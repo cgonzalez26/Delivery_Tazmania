@@ -19,7 +19,7 @@ public class Conexion {
       if(cnbd == null){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            cnbd= DriverManager.getConnection("jdbc:mysql://localhost:3306/delivery_tazmania", "nombre de usuario","contraseña"); // agregar nombre y contraseña con el que entran a mysql workbench y el nombre de la BD que para un ejemplo lo deje (delivery_tazmania).
+            cnbd= DriverManager.getConnection("jdbc:mysql://localhost:3306/delivery_tazmania", "root","colo"); // agregar nombre y contraseña con el que entran a mysql workbench y el nombre de la BD que para un ejemplo lo deje (delivery_tazmania).
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Conexion a la Base de datos sin exito");
         } catch(ClassNotFoundException e){

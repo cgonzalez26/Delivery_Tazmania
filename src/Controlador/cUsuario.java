@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import Modulos.Conexion;
@@ -127,8 +122,6 @@ public class cUsuario {
             sql2 = "Insert into Usuarios (NOMBRE_USUARIO, CONTRASEÑA_USUARIO, TIPO_USUARIO, ESTADO_USUARIO, ID_PERSONA)"
                 + "VALUES (?,?,?,?,(select ID_PERSONA from Personas ORDER BY ID_PERSONA DESC LIMIT 1))";
         
-        
-
         try {
 
             PreparedStatement pst1 = cn.prepareStatement(sql1);
@@ -161,8 +154,6 @@ public class cUsuario {
             return false;
         }
     }
-
-    mUsuario datos = new mUsuario();
 
     public boolean EditarUsuarios(mUsuario modulo) {
         sql1 = " UPDATE PERSONAS SET NOMBRE_PERSONA = ?, APELLIDO_PERSONA= ?, DOMICILIO_PERSONA= ?, TELCONTACTO_PERSONA= ?, EMAILCONTACTO_PERSONA= ? "
@@ -372,6 +363,4 @@ public class cUsuario {
         }
 
     }
-
-
 }
