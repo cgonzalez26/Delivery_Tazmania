@@ -1,8 +1,8 @@
 package Controlador;
 
-import Modulos.Conexion;
-import Modulos.mPersona;
-import Modulos.mUsuario;
+import Modelo.Conexion;
+import Modelo.mPersona;
+import Modelo.mUsuario;
 import Vistas.vLogin;
 /*import static Vistas.vLogin.jTextoNomUser_Login;
 import static Vistas.vLogin.jTextoPass_Login;*/

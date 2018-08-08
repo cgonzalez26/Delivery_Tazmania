@@ -6,8 +6,8 @@
 package Vistas;
 
 import Controlador.cUsuario;
-import Modulos.mPersona;
-import Modulos.mUsuario;
+import Modelo.mPersona;
+import Modelo.mUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
