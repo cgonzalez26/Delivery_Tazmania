@@ -1,7 +1,12 @@
 package Controlador;
 
 
+
 import Modelo.modelo_Usuario;
+
+import Modelo.Conexion;
+import Modelo.mPersona;
+import Modelo.mUsuario;
 import Vistas.vLogin;
 import Vistas.vGestion_Usuarios;
 import Vistas.vMenuPrincipal;

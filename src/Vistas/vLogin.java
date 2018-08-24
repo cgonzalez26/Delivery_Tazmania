@@ -9,10 +9,7 @@ import Controlador.control_Usuario;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Colo-PC
- */
+
 public final class vLogin extends javax.swing.JFrame {
 
     /**
@@ -137,6 +134,7 @@ public final class vLogin extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             jTextoPass_Login.requestFocus();
         }
+
     }//GEN-LAST:event_jTextNomUser_LoginKeyPressed
 
     private void jTextoPass_LoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextoPass_LoginKeyPressed
