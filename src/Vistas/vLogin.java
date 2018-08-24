@@ -5,7 +5,7 @@
  */
 package Vistas;
 
-import Controlador.cUsuario;
+import Controlador.control_Usuario;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -108,7 +108,7 @@ public final class vLogin extends javax.swing.JFrame {
 
 
     private void jBotonIngreso_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonIngreso_LoginActionPerformed
-        cUsuario usuario = new cUsuario();
+        control_Usuario usuario = new control_Usuario();
         usuario.ExistenciaUsuarios();
 
         if (jTextNomUser_Login.getText().trim().length() == 0) {
@@ -123,7 +123,7 @@ public final class vLogin extends javax.swing.JFrame {
 
         if (usuario.VerificarInicioSesion() == true) {
             this.setVisible(false);
-        } else {
+        }else{
             this.setVisible(true);
         }
     }//GEN-LAST:event_jBotonIngreso_LoginActionPerformed
@@ -137,7 +137,6 @@ public final class vLogin extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             jTextoPass_Login.requestFocus();
         }
-
     }//GEN-LAST:event_jTextNomUser_LoginKeyPressed
 
     private void jTextoPass_LoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextoPass_LoginKeyPressed
@@ -149,7 +148,7 @@ public final class vLogin extends javax.swing.JFrame {
 
     private void jBotonIngreso_LoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBotonIngreso_LoginKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            cUsuario usuario = new cUsuario();
+            control_Usuario usuario = new control_Usuario();
             usuario.ExistenciaUsuarios();
 
             if (jTextNomUser_Login.getText().trim().length() == 0) {
@@ -211,22 +210,21 @@ public final class vLogin extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                cUsuario usuario = new cUsuario();
+                control_Usuario usuario = new control_Usuario();
 
                 int contar = usuario.ExistenciaUsuarios();
                 if (contar == 0) {
                     JOptionPane.showMessageDialog(null, "Hay que crear un Administrador");
 
                     vGestion_Usuarios usuarios = new vGestion_Usuarios();
-                    usuarios.toFront();
-                    usuarios.setResizable(false);
-                    usuarios.setVisible(true);
-                    usuarios.setLocationRelativeTo(null);
+                    
+                    vLogin login = new vLogin();
+                    
+                    login.getContentPane().add(usuarios);
                     
                     vGestion_Usuarios.jComboAcceso_Usuario.setEnabled(false);
                     vGestion_Usuarios.jComboEstado_Usuario.setSelectedIndex(1);
                     vGestion_Usuarios.jComboEstado_Usuario.setVisible(false);
-                    vGestion_Usuarios.jBotonSalir2_Usuario.setVisible(true);
                     vGestion_Usuarios.jBotonSalir_Usuario.setVisible(false);
                     
                     new vLogin().setVisible(false);

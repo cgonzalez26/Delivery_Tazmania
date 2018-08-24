@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Modulos/mTiposUsuarios.java</file>
-            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Modulos/mPersona.java</file>
-            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Modulos/mPantallas.java</file>
+            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Vistas/vComprasInsumos.java</file>
+            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Controlador/control_Usuario.java</file>
             <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Vistas/vGestion_Usuarios.java</file>
-            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Modulos/mUsuario.java</file>
-            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Controlador/cUsuario.java</file>
-            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Modulos/mPermisosPantallaPerfiles.java</file>
-            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Vistas/vMenu.java</file>
+            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Vistas/vInsumos.java</file>
+            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Vistas/vTipos_Insumos.java</file>
+            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Vistas/vGestion_Proveedores.java</file>
+            <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Vistas/vMenuPrincipal.java</file>
             <file>file:/C:/Users/Colo-PC/Documents/NetBeansProjects/Delivery_Tazmania/src/Vistas/vLogin.java</file>
         </group>
     </open-files>
