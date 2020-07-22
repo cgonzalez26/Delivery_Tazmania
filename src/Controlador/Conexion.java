@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,20 +10,25 @@ import javax.swing.JOptionPane;
 public class Conexion {
    private static Connection cnbd = null;
    
-    public static Connection obtener() {
+    public Connection obtener() {
       if(cnbd == null){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            cnbd= DriverManager.getConnection("jdbc:mysql://localhost:3306/delivery_tazmania", "root","colo"); // agregar nombre y contraseña con el que entran a mysql workbench y el nombre de la BD que para un ejemplo lo deje (delivery_tazmania).
+            cnbd= DriverManager.getConnection("jdbc:mysql://localhost:3306/delivery_tazmania", "root",""); // agregar nombre y contraseña con el que entran a mysql workbench y el nombre de la BD que para un ejemplo lo deje (delivery_tazmania).
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Conexion a la Base de datos sin exito");
+            e.printStackTrace();
+            System.exit(0);
         } catch(ClassNotFoundException e){
-            throw new ClassCastException(e.getMessage());
+            //throw new ClassCastException(e.getMessage());
+            e.printStackTrace();
         }  
       }
          return cnbd;
     }
-    
+    public Connection conectado(){
+      return cnbd;
+    }
     public static void cerrar() throws SQLException{
         if(cnbd != null){
             cnbd.close();

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="32" orientation="Landscape" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f5f7fdc9-cb9c-4ce1-82ac-e9dfecfc5950">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Mes" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Año" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select sum(MontoTotal) from ventas where Month(FechaVenta)='$P!{Mes}' and year(FechaVenta)='$P!{Año}' and activo=1;]]>
+	</queryString>
+	<field name="sum(MontoTotal)" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="15" uuid="e80be331-c572-42ea-a2c9-ef75b24b80b4"/>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="495" y="0" width="100" height="15" uuid="4b3a6fd8-0b15-4bae-be16-67637231afd7"/>
+				<textFieldExpression><![CDATA[$F{sum(MontoTotal)}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

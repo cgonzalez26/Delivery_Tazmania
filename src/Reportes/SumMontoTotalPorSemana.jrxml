@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="32" orientation="Landscape" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a66f10d0-fda6-4a53-b99f-23e3fbf7c6a1">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FechaInicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FechaFinal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select sum(MontoTotal) from ventas where date(FechaVenta) between str_to_date((str_to_date('$P!{FechaInicio}','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('$P!{FechaFinal}','%d/%m/%Y')),'%Y-%m-%d') and activo=1;]]>
+	</queryString>
+	<field name="sum(MontoTotal)" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="15" uuid="d984d32a-3c9b-48ef-8cc6-f886e65c6ed0"/>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="495" y="0" width="100" height="15" uuid="b809e1e0-c963-46e4-b3d1-56495fae9dfe"/>
+				<textFieldExpression><![CDATA[$F{sum(MontoTotal)}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

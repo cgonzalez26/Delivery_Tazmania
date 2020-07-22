@@ -1,193 +1,65 @@
 package Controlador;
 
-
-
-import Modelo.modelo_Usuario;
-
-import Modelo.Conexion;
-import Modelo.mPersona;
-import Modelo.mUsuario;
-import Vistas.vLogin;
-import Vistas.vGestion_Usuarios;
-import Vistas.vMenuPrincipal;
+import Modelo.Usuarios;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author Colo-PC
  */
-public class control_Usuario extends modelo_Usuario {
-
+public class control_Usuario extends Usuarios {
+    private Sentencias_sql sql; 
     private Conexion mysql = new Conexion();
-    private Connection cn = mysql.obtener();
-    private String sql1 = "", sql2="";
+    private final Connection cn = mysql.obtener();
 
     public control_Usuario() {
-
+        sql= new Sentencias_sql();
     }
     
-    //Cada consulta o query lo hice creando una bd temporal para su correcto funcionamiento.
     
-    @Override
-    public DefaultTableModel MostrarDatos() throws SQLException {
-        DefaultTableModel model;
-        String titulos[] = {
-            "N°", "Nombre", "Apellido", "Domicilio", "Telefono Contacto", "Correo Electronico", "Usuario", "Contraseña", "Acceso", "Estado"};
-        model = new DefaultTableModel(null, titulos);
-
-        String[] datos = new String[10];
-        sql1 = "SELECT P.ID_PERSONA, P.NOMBRE_PERSONA, P.APELLIDO_PERSONA, P.DOMICILIO_PERSONA, P.TELCONTACTO_PERSONA, P.EMAILCONTACTO_PERSONA, "
-                + " U.NOMBRE_USUARIO, U.CONTRASEÑA_USUARIO ,U.TIPO_USUARIO, U.ESTADO_USUARIO "
-                + " FROM Personas P INNER JOIN Usuarios U WHERE P.ID_PERSONA=U.ID_PERSONA";
-
-        try {
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-            ResultSet rs = pst1.executeQuery();
-
-            while (rs.next()) {
-                datos[0] = rs.getString("ID_PERSONA");
-                datos[1] = rs.getString("NOMBRE_PERSONA");
-                datos[2] = rs.getString("APELLIDO_PERSONA");
-                datos[3] = rs.getString("DOMICILIO_PERSONA");
-                datos[4] = rs.getString("TELCONTACTO_PERSONA");
-                datos[5] = rs.getString("EMAILCONTACTO_PERSONA");
-                datos[6] = rs.getString("NOMBRE_USUARIO");
-                datos[7] = rs.getString("CONTRASEÑA_USUARIO");
-                datos[8] = rs.getString("TIPO_USUARIO");
-                datos[9] = rs.getString("ESTADO_USUARIO");
-                model.addRow(datos);
-
-            }
-
-            if (rs != null || pst1 != null) {
-                rs.close();
-                pst1.close();
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-            return null;
-        } finally {
-            /*Conexion.cerrar();*/
-        }
-        return model;
+    public Object[][] MostrarDatos(){
+        String[] columnas={"idusuario","idtipousuario","descripcion","Login","Password","Nombre","Apellido","Direccion","Mail","Telefono","Estado"};
+        Object[][] datos=sql.GetTabla(columnas, "usuarios", "select u.idusuario,t.idtipousuario,t.descripcion,u.Login,u.Password,u.Nombre,u.Apellido,u.Direccion, u.Mail,u.Telefono,u.Estado from usuarios u INNER JOIN tiposusuarios t on u.idtipousuario=t.idtipousuario where u.activo=1");
+        return datos;       
+    }
+    
+    public Object[][] MostrarDatosBusqueda(String texto){
+        String[] columnas={"idusuario","idtipousuario","descripcion","Login","Password","Nombre","Apellido","Direccion","Mail","Telefono","Estado"};
+        Object[][] datos=sql.GetTabla(columnas, "usuarios", "select u.idusuario,t.idtipousuario,t.descripcion,u.Login,u.Password,u.Nombre,u.Apellido,u.Direccion, u.Mail,u.Telefono,u.Estado from usuarios u INNER JOIN tiposusuarios t on u.idtipousuario=t.idtipousuario where u.activo=1 and u.Login like '%"+texto+"%'");
+        return datos;       
+    }
+    
+    public boolean InsertarUsuarios(Usuarios user){
+        String idtipodoc = Integer.toString(user.getIdtipousuario());
+        String datos[]= {idtipodoc,user.getLogin(),user.getPassword(),user.getNombre(),user.getApellido(),user.getDireccion(),user.getEmail(),user.getTelefono(),user.getEstado()};
+        return sql.insertar(datos, "insert into usuarios (idtipousuario,Login,Password,Nombre,Apellido,Direccion,Mail,Telefono,Estado,activo) values (?,?,?,?,?,?,?,?,?,1)");
+    }
+    
+    public boolean EditarUsuarios(Usuarios user){
+        String idusuario= (Integer.toString(user.getIdusuario())),idtipodoc = Integer.toString(user.getIdtipousuario());
+        String datos[]= {idtipodoc,user.getLogin(),user.getPassword(),user.getNombre(),user.getApellido(),user.getDireccion(),user.getEmail(),user.getTelefono(),user.getEstado(),idusuario};
+        return sql.insertar(datos,"update usuarios set idtipousuario=?,Login=?,Password=?,Nombre=?,Apellido=?,Direccion=?,Mail=?,Telefono=?,Estado=? where idusuario=?" );
+    }
+    
+    public boolean EliminarUsuarios(Usuarios user){
+        sql.baja_dedatos("usuarios", "idusuario", user.getIdusuario());
+        return true;
+    }
+    
+    public boolean InicioSesion(Usuarios user){
+      return sql.InicioSesion(user.getLogin(), user.getPassword());
+    }
+    
+    public int ObtenerIDTipoUsuario(String dato){
+        return sql.ObtenerID("select idtipousuario from tiposusuarios where descripcion='"+dato+"'");
+    }
+    
+    public int ObtenerIDUsuario(String dato){
+        return sql.ObtenerID("select idusuario from usuarios where Login='"+dato+"'");
     }
 
-    @Override
-    public boolean InsertarUsuarios(modelo_Usuario modelo) {
-
-        sql1 = "Insert into Personas (NOMBRE_PERSONA, APELLIDO_PERSONA, DOMICILIO_PERSONA, TELCONTACTO_PERSONA, EMAILCONTACTO_PERSONA)"
-                + "VALUES (?,?,?,?,?)";
-        
-            sql2 = "Insert into Usuarios (NOMBRE_USUARIO, CONTRASEÑA_USUARIO, TIPO_USUARIO, ESTADO_USUARIO, ID_PERSONA)"
-                + "VALUES (?,?,?,?,(select ID_PERSONA from Personas ORDER BY ID_PERSONA DESC LIMIT 1))";
-        
-        try {
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-
-            PreparedStatement pst2 = cn.prepareStatement(sql2);
-
-            pst1.setString(1, modelo.getNombre_persona());
-            pst1.setString(2, modelo.getApellido_persona());
-            pst1.setString(3, modelo.getDomicilio_persona());
-            pst1.setString(4, modelo.getTelefonoContacto_persona());
-            pst1.setString(5, modelo.getEmailContacto_persona());
-
-            int ej1 = pst1.executeUpdate();
-
-            pst2.setString(1, modelo.getNombre_usuario());
-            pst2.setString(2, modelo.getContraseña_usuario());
-            pst2.setString(3, modelo.getTipo_usario());
-            pst2.setBoolean(4, modelo.isEstado_usuario());
-
-            int ej2 = pst2.executeUpdate();
-
-            if (ej1 != 0 || ej2 != 0) {
-                return true;
-            } else {
-                return false;
-            }
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-            return false;
-        }
-    }
-
-    @Override
-    public boolean EditarUsuarios(modelo_Usuario modelo) {
-        sql1 = " UPDATE PERSONAS SET NOMBRE_PERSONA = ?, APELLIDO_PERSONA= ?, DOMICILIO_PERSONA= ?, TELCONTACTO_PERSONA= ?, EMAILCONTACTO_PERSONA= ? "
-                + " WHERE ID_PERSONA=? ";
-
-        sql2 = " UPDATE USUARIOS SET NOMBRE_USUARIO= ?, CONTRASEÑA_USUARIO= ?, TIPO_USUARIO= ?, ESTADO_USUARIO= ? "
-                + " WHERE ID_PERSONA= ? ";
-
-        try {
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-            PreparedStatement pst2 = cn.prepareStatement(sql2);
-
-            pst1.setString(1, modelo.getNombre_persona());
-            pst1.setString(2, modelo.getApellido_persona());
-            pst1.setString(3, modelo.getDomicilio_persona());
-            pst1.setString(4, modelo.getTelefonoContacto_persona());
-            pst1.setString(5, modelo.getEmailContacto_persona());
-            pst1.setInt(6, modelo.getId_persona());
-
-            pst2.setString(1, modelo.getNombre_usuario());
-            pst2.setString(2, modelo.getContraseña_usuario());
-            pst2.setString(3, modelo.getTipo_usario());
-            pst2.setBoolean(4, modelo.isEstado_usuario());
-            pst2.setInt(5, modelo.getId_usuario());
-
-            int N1 = pst1.executeUpdate();
-            int N2 = pst2.executeUpdate();
-
-            if (N1 != 0 || N1 != 0) {
-                return true;
-            } else {
-                return false;
-            }
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-            return false;
-        }
-    }
-
-    @Override
-    public boolean EliminarUsuarios(modelo_Usuario modelo) {
-
-        try {
-            /*sql1=" DELETE u.* FROM PERSONAS p INNER JOIN USUARIOS u ON u.id_persona=p.id_persona WHERE (u.id_persona=p.id_persona) ";*/
-
-            PreparedStatement pst1 = cn.prepareStatement(" DELETE from Personas where id_persona= ? ");
-
-            pst1.setInt(1, modelo.getId_persona());
-
-            int N1 = pst1.executeUpdate();
-
-            if (N1 != 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-            return false;
-        }
-    }
-
-    @Override
+    /*@Override
     public int VerificarLogin() {
         String sql = "select count(nombre_usuario) from Usuarios where nombre_usuario =" + "'" + vGestion_Usuarios.jTextNomUser_Usuario.getText() + "'";
         try {
@@ -209,7 +81,7 @@ public class control_Usuario extends modelo_Usuario {
         }
     }
 
-    @Override
+    //@Override
     public boolean VerificarInicioSesion() {
 
         String cadena1 = vLogin.jTextNomUser_Login.getText().trim();
@@ -294,7 +166,7 @@ public class control_Usuario extends modelo_Usuario {
         }
     }
 
-    @Override
+    //@Override
     public boolean cerrarEstado() {
         String sql1 = "update Usuarios set estado_usuario= false where estado_usuario=true";
         String sql2 = "SET SQL_SAFE_UPDATES=0";
@@ -316,7 +188,7 @@ public class control_Usuario extends modelo_Usuario {
         }
     }
 
-    @Override
+    //@Override
     public int ExistenciaUsuarios() {
         sql1 = "SELECT count(*) as cant_usuarios from Usuarios";
 
@@ -334,5 +206,5 @@ public class control_Usuario extends modelo_Usuario {
             return 0;
         }
 
-    }
+    }*/
 }

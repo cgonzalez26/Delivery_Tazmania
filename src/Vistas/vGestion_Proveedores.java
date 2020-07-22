@@ -1,80 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
 
 import Controlador.control_Proveedores;
-import java.sql.SQLException;
+import Controlador.control_existencias;
+import Modelo.Proveedores;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Colo-PC
  */
-public class vGestion_Proveedores extends javax.swing.JPanel {
+public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Panel3
-     */
+    control_Proveedores control_prov = new control_Proveedores();
+    control_existencias combo = new control_existencias();
+    Proveedores p = new Proveedores();
+    String idprov;
+    Object[] tipodoc;
+    Object[][] datostabla;
+    vLista_Proveedores lista = null;
+
     public vGestion_Proveedores() {
         initComponents();
-        Mostrar();
-        GrupoBotones();
-        jBotonEdit_Prov.setEnabled(false);
-        jBotonElim_Prov.setEnabled(false);
-        jEtiqNumID_Prov.setVisible(false);
-        jTextNumID_Prov.setVisible(false);
         jTextNom_Prov.requestFocus();
-
-        jTabla_Prov.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                    if (i == 0) {
-                        jEtiqNumID_Prov.setVisible(true);
-                        jTextNumID_Prov.setVisible(true);
-                        jBotonEdit_Prov.setEnabled(true);
-                        jBotonElim_Prov.setEnabled(true);
-                        jBotonAgre_Prov.setEnabled(false);
-
-                        int fila = jTabla_Prov.rowAtPoint(e.getPoint());
-
-                        jTextNumID_Prov.setText(jTabla_Prov.getValueAt(fila, 0).toString());
-                        if("DNI".equals(jTabla_Prov.getValueAt(fila, 1).toString())){
-                            jRbDNI_Prov.setSelected(true);
-                        }else{
-                            jRbDNI_Prov.setSelected(false);
-                        }
-                        if("Libreta Civica".equals(jTabla_Prov.getValueAt(fila, 1).toString())){
-                            jRbLC_Prov.setSelected(true);
-                        }else{
-                            jRbLC_Prov.setSelected(false);
-                        }
-                        /*jRbDNI_Prov.setText(jTabla_Prov.getValueAt(fila, 1).toString());
-                        jRbLC_Prov.setText(jTabla_Prov.getValueAt(fila, 1).toString());*/
-                        jTextNroDoc_Prov.setText(jTabla_Prov.getValueAt(fila, 2).toString());
-                        jTextNom_Prov.setText(jTabla_Prov.getValueAt(fila, 3).toString());
-                        jTextApe_Prov.setText(jTabla_Prov.getValueAt(fila, 4).toString());
-                        jTextNomCom_Prov.setText(jTabla_Prov.getValueAt(fila, 5).toString());
-                        jTextDirec_Prov.setText(jTabla_Prov.getValueAt(fila, 6).toString());
-                        jTextTel_Prov.setText(jTabla_Prov.getValueAt(fila, 7).toString());
-                    }
-                }
-            }
-        });
-    }
-
-            public void Mostrar() {
-        try {
-            DefaultTableModel model;
-            control_Proveedores obtdatos = new control_Proveedores();
-            model = obtdatos.MostrarDatos();
-            jTabla_Prov.setModel(model);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
+        jBotonModificar_Prov.setEnabled(false);
     }
 
     public void Limpiar() {
@@ -83,19 +33,26 @@ public class vGestion_Proveedores extends javax.swing.JPanel {
         jTextNomCom_Prov.setText("");
         jTextDirec_Prov.setText("");
         jTextTel_Prov.setText("");
-        jTextNumID_Prov.setText("");
         jTextNroDoc_Prov.setText("");
     }
 
-    public void GrupoBotones(){
-        GrupoBotones.add(jRbDNI_Prov);
-        GrupoBotones.add(jRbLC_Prov);
+    public void Cerrar() {
+        if (!jTextNom_Prov.getText().trim().isEmpty() || !jTextApe_Prov.getText().trim().isEmpty() || !jTextNomCom_Prov.getText().trim().isEmpty() || !jTextNroDoc_Prov.getText().trim().isEmpty()) {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else {
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        GrupoBotones = new javax.swing.ButtonGroup();
         jEtiqNom_Prov = new javax.swing.JLabel();
         jTextNom_Prov = new javax.swing.JTextField();
         jEtiqApe_Prov = new javax.swing.JLabel();
@@ -106,263 +63,338 @@ public class vGestion_Proveedores extends javax.swing.JPanel {
         jTextDirec_Prov = new javax.swing.JTextField();
         jEtiqTel_Prov = new javax.swing.JLabel();
         jTextTel_Prov = new javax.swing.JTextField();
-        jEtiqTD_Prov = new javax.swing.JLabel();
-        jRbDNI_Prov = new javax.swing.JRadioButton();
-        jRbLC_Prov = new javax.swing.JRadioButton();
         jTextNroDoc_Prov = new javax.swing.JTextField();
         jEtiqNumDoc_Prov = new javax.swing.JLabel();
-        jBotonAgre_Prov = new javax.swing.JButton();
-        jBotonEdit_Prov = new javax.swing.JButton();
-        jBotonElim_Prov = new javax.swing.JButton();
-        jEtiqNumID_Prov = new javax.swing.JLabel();
-        jTextNumID_Prov = new javax.swing.JTextField();
-        jSP1_Prov = new javax.swing.JScrollPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTabla_Prov = jTabla_Prov = new javax.swing.JTable(){
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return false; //Disallow the editing of any cell
+        jBotonAgre_Prov2 = new javax.swing.JButton();
+        jBotonModificar_Prov = new javax.swing.JButton();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Administrar Proveedores");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        try {
+            setSelected(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
+        setVerifyInputWhenFocusTarget(false);
+        setVisible(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
-        };
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jEtiqNom_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jEtiqNom_Prov.setText("(*) Nombre");
 
-        jEtiqNom_Prov.setText("Nombre");
-        add(jEtiqNom_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 90, 20));
-        add(jTextNom_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 180, 30));
+        jTextNom_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextNom_Prov.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNom_ProvKeyTyped(evt);
+            }
+        });
 
+        jEtiqApe_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqApe_Prov.setText("Apellido");
-        add(jEtiqApe_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 100, 20));
-        add(jTextApe_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 170, 30));
 
-        jEtiqNomCom_Prov.setText("Nombre Comercial");
-        add(jEtiqNomCom_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 100, 20));
-        add(jTextNomCom_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 140, 30));
+        jTextApe_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextApe_Prov.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextApe_ProvKeyTyped(evt);
+            }
+        });
 
+        jEtiqNomCom_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jEtiqNomCom_Prov.setText("(*) Nombre Comercial");
+
+        jTextNomCom_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+
+        jEtiqDirec_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqDirec_Prov.setText("Direccion");
-        add(jEtiqDirec_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 40, 90, 20));
-        add(jTextDirec_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 70, 200, 30));
 
+        jTextDirec_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+
+        jEtiqTel_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqTel_Prov.setText("Telefono");
-        add(jEtiqTel_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 40, 80, 20));
-        add(jTextTel_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 70, 220, 30));
 
-        jEtiqTD_Prov.setText("Tipo Documento");
-        add(jEtiqTD_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 90, 20));
+        jTextTel_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jRbDNI_Prov.setText("DNI");
-        add(jRbDNI_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, -1, -1));
-
-        jRbLC_Prov.setText("Libreta Civica");
-        add(jRbLC_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, -1, -1));
-        add(jTextNroDoc_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 160, 160, 30));
-
-        jEtiqNumDoc_Prov.setText("Numero Documento");
-        add(jEtiqNumDoc_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, 100, 20));
-
-        jBotonAgre_Prov.setText("Agregar");
-        jBotonAgre_Prov.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonAgre_ProvActionPerformed(evt);
+        jTextNroDoc_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextNroDoc_Prov.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNroDoc_ProvKeyTyped(evt);
             }
         });
-        add(jBotonAgre_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 470, 90, 30));
 
-        jBotonEdit_Prov.setText("Editar");
-        jBotonEdit_Prov.addActionListener(new java.awt.event.ActionListener() {
+        jEtiqNumDoc_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jEtiqNumDoc_Prov.setText(" Numero Documento");
+
+        jBotonAgre_Prov2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jBotonAgre_Prov2.setText("Agregar");
+        jBotonAgre_Prov2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonEdit_ProvActionPerformed(evt);
+                jBotonAgre_Prov2ActionPerformed(evt);
             }
         });
-        add(jBotonEdit_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 470, 80, 30));
 
-        jBotonElim_Prov.setText("Eliminar");
-        jBotonElim_Prov.addActionListener(new java.awt.event.ActionListener() {
+        jBotonModificar_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jBotonModificar_Prov.setText("Modificar");
+        jBotonModificar_Prov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonElim_ProvActionPerformed(evt);
+                jBotonModificar_ProvActionPerformed(evt);
             }
         });
-        add(jBotonElim_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, 80, 30));
 
-        jEtiqNumID_Prov.setText("N° Identificador");
-        add(jEtiqNumID_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 80, 20));
-        add(jTextNumID_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 50, 30));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jEtiqNumDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextNroDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jEtiqNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jEtiqApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jEtiqTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jEtiqDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jEtiqNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(jBotonAgre_Prov2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBotonModificar_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(148, 148, 148))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jEtiqNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jEtiqApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jEtiqNumDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jTextNroDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jEtiqTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jTextTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34)
+                .addComponent(jEtiqNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jEtiqDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBotonAgre_Prov2)
+                    .addComponent(jBotonModificar_Prov))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        jTabla_Prov.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTabla_Prov);
-
-        jSP1_Prov.setViewportView(jScrollPane1);
-
-        add(jSP1_Prov, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 890, 200));
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBotonAgre_ProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAgre_ProvActionPerformed
-
-        control_Proveedores funcion = new control_Proveedores();
-
-        if (jTextNom_Prov.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar un Nombre del Proveedor");
-            jTextNom_Prov.requestFocus();
-        }
-
-        if (jTextApe_Prov.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar un Apellido del Proveedor");
-            jTextApe_Prov.requestFocus();
-        }
-
-        if (jTextDirec_Prov.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar el Domicilio del Proveedor");
-            jTextDirec_Prov.requestFocus();
-        }
-
-        if (jRbDNI_Prov.isSelected() == false && jRbLC_Prov.isSelected() == false) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar un Tipo de Documento del Proveedor");
-            jRbDNI_Prov.requestFocus();
-            jRbLC_Prov.requestFocus();
-        }
-
-        if (jTextNroDoc_Prov.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar el Numero de Documento del Proveedor");
-            jTextNroDoc_Prov.requestFocus();
-        }
-
-        funcion.setNombre_persona(jTextNom_Prov.getText());
-        funcion.setApellido_persona(jTextApe_Prov.getText());
-        funcion.setNomComercial_Proveedores(jTextNomCom_Prov.getText());
-        funcion.setDomicilio_persona(jTextDirec_Prov.getText());
-        funcion.setTelefonoContacto_persona(jTextTel_Prov.getText());
-
-        if (jRbDNI_Prov.isSelected()) {
-            funcion.setTipoDoc_Proveedores(jRbDNI_Prov.getText());
-        } else {
-            funcion.setTipoDoc_Proveedores(jRbLC_Prov.getText());
-        }
-
-        funcion.setNroDoc_Proveedores(Integer.parseInt(jTextNroDoc_Prov.getText()));
-
-        if (funcion.InsertarProveedores(funcion)) {
-            JOptionPane.showMessageDialog(null, "Ingreso de datos correctos!");
-            Mostrar();
-            Limpiar();
-        } else {
-            JOptionPane.showMessageDialog(null, "Ingreso de datos sin exito!");
-        }
-    }//GEN-LAST:event_jBotonAgre_ProvActionPerformed
-
-    private void jBotonEdit_ProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonEdit_ProvActionPerformed
-        control_Proveedores funcion = new control_Proveedores();
-
-        if(jTextNumID_Prov.getText().trim().length() == 0){
-            JOptionPane.showMessageDialog(null, "Debes ingresar el Numero que Identifica dicho Proveedor");
-            jTextNumID_Prov.requestFocus();
-        }
-
-        if (jTextNom_Prov.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar un Nombre del Proveedor");
-            jTextNom_Prov.requestFocus();
-        }
-
-        if (jTextApe_Prov.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar un Apellido del Proveedor");
-            jTextApe_Prov.requestFocus();
-        }
-
-        if (jTextDirec_Prov.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar el Domicilio del Proveedor");
-            jTextDirec_Prov.requestFocus();
-        }
-
-        if (jRbDNI_Prov.isSelected() == false && jRbLC_Prov.isSelected() == false) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar un Tipo de Documento del Proveedor");
-            jRbDNI_Prov.requestFocus();
-            jRbLC_Prov.requestFocus();
-        }
-
-        if (jTextNroDoc_Prov.getText().trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar el Numero de Documento del Proveedor");
-            jTextNroDoc_Prov.requestFocus();
-        }
-        funcion.setId_persona(Integer.parseInt(jTextNumID_Prov.getText()));
-        funcion.setNombre_persona(jTextNom_Prov.getText());
-        funcion.setApellido_persona(jTextApe_Prov.getText());
-        funcion.setNomComercial_Proveedores(jTextNomCom_Prov.getText());
-        funcion.setDomicilio_persona(jTextDirec_Prov.getText());
-        funcion.setTelefonoContacto_persona(jTextTel_Prov.getText());
-        funcion.setId_Proveedores(Integer.parseInt(jTextNumID_Prov.getText()));
-
-        if (jRbDNI_Prov.isSelected()) {
-            funcion.setTipoDoc_Proveedores(jRbDNI_Prov.getText());
-        } else {
-            funcion.setTipoDoc_Proveedores(jRbLC_Prov.getText());
-        }
-
-        funcion.setNroDoc_Proveedores(Integer.parseInt(jTextNroDoc_Prov.getText()));
-
-        if (funcion.EditarProveedores(funcion)) {
-            JOptionPane.showMessageDialog(null, "Modificación Exitosa!");
-            Mostrar();
-            Limpiar();
-        } else {
-            JOptionPane.showMessageDialog(null, "Modificación sin Exito!");
-        }
-    }//GEN-LAST:event_jBotonEdit_ProvActionPerformed
-
-    private void jBotonElim_ProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonElim_ProvActionPerformed
-
-        int i = JOptionPane.showConfirmDialog(this, "Eliminar Proveedor?", "Confirmar", JOptionPane.YES_NO_OPTION);
-
-        if (i == 0) {
-
-            if (!jTextNumID_Prov.getText().trim().equals("")) {
-                control_Proveedores funcion = new control_Proveedores();
-
-                funcion.setId_persona(Integer.parseInt(jTextNumID_Prov.getText()));
-
-                if (funcion.EliminarProveedores(funcion)) {
-                    JOptionPane.showMessageDialog(null, "Proveedor Eliminado");
-                    Mostrar();
-                    Limpiar();
+    private void jBotonAgre_Prov2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAgre_Prov2ActionPerformed
+        if (jBotonAgre_Prov2.getText().equals("Agregar")) {
+            if (!jTextNom_Prov.getText().trim().equals("") && !jTextNomCom_Prov.getText().trim().equals("")) {
+                if (jTextNroDoc_Prov.getText().length() <= 10) {
+                    p.setIdTipoDocumento(1);
+                    p.setNombre(jTextNom_Prov.getText());
+                    if (jTextNroDoc_Prov.getText().equals("")) {
+                        p.setNroDocumento("-");
+                    } else {
+                        p.setNroDocumento(jTextNroDoc_Prov.getText());
+                    }
+                    if (!jTextApe_Prov.getText().equals("")) {
+                        p.setApellido(jTextApe_Prov.getText());
+                    } else {
+                        p.setApellido("-");
+                    }
+                    p.setNombre_comercial(jTextNomCom_Prov.getText());
+                    if (jTextDirec_Prov.getText().equals("")) {
+                        p.setDireccion("-");
+                    } else {
+                        p.setDireccion(jTextDirec_Prov.getText());
+                    }
+                    if (jTextTel_Prov.getText().equals("")) {
+                        p.setTelefono("-");
+                    } else {
+                        p.setTelefono(jTextTel_Prov.getText());
+                    }
+                    if (control_prov.InsertarProveedores(p)) {
+                        JOptionPane.showMessageDialog(null, "Nuevo Proveedor agreado");
+                        lista = new vLista_Proveedores();
+                        vMenuPrincipal.jDesktopPane1.add(lista);
+                        lista.setVisible(true);
+                        this.dispose();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El formato del documento es incorrecto");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "No se elimino Proveedor, Ingrese el numero que identifica dicho Proveedor");
+                JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
+            }
+        } else {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                lista = new vLista_Proveedores();
+                vMenuPrincipal.jDesktopPane1.add(lista);
+                lista.setVisible(true);
+                this.dispose();
             }
         }
-    }//GEN-LAST:event_jBotonElim_ProvActionPerformed
+
+    }//GEN-LAST:event_jBotonAgre_Prov2ActionPerformed
+
+    private void jBotonModificar_ProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonModificar_ProvActionPerformed
+        if (!jTextNom_Prov.getText().trim().equals("") && !jTextNomCom_Prov.getText().trim().equals("")) {
+            if (jTextNroDoc_Prov.getText().length() <= 10) {
+                int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "confirmar", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    p.setIdTipoDocumento(1);
+                    p.setNombre(jTextNom_Prov.getText());
+                    if (jTextNroDoc_Prov.getText().equals("")) {
+                        p.setNroDocumento("-");
+                    } else {
+                        p.setNroDocumento(jTextNroDoc_Prov.getText());
+                    }
+                    if (!jTextApe_Prov.getText().equals("")) {
+                        p.setApellido(jTextApe_Prov.getText());
+                    } else {
+                        p.setApellido("-");
+                    }
+                    p.setNombre_comercial(jTextNomCom_Prov.getText());
+                    if (jTextDirec_Prov.getText().equals("")) {
+                        p.setDireccion("-");
+                    } else {
+                        p.setDireccion(jTextDirec_Prov.getText());
+                    }
+                    if (jTextTel_Prov.getText().equals("")) {
+                        p.setTelefono("-");
+                    } else {
+                        p.setTelefono(jTextTel_Prov.getText());
+                    }
+                    p.setIdproveedor(Integer.parseInt(idprov));
+
+                    if (control_prov.EditarProveedores(p)) {
+                        JOptionPane.showMessageDialog(null, "Modificacion Completa");
+                        jBotonModificar_Prov.setEnabled(false);
+                        jBotonAgre_Prov2.setEnabled(true);
+                        lista = new vLista_Proveedores();
+                        vMenuPrincipal.jDesktopPane1.add(lista);
+                        lista.setVisible(true);
+                        this.dispose();
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El formato del documento es incorrecto");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
+        }
+    }//GEN-LAST:event_jBotonModificar_ProvActionPerformed
+
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        if (jBotonAgre_Prov2.getText().equals("Cancelar")) {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                lista = new vLista_Proveedores();
+                vMenuPrincipal.jDesktopPane1.add(lista);
+                lista.setVisible(true);
+                this.dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else {
+            Cerrar();
+        }
+    }//GEN-LAST:event_formInternalFrameClosing
+
+    private void jTextNom_ProvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNom_ProvKeyTyped
+        if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_jTextNom_ProvKeyTyped
+
+    private void jTextApe_ProvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextApe_ProvKeyTyped
+        if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_jTextApe_ProvKeyTyped
+
+    private void jTextNroDoc_ProvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNroDoc_ProvKeyTyped
+        char[] p = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', KeyEvent.VK_BACK_SPACE};
+        int b = 0;
+        for (int i = 0; i <= 11; i++) {
+            if (p[i] == evt.getKeyChar()) {
+                b = 1;
+            }
+        }
+        if (b == 0) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_jTextNroDoc_ProvKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup GrupoBotones;
-    private javax.swing.JButton jBotonAgre_Prov;
-    private javax.swing.JButton jBotonEdit_Prov;
-    private javax.swing.JButton jBotonElim_Prov;
+    public static javax.swing.JButton jBotonAgre_Prov2;
+    public static javax.swing.JButton jBotonModificar_Prov;
     private javax.swing.JLabel jEtiqApe_Prov;
     private javax.swing.JLabel jEtiqDirec_Prov;
     private javax.swing.JLabel jEtiqNomCom_Prov;
     private javax.swing.JLabel jEtiqNom_Prov;
     private javax.swing.JLabel jEtiqNumDoc_Prov;
-    private javax.swing.JLabel jEtiqNumID_Prov;
-    private javax.swing.JLabel jEtiqTD_Prov;
     private javax.swing.JLabel jEtiqTel_Prov;
-    private javax.swing.JRadioButton jRbDNI_Prov;
-    private javax.swing.JRadioButton jRbLC_Prov;
-    private javax.swing.JScrollPane jSP1_Prov;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTabla_Prov;
-    private javax.swing.JTextField jTextApe_Prov;
-    private javax.swing.JTextField jTextDirec_Prov;
-    private javax.swing.JTextField jTextNomCom_Prov;
-    private javax.swing.JTextField jTextNom_Prov;
-    private javax.swing.JTextField jTextNroDoc_Prov;
-    private javax.swing.JTextField jTextNumID_Prov;
-    private javax.swing.JTextField jTextTel_Prov;
+    public static javax.swing.JTextField jTextApe_Prov;
+    public static javax.swing.JTextField jTextDirec_Prov;
+    public static javax.swing.JTextField jTextNomCom_Prov;
+    public static javax.swing.JTextField jTextNom_Prov;
+    public static javax.swing.JTextField jTextNroDoc_Prov;
+    public static javax.swing.JTextField jTextTel_Prov;
     // End of variables declaration//GEN-END:variables
 }

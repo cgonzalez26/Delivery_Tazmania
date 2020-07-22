@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ventas_Diarias" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="51b23c06-1f4e-4fa8-a573-caeb90eb6e12">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select v.NroFactura,date_format(v.FechaVenta, '%d/%m/%Y %h:%i') as Fecha,p.descripcion,d.Precio,d.Cantidad,(d.Precio*d.Cantidad) as SubTotal from ventas as v INNER JOIN detallesventas as d on v.idventa=d.idventa INNER JOIN productos as p on p.idproducto=d.idproducto where d.activo=1 and p.activo=1 and v.activo=1 order by date_format(v.FechaVenta, '%d/%m/%Y %h:%i')desc,v.NroFactura;]]>
+	</queryString>
+	<field name="NroFactura" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Fecha" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Precio" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Cantidad" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SubTotal" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement x="145" y="24" width="249" height="25" uuid="dbbaf190-a513-4cd9-a926-45cc06e96a90"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Verdana" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Ventas Diarias]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="80d862d1-ced4-4723-af27-8d7430ada687"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="23" uuid="a05d8d40-bd18-4cca-adf6-6a318d5b678e"/>
+				<text><![CDATA[NroFactura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="23" uuid="9ecc66b5-e709-42ef-8ce2-6c75fead888d"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="23" uuid="4b54f4f8-1fb8-4968-88ae-a6e722ee8f91"/>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="23" uuid="b239447c-b5c1-468a-89ee-6d12de913cce"/>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="23" uuid="072ff088-5290-4882-ade5-cd92cc7b8b79"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="0" width="55" height="23" uuid="976b6402-0387-4212-b956-cec3f93e8a27"/>
+				<text><![CDATA[SubTotal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="21" uuid="6d7d689f-d50a-4f8b-8222-bfda098f8adf"/>
+				<textFieldExpression><![CDATA[$F{NroFactura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="21" uuid="4bfcfc60-bd23-4458-b047-91927a5762d4"/>
+				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="21" uuid="ef36d527-7719-414a-8a12-8bcc3fc0207b"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="21" uuid="a0cb9107-4be9-4108-a6eb-da66b4e1039a"/>
+				<textFieldExpression><![CDATA[$F{Precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="21" uuid="c6ff5689-99fe-4ed2-9117-90dfeec38b50"/>
+				<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="55" height="21" uuid="2308dd03-3a5d-4199-a9e0-140692b9b674"/>
+				<textFieldExpression><![CDATA[$F{SubTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="38">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="38" uuid="c06e7e9e-1815-40d3-baa5-cde8ee1e5443"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "\\SumMontoTotalVentaDiaria.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="200" y="1" width="80" height="20" uuid="9e7aee63-9fd4-41b5-8e2e-b325c6a2a332"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="1" width="40" height="20" uuid="d125704e-0c04-442d-be3c-39c43c3f530c"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

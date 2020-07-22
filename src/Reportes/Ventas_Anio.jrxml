@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="ed048331-aaa6-458a-8d22-448e53017dd4">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Año" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.io.File" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select v.NroFactura,date_format(v.FechaVenta, '%d/%m/%Y %h:%i') as Fecha,p.descripcion,d.Precio,d.Cantidad,(d.Precio*d.Cantidad) as SubTotal from ventas as v INNER JOIN detallesventas as d on v.idventa=d.idventa INNER JOIN productos as p on p.idproducto=d.idproducto where YEAR(v.FechaVenta)='$P!{Año}' and d.activo=1 and p.activo=1 and v.activo=1 order by date_format(v.FechaVenta, '%d/%m/%Y %h:%i') desc,v.NroFactura;]]>
+	</queryString>
+	<field name="NroFactura" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Fecha" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Precio" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Cantidad" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SubTotal" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="168" y="23" width="248" height="29" uuid="1c6d6884-a35e-4ffd-8c61-74add80d1f43"/>
+				<textElement>
+					<font fontName="Verdana" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Ventas por Año]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="44c1a564-217d-45ca-8e07-2bba7c1b364c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="141d0493-badf-4013-817c-fcf705934781"/>
+				<text><![CDATA[NroFactura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="20" uuid="8850bcd9-f6b3-4891-bd45-5afc67c0427a"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" uuid="76697233-8bc1-46fb-82f5-925c7df9b35d"/>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="e12a22fa-b1f3-47bc-bb89-a85cc4c9682c"/>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="20" uuid="77e5f9ed-c305-4dfb-8fbc-1e95a6c177a4"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="0" width="55" height="20" uuid="6413093a-762c-4204-99e9-915283ad2cf8"/>
+				<text><![CDATA[SubTotal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="100" height="20" uuid="0a4da694-9024-4bae-88d2-dcc67cfe40c0"/>
+				<textFieldExpression><![CDATA[$F{NroFactura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="1" width="100" height="20" uuid="5cb625a3-5ff1-4533-bc35-4548555f0c65"/>
+				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="1" width="100" height="20" uuid="59e85205-bcc9-481d-83cf-c0930bbd73bd"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="1" width="100" height="20" uuid="e30acfbc-855c-4b06-a4cf-902f4ea375cd"/>
+				<textFieldExpression><![CDATA[$F{Precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="1" width="100" height="20" uuid="3c06016e-2e16-48a7-933e-2b43da3ecb1c"/>
+				<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="1" width="55" height="20" uuid="404c2ffc-e10a-42f5-b162-0e7a66ee4c1c"/>
+				<textFieldExpression><![CDATA[$F{SubTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="50" uuid="8231c945-7209-4ac7-9a65-b9f16a6f62f0"/>
+				<subreportParameter name="Año">
+					<subreportParameterExpression><![CDATA[$P{Año}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "\\SumMontoTotalPorAnio.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="218" y="0" width="80" height="20" uuid="ef844c92-f1bc-4721-9da9-3fc41db977db"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="298" y="0" width="40" height="20" uuid="002e711e-32cb-4ed1-bc03-fcea5704732c"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

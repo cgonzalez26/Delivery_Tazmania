@@ -1,102 +1,90 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
-import Modelo.modelo_DetalleCompras;
-import Modelo.modelo_Insumos;
-import Modelo.modelo_TipoInsumos;
+import Modelo.Compras;
 import Vistas.vCompras_Insumos;
-import Vistas.vInsumos;
-import Vistas.vTipos_Insumos;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Colo-PC
  */
-public class control_Compras extends modelo_DetalleCompras {
+public class control_Compras {
 
+    Sentencias_sql sql;
     private final Conexion mysql = new Conexion();
     private final Connection cn = mysql.obtener();
-    private String sql1 = "", sql2 = "", sql3 = "", sql4 = "";
 
     public control_Compras() {
-
+        sql = new Sentencias_sql();
     }
 
-    @Override
-    public ArrayList<String> LlenarComboProveedor() {
-        ArrayList<String> Lista = new ArrayList<String>();
-        sql1 = "SELECT NOMCOMERCIAL_PROVEEDOR FROM PROVEEDORES";
-        try {
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-            ResultSet rs = pst1.executeQuery();
-
-            while (rs.next()) {
-                Lista.add(rs.getString("NOMCOMERCIAL_PROVEEDOR"));
-            }
-
-        } catch (SQLException e) {
-            return null;
-        }
-        return Lista;
+    public Object[][] MostrarDatos(String desde, String hasta) {
+        String[] columnas = {"idcompra", "idproveedor", "idusuario", "Nombre_comercial", "NroCompra", "Login", "MontoTotal", "FechaCompra"};
+        Object[][] datos = sql.GetTabla(columnas, "compras", "select c.idcompra,p.idproveedor,u.idusuario,p.Nombre_comercial,c.NroCompra,u.Login,c.MontoTotal,date_format(c.FechaCompra,'%d/%m/%Y %H:%i') as FechaCompra from proveedores p INNER JOIN compras c on p.idproveedor=c.idproveedor INNER JOIN usuarios u on u.idusuario=c.idusuario where date(c.FechaCompra) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and c.activo=1 order by FechaCompra asc;");
+        return datos;
     }
 
-    @Override
-    public DefaultTableModel MostrarDatosC() throws SQLException {
-
-        DefaultTableModel modelo;
-
-        String titulos[] = {"N°", "Usuario", "Proveedor de Comercio", "Nombre del Insumo", "Precio", "Cantidad", "Monto Total", "Fecha de Compra"};
-
-        String datos[] = new String[8];
-
-        modelo = new DefaultTableModel(null, titulos);
-
-        sql1 = "SELECT D.ID_DETCOMPRA, U.NOMBRE_USUARIO, P.NOMCOMERCIAL_PROVEEDOR, D.NOMINSUMO_DETCOMPRA, D.PRECIOINSUMO_DETCOMPRA, D.CANTIDAD_DETCOMPRA, "
-                + " C.MONTOTOTAL_COMPRA, C.FECHA_COMPRA FROM USUARIOS U INNER JOIN COMPRAS C ON C.ID_USUARIO=U.ID_USUARIO INNER JOIN PROVEEDORES P "
-                + " ON C.ID_PROVEEDOR=P.ID_PROVEEDOR INNER JOIN DETALLE_COMPRAS D ON D.ID_COMPRA=C.ID_COMPRA";
-
-        try {
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-            ResultSet rs = pst1.executeQuery();
-
-            while (rs.next()) {
-                datos[0] = rs.getString("ID_DETCOMPRA");
-                datos[1] = rs.getString("NOMBRE_USUARIO");
-                datos[2] = rs.getString("NOMCOMERCIAL_PROVEEDOR");
-                datos[3] = rs.getString("NOMINSUMO_DETCOMPRA");
-                datos[4] = rs.getString("PRECIOINSUMO_DETCOMPRA");
-                datos[5] = rs.getString("CANTIDAD_DETCOMPRA");
-                datos[6] = rs.getString("MONTOTOTAL_COMPRA");
-                datos[7] = rs.getString("FECHA_COMPRA");
-                modelo.addRow(datos);
-            }
-            pst1.close();
-            rs.close();
-
-        } catch (SQLException e) {
-            Logger.getLogger(vCompras_Insumos.class.getName()).log(Level.SEVERE, null, e);
-            return null;
-        }
-        return modelo;
+    public Object[][] MostrarProveedores() {
+        String[] columnas = {"Nombre_comercial"};
+        Object[][] datos = sql.GetTabla(columnas, "proveedores", "select Nombre_comercial from proveedores where activo=1");
+        return datos;
     }
 
-    @Override
-    public int CantidadInsumo() {
+    public Object[][] MostrarProveedorBuscado(String prov) {
+        String[] columnas = {"Nombre_comercial"};
+        Object[][] datos = sql.GetTabla(columnas, "proveedores", "select Nombre_comercial from proveedores where Nombre_comercial like '%" + prov + "%' and activo=1");
+        return datos;
+    }
+
+    public boolean EfectuarCompra(Compras compra) {
+        String monto = (Float.toString(compra.getMontototal())), fecha = ((JTextField) vCompras_Insumos.jDateChooser1.getDateEditor().getUiComponent()).getText(), idprov = Integer.toString(compra.getIdproveedor()), iduser = Integer.toString(compra.getIdusuario());
+        String datos[] = {idprov, iduser, monto};
+        return sql.insertar(datos, "insert into compras (idproveedor,idusuario,FechaCompra,MontoTotal,activo) values (?,?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'),?,1)");
+    }
+
+    public boolean EditarCompra(Compras compra) {
+        String monto = (Float.toString(compra.getMontototal())), id = (Integer.toString(compra.getIdcompra())), fecha = ((JTextField) vCompras_Insumos.jDateChooser1.getDateEditor().getUiComponent()).getText(), idprov = Integer.toString(compra.getIdproveedor()), iduser = Integer.toString(compra.getIdusuario());
+        String datos[] = {idprov, iduser, monto, id};
+        return sql.editar(datos, "update compras set idproveedor=?,idusuario=?,FechaCompra=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'),MontoTotal=? where idcompra=?");
+    }
+
+    public boolean ActualizarTotalCompra(Compras compra) {
+        String total = (Float.toString(compra.getMontototal())), id = (Integer.toString(compra.getIdcompra()));
+        String datos[] = {total, id};
+        return sql.editar(datos, "update compras set MontoTotal=? where idcompra=?");
+    }
+
+    public boolean EliminarCompra(Compras compra) {
+        return sql.baja_dedatos("compras", "idcompra", compra.getIdcompra());
+    }
+
+    public ArrayList<String> ObtenerDatosNumInsumos(String texto) {
+        return sql.ObtenerDatosInsProd("precio","stock","select precio,stock from insumos where descripcion='" + texto + "' and activo=1");
+    }
+
+    public int ObtenerUltimoIDCompra() {
+        return sql.ObtenerID("select max(idcompra) from compras");
+    }
+
+    public int ObtenerIDProveedor(String dato) {
+        return sql.ObtenerID("select idproveedor from proveedores where Nombre_comercial='" + dato + "'");
+    }
+
+    public int ObtenerIDUsuario(String dato) {
+        return sql.ObtenerID("select idusuario from usuarios where Login='" + dato + "'");
+    }
+
+    public int ObtenerIDMovCajaCompra(int id, String tipomovnro) {
+        return sql.ObtenerID("select idmovimientocaja from movimientos_caja where idmovimiento=" + id + " and NroMovimiento like '%" + tipomovnro + "%'");
+    }
+
+    public String VerificarNroFactra(String dato) {
+        return sql.VerificarDuplicadosNrosFacturas("NroCompra", "select NroCompra from compras where NroCompra='" + dato + "' where activo=1");
+    }
+
+    /*  public int CantidadInsumo() {
         String nominsumo = vCompras_Insumos.jTextField4.getText();
         sql1 = "SELECT COUNT(NOMBRE_INSUMO) AS CANTIDAD_INSUMOS FROM INSUMOS WHERE NOMBRE_INSUMO='" + nominsumo + "'";
 
@@ -118,35 +106,8 @@ public class control_Compras extends modelo_DetalleCompras {
             Logger.getLogger(vCompras_Insumos.class.getName()).log(Level.SEVERE, null, e);
             return 0;
         }
-    }
-
-    @Override
-    public int CantidadTipos() {
-        String nomtipo = vCompras_Insumos.jTextField5.getText();
-        sql1 = "SELECT COUNT(TIPO_INSUMO) AS CANTIDAD_INSUMOS FROM INSUMOS WHERE TIPO_INSUMO='" + nomtipo + "'";
-
-        try {
-
-            int tipo = 0;
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-            ResultSet rs = pst1.executeQuery();
-
-            while (rs.next()) {
-                tipo = rs.getInt("CANTIDAD_INSUMOS");
-            }
-            pst1.close();
-            rs.close();
-
-            return tipo;
-        } catch (SQLException e) {
-            Logger.getLogger(vCompras_Insumos.class.getName()).log(Level.SEVERE, null, e);
-            return 0;
-        }
-    }
-
-    @Override
-    public boolean EfectuarCompra(modelo_DetalleCompras modelo1) {
+    }*/
+ /*public boolean EfectuarCompra(DetallesCompras modelo1) {
         String proveedor = (String) vCompras_Insumos.jComboBox1.getSelectedItem();
         String usuario = vCompras_Insumos.jTextField2.getText().trim();
         int cantidad = Integer.parseInt(vCompras_Insumos.jTextField7.getText());
@@ -309,306 +270,5 @@ public class control_Compras extends modelo_DetalleCompras {
 
         }
         return false;
-    }
-
-    @Override
-    public ArrayList<String> LlenarTipoInsumo() {
-        ArrayList<String> Lista = new ArrayList<String>();
-        sql1 = "SELECT NOMBRE_TIPOINSUMO FROM TIPOS_INSUMOS";
-        try {
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-            ResultSet rs = pst1.executeQuery();
-
-            while (rs.next()) {
-                Lista.add(rs.getString("NOMBRE_TIPOINSUMO"));
-            }
-
-        } catch (SQLException e) {
-            return null;
-        }
-        return Lista;
-    }
-
-    @Override
-    public DefaultTableModel MostrarDatosI() throws SQLException {
-        DefaultTableModel modelo;
-
-        String titulos[] = {"N°", "Nombre del Insumo", "Descripción", "Precio", "Stock", "Tipo Insumo", "Proveedor", "Fecha Registro"};
-
-        modelo = new DefaultTableModel(null, titulos);
-
-        String datos[] = new String[8];
-
-        sql1 = "SELECT * FROM INSUMOS";
-
-        try {
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-            ResultSet rs = pst1.executeQuery();
-
-            while (rs.next()) {
-                datos[0] = rs.getString("ID_INSUMO");
-                datos[1] = rs.getString("NOMBRE_INSUMO");
-                datos[2] = rs.getString("DESCRIPCION_INSUMO");
-                datos[3] = rs.getString("PRECIO_INSUMO");
-                datos[4] = rs.getString("STOCK_INSUMO");
-                datos[5] = rs.getString("TIPO_INSUMO");
-                datos[6] = rs.getString("PROVEEDOR_INSUMO");
-                datos[7] = rs.getString("FECHAREGISTRO_INSUMO");
-                modelo.addRow(datos);
-            }
-            pst1.close();
-            rs.close();
-        } catch (SQLException e) {
-            Logger.getLogger(vInsumos.class.getName()).log(Level.SEVERE, null, e);
-            return null;
-        }
-        return modelo;
-    }
-
-    @Override
-    public boolean InsertarInsumos(modelo_Insumos modelo) {
-        sql1 = "INSERT INTO INSUMOS (DESCRIPCION_INSUMO,PRECIO_INSUMO,STOCK_INSUMO,TIPO_INSUMO,PROVEEDOR_INSUMO,FECHAREGISTRO_INSUMO,ID_TIPOINSUMO)"
-                + "VALUES (?,?,?,?,?,?,(SELECT ID_TIPOINSUMO FROM TIPOS_INSUMOS ORDER BY ID_TIPOINSUMO DESC LIMIT 1))";
-
-        try {
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-
-            pst1.setString(1, modelo.getDescripcion_Insumos());
-            pst1.setDouble(2, modelo.getPrecio_Insumos());
-            pst1.setInt(3, modelo.getStock_Insumos());
-            pst1.setString(4, modelo.getNombre_TipoInsumos());
-            pst1.setString(5, modelo.getNomProv_Insumos());
-            pst1.setString(6, modelo.getFechaReg_Insumos());
-
-            int ej1 = pst1.executeUpdate();
-
-            if (ej1 != 0) {
-                return true;
-            } else {
-                return false;
-            }
-
-        } catch (SQLException e) {
-            Logger.getLogger(vInsumos.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
-    }
-
-    @Override
-    public boolean EditarInsumos(modelo_Insumos modelo) {
-
-        String nominsumo = (String) vInsumos.jCBTipo_Insumos.getSelectedItem();
-
-        sql1 = "UPDATE INSUMOS SET NOMBRE_INSUMO=?, DESCRIPCION_INSUMO=?, PRECIO_INSUMO=?, STOCK_INSUMO=?, TIPO_INSUMO=?, PROVEEDOR_INSUMO=?, FECHAREGISTRO_INSUMO=?, "
-                + "ID_TIPOINSUMO = (SELECT ID_TIPOINSUMO FROM TIPOS_INSUMOS WHERE NOMBRE_TIPOINSUMO='" + nominsumo + "') WHERE ID_INSUMO=?";
-
-        try {
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-
-            pst1.setString(1, modelo.getNombre_Insumos());
-            pst1.setString(2, modelo.getDescripcion_Insumos());
-            pst1.setDouble(3, modelo.getPrecio_Insumos());
-            pst1.setInt(4, modelo.getStock_Insumos());
-            pst1.setString(5, modelo.getNombre_TipoInsumos());
-            pst1.setString(6, modelo.getNomProv_Insumos());
-            pst1.setString(7, modelo.getFechaReg_Insumos());
-            pst1.setInt(8, modelo.getId_Insumos());
-
-            int ej1 = pst1.executeUpdate();
-
-            if (ej1 != 0) {
-                return true;
-            } else {
-                return false;
-            }
-
-        } catch (SQLException e) {
-            Logger.getLogger(vInsumos.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
-    }
-
-    @Override
-    public boolean EliminarInsumos(modelo_Insumos modelo) {
-        sql1 = "DELETE FROM INSUMOS WHERE ID_INSUMO = ?";
-
-        try {
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-
-            pst1.setInt(1, modelo.getId_Insumos());
-
-            int ej1 = pst1.executeUpdate();
-
-            if (ej1 != 0) {
-                return true;
-            } else {
-                return false;
-            }
-
-        } catch (SQLException e) {
-            Logger.getLogger(vInsumos.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
-    }
-
-    @Override
-    public DefaultTableModel MostrarDatosTI() throws SQLException {
-        DefaultTableModel modelo;
-
-        String titulos[] = {"N°", "Nombre Tipo de Insumo"};
-
-        modelo = new DefaultTableModel(null, titulos);
-
-        String[] datos = new String[2];
-
-        sql1 = "SELECT * FROM TIPOS_INSUMOS";
-
-        try {
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-            ResultSet rs = pst1.executeQuery();
-
-            while (rs.next()) {
-                datos[0] = rs.getString("ID_TIPOINSUMO");
-                datos[1] = rs.getString("NOMBRE_TIPOINSUMO");
-                modelo.addRow(datos);
-            }
-            pst1.close();
-            rs.close();
-        } catch (SQLException e) {
-            Logger.getLogger(vTipos_Insumos.class.getName()).log(Level.SEVERE, null, e);
-            return null;
-        }
-        return modelo;
-    }
-
-    @Override
-    public boolean InsertarTiposInsumos(modelo_TipoInsumos modelo) {
-        sql1 = "INSERT INTO TIPOS_INSUMOS (NOMBRE_TIPOINSUMO) VALUES (?)";
-
-        try {
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-
-            pst1.setString(1, modelo.getNombre_TipoInsumos());
-
-            int ej1 = pst1.executeUpdate();
-
-            if (ej1 != 0) {
-                return true;
-            } else {
-                return false;
-            }
-
-        } catch (SQLException e) {
-            Logger.getLogger(vTipos_Insumos.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
-    }
-
-    @Override
-    public int CantidadIDTipoInsumos() {
-        int idtipoinsumo = Integer.parseInt(vTipos_Insumos.jTextID_TipoInsumo.getText());
-        sql1 = "SELECT COUNT(ID_TIPOINSUMO) AS CANTIDAD FROM INSUMOS WHERE ID_TIPOINSUMO="+idtipoinsumo;
-
-        try {
-            int idtipo = 0;
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-            ResultSet rs = pst1.executeQuery();
-
-            while (rs.next()) {
-                idtipo = rs.getInt("CANTIDAD");
-            }
-            pst1.close();
-            rs.close();
-            return idtipo;
-        } catch (SQLException e) {
-            Logger.getLogger(vTipos_Insumos.class.getName()).log(Level.SEVERE, null, e);
-            return 0;
-        }
-    }
-
-    @Override
-    public boolean EditarTiposInsumos(modelo_TipoInsumos modelo) {
-        if (CantidadIDTipoInsumos() > 0) {
-            sql1 = "UPDATE TIPOS_INSUMOS SET NOMBRE_TIPOINSUMO=? WHERE ID_TIPOINSUMO=?";
-            sql2 = "UPDATE INSUMOS SET TIPO_INSUMO=? WHERE ID_TIPOINSUMO=?";
-            try {
-
-                PreparedStatement pst1 = cn.prepareStatement(sql1);
-                PreparedStatement pst2 = cn.prepareStatement(sql2);
-
-                pst1.setString(1, modelo.getNombre_TipoInsumos());
-                pst1.setInt(2, modelo.getId_TipoInsumos());
-                pst2.setString(1, modelo.getNombre_TipoInsumos());
-                pst2.setInt(2, modelo.getId_TipoInsumos());
-
-                int ej1 = pst1.executeUpdate();
-                int ej2 = pst2.executeUpdate();
-
-                if (ej1 != 0 && ej2 != 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-
-            } catch (SQLException e) {
-                Logger.getLogger(vTipos_Insumos.class.getName()).log(Level.SEVERE, null, e);
-                return false;
-            }
-        }else{
-           sql1 = "UPDATE TIPOS_INSUMOS SET NOMBRE_TIPOINSUMO=? WHERE ID_TIPOINSUMO=?";
-           
-           try{
-               PreparedStatement pst1 = cn.prepareStatement(sql1); 
-               
-               pst1.setString(1, modelo.getNombre_TipoInsumos());
-               pst1.setInt(2, modelo.getId_TipoInsumos());
-               
-                int ej1 = pst1.executeUpdate();
-                
-                if(ej1 !=0){
-                    return true;
-                }else{
-                    return false;
-                }
-           }catch(SQLException e){
-              Logger.getLogger(vTipos_Insumos.class.getName()).log(Level.SEVERE, null, e);
-              return false; 
-           }
-        }
-    }
-
-    @Override
-    public boolean EliminarTiposInsumos(modelo_TipoInsumos modelo) {
-        int idtipoinsumo = Integer.parseInt(vTipos_Insumos.jTextID_TipoInsumo.getText());
-        
-        sql1 = "DELETE FROM INSUMOS WHERE ID_TIPOINSUMO="+idtipoinsumo;
-        sql2= "DELETE FROM TIPOS_INSUMOS WHERE ID_TIPOINSUMO="+idtipoinsumo;
-
-        try {
-
-            PreparedStatement pst1 = cn.prepareStatement(sql1);
-            PreparedStatement pst2= cn.prepareStatement(sql2);
-
-            int ej1 = pst1.executeUpdate();
-            int ej2 = pst2.executeUpdate();
-
-            if (ej1 != 0 && ej2 != 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(vTipos_Insumos.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
-    }
-
+    }*/
 }

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="d926acd0-99e1-40a2-a9d9-ab962aca07ea">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Mes" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Año" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.io.File" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select v.NroFactura,date_format(v.FechaVenta, '%d/%m/%Y %h:%i') as Fecha,p.descripcion,d.Precio,d.Cantidad,(d.Precio*d.Cantidad) as SubTotal from ventas as v INNER JOIN detallesventas as d on v.idventa=d.idventa INNER JOIN productos as p on p.idproducto=d.idproducto where Month(v.FechaVenta)='$P!{Mes}' and year(v.FechaVenta)='$P!{Año}' and d.activo=1 and p.activo=1 and v.activo=1 order by date_format(v.FechaVenta, '%d/%m/%Y %h:%i')desc,v.NroFactura;]]>
+	</queryString>
+	<field name="NroFactura" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Fecha" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Precio" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Cantidad" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SubTotal" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="176" y="30" width="215" height="20" uuid="55eb79aa-350f-4607-90b6-fd29f6c73e42"/>
+				<textElement>
+					<font fontName="Verdana" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Venta Por Mes]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="512cdbc9-9670-4457-a0d4-8191ae04da53"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="f6e828d8-3b97-442c-9aa1-698577728b2d"/>
+				<text><![CDATA[NroFactura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" uuid="f1dba92e-fab6-444d-a63d-80c42042af4f"/>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="20" uuid="619fad99-97b6-4951-8e51-57c55ea0a934"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="aaf9ffbd-f038-42d3-a211-8a4aed04cdad"/>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="20" uuid="ca847faf-828b-4190-becc-04206b3bc83d"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="0" width="55" height="20" uuid="2dd9eb49-5c24-4ac7-95fa-0a874e4788b4"/>
+				<text><![CDATA[SubTotal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="21" uuid="6ef2b5eb-4809-41c5-bc9f-f40a02ef320b"/>
+				<textFieldExpression><![CDATA[$F{NroFactura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="21" uuid="b865e3d0-52bf-4584-a316-80e9c50632bb"/>
+				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="21" uuid="ad67d8ed-b1d9-4ddf-9a48-4d54c065c2fb"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="21" uuid="362bec99-20af-4a0b-875f-a5f7eb7ebd55"/>
+				<textFieldExpression><![CDATA[$F{Precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="21" uuid="1351d15d-d1b9-4f35-b40a-72f4166b5c4c"/>
+				<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="55" height="21" uuid="1bdbadef-ef27-4828-ac40-787d7789df80"/>
+				<textFieldExpression><![CDATA[$F{SubTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="38">
+			<subreport isUsingCache="true">
+				<reportElement x="0" y="0" width="555" height="38" uuid="68f32003-2426-4b0f-bccc-a711cbd5e280"/>
+				<subreportParameter name="Mes">
+					<subreportParameterExpression><![CDATA[$P{Mes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Año">
+					<subreportParameterExpression><![CDATA[$P{Año}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "\\SumMontoTotalPorMes.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="218" y="0" width="80" height="20" uuid="20a6f193-0803-4b78-99b1-a87c1c5ae2bd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="298" y="0" width="40" height="20" uuid="e141a40d-a9f3-4179-aabc-bd67a9293349"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
