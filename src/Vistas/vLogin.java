@@ -28,7 +28,7 @@ public final class vLogin extends javax.swing.JFrame {
 
     public vLogin() {
         initComponents();
-        this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.PNG")).getImage());
     }
 
     @SuppressWarnings("unchecked")
@@ -47,18 +47,21 @@ public final class vLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Delivery Tazmania");
         setIconImage(getIconImage());
+        setMinimumSize(new java.awt.Dimension(430, 370));
         setName("jFLogin"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(430, 370));
         setResizable(false);
         setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jEtiqTitulo_Login.setFont(new java.awt.Font("Segoe UI Semibold", 0, 36)); // NOI18N
+        jEtiqTitulo_Login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/DeliveryTazmania_login.png"))); // NOI18N
         jEtiqTitulo_Login.setText("Bienvenido!");
-        getContentPane().add(jEtiqTitulo_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 200, 40));
+        getContentPane().add(jEtiqTitulo_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 200, 160));
 
         jEtiqNom_Login.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
-        jEtiqNom_Login.setText("Nombre Usuario");
-        getContentPane().add(jEtiqNom_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 200, 30));
+        jEtiqNom_Login.setText("Usuario:");
+        getContentPane().add(jEtiqNom_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 90, 30));
 
         jTextNomUser_Login.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jTextNomUser_Login.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -66,12 +69,13 @@ public final class vLogin extends javax.swing.JFrame {
                 jTextNomUser_LoginKeyPressed(evt);
             }
         });
-        getContentPane().add(jTextNomUser_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 250, 40));
+        getContentPane().add(jTextNomUser_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 250, 40));
 
         jEtiqPass_Login.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
-        jEtiqPass_Login.setText("Contraseña");
-        getContentPane().add(jEtiqPass_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 130, 40));
+        jEtiqPass_Login.setText("Contraseña:");
+        getContentPane().add(jEtiqPass_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 130, 40));
 
+        jBotonIngreso_Login.setBackground(new java.awt.Color(252, 240, 0));
         jBotonIngreso_Login.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jBotonIngreso_Login.setText("Ingresar");
         jBotonIngreso_Login.addActionListener(new java.awt.event.ActionListener() {
@@ -84,8 +88,9 @@ public final class vLogin extends javax.swing.JFrame {
                 jBotonIngreso_LoginKeyPressed(evt);
             }
         });
-        getContentPane().add(jBotonIngreso_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 100, 40));
+        getContentPane().add(jBotonIngreso_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 100, 40));
 
+        jBotonSalir_Login.setBackground(new java.awt.Color(226, 74, 37));
         jBotonSalir_Login.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jBotonSalir_Login.setText("Salir");
         jBotonSalir_Login.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +103,7 @@ public final class vLogin extends javax.swing.JFrame {
                 jBotonSalir_LoginKeyPressed(evt);
             }
         });
-        getContentPane().add(jBotonSalir_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 100, 40));
+        getContentPane().add(jBotonSalir_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 100, 40));
 
         jTextoPass_Login.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jTextoPass_Login.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -106,7 +111,7 @@ public final class vLogin extends javax.swing.JFrame {
                 jTextoPass_LoginKeyPressed(evt);
             }
         });
-        getContentPane().add(jTextoPass_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 250, 40));
+        getContentPane().add(jTextoPass_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 250, 40));
 
         jCheckBox1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         jCheckBox1.setText("Ver Contraseña");
@@ -115,9 +120,9 @@ public final class vLogin extends javax.swing.JFrame {
                 jCheckBox1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 190, -1));
+        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 190, -1));
 
-        setSize(new java.awt.Dimension(275, 494));
+        setSize(new java.awt.Dimension(519, 433));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -214,10 +219,10 @@ public final class vLogin extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+        /*try {
              UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
-        }
+        }*/
         //</editor-fold>
 
         /* Create and display the form */
