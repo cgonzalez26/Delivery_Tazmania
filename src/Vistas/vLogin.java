@@ -90,7 +90,7 @@ public final class vLogin extends javax.swing.JFrame {
         });
         getContentPane().add(jBotonIngreso_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 100, 40));
 
-        jBotonSalir_Login.setBackground(new java.awt.Color(226, 74, 37));
+        jBotonSalir_Login.setBackground(new java.awt.Color(240, 87, 49));
         jBotonSalir_Login.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jBotonSalir_Login.setText("Salir");
         jBotonSalir_Login.addActionListener(new java.awt.event.ActionListener() {
