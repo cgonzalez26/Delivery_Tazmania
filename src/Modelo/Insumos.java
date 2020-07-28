@@ -11,6 +11,7 @@ public class Insumos {
     private int idinsumo;
     private int idtipoinsumo;
     private int idproveedor;
+    private int idunidadmedida;
     private String descripcion;
     private float precio;
     private float stock;
@@ -20,10 +21,11 @@ public class Insumos {
     public Insumos() {
     }
 
-    public Insumos(int idinsumo, int idtipoinsumo, int idproveedor, String descripcion, float precio, float stock, Timestamp fecha_registro, int activo) {
+    public Insumos(int idinsumo, int idtipoinsumo, int idproveedor, int idunidadmedida, String descripcion, float precio, float stock, Timestamp fecha_registro, int activo) {
         this.idinsumo = idinsumo;
         this.idtipoinsumo = idtipoinsumo;
         this.idproveedor = idproveedor;
+        this.idunidadmedida = idunidadmedida;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
@@ -97,6 +99,14 @@ public class Insumos {
     
     public float SubTotal(float texto){
         return precio*stock;
+    }
+
+    public int getIdunidadmedida() {
+        return idunidadmedida;
+    }
+
+    public void setIdunidadmedida(int idunidadmedida) {
+        this.idunidadmedida = idunidadmedida;
     }
     
 }
