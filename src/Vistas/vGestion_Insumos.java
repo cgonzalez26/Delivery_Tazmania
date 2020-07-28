@@ -299,7 +299,7 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Administrar Insumos");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(708, 325));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -394,7 +394,7 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jBotonAgregar_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 91, -1));
 
-        jBotonModif_Insumos.setBackground(new java.awt.Color(240, 87, 49));
+        jBotonModif_Insumos.setBackground(new java.awt.Color(252, 240, 0));
         jBotonModif_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonModif_Insumos.setText("Modificar");
         jBotonModif_Insumos.addActionListener(new java.awt.event.ActionListener() {

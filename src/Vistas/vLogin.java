@@ -46,6 +46,7 @@ public final class vLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Delivery Tazmania");
+        setBackground(new java.awt.Color(255, 248, 177));
         setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(430, 370));
         setName("jFLogin"); // NOI18N
@@ -75,7 +76,7 @@ public final class vLogin extends javax.swing.JFrame {
         jEtiqPass_Login.setText("Contraseña:");
         getContentPane().add(jEtiqPass_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 130, 40));
 
-        jBotonIngreso_Login.setBackground(new java.awt.Color(252, 240, 0));
+        jBotonIngreso_Login.setBackground(new java.awt.Color(252, 249, 57));
         jBotonIngreso_Login.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jBotonIngreso_Login.setText("Ingresar");
         jBotonIngreso_Login.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +91,7 @@ public final class vLogin extends javax.swing.JFrame {
         });
         getContentPane().add(jBotonIngreso_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 100, 40));
 
-        jBotonSalir_Login.setBackground(new java.awt.Color(240, 87, 49));
+        jBotonSalir_Login.setBackground(new java.awt.Color(237, 124, 61));
         jBotonSalir_Login.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jBotonSalir_Login.setText("Salir");
         jBotonSalir_Login.addActionListener(new java.awt.event.ActionListener() {

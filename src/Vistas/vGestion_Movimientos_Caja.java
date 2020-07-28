@@ -186,12 +186,13 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         jDateFecha = new com.toedter.calendar.JDateChooser();
         jLabelMensaje = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Administrar Movimiento de Caja");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(547, 357));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -237,6 +238,7 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         });
         getContentPane().add(jCBTipoMovimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 30));
 
+        jBotonAgregar.setBackground(new java.awt.Color(252, 240, 0));
         jBotonAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonAgregar.setText("Agregar");
         jBotonAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +248,7 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         });
         getContentPane().add(jBotonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 90, -1));
 
+        jBotonModificar.setBackground(new java.awt.Color(252, 240, 0));
         jBotonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonModificar.setText("Modificar");
         jBotonModificar.addActionListener(new java.awt.event.ActionListener() {
