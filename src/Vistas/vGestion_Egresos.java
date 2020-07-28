@@ -170,12 +170,13 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
         jDateFecha_Egresos = new com.toedter.calendar.JDateChooser();
         jLabelMensaje = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Administrar Gastos");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(526, 391));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -214,6 +215,7 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
             }
         });
 
+        jBotonAgregar_Egresos.setBackground(new java.awt.Color(252, 249, 57));
         jBotonAgregar_Egresos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonAgregar_Egresos.setText("Agregar");
         jBotonAgregar_Egresos.addActionListener(new java.awt.event.ActionListener() {
@@ -222,6 +224,7 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
             }
         });
 
+        jBotonModif_Egresos.setBackground(new java.awt.Color(252, 249, 57));
         jBotonModif_Egresos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonModif_Egresos.setText("Modificar");
         jBotonModif_Egresos.addActionListener(new java.awt.event.ActionListener() {

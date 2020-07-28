@@ -62,15 +62,15 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                     vGestion_Insumos.jTextPrecio_Insumos.setText(jTabla_Insumos.getValueAt(fila, 6).toString());
                     vGestion_Insumos.jTextStock_Insumos.setText(jTabla_Insumos.getValueAt(fila, 7).toString());
                     fecha = jTabla_Insumos.getValueAt(fila, 8).toString();
-                    if (!fecha.equals("-")) {
+                    /*if (!fecha.equals("-")) {
                         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                         try {
                             fecha_insumo = new java.sql.Timestamp(df.parse(fecha).getTime());
                         } catch (ParseException ex) {
                             Logger.getLogger(vLista_Insumos.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        vGestion_Insumos.jDateChooser1.setDate(fecha_insumo);
-                    }
+                        //vGestion_Insumos.jDateChooser1.setDate(fecha_insumo);
+                    }*/
                     tipo.id = idinsumo;
                     dispose();
                     LimpiarSeleccion();
@@ -418,7 +418,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
             vGestion_Insumos.jTextPrecio_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 6).toString());
             vGestion_Insumos.jTextStock_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 7).toString());
             fecha = jTabla_Insumos.getValueAt(seleccionado, 8).toString();
-            if (!fecha.equals("-")) {
+            /*if (!fecha.equals("-")) {
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 try {
                     fecha_insumo = new java.sql.Timestamp(df.parse(fecha).getTime());
@@ -428,7 +428,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                 vGestion_Insumos.jDateChooser1.setDate(fecha_insumo);
             } else {
                 ((JTextField) vGestion_Insumos.jDateChooser1.getDateEditor().getUiComponent()).setText("");
-            }
+            }*/
             tipo.id = idinsumo;
             dispose();
             LimpiarSeleccion();

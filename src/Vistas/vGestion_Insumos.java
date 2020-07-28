@@ -23,6 +23,7 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
     Insumos I = new Insumos();
     control_existencias combo = new control_existencias();
     Object[] tipoinsumo;
+    Object[] unidadmedida;
     DefaultTableModel modelprov;
     vLista_Insumos lista = null;
     String id;
@@ -33,6 +34,7 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
     public vGestion_Insumos() {
         initComponents();
         ComboTipoInsumo();
+        ComboUnidadMedida();
         MostrarProveedores();
         EliminarItemsVacios();
         jBotonModif_Insumos.setEnabled(false);
@@ -86,6 +88,13 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         tipoinsumo = combo.combox("tiposinsumos", "descripcion");
         for (Object tipoinsumo1 : tipoinsumo) {
             jCBTipo_Insumos.addItem((String) tipoinsumo1);
+        }
+    }
+    
+    public void ComboUnidadMedida() {
+        unidadmedida = combo.combox("unidadesmedidas", "descripcion");
+        for (Object um : unidadmedida) {
+            jCBUnidad_Medida.addItem((String) um);
         }
     }
 
@@ -160,8 +169,9 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         jBotonAgregar_Insumos = new javax.swing.JButton();
         jBotonModif_Insumos = new javax.swing.JButton();
         jTextDesc_Insumos = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jCBUnidad_Medida = new javax.swing.JComboBox<>();
 
         vSeleccionarNombreComercialProv.setTitle("Seleccionar Nombre Comercial Proveedor");
         java.awt.Image icono = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
@@ -283,12 +293,13 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Administrar Insumos");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(708, 325));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -310,16 +321,17 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel3.setText("(*) Seleccionar Proveedor");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, -2, -1, 30));
+        jLabel3.setText("Unidad de Medida:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, 30));
 
         jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextField1.setText("Seleccionar Proveedor...");
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField1KeyReleased(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 291, 30));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 270, 30));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -327,7 +339,7 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 43, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, 43, 30));
 
         jList2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -341,12 +353,12 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         getContentPane().add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 291, -1));
 
         jEtiqDesc_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqDesc_Insumos.setText("(*) Descripción ");
-        getContentPane().add(jEtiqDesc_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 94, 20));
+        jEtiqDesc_Insumos.setText("(*) Descripción:");
+        getContentPane().add(jEtiqDesc_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 94, 20));
 
         jEtiqPrecio_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqPrecio_Insumos.setText("Precio");
-        getContentPane().add(jEtiqPrecio_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, -1, -1));
+        jEtiqPrecio_Insumos.setText("Precio:");
+        getContentPane().add(jEtiqPrecio_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, 20));
 
         jTextPrecio_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextPrecio_Insumos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -354,11 +366,11 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 jTextPrecio_InsumosKeyTyped(evt);
             }
         });
-        getContentPane().add(jTextPrecio_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 170, 32));
+        getContentPane().add(jTextPrecio_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 200, 30));
 
         jEtiqStock_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqStock_Insumos.setText("Stock");
-        getContentPane().add(jEtiqStock_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, -1));
+        jEtiqStock_Insumos.setText("Stock:");
+        getContentPane().add(jEtiqStock_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, -1, 20));
 
         jTextStock_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextStock_Insumos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -366,12 +378,13 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 jTextStock_InsumosKeyTyped(evt);
             }
         });
-        getContentPane().add(jTextStock_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 168, 32));
+        getContentPane().add(jTextStock_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 200, 30));
 
         jCBTipo_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jCBTipo_Insumos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(*) Seleccionar Tipo Insumo.." }));
-        getContentPane().add(jCBTipo_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 198, 30));
+        jCBTipo_Insumos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo..." }));
+        getContentPane().add(jCBTipo_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 200, 30));
 
+        jBotonAgregar_Insumos.setBackground(new java.awt.Color(252, 240, 0));
         jBotonAgregar_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonAgregar_Insumos.setText("Agregar");
         jBotonAgregar_Insumos.addActionListener(new java.awt.event.ActionListener() {
@@ -379,8 +392,9 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 jBotonAgregar_InsumosActionPerformed(evt);
             }
         });
-        getContentPane().add(jBotonAgregar_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 91, -1));
+        getContentPane().add(jBotonAgregar_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 91, -1));
 
+        jBotonModif_Insumos.setBackground(new java.awt.Color(252, 240, 0));
         jBotonModif_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonModif_Insumos.setText("Modificar");
         jBotonModif_Insumos.addActionListener(new java.awt.event.ActionListener() {
@@ -388,49 +402,51 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 jBotonModif_InsumosActionPerformed(evt);
             }
         });
-        getContentPane().add(jBotonModif_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 91, -1));
+        getContentPane().add(jBotonModif_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 91, -1));
 
         jTextDesc_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        getContentPane().add(jTextDesc_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 265, 32));
+        getContentPane().add(jTextDesc_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 270, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("Fecha");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 60, -1));
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabel5.setText("(*) Proveedor:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, 20));
 
-        jDateChooser1.setDateFormatString("dd/MM/yyyy HH:mm");
-        jDateChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 156, 33));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabel4.setText("(*) Tipo de Insumo:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 30));
+
+        jCBUnidad_Medida.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jCBUnidad_Medida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Unidad..." }));
+        getContentPane().add(jCBUnidad_Medida, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 200, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBotonAgregar_InsumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAgregar_InsumosActionPerformed
         if (jBotonAgregar_Insumos.getText().equals("Agregar")) {
-            if (!jCBTipo_Insumos.getSelectedItem().equals("(*) Seleccionar Tipo Insumo..") && !jTextField1.getText().equals("") && !jTextDesc_Insumos.getText().trim().equals("")) {
-                if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                    I.setIdtipoinsumo(insumo.ObtenerIDTipoInsumo((String) jCBTipo_Insumos.getSelectedItem()));
-                    I.setIdproveedor(insumo.ObtenerIDProveedor((jTextField1.getText())));
-                    I.setDescripcion(jTextDesc_Insumos.getText());
-                    if (jTextPrecio_Insumos.getText().trim().length() == 0) {
-                        I.setPrecio((float) 0.00);
-                    } else {
-                        I.setPrecio(Float.parseFloat(jTextPrecio_Insumos.getText()));
-                    }
-                    if (jTextStock_Insumos.getText().trim().length() == 0) {
-                        I.setStock((float) 0.00);
-                    } else {
-                        I.setStock(Float.parseFloat(jTextStock_Insumos.getText()));
-                    }
-                    if (insumo.InsertarInsumos(I)) {
-                        JOptionPane.showMessageDialog(null, "Nuevo Insumo agregado");
-                        lista = new vLista_Insumos();
-                        vMenuPrincipal.jDesktopPane1.add(lista);
-                        lista.setVisible(true);
-                        this.dispose();
-                    }
+            if (!jCBTipo_Insumos.getSelectedItem().equals("(*) Seleccionar Tipo Insumo..") && !jTextField1.getText().equals("") && !jTextDesc_Insumos.getText().trim().equals("")) {               
+                I.setIdtipoinsumo(insumo.ObtenerIDTipoInsumo((String) jCBTipo_Insumos.getSelectedItem()));
+                I.setIdunidadmedida(insumo.ObtenerIDUnidadMedida((String) jCBUnidad_Medida.getSelectedItem()));
+                I.setIdproveedor(insumo.ObtenerIDProveedor((jTextField1.getText())));
+                I.setDescripcion(jTextDesc_Insumos.getText());
+                if (jTextPrecio_Insumos.getText().trim().length() == 0) {
+                    I.setPrecio((float) 0.00);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto");
+                    I.setPrecio(Float.parseFloat(jTextPrecio_Insumos.getText()));
                 }
+                if (jTextStock_Insumos.getText().trim().length() == 0) {
+                    I.setStock((float) 0.00);
+                } else {
+                    I.setStock(Float.parseFloat(jTextStock_Insumos.getText()));
+                }
+                if (insumo.InsertarInsumos(I)) {
+                    JOptionPane.showMessageDialog(null, "Nuevo Insumo agregado");
+                    lista = new vLista_Insumos();
+                    vMenuPrincipal.jDesktopPane1.add(lista);
+                    lista.setVisible(true);
+                    this.dispose();
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
             }
@@ -448,37 +464,34 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
 
     private void jBotonModif_InsumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonModif_InsumosActionPerformed
         if (!jCBTipo_Insumos.getSelectedItem().equals("(*) Seleccionar Tipo Insumo..") && !jTextField1.getText().equals("") && !jTextDesc_Insumos.getText().trim().equals("")) {
-            if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    I.setIdtipoinsumo(insumo.ObtenerIDTipoInsumo((String) jCBTipo_Insumos.getSelectedItem()));
-                    I.setIdproveedor(insumo.ObtenerIDProveedor(jTextField1.getText()));
-                    I.setDescripcion(jTextDesc_Insumos.getText());
-                    if (jTextPrecio_Insumos.getText().trim().length() == 0) {
-                        I.setPrecio((float) 0.00);
-                    } else {
-                        I.setPrecio(Float.parseFloat(jTextPrecio_Insumos.getText()));
-                    }
-                    if (jTextStock_Insumos.getText().trim().length() == 0) {
-                        I.setStock((float) 0.00);
-                    } else {
-                        I.setStock(Float.parseFloat(jTextStock_Insumos.getText()));
-                    }
-                    I.setIdinsumo(Integer.parseInt(id));
-
-                    if (insumo.EditarInsumos(I)) {
-                        JOptionPane.showMessageDialog(null, "Modificado");
-                        jBotonModif_Insumos.setEnabled(false);
-                        jBotonAgregar_Insumos.setEnabled(true);
-                        lista = new vLista_Insumos();
-                        vMenuPrincipal.jDesktopPane1.add(lista);
-                        lista.setVisible(true);
-                        this.dispose();
-                    }
+           
+            int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                I.setIdtipoinsumo(insumo.ObtenerIDTipoInsumo((String) jCBTipo_Insumos.getSelectedItem()));
+                I.setIdproveedor(insumo.ObtenerIDProveedor(jTextField1.getText()));
+                I.setDescripcion(jTextDesc_Insumos.getText());
+                if (jTextPrecio_Insumos.getText().trim().length() == 0) {
+                    I.setPrecio((float) 0.00);
+                } else {
+                    I.setPrecio(Float.parseFloat(jTextPrecio_Insumos.getText()));
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto");
-            }
+                if (jTextStock_Insumos.getText().trim().length() == 0) {
+                    I.setStock((float) 0.00);
+                } else {
+                    I.setStock(Float.parseFloat(jTextStock_Insumos.getText()));
+                }
+                I.setIdinsumo(Integer.parseInt(id));
+
+                if (insumo.EditarInsumos(I)) {
+                    JOptionPane.showMessageDialog(null, "Modificado");
+                    jBotonModif_Insumos.setEnabled(false);
+                    jBotonAgregar_Insumos.setEnabled(true);
+                    lista = new vLista_Insumos();
+                    vMenuPrincipal.jDesktopPane1.add(lista);
+                    lista.setVisible(true);
+                    this.dispose();
+                }
+            }            
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
         }
@@ -609,13 +622,14 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     public static javax.swing.JComboBox<String> jCBTipo_Insumos;
-    public static com.toedter.calendar.JDateChooser jDateChooser1;
+    public static javax.swing.JComboBox<String> jCBUnidad_Medida;
     private javax.swing.JLabel jEtiqDesc_Insumos;
     private javax.swing.JLabel jEtiqPrecio_Insumos;
     private javax.swing.JLabel jEtiqStock_Insumos;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

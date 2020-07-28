@@ -92,13 +92,14 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         jComboBox1 = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Administrar Usuarios");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -118,15 +119,15 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
         });
 
         jEtiqLogin_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqLogin_Usuario.setText("(*) Usuario");
+        jEtiqLogin_Usuario.setText("(*) Usuario:");
 
         jTextLogin_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jEtiqPass_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqPass_Usuario.setText("(*) Contraseña");
+        jEtiqPass_Usuario.setText("(*) Contraseña:");
 
         jEtiqNom_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqNom_Usuario.setText("(*) Nombre");
+        jEtiqNom_Usuario.setText("(*) Nombres:");
 
         jTextNom_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextNom_Usuario.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -136,7 +137,7 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
         });
 
         jEtiqApe_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqApe_Usuario.setText("Apellido");
+        jEtiqApe_Usuario.setText("Apellidos:");
 
         jTextApe_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextApe_Usuario.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -146,23 +147,24 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
         });
 
         jEtiqDireccion_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqDireccion_Usuario.setText("Direccion");
+        jEtiqDireccion_Usuario.setText("Dirección:");
 
         jTextDireccion_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jEtiqtMail_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqtMail_Usuario.setText("Correo");
+        jEtiqtMail_Usuario.setText("E-mail:");
 
         jTextMail_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jEtiqTel_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqTel_Usuario.setText("Telefono");
+        jEtiqTel_Usuario.setText("Teléfono:");
 
         jTextTel_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jComboEstado_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jComboEstado_Usuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Estado", "PERMITIDO", "NO PERMITIDO" }));
 
+        jBotonAgre_Usuario.setBackground(new java.awt.Color(252, 240, 0));
         jBotonAgre_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonAgre_Usuario.setText("Agregar");
         jBotonAgre_Usuario.addActionListener(new java.awt.event.ActionListener() {
@@ -171,6 +173,7 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
             }
         });
 
+        jBotonModif_Usuario.setBackground(new java.awt.Color(252, 240, 0));
         jBotonModif_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonModif_Usuario.setText("Modificar");
         jBotonModif_Usuario.addActionListener(new java.awt.event.ActionListener() {

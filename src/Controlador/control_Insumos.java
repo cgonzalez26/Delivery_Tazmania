@@ -56,17 +56,17 @@ public class control_Insumos {
     }
 
     public boolean InsertarInsumos(Insumos insumos) {
-        String idtipoinsumo = Integer.toString(insumos.getIdtipoinsumo()), idprov = Integer.toString(insumos.getIdproveedor()), fecha = ((JTextField) vGestion_Insumos.jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String idtipoinsumo = Integer.toString(insumos.getIdtipoinsumo()), idprov = Integer.toString(insumos.getIdproveedor()), fecha = "NOW()", idunidadmedida = Integer.toString(insumos.getIdunidadmedida());
         String precio = (Float.toString(insumos.getPrecio())), stock = (Float.toString(insumos.getStock()));
-        String datos[] = {idtipoinsumo, idprov, insumos.getDescripcion(), precio, stock};
-        return sql.insertar(datos, "insert into insumos (idtipoinsumo,idproveedor,descripcion,precio,stock,fecharegistro,activo) values (?,?,?,?,?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),1)");
+        String datos[] = {idtipoinsumo, idprov, idunidadmedida, insumos.getDescripcion(), precio, stock};
+        return sql.insertar(datos, "insert into insumos (idtipoinsumo,idproveedor,idunidadmedida,descripcion,precio,stock,fecharegistro,activo) values (?,?,?,?,?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),1)");
     }
 
     public boolean EditarInsumos(Insumos insumos) {
-        String idtipoinsumo = Integer.toString(insumos.getIdtipoinsumo()), idprov = Integer.toString(insumos.getIdproveedor()), fecha = ((JTextField) vGestion_Insumos.jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String idtipoinsumo = Integer.toString(insumos.getIdtipoinsumo()), idprov = Integer.toString(insumos.getIdproveedor()), fecha = "NOW()", idunidadmedida = Integer.toString(insumos.getIdunidadmedida());
         String precio = (Float.toString(insumos.getPrecio())), stock = (Float.toString(insumos.getStock())), id = (Integer.toString(insumos.getIdinsumo()));
-        String datos[] = {idtipoinsumo, idprov, insumos.getDescripcion(), precio, stock, id};
-        return sql.editar(datos, "update insumos set idtipoinsumo=?,idproveedor=?,descripcion=?,precio=?,stock=?,fecharegistro=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s') where idinsumo=?");
+        String datos[] = {idtipoinsumo, idprov, idunidadmedida, insumos.getDescripcion(), precio, stock, id};
+        return sql.editar(datos, "update insumos set idtipoinsumo=?,idproveedor=?, idunidadmedida=? ,descripcion=?,precio=?,stock=?,fecharegistro=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s') where idinsumo=?");
     }
 
     public boolean EliminarInsumos(Insumos insumos) {
@@ -78,6 +78,10 @@ public class control_Insumos {
         return sql.ObtenerID("select idtipoinsumo from tiposinsumos where descripcion='" + dato + "'");
     }
 
+    public int ObtenerIDUnidadMedida(String dato) {
+        return sql.ObtenerID("select idunidadmedida from unidadesmedidas where descripcion='" + dato + "'");
+    }
+            
     public int ObtenerIDProveedor(String dato) {
         return sql.ObtenerID("select idproveedor from proveedores where Nombre_comercial='" + dato + "'");
     }

@@ -2,6 +2,9 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="b1" green="f8" red="ff" type="rgb"/>
+    </Property>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
@@ -11,7 +14,7 @@
       <Color id="Cursor Por defecto"/>
     </Property>
     <Property name="frameIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-      <Image iconType="3" name="/Imagenes/LogoDelivery.jpg"/>
+      <Image iconType="3" name="/Imagenes/LogoDelivery.png"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -171,7 +174,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="(*) Usuario"/>
+        <Property name="text" type="java.lang.String" value="(*) Usuario:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextLogin_Usuario">
@@ -189,7 +192,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="(*) Contrase&#xf1;a"/>
+        <Property name="text" type="java.lang.String" value="(*) Contrase&#xf1;a:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jEtiqNom_Usuario">
@@ -197,7 +200,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="(*) Nombre"/>
+        <Property name="text" type="java.lang.String" value="(*) Nombres:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextNom_Usuario">
@@ -218,7 +221,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Apellido"/>
+        <Property name="text" type="java.lang.String" value="Apellidos:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextApe_Usuario">
@@ -239,7 +242,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Direccion"/>
+        <Property name="text" type="java.lang.String" value="Direcci&#xf3;n:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextDireccion_Usuario">
@@ -257,7 +260,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Correo"/>
+        <Property name="text" type="java.lang.String" value="E-mail:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextMail_Usuario">
@@ -275,7 +278,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Telefono"/>
+        <Property name="text" type="java.lang.String" value="Tel&#xe9;fono:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextTel_Usuario">
@@ -308,6 +311,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBotonAgre_Usuario">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="f0" red="fc" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="12" style="0"/>
         </Property>
@@ -322,6 +328,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBotonModif_Usuario">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="f0" red="fc" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="12" style="0"/>
         </Property>

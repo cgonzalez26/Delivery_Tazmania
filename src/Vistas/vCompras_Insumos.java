@@ -570,13 +570,14 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Registrar Compra");
         setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         setVisible(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -610,7 +611,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 jTextField3KeyReleased(evt);
             }
         });
-        jLayeredPane3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 292, 30));
+        jLayeredPane3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 292, 30));
 
         jList1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jList1.setValueIsAdjusting(true);
@@ -629,7 +630,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jLayeredPane3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 44, 30));
+        jLayeredPane3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 44, 30));
 
         jTextField2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextField2.setToolTipText("");
@@ -638,7 +639,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 jTextField2KeyReleased(evt);
             }
         });
-        jLayeredPane3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, 224, 30));
+        jLayeredPane3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 224, 30));
 
         jList2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jList2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -657,7 +658,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jLayeredPane3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 46, 32));
+        jLayeredPane3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 46, 32));
 
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Insumos a Comprar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
@@ -697,7 +698,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         });
 
         jButton5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton5.setText("Quitar");
+        jButton5.setText("Borrar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -746,7 +747,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jLayeredPane3.add(jLayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1220, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel5.setText("Usuario responsable de la compra");
+        jLabel5.setText("Usuario:");
         jLayeredPane3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(514, 11, 232, -1));
 
         jComboBox2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -759,9 +760,10 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jLayeredPane3.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 37, 175, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel6.setText("(*) Fecha");
+        jLabel6.setText("(*) Fecha:");
         jLayeredPane3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 11, 80, 20));
 
+        jButton7.setBackground(new java.awt.Color(252, 249, 57));
         jButton7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton7.setText("Modificar Compra");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -771,6 +773,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         });
         jLayeredPane3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 480, 150, -1));
 
+        jButton1.setBackground(new java.awt.Color(252, 249, 57));
         jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton1.setText("Registrar Compra");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -781,11 +784,11 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jLayeredPane3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 480, 136, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel9.setText("(*) Precio");
+        jLabel9.setText("(*) Precio;");
         jLayeredPane3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 388, -1, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel7.setText("(*) Cantidad");
+        jLabel7.setText("(*) Cantidad:");
         jLayeredPane3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 388, -1, 30));
 
         jTextField4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -797,14 +800,14 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jLayeredPane3.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, 130, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel8.setText("Sub Total");
+        jLabel8.setText("Sub Total:");
         jLayeredPane3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(778, 391, -1, -1));
 
         jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLayeredPane3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(778, 415, 150, 32));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel10.setText("TOTAL");
+        jLabel10.setText("TOTAL:");
         jLayeredPane3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1015, 391, -1, 20));
 
         jTextField6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -824,12 +827,12 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jLayeredPane3.add(jlabelMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(971, 485, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel3.setText("(*) Seleccionar Insumo");
-        jLayeredPane3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, -1, 30));
+        jLabel3.setText("(*) Insumo:");
+        jLayeredPane3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel4.setText("(*) Seleccionar Proveedor");
-        jLayeredPane3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, 30));
+        jLabel4.setText("(*) Proveedor:");
+        jLayeredPane3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
 
         getContentPane().add(jLayeredPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1242, 519));
 

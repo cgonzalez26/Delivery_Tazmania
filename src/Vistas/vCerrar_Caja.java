@@ -237,6 +237,7 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
         jTextVentasLocal = new javax.swing.JTextField();
         jTextVentasOnline = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -268,6 +269,7 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
         jTextTotal.setEditable(false);
         jTextTotal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
+        btnCerrarCaja.setBackground(new java.awt.Color(252, 249, 57));
         btnCerrarCaja.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnCerrarCaja.setText("Cerrar Caja");
         btnCerrarCaja.addActionListener(new java.awt.event.ActionListener() {
