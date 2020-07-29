@@ -223,6 +223,11 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         jLabel2.setText("Nombre Proveedor");
 
         jTextField2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton4.setText("Buscar");
@@ -325,10 +330,12 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, 30));
 
         jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField1.setText("Seleccionar Proveedor...");
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
             }
         });
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 270, 30));
@@ -350,7 +357,7 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 jList2MouseClicked(evt);
             }
         });
-        getContentPane().add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 291, -1));
+        getContentPane().add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 270, 0));
 
         jEtiqDesc_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqDesc_Insumos.setText("(*) Descripción:");
@@ -405,6 +412,11 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         getContentPane().add(jBotonModif_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 91, -1));
 
         jTextDesc_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextDesc_Insumos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextDesc_InsumosKeyTyped(evt);
+            }
+        });
         getContentPane().add(jTextDesc_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 270, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -612,6 +624,33 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         ListaProveedores();
     }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jTextDesc_InsumosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDesc_InsumosKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextDesc_InsumosKeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextField2KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

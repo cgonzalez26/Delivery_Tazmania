@@ -140,6 +140,11 @@ public final class vGestion_Pantallas extends javax.swing.JInternalFrame {
         jLabel1.setText("(*) Nombre Pantalla");
 
         jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(252, 240, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -314,6 +319,15 @@ public final class vGestion_Pantallas extends javax.swing.JInternalFrame {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccion();
     }//GEN-LAST:event_formMouseClicked
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

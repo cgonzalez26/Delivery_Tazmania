@@ -125,6 +125,11 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
         jEtiqNombre_TipoInsumo.setText("(*) Tipo de Insumo");
 
         jTextDescripcion_TipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextDescripcion_TipoInsumo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextDescripcion_TipoInsumoKeyTyped(evt);
+            }
+        });
 
         jBotonAgregar_TipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonAgregar_TipoInsumo.setText("Agregar");
@@ -170,6 +175,11 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
         jLabel1.setText("Nombre Tipo");
 
         jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton1.setText("Buscar");
@@ -377,6 +387,24 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Debes completar el campo");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextDescripcion_TipoInsumoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDescripcion_TipoInsumoKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextDescripcion_TipoInsumoKeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

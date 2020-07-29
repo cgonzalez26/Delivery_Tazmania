@@ -221,6 +221,11 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         jTextDetalle.setColumns(20);
         jTextDetalle.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextDetalle.setRows(5);
+        jTextDetalle.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextDetalleKeyTyped(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTextDetalle);
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 230, 120));
@@ -246,7 +251,7 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
                 jBotonAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBotonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 90, -1));
+        getContentPane().add(jBotonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 90, -1));
 
         jBotonModificar.setBackground(new java.awt.Color(252, 240, 0));
         jBotonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -256,13 +261,18 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
                 jBotonModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 100, -1));
+        getContentPane().add(jBotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 100, -1));
 
         jEtiqStock_Insumos1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqStock_Insumos1.setText("(*) Monto:");
         getContentPane().add(jEtiqStock_Insumos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
 
         jTextMonto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextMonto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextMontoKeyTyped(evt);
+            }
+        });
         getContentPane().add(jTextMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 120, 30));
 
         jEtiqStock_Insumos2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -274,6 +284,11 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         getContentPane().add(jEtiqStock_Insumos3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         jTextDescripcion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextDescripcionKeyTyped(evt);
+            }
+        });
         getContentPane().add(jTextDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 450, 30));
 
         jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -282,7 +297,7 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         jLabelMensaje.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelMensaje.setForeground(new java.awt.Color(255, 0, 0));
         jLabelMensaje.setText("jLabel2");
-        getContentPane().add(jLabelMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
+        getContentPane().add(jLabelMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -399,6 +414,33 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosed
+
+    private void jTextDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDescripcionKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextDescripcionKeyTyped
+
+    private void jTextDetalleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDetalleKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextDetalleKeyTyped
+
+    private void jTextMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMontoKeyTyped
+       char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextMontoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

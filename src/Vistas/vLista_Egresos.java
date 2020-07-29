@@ -207,6 +207,9 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtbuscarKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyTyped(evt);
+            }
         });
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -404,6 +407,15 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
         Mostrar();
         txtbuscar.setText("");
     }//GEN-LAST:event_formMouseClicked
+
+    private void txtbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_txtbuscarKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

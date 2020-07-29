@@ -202,6 +202,11 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
         jTextDetalle_Egresos.setColumns(20);
         jTextDetalle_Egresos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextDetalle_Egresos.setRows(5);
+        jTextDetalle_Egresos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextDetalle_EgresosKeyTyped(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTextDetalle_Egresos);
 
         jEtiqTipo_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -237,6 +242,11 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
         jEtiqStock_Insumos1.setText("(*) Monto:");
 
         jTextMonto_Egresos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextMonto_Egresos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextMonto_EgresosKeyTyped(evt);
+            }
+        });
 
         jEtiqStock_Insumos2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqStock_Insumos2.setText("(*) Fecha:");
@@ -245,6 +255,11 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
         jEtiqStock_Insumos3.setText("(*) Concepto:");
 
         jTextDescripcion_Egresos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextDescripcion_Egresos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextDescripcion_EgresosKeyTyped(evt);
+            }
+        });
 
         jDateFecha_Egresos.setDateFormatString("dd/MM/yyyy HH:mm");
         jDateFecha_Egresos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -479,6 +494,33 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_formInternalFrameClosing
+
+    private void jTextDescripcion_EgresosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDescripcion_EgresosKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextDescripcion_EgresosKeyTyped
+
+    private void jTextDetalle_EgresosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDetalle_EgresosKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextDetalle_EgresosKeyTyped
+
+    private void jTextMonto_EgresosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMonto_EgresosKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextMonto_EgresosKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

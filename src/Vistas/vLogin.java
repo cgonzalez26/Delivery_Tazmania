@@ -69,6 +69,9 @@ public final class vLogin extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextNomUser_LoginKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNomUser_LoginKeyTyped(evt);
+            }
         });
         getContentPane().add(jTextNomUser_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 250, 40));
 
@@ -110,6 +113,9 @@ public final class vLogin extends javax.swing.JFrame {
         jTextoPass_Login.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextoPass_LoginKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextoPass_LoginKeyTyped(evt);
             }
         });
         getContentPane().add(jTextoPass_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 250, 40));
@@ -210,6 +216,24 @@ public final class vLogin extends javax.swing.JFrame {
             jTextoPass_Login.setEchoChar('\u25cf');
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jTextNomUser_LoginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNomUser_LoginKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextNomUser_LoginKeyTyped
+
+    private void jTextoPass_LoginKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextoPass_LoginKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextoPass_LoginKeyTyped
 
     /**
      * @param args the command line arguments

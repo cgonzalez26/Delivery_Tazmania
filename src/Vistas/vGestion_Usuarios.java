@@ -122,6 +122,11 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
         jEtiqLogin_Usuario.setText("(*) Usuario:");
 
         jTextLogin_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextLogin_Usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextLogin_UsuarioKeyTyped(evt);
+            }
+        });
 
         jEtiqPass_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqPass_Usuario.setText("(*) Contraseña:");
@@ -150,16 +155,31 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
         jEtiqDireccion_Usuario.setText("Dirección:");
 
         jTextDireccion_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextDireccion_Usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextDireccion_UsuarioKeyTyped(evt);
+            }
+        });
 
         jEtiqtMail_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqtMail_Usuario.setText("E-mail:");
 
         jTextMail_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextMail_Usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextMail_UsuarioKeyTyped(evt);
+            }
+        });
 
         jEtiqTel_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqTel_Usuario.setText("Teléfono:");
 
         jTextTel_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextTel_Usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextTel_UsuarioKeyTyped(evt);
+            }
+        });
 
         jComboEstado_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jComboEstado_Usuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Estado", "PERMITIDO", "NO PERMITIDO" }));
@@ -183,6 +203,11 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
         });
 
         jTextPass_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextPass_Usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextPass_UsuarioKeyTyped(evt);
+            }
+        });
 
         jCheckBox1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jCheckBox1.setText("Ver Contraseña");
@@ -425,12 +450,24 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
     }//GEN-LAST:event_jTextNom_UsuarioKeyTyped
 
     private void jTextApe_UsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextApe_UsuarioKeyTyped
         if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
+        }
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
         }
     }//GEN-LAST:event_jTextApe_UsuarioKeyTyped
 
@@ -441,6 +478,51 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
             jTextPass_Usuario.setEchoChar('\u25cf');
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jTextLogin_UsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextLogin_UsuarioKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextLogin_UsuarioKeyTyped
+
+    private void jTextPass_UsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPass_UsuarioKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextPass_UsuarioKeyTyped
+
+    private void jTextDireccion_UsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDireccion_UsuarioKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextDireccion_UsuarioKeyTyped
+
+    private void jTextTel_UsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextTel_UsuarioKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextTel_UsuarioKeyTyped
+
+    private void jTextMail_UsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMail_UsuarioKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextMail_UsuarioKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton jBotonAgre_Usuario;

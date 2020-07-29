@@ -301,6 +301,9 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField1KeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
         });
         jLayeredPane1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 229, 30));
 
@@ -331,6 +334,11 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
         jLayeredPane1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 108, 22));
 
         jTextField2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
         jLayeredPane1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 326, 33));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -648,6 +656,24 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
             jList2.setVisible(false);
         }
     }//GEN-LAST:event_jList2MouseClicked
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

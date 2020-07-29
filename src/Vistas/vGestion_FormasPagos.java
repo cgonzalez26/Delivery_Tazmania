@@ -315,6 +315,12 @@ public final class vGestion_FormasPagos extends javax.swing.JInternalFrame {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
     }//GEN-LAST:event_jTextField1KeyTyped
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
