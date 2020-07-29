@@ -92,12 +92,13 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Administrar Tipos Insumos");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -122,7 +123,7 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
         });
 
         jEtiqNombre_TipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqNombre_TipoInsumo.setText("(*) Tipo de Insumo");
+        jEtiqNombre_TipoInsumo.setText("(*) Tipo de Insumo:");
 
         jTextDescripcion_TipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextDescripcion_TipoInsumo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -131,6 +132,7 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
             }
         });
 
+        jBotonAgregar_TipoInsumo.setBackground(new java.awt.Color(252, 249, 57));
         jBotonAgregar_TipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonAgregar_TipoInsumo.setText("Agregar");
         jBotonAgregar_TipoInsumo.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +141,7 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
             }
         });
 
+        jBotonEliminar_TipoInsumo.setBackground(new java.awt.Color(237, 124, 61));
         jBotonEliminar_TipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonEliminar_TipoInsumo.setText("Eliminar");
         jBotonEliminar_TipoInsumo.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +164,7 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTabla_TiposInsumos);
 
+        jBotonModif_TipoInsumo.setBackground(new java.awt.Color(252, 249, 57));
         jBotonModif_TipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonModif_TipoInsumo.setText("Modificar");
         jBotonModif_TipoInsumo.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +173,7 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N

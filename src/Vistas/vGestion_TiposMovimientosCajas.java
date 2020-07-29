@@ -101,11 +101,12 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Tipos de Movimientos de Caja");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -153,6 +154,7 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        btnAgregar.setBackground(new java.awt.Color(252, 249, 57));
         btnAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +163,7 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
             }
         });
 
+        btnModificar.setBackground(new java.awt.Color(252, 249, 57));
         btnModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +172,7 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
             }
         });
 
+        btnEliminar.setBackground(new java.awt.Color(237, 124, 61));
         btnEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -180,9 +184,11 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel2.setText("(*) Nombre:");
 
+        rbIngreso.setBackground(new java.awt.Color(255, 248, 177));
         rbIngreso.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         rbIngreso.setText("Ingreso");
 
+        rbEgreso.setBackground(new java.awt.Color(255, 248, 177));
         rbEgreso.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         rbEgreso.setText("Egreso");
         rbEgreso.addActionListener(new java.awt.event.ActionListener() {
@@ -191,6 +197,7 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N

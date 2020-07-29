@@ -483,11 +483,12 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Registrar Venta");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -518,7 +519,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 202, 33));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel3.setText("(*) Fecha");
+        jLabel3.setText("(*) Fecha.");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 161, 29));
 
         jDateChooser1.setDateFormatString("dd/MM/yyyy HH:mm");
@@ -533,7 +534,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 470, 150, 32));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel6.setText("(*) Cantidad");
+        jLabel6.setText("(*) Cantidad:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, 99, 23));
 
         jTextField4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -545,7 +546,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 470, 143, 32));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel7.setText("(*) Precio");
+        jLabel7.setText("(*) Precio:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, 113, 23));
 
         jTextField5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -563,6 +564,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         jTextField6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 470, 140, 32));
 
+        jButton1.setBackground(new java.awt.Color(252, 249, 57));
         jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton1.setText("Registrar Venta");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -572,6 +574,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 530, -1, -1));
 
+        jButton3.setBackground(new java.awt.Color(252, 249, 57));
         jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton3.setText("Modificar Venta");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -581,6 +584,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 530, -1, -1));
 
+        jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Productos a Vender", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
         jButton8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -668,11 +672,14 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         jLabel5.setText("No Hay CAJA ABIERTA.");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 540, 150, 30));
 
+        jPanel2.setBackground(new java.awt.Color(255, 248, 177));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "(*) Tipo de Venta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
+        jRadioButton1.setBackground(new java.awt.Color(255, 248, 177));
         jRadioButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jRadioButton1.setText("Local");
 
+        jRadioButton2.setBackground(new java.awt.Color(255, 248, 177));
         jRadioButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jRadioButton2.setText("Online");
 
@@ -731,7 +738,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         getContentPane().add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 221, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel9.setText("(*) Seleccionar Producto");
+        jLabel9.setText("(*) Producto:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, -1, 30));
 
         pack();

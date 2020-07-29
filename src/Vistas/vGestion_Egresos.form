@@ -39,41 +39,39 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jEtiqStock_Insumos2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jDateFecha_Egresos" min="-2" pref="180" max="-2" attributes="0"/>
-                          <Component id="jEtiqStock_Insumos1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextMonto_Egresos" min="-2" pref="140" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" pref="255" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jEtiqStock_Insumos3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextDescripcion_Egresos" min="-2" pref="450" max="-2" attributes="0"/>
-                          <Component id="jEtiqTipo_Insumos" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="jCBTipoEgreso_Egresos" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="109" pref="109" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                      <Component id="jTextDescripcion_Egresos" alignment="0" min="-2" pref="502" max="-2" attributes="0"/>
+                      <Component id="jEtiqStock_Insumos3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelMensaje" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jEtiqTipo_Insumos" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jEtiqStock_Insumos2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jDateFecha_Egresos" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                              <Component id="jEtiqStock_Insumos1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextMonto_Egresos" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                              <Component id="jCBTipoEgreso_Egresos" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane3" max="32767" attributes="0"/>
                               <Component id="jEtiqDesc_Insumos" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabelMensaje" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="jBotonAgregar_Egresos" min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                      <Component id="jBotonModif_Egresos" min="-2" pref="90" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                      <Component id="jBotonCancelar" min="-2" pref="91" max="-2" attributes="0"/>
+                      <EmptySpace pref="71" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
-              <Component id="jBotonAgregar_Egresos" min="-2" pref="80" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jBotonModif_Egresos" min="-2" pref="90" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -84,34 +82,32 @@
               <Component id="jEtiqStock_Insumos3" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
               <Component id="jTextDescripcion_Egresos" min="-2" pref="30" max="-2" attributes="0"/>
-              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-              <Component id="jEtiqTipo_Insumos" min="-2" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jCBTipoEgreso_Egresos" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="jEtiqDesc_Insumos" min="-2" pref="30" max="-2" attributes="0"/>
-                  </Group>
+              <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jEtiqTipo_Insumos" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="jEtiqDesc_Insumos" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <Component id="jCBTipoEgreso_Egresos" min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="jEtiqStock_Insumos2" min="-2" pref="20" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="jDateFecha_Egresos" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                       <Component id="jEtiqStock_Insumos1" min="-2" pref="20" max="-2" attributes="0"/>
-                      <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                      <Component id="jTextMonto_Egresos" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane3" min="-2" pref="130" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTextMonto_Egresos" min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabelMensaje" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jBotonAgregar_Egresos" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBotonModif_Egresos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBotonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
           </Group>
@@ -169,7 +165,7 @@
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
-            <StringItem index="0" value="Seleccionar Tipo Egreso"/>
+            <StringItem index="0" value="Seleccionar Tipo..."/>
           </StringArray>
         </Property>
       </Properties>
@@ -287,6 +283,23 @@
         </Property>
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBotonCancelar">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="3d" green="7c" red="ed" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI Semibold" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBotonCancelarActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

@@ -185,6 +185,7 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         jTextDescripcion = new javax.swing.JTextField();
         jDateFecha = new com.toedter.calendar.JDateChooser();
         jLabelMensaje = new javax.swing.JLabel();
+        jBotonCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -216,7 +217,7 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
 
         jEtiqDesc_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqDesc_Insumos.setText("Detalle del Movimiento:");
-        getContentPane().add(jEtiqDesc_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 148, -1, 30));
+        getContentPane().add(jEtiqDesc_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, 30));
 
         jTextDetalle.setColumns(20);
         jTextDetalle.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -228,20 +229,20 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         });
         jScrollPane3.setViewportView(jTextDetalle);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 230, 120));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 230, 170));
 
         jEtiqTipo_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqTipo_Insumos.setText("(*) Tipo de Movimiento:");
         getContentPane().add(jEtiqTipo_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, 20));
 
         jCBTipoMovimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jCBTipoMovimiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo Movimiento" }));
+        jCBTipoMovimiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo..." }));
         jCBTipoMovimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBTipoMovimientoActionPerformed(evt);
             }
         });
-        getContentPane().add(jCBTipoMovimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 30));
+        getContentPane().add(jCBTipoMovimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 170, 30));
 
         jBotonAgregar.setBackground(new java.awt.Color(252, 240, 0));
         jBotonAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -251,7 +252,7 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
                 jBotonAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBotonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 90, -1));
+        getContentPane().add(jBotonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 90, -1));
 
         jBotonModificar.setBackground(new java.awt.Color(252, 240, 0));
         jBotonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -261,7 +262,7 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
                 jBotonModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 100, -1));
+        getContentPane().add(jBotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 100, -1));
 
         jEtiqStock_Insumos1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqStock_Insumos1.setText("(*) Monto:");
@@ -273,7 +274,7 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
                 jTextMontoKeyTyped(evt);
             }
         });
-        getContentPane().add(jTextMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 120, 30));
+        getContentPane().add(jTextMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 170, 30));
 
         jEtiqStock_Insumos2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqStock_Insumos2.setText("(*) Fecha:");
@@ -298,6 +299,16 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         jLabelMensaje.setForeground(new java.awt.Color(255, 0, 0));
         jLabelMensaje.setText("jLabel2");
         getContentPane().add(jLabelMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
+
+        jBotonCancelar.setBackground(new java.awt.Color(237, 124, 61));
+        jBotonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jBotonCancelar.setText("Cancelar");
+        jBotonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonCancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBotonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 91, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -442,9 +453,15 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         }
     }//GEN-LAST:event_jTextMontoKeyTyped
 
+    private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jBotonCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton jBotonAgregar;
+    public static javax.swing.JButton jBotonCancelar;
     public static javax.swing.JButton jBotonModificar;
     public static javax.swing.JComboBox<String> jCBTipoMovimiento;
     public com.toedter.calendar.JDateChooser jDateFecha;

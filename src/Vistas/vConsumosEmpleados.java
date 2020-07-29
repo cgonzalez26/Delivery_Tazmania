@@ -649,12 +649,13 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Consumos de Empleados");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(866, 561));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -685,11 +686,11 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 145, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("(*) Fecha");
+        jLabel1.setText("(*) Fecha:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 128, -1, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel2.setText("(*) Cantidad");
+        jLabel2.setText("(*) Cantidad:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 128, -1, 30));
 
         jTextField3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -703,11 +704,11 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel7.setText("(*) Seleccionar Empleado");
+        jLabel7.setText("(*) Empleado:");
         jLayeredPane1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 170, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel8.setText("(*) Seleccionar Producto");
+        jLabel8.setText("(*) Producto:");
         jLayeredPane1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, -1, 30));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
@@ -791,6 +792,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 830, 275));
 
+        jButton3.setBackground(new java.awt.Color(252, 249, 57));
         jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton3.setText("Agregar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -800,6 +802,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 85, -1));
 
+        jButton4.setBackground(new java.awt.Color(252, 249, 57));
         jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton4.setText("Modificar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -809,6 +812,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 500, 92, -1));
 
+        jButton5.setBackground(new java.awt.Color(240, 87, 49));
         jButton5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton5.setText("Eliminar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -818,6 +822,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 500, 89, -1));
 
+        jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
         jDateChooser2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N

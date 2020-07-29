@@ -172,6 +172,7 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jCBUnidad_Medida = new javax.swing.JComboBox<>();
+        jBotonCancelar = new javax.swing.JButton();
 
         vSeleccionarNombreComercialProv.setTitle("Seleccionar Nombre Comercial Proveedor");
         java.awt.Image icono = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
@@ -399,7 +400,7 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 jBotonAgregar_InsumosActionPerformed(evt);
             }
         });
-        getContentPane().add(jBotonAgregar_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 91, -1));
+        getContentPane().add(jBotonAgregar_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 91, -1));
 
         jBotonModif_Insumos.setBackground(new java.awt.Color(252, 240, 0));
         jBotonModif_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -409,7 +410,7 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 jBotonModif_InsumosActionPerformed(evt);
             }
         });
-        getContentPane().add(jBotonModif_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 91, -1));
+        getContentPane().add(jBotonModif_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 91, -1));
 
         jTextDesc_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextDesc_Insumos.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -430,6 +431,16 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         jCBUnidad_Medida.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jCBUnidad_Medida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Unidad..." }));
         getContentPane().add(jCBUnidad_Medida, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 200, 30));
+
+        jBotonCancelar.setBackground(new java.awt.Color(237, 124, 61));
+        jBotonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jBotonCancelar.setText("Cancelar");
+        jBotonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonCancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBotonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 91, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -652,9 +663,15 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextField2KeyTyped
 
+    private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jBotonCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton jBotonAgregar_Insumos;
+    public static javax.swing.JButton jBotonCancelar;
     public static javax.swing.JButton jBotonModif_Insumos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

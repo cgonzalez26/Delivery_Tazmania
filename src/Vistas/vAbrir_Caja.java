@@ -156,6 +156,7 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabelMensaje = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -189,6 +190,7 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
             }
         });
 
+        btnAbrirCaja.setBackground(new java.awt.Color(252, 249, 57));
         btnAbrirCaja.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnAbrirCaja.setText("Abrir Caja");
         btnAbrirCaja.addActionListener(new java.awt.event.ActionListener() {

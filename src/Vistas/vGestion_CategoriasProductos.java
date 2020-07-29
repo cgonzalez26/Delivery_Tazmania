@@ -140,6 +140,7 @@ public final class vGestion_CategoriasProductos extends javax.swing.JInternalFra
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(252, 249, 57));
         jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +149,7 @@ public final class vGestion_CategoriasProductos extends javax.swing.JInternalFra
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(252, 249, 57));
         jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton2.setText("Modificar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -156,6 +158,7 @@ public final class vGestion_CategoriasProductos extends javax.swing.JInternalFra
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(240, 87, 49));
         jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton3.setText("Eliminar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -164,6 +167,7 @@ public final class vGestion_CategoriasProductos extends javax.swing.JInternalFra
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N

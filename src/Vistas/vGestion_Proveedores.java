@@ -67,13 +67,15 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         jEtiqNumDoc_Prov = new javax.swing.JLabel();
         jBotonAgre_Prov2 = new javax.swing.JButton();
         jBotonModificar_Prov = new javax.swing.JButton();
+        jBotonCancelar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Administrar Proveedores");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -100,7 +102,7 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         });
 
         jEtiqNom_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqNom_Prov.setText("(*) Nombre");
+        jEtiqNom_Prov.setText("(*) Nombres:");
 
         jTextNom_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextNom_Prov.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -110,7 +112,7 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         });
 
         jEtiqApe_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqApe_Prov.setText("Apellido");
+        jEtiqApe_Prov.setText("Apellidos:");
 
         jTextApe_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextApe_Prov.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -120,7 +122,7 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         });
 
         jEtiqNomCom_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqNomCom_Prov.setText("(*) Nombre Comercial");
+        jEtiqNomCom_Prov.setText("(*) Nombre Comercial:");
 
         jTextNomCom_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextNomCom_Prov.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -130,7 +132,7 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         });
 
         jEtiqDirec_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqDirec_Prov.setText("Direccion");
+        jEtiqDirec_Prov.setText("Dirección:");
 
         jTextDirec_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextDirec_Prov.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -140,7 +142,7 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         });
 
         jEtiqTel_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqTel_Prov.setText("Telefono");
+        jEtiqTel_Prov.setText("Teléfono:");
 
         jTextTel_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextTel_Prov.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -157,8 +159,9 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         });
 
         jEtiqNumDoc_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqNumDoc_Prov.setText(" Numero Documento");
+        jEtiqNumDoc_Prov.setText(" Número Documento:");
 
+        jBotonAgre_Prov2.setBackground(new java.awt.Color(252, 249, 57));
         jBotonAgre_Prov2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonAgre_Prov2.setText("Agregar");
         jBotonAgre_Prov2.addActionListener(new java.awt.event.ActionListener() {
@@ -167,6 +170,7 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
             }
         });
 
+        jBotonModificar_Prov.setBackground(new java.awt.Color(252, 249, 57));
         jBotonModificar_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonModificar_Prov.setText("Modificar");
         jBotonModificar_Prov.addActionListener(new java.awt.event.ActionListener() {
@@ -175,65 +179,74 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
             }
         });
 
+        jBotonCancelar.setBackground(new java.awt.Color(237, 124, 61));
+        jBotonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jBotonCancelar.setText("Cancelar");
+        jBotonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jEtiqNumDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextNroDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jEtiqNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jEtiqApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jEtiqTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jBotonAgre_Prov2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79)
+                        .addComponent(jBotonModificar_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74)
+                        .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jEtiqDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jEtiqNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(jBotonAgre_Prov2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBotonModificar_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(148, 148, 148))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextNomCom_Prov)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jEtiqNumDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextNroDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jEtiqNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jEtiqNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jEtiqApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jEtiqTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jEtiqNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jEtiqApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jEtiqNumDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jTextNroDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jTextApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
                         .addComponent(jEtiqTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jTextTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34)
+                        .addComponent(jTextTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jEtiqNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jEtiqNumDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jTextNroDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
                 .addComponent(jEtiqNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,10 +254,11 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
                 .addComponent(jEtiqDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBotonAgre_Prov2)
-                    .addComponent(jBotonModificar_Prov))
+                    .addComponent(jBotonModificar_Prov)
+                    .addComponent(jBotonCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -434,9 +448,15 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextDirec_ProvKeyTyped
 
+    private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jBotonCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton jBotonAgre_Prov2;
+    public static javax.swing.JButton jBotonCancelar;
     public static javax.swing.JButton jBotonModificar_Prov;
     private javax.swing.JLabel jEtiqApe_Prov;
     private javax.swing.JLabel jEtiqDirec_Prov;

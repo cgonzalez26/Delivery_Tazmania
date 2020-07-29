@@ -422,13 +422,14 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         txtTotalCaja = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Listado de Movimientos de Caja");
         setToolTipText("");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(1028, 490));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -528,6 +529,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 60, 109, -1));
 
+        btnAgregar.setBackground(new java.awt.Color(252, 249, 57));
         btnAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnAgregar.setText("Nuevo");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -537,6 +539,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, 84, -1));
 
+        btnEditar.setBackground(new java.awt.Color(252, 249, 57));
         btnEditar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnEditar.setText("Modificar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -546,6 +549,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 420, 90, -1));
 
+        btnEliminar.setBackground(new java.awt.Color(237, 124, 61));
         btnEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {

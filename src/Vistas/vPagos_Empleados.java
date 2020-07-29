@@ -144,12 +144,13 @@ public class vPagos_Empleados extends javax.swing.JInternalFrame{
         jLabel8 = new javax.swing.JLabel();
         jTexTotal = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Pagos a Empleados");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -203,6 +204,7 @@ public class vPagos_Empleados extends javax.swing.JInternalFrame{
 
         jTextCadete4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
+        btnAceptar.setBackground(new java.awt.Color(252, 249, 57));
         btnAceptar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -211,6 +213,7 @@ public class vPagos_Empleados extends javax.swing.JInternalFrame{
             }
         });
 
+        btnCancelar.setBackground(new java.awt.Color(237, 124, 61));
         btnCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
