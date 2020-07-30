@@ -55,7 +55,7 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
     }
 
     public void Mostrar() {
-        String[] columnas = {"IDPROV", "ID TIPODOC", "TIPO DOC", "NRODOC", "NOMBRE", "APELLIDO", "NOMBRE COMERCIAL", "DIRECCION", "TELEFONO"};
+        String[] columnas = {"IDPROV", "ID TIPODOC", "TIPO DOC", "NRO DOCUMENTO", "NOMBRES", "APELLIDOS", "NOMBRE COMERCIAL", "DOMICILIO", "TELEFONO"};
         datostabla = prov.MostrarDatos();
         datos = new DefaultTableModel(datostabla, columnas);
         jTabla_Prov.setModel(datos);
@@ -178,9 +178,9 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(337, 347, 101, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 100, 30));
 
-        jButton2.setBackground(new java.awt.Color(237, 124, 61));
+        jButton2.setBackground(new java.awt.Color(252, 249, 57));
         jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton2.setText("Eliminar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +188,7 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(781, 347, 101, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 360, 100, 30));
 
         jButton3.setBackground(new java.awt.Color(252, 249, 57));
         jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -198,7 +198,7 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(559, 347, 101, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, 100, 30));
 
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Buscar Por", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
@@ -250,6 +250,8 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         proveedor = new vGestion_Proveedores();
+        proveedor.jBotonAgre_Prov2.setEnabled(true);
+        proveedor.jBotonModificar_Prov.setEnabled(false);
         vMenuPrincipal.jDesktopPane1.add(proveedor);
         proveedor.setVisible(true);
         proveedor.toFront();
@@ -286,7 +288,8 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
             proveedor.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             proveedor.toFront();
             proveedor.setVisible(true);
-            vGestion_Proveedores.jBotonAgre_Prov2.setText("Cancelar");
+//            vGestion_Proveedores.jBotonAgre_Prov2.setText("Cancelar");
+            vGestion_Proveedores.jBotonAgre_Prov2.setEnabled(false);
             vGestion_Proveedores.jBotonModificar_Prov.setEnabled(true);
             id = (jTabla_Prov.getValueAt(seleccionado, 0).toString());
             vGestion_Proveedores.jTextNroDoc_Prov.setText(jTabla_Prov.getValueAt(seleccionado, 3).toString());

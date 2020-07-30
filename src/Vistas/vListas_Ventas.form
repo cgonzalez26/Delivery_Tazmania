@@ -609,13 +609,13 @@
                           <Component id="jScrollPane2" min="-2" pref="799" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="799" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jButton1" min="-2" pref="106" max="-2" attributes="0"/>
+                              <Component id="jButton1" min="-2" pref="100" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
-                              <Component id="jButton4" min="-2" pref="106" max="-2" attributes="0"/>
+                              <Component id="jButton4" min="-2" pref="100" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButton2" min="-2" pref="117" max="-2" attributes="0"/>
+                              <Component id="jButton2" min="-2" pref="100" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
-                              <Component id="jButton5" min="-2" pref="106" max="-2" attributes="0"/>
+                              <Component id="jButton5" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -656,10 +656,10 @@
               <Component id="jScrollPane2" min="-2" pref="213" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jButton2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jButton4" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jButton5" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -743,12 +743,12 @@
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="3d" green="7c" red="ed" type="rgb"/>
+          <Color blue="39" green="f9" red="fc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="12" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Eliminar Venta"/>
+        <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
@@ -903,6 +903,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButton5">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="39" green="f9" red="fc" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="12" style="0"/>
         </Property>

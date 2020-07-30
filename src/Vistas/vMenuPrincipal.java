@@ -96,7 +96,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
                     i++;
                     jMenu2.setVisible(true);
                     jMenuItem13.setVisible(false);
-                    jMenuItem32.setVisible(false);
+                    //jMenuItem32.setVisible(false);
                     if (i == nombres.size()) {
                         jMenu12.setVisible(false);
                         jMenu4.setVisible(false);
@@ -115,12 +115,12 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
                     if (!jMenu2.isVisible()) {
                         jMenu2.setVisible(true);
                         jMenuItem13.setVisible(true);
-                        jMenuItem32.setVisible(true);
+                        //jMenuItem32.setVisible(true);
                         jMenuItem2.setVisible(false);
                         jMenuItem8.setVisible(false);
                     } else {
                         jMenuItem13.setVisible(true);
-                        jMenuItem32.setVisible(true);
+                        //jMenuItem32.setVisible(true);
                         jMenuItem2.setVisible(true);
                         jMenuItem18.setVisible(true);
                     }
@@ -136,7 +136,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
                     }
                 } else {
                     jMenuItem13.setVisible(false);
-                    jMenuItem32.setVisible(false);
+                    //jMenuItem32.setVisible(false);
                 }
                 if (jMenu12.getText().equals(nombres.get(i))) {
                     i++;
@@ -144,7 +144,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
                     jMenuItem28.setVisible(false);
                     jMenuItem33.setVisible(false);
                     jMenuItem1.setVisible(false);
-                    jMenuItem7.setVisible(false);
+                    //jMenuItem7.setVisible(false);
                     if (i == nombres.size()) {
                         //jMenu2.setVisible(false);
                         jMenu4.setVisible(false);
@@ -168,14 +168,14 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
                         jMenuItem20.setVisible(false);
                         jMenuItem19.setVisible(false);
                         jMenuItem1.setVisible(false);
-                        jMenuItem7.setVisible(false);
+                        //jMenuItem7.setVisible(false);
                     } else {
                         jMenuItem28.setVisible(true);
                         jMenuItem33.setVisible(true);
                         jMenuItem20.setVisible(true);
                         jMenuItem19.setVisible(true);
                         jMenuItem1.setVisible(true);
-                        jMenuItem7.setVisible(true);
+                        //jMenuItem7.setVisible(true);
                     }
                     if (i == nombres.size()) {
                         //jMenu2.setVisible(false);
@@ -197,14 +197,14 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
                     if (!jMenu12.isVisible()) {
                         jMenu12.setVisible(true);
                         jMenuItem1.setVisible(true);
-                        jMenuItem7.setVisible(true);
+                        //jMenuItem7.setVisible(true);
                         jMenuItem28.setVisible(false);
                         jMenuItem33.setVisible(false);
                         jMenuItem20.setVisible(false);
                         jMenuItem19.setVisible(false);
                     } else {
                         jMenuItem1.setVisible(true);
-                        jMenuItem7.setVisible(true);
+                        //jMenuItem7.setVisible(true);
                         jMenuItem28.setVisible(true);
                         jMenuItem33.setVisible(true);
                         jMenuItem20.setVisible(true);
@@ -222,7 +222,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
                     }
                 } else {
                     jMenuItem1.setVisible(false);
-                    jMenuItem7.setVisible(false);
+                    //jMenuItem7.setVisible(false);
                 }
 
                 if (jMenu4.getText().equals(nombres.get(i))) {
@@ -410,13 +410,13 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     }
 
     public void DeshabilitarBotonesCompraVenta() {
-        if (jMenu2.isVisible() && jMenuItem2.isVisible() && jMenuItem8.isVisible() && !jMenuItem13.isVisible() && !jMenuItem32.isVisible()) {
+        if (jMenu2.isVisible() && jMenuItem2.isVisible() && jMenuItem8.isVisible() && !jMenuItem13.isVisible()) {
             jButton6.setVisible(true);
             jButton2.setVisible(false);
-        } else if (jMenu2.isVisible() && !jMenuItem2.isVisible() && !jMenuItem8.isVisible() && jMenuItem13.isVisible() && jMenuItem32.isVisible()) {
+        } else if (jMenu2.isVisible() && !jMenuItem2.isVisible() && !jMenuItem8.isVisible() && jMenuItem13.isVisible()) {
             jButton2.setVisible(true);
             jButton6.setVisible(false);
-        } else if (jMenu2.isVisible() && jMenuItem2.isVisible() && jMenuItem8.isVisible() && jMenuItem13.isVisible() && jMenuItem32.isVisible()) {
+        } else if (jMenu2.isVisible() && jMenuItem2.isVisible() && jMenuItem8.isVisible() && jMenuItem13.isVisible()) {
             jButton2.setVisible(true);
             jButton6.setVisible(true);
         } else if (!jMenu2.isVisible()) {
@@ -433,13 +433,13 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         if (!jMenu12.isVisible()) {
             jButton5.setVisible(false);
         } else if (jMenu12.isVisible() && !jMenuItem20.isVisible() && !jMenuItem19.isVisible() && jMenuItem28.isVisible() && jMenuItem33.isVisible()
-                && jMenuItem7.isVisible() && jMenuItem1.isVisible()) {
+                && jMenuItem1.isVisible()) {
             jButton5.setVisible(false);
         } else if (jMenu12.isVisible() && !jMenuItem20.isVisible() && !jMenuItem19.isVisible() && !jMenuItem28.isVisible() && !jMenuItem33.isVisible()
-                && jMenuItem7.isVisible() && jMenuItem1.isVisible()) {
+                && jMenuItem1.isVisible()) {
             jButton5.setVisible(false);
         } else if (jMenu12.isVisible() && !jMenuItem20.isVisible() && !jMenuItem19.isVisible() && jMenuItem28.isVisible() && jMenuItem33.isVisible()
-                && !jMenuItem7.isVisible() && !jMenuItem1.isVisible()) {
+                && !jMenuItem1.isVisible()) {
             jButton5.setVisible(false);
         } else if (jMenu12.isVisible() && jMenuItem20.isVisible() && jMenuItem19.isVisible()) {
             jButton5.setVisible(true);
@@ -479,21 +479,17 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem32 = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem28 = new javax.swing.JMenuItem();
         jMenuItem33 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -504,7 +500,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenuItem25 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
@@ -703,16 +698,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem13);
 
-        jMenuItem32.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem32.setText("Listado de Proveedores");
-        jMenuItem32.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenuItem32.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem32ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem32);
-
         jMenuBar1.add(jMenu2);
 
         jMenu12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -772,16 +757,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu12.add(jMenuItem1);
 
-        jMenuItem7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem7.setText("Listado de Clientes");
-        jMenuItem7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenu12.add(jMenuItem7);
-
         jMenuBar1.add(jMenu12);
 
         jMenu4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -800,16 +775,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem4);
-
-        jMenuItem10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem10.setText("Listado de Insumos");
-        jMenuItem10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem10);
 
         jMenuItem5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jMenuItem5.setText("Tipos Insumos");
@@ -839,16 +804,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu8.add(jMenuItem14);
-
-        jMenuItem17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem17.setText("Listado de Empleados");
-        jMenuItem17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem17ActionPerformed(evt);
-            }
-        });
-        jMenu8.add(jMenuItem17);
 
         jMenuItem15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jMenuItem15.setText("Tipos Empleados");
@@ -945,16 +900,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jMenuItem9);
-
-        jMenuItem3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem3.setText("Listado Gastos");
-        jMenuItem3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu6.add(jMenuItem3);
 
         jMenuBar1.add(jMenu6);
 
@@ -1106,10 +1051,10 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        if (insumos == null || insumos.isClosed()) {
-            insumos = new vGestion_Insumos();
-            jDesktopPane1.add(insumos);
-            insumos.setVisible(true);
+        if (listainsumos == null || listainsumos.isClosed()) {
+            listainsumos = new vLista_Insumos();
+            jDesktopPane1.add(listainsumos);
+            listainsumos.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
@@ -1131,22 +1076,12 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        if (listainsumos == null || listainsumos.isClosed()) {
-            listainsumos = new vLista_Insumos();
-            jDesktopPane1.add(listainsumos);
-            listainsumos.setVisible(true);
-        }
-
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
-
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        if (empleados == null || empleados.isClosed()) {
-            empleados = new vGestion_Empleados();
-            jDesktopPane1.add(empleados);
-            empleados.setVisible(true);
+       if (listaemp == null || listaemp.isClosed()) {
+            listaemp = new vLista_Empleados();
+            jDesktopPane1.add(listaemp);
+            listaemp.setVisible(true);
         }
-
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
@@ -1166,15 +1101,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jMenuItem16ActionPerformed
-
-    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        if (listaemp == null || listaemp.isClosed()) {
-            listaemp = new vLista_Empleados();
-            jDesktopPane1.add(listaemp);
-            listaemp.setVisible(true);
-        }
-
-    }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
         if (ventas == null || ventas.isClosed()) {
@@ -1249,22 +1175,13 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        if (proveedores == null || proveedores.isClosed()) {
-            proveedores = new vGestion_Proveedores();
-            jDesktopPane1.add(proveedores);
-            proveedores.toFront();
-            proveedores.setVisible(true);
-        }
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
-
-    private void jMenuItem32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem32ActionPerformed
         if (listaprov == null || listaprov.isClosed()) {
             listaprov = new vLista_Proveedores();
             jDesktopPane1.add(listaprov);
             listaprov.toFront();
             listaprov.setVisible(true);
         }
-    }//GEN-LAST:event_jMenuItem32ActionPerformed
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
         if (productos == null || productos.isClosed()) {
@@ -1291,19 +1208,11 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem30ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         if (listaegreso == null || listaegreso.isClosed()) {
             listaegreso = new vLista_Egresos();
             jDesktopPane1.add(listaegreso);
             listaegreso.setVisible(true);
-        }
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        if (egreso == null || egreso.isClosed()) {
-            egreso = new vGestion_Egresos();
-            jDesktopPane1.add(egreso);
-            egreso.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
@@ -1389,20 +1298,12 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem35ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if (cliente == null || cliente.isClosed()) {
-            cliente = new vGestion_Clientes();
-            jDesktopPane1.add(cliente);
-            cliente.setVisible(true);
-        }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         if (listaclie == null || listaclie.isClosed()) {
             listaclie = new vLista_Clientes();
             jDesktopPane1.add(listaclie);
             listaclie.setVisible(true);
         }
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         if (consumos == null || consumos.isClosed()) {
@@ -1427,15 +1328,15 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenu5MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu5MenuSelected
         // TODO add your handling code here:
-        int idcaja = Session.getIdcaja_abierta();
-        if (idcaja == 0) {
+//        int idcaja = Session.getIdcaja_abierta();
+//        if (idcaja == 0) {
             vLogin login1 = new vLogin();
             login1.toFront();
             login1.setVisible(true);
             this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Antes de salir de Sesión debes Cerrar Caja!");
-        }
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Antes de salir de Sesión debes Cerrar Caja!");
+//        }
     }//GEN-LAST:event_jMenu5MenuSelected
 
     /**
@@ -1506,14 +1407,12 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     public static javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     public static javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
@@ -1525,16 +1424,13 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
     public static javax.swing.JMenuItem jMenuItem29;
-    private javax.swing.JMenuItem jMenuItem3;
     public static javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem31;
-    private javax.swing.JMenuItem jMenuItem32;
     private javax.swing.JMenuItem jMenuItem33;
     private javax.swing.JMenuItem jMenuItem34;
     private javax.swing.JMenuItem jMenuItem35;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;

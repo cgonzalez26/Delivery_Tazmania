@@ -207,7 +207,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         String dato, nomtipo;
         int idtipo;
         Turnos turno;
-        nomtipo = "Seleccionar una opción";
+        nomtipo = "Seleccionar Turno...";
         cbxTurnos.addItem(nomtipo);
         for (Object te : turnos) {
             dato = (String) te;
@@ -396,31 +396,32 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        txtbuscar = new javax.swing.JTextField();
-        jList2 = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabla_MovCaja = jTabla_MovCaja= new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        jLabel1 = new javax.swing.JLabel();
-        btnBuscar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        cbxTurnos = new javax.swing.JComboBox<>();
-        jFechaDesde = new com.toedter.calendar.JDateChooser();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jFechaHasta = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtTotalIngreso = new javax.swing.JTextField();
         txtTotalEgreso = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtTotalCaja = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jFechaDesde = new com.toedter.calendar.JDateChooser();
+        jLabel8 = new javax.swing.JLabel();
+        cbxTurnos = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jFechaHasta = new com.toedter.calendar.JDateChooser();
+        btnBuscar = new javax.swing.JButton();
+        txtbuscar = new javax.swing.JTextField();
+        jList2 = new javax.swing.JList<>();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -455,45 +456,15 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtbuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        txtbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtbuscarActionPerformed(evt);
-            }
-        });
-        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtbuscarKeyReleased(evt);
-            }
-        });
-
-        jList2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList2MouseClicked(evt);
-            }
-        });
-
-        jLayeredPane1.setLayer(txtbuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jList2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jList2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 256, Short.MAX_VALUE)
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jList2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addGap(0, 134, Short.MAX_VALUE)
         );
 
         getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 59, 256, -1));
@@ -514,20 +485,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTabla_MovCaja);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 112, 992, 258));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("Buscar Movimientos:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 59, -1, -1));
-
-        btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 60, 109, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 992, 210));
 
         btnAgregar.setBackground(new java.awt.Color(252, 249, 57));
         btnAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -537,7 +495,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, 84, -1));
+        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, 100, 30));
 
         btnEditar.setBackground(new java.awt.Color(252, 249, 57));
         btnEditar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -547,9 +505,9 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 420, 90, -1));
+        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 420, 100, 30));
 
-        btnEliminar.setBackground(new java.awt.Color(237, 124, 61));
+        btnEliminar.setBackground(new java.awt.Color(252, 249, 57));
         btnEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -557,29 +515,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 420, 96, -1));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel8.setText("Turno:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, -1, -1));
-
-        cbxTurnos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        cbxTurnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cbxTurnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 186, 30));
-
-        jFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
-        getContentPane().add(jFechaDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 13, 138, 30));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel6.setText("Fecha Desde:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 13, -1, -1));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel7.setText("Fecha Hasta:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(666, 13, -1, -1));
-
-        jFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
-        getContentPane().add(jFechaHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(761, 11, 141, 32));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 420, 100, 30));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel9.setText("Ingreso:");
@@ -631,6 +567,117 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(txtTotalCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 420, 105, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 248, 177));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Buscar Por", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabel1.setText("Buscar Movimientos:");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabel6.setText("Fecha Desde:");
+
+        jFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabel8.setText("Turno:");
+
+        cbxTurnos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        cbxTurnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabel7.setText("Fecha Hasta:");
+
+        jFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
+
+        btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        txtbuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        txtbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbuscarActionPerformed(evt);
+            }
+        });
+        txtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbuscarKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addComponent(jLabel8)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47))
+                    .addComponent(cbxTurnos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jFechaDesde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(32, 32, 32))))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 850, 130));
+
+        jList2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList2MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 256, 53));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -886,6 +933,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JList<String> jList2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTabla_MovCaja;
     private javax.swing.JTextField txtTotalCaja;

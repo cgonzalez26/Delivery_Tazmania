@@ -127,7 +127,7 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         jTextNomCom_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jEtiqDirec_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqDirec_Prov.setText("Dirección:");
+        jEtiqDirec_Prov.setText("Domicilio:");
 
         jTextDirec_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
@@ -144,7 +144,7 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         });
 
         jEtiqNumDoc_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqNumDoc_Prov.setText(" Número Documento:");
+        jEtiqNumDoc_Prov.setText("Nro Documento:");
 
         jBotonAgre_Prov2.setBackground(new java.awt.Color(252, 249, 57));
         jBotonAgre_Prov2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -178,37 +178,34 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jBotonAgre_Prov2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
-                        .addComponent(jBotonModificar_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
-                        .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jEtiqDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextNomCom_Prov)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jEtiqNumDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextNroDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jEtiqNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jEtiqNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jEtiqApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jEtiqTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(48, Short.MAX_VALUE))
+                    .addComponent(jTextDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jEtiqDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jEtiqNumDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextNroDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jEtiqNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextNom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jEtiqNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(46, 46, 46)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jEtiqApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextApe_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jEtiqTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextTel_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextNomCom_Prov)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(92, 92, 92)
+                            .addComponent(jBotonAgre_Prov2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(79, 79, 79)
+                            .addComponent(jBotonModificar_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(74, 74, 74)
+                            .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,25 +230,27 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
                         .addComponent(jTextNroDoc_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
                 .addComponent(jEtiqNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextNomCom_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jEtiqDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBotonAgre_Prov2)
                     .addComponent(jBotonModificar_Prov)
                     .addComponent(jBotonCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
+
+        jEtiqNumDoc_Prov.getAccessibleContext().setAccessibleName("Nro Documento:");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBotonAgre_Prov2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAgre_Prov2ActionPerformed
-        if (jBotonAgre_Prov2.getText().equals("Agregar")) {
+        //if (jBotonAgre_Prov2.getText().equals("Agregar")) {
             if (!jTextNom_Prov.getText().trim().equals("") && !jTextNomCom_Prov.getText().trim().equals("")) {
                 if (jTextNroDoc_Prov.getText().length() <= 10) {
                     p.setIdTipoDocumento(1);
@@ -278,7 +277,7 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
                         p.setTelefono(jTextTel_Prov.getText());
                     }
                     if (control_prov.InsertarProveedores(p)) {
-                        JOptionPane.showMessageDialog(null, "Nuevo Proveedor agreado");
+                        JOptionPane.showMessageDialog(null, "Nuevo Proveedor agregado");
                         lista = new vLista_Proveedores();
                         vMenuPrincipal.jDesktopPane1.add(lista);
                         lista.setVisible(true);
@@ -290,15 +289,15 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
             }
-        } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                lista = new vLista_Proveedores();
-                vMenuPrincipal.jDesktopPane1.add(lista);
-                lista.setVisible(true);
-                this.dispose();
-            }
-        }
+//        } else {
+//            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+//            if (i == 0) {
+//                lista = new vLista_Proveedores();
+//                vMenuPrincipal.jDesktopPane1.add(lista);
+//                lista.setVisible(true);
+//                this.dispose();
+//            }
+//        }
 
     }//GEN-LAST:event_jBotonAgre_Prov2ActionPerformed
 
@@ -396,7 +395,13 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        int i = JOptionPane.showConfirmDialog(null, "Desea cancelar la Operación?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            lista = new vLista_Proveedores();
+            vMenuPrincipal.jDesktopPane1.add(lista);
+            lista.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jBotonCancelarActionPerformed
 
 
