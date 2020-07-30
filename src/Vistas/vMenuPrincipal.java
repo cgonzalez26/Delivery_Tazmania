@@ -483,14 +483,11 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem28 = new javax.swing.JMenuItem();
-        jMenuItem33 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenu13 = new javax.swing.JMenu();
@@ -504,12 +501,17 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem30 = new javax.swing.JMenuItem();
-        jMenuItem29 = new javax.swing.JMenuItem();
         jMenu14 = new javax.swing.JMenu();
         jMenuItem27 = new javax.swing.JMenuItem();
         jMenuItem31 = new javax.swing.JMenuItem();
         jMenuItem34 = new javax.swing.JMenuItem();
         jMenuItem35 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem33 = new javax.swing.JMenuItem();
+        jMenu_TiposProductos = new javax.swing.JMenuItem();
+        jMenuItem29 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -605,11 +607,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(963, 963, 963)
-                .addComponent(jLabel1)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel2))
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -622,17 +619,24 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addComponent(jLabel4)
-                .addGap(72, 72, 72)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(414, 414, 414))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel2)
+                .addGap(46, 46, 46))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addGap(20, 20, 20)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addGap(66, 66, 66)
+                .addGap(57, 57, 57)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(61, 61, 61)
@@ -690,7 +694,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenuItem13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jMenuItem13.setText("Administrar Proveedores");
         jMenuItem13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenuItem13.setPreferredSize(new java.awt.Dimension(318, 25));
+        jMenuItem13.setPreferredSize(new java.awt.Dimension(325, 25));
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
@@ -737,16 +741,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu12.add(jMenuItem28);
 
-        jMenuItem33.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem33.setText("Categorias Productos");
-        jMenuItem33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem33ActionPerformed(evt);
-            }
-        });
-        jMenu12.add(jMenuItem33);
-
         jMenuItem1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jMenuItem1.setText("Administrar Clientes");
         jMenuItem1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -768,24 +762,13 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenuItem4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jMenuItem4.setText("Administrar Insumos");
         jMenuItem4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenuItem4.setPreferredSize(new java.awt.Dimension(285, 27));
+        jMenuItem4.setPreferredSize(new java.awt.Dimension(295, 27));
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
             }
         });
         jMenu4.add(jMenuItem4);
-
-        jMenuItem5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem5.setText("Tipos Insumos");
-        jMenuItem5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenuItem5.setPreferredSize(new java.awt.Dimension(338, 27));
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem5);
 
         jMenuBar1.add(jMenu4);
 
@@ -804,16 +787,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu8.add(jMenuItem14);
-
-        jMenuItem15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem15.setText("Tipos Empleados");
-        jMenuItem15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
-            }
-        });
-        jMenu8.add(jMenuItem15);
 
         jMenuItem16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jMenuItem16.setText("Asistencias");
@@ -938,27 +911,18 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem30);
 
-        jMenuItem29.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem29.setText("Tipos Movimientos Caja");
-        jMenuItem29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem29ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem29);
-
         jMenuBar1.add(jMenu3);
 
         jMenu14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jMenu14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/jmenuAdmin.png"))); // NOI18N
-        jMenu14.setText("Administrar");
+        jMenu14.setText("Configuración");
         jMenu14.setFont(new java.awt.Font("Segoe UI Semibold", 1, 20)); // NOI18N
-        jMenu14.setPreferredSize(new java.awt.Dimension(149, 19));
+        jMenu14.setPreferredSize(new java.awt.Dimension(175, 19));
 
         jMenuItem27.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem27.setText("Gestionar Permisos Pantallas a Tipos de Usuarios");
+        jMenuItem27.setText("Gestionar Permisos de Pantallas");
         jMenuItem27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jMenuItem27.setPreferredSize(new java.awt.Dimension(390, 27));
         jMenuItem27.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem27ActionPerformed(evt);
@@ -980,6 +944,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenuItem34.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jMenuItem34.setText("Listado de Usuarios");
         jMenuItem34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jMenuItem34.setPreferredSize(new java.awt.Dimension(290, 27));
         jMenuItem34.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem34ActionPerformed(evt);
@@ -990,6 +955,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenuItem35.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jMenuItem35.setText("Tipos Usuarios");
         jMenuItem35.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jMenuItem35.setPreferredSize(new java.awt.Dimension(290, 27));
         jMenuItem35.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem35ActionPerformed(evt);
@@ -998,6 +964,66 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenu14.add(jMenuItem35);
 
         jMenuBar1.add(jMenu14);
+
+        jMenu1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/tools32.png"))); // NOI18N
+        jMenu1.setText("Administrar");
+        jMenu1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 20)); // NOI18N
+
+        jMenuItem33.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenuItem33.setText("Categorias Productos");
+        jMenuItem33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jMenuItem33.setPreferredSize(new java.awt.Dimension(340, 27));
+        jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem33ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem33);
+
+        jMenu_TiposProductos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenu_TiposProductos.setText("Tipos Productos");
+        jMenu_TiposProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu_TiposProductosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenu_TiposProductos);
+
+        jMenuItem29.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenuItem29.setText("Tipos Movimientos Caja");
+        jMenuItem29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jMenuItem29.setPreferredSize(new java.awt.Dimension(340, 27));
+        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem29ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem29);
+
+        jMenuItem5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenuItem5.setText("Tipos Insumos");
+        jMenuItem5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jMenuItem5.setPreferredSize(new java.awt.Dimension(340, 27));
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+
+        jMenuItem15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenuItem15.setText("Tipos Empleados");
+        jMenuItem15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jMenuItem15.setPreferredSize(new java.awt.Dimension(340, 27));
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem15);
+
+        jMenuBar1.add(jMenu1);
 
         jMenu5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logout.png"))); // NOI18N
@@ -1012,11 +1038,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
                 jMenu5MenuSelected(evt);
-            }
-        });
-        jMenu5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu5ActionPerformed(evt);
             }
         });
         jMenuBar1.add(jMenu5);
@@ -1313,19 +1334,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
-    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
-        // TODO add your handling code here:
-        int idcaja = Session.getIdcaja_abierta();
-        if (idcaja == 0) {
-            vLogin login1 = new vLogin();
-            login1.toFront();
-            login1.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Para salir de Sessión debes Cerrar Caja!");
-        }
-    }//GEN-LAST:event_jMenu5ActionPerformed
-
     private void jMenu5MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu5MenuSelected
         // TODO add your handling code here:
 //        int idcaja = Session.getIdcaja_abierta();
@@ -1338,6 +1346,15 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, "Antes de salir de Sesión debes Cerrar Caja!");
 //        }
     }//GEN-LAST:event_jMenu5MenuSelected
+
+    private void jMenu_TiposProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_TiposProductosActionPerformed
+        // TODO add your handling code here:
+        if (tiposart == null || tiposart.isClosed()) {
+            tiposart = new vGestion_TiposArticulos();
+            jDesktopPane1.add(tiposart);
+            tiposart.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenu_TiposProductosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1396,6 +1413,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenu jMenu1;
     public static javax.swing.JMenu jMenu12;
     public static javax.swing.JMenu jMenu13;
     public static javax.swing.JMenu jMenu14;
@@ -1433,6 +1451,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenu_TiposProductos;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
