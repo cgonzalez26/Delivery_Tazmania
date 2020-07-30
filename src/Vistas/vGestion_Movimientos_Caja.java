@@ -222,11 +222,6 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         jTextDetalle.setColumns(20);
         jTextDetalle.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextDetalle.setRows(5);
-        jTextDetalle.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextDetalleKeyTyped(evt);
-            }
-        });
         jScrollPane3.setViewportView(jTextDetalle);
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 230, 170));
@@ -269,11 +264,6 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         getContentPane().add(jEtiqStock_Insumos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
 
         jTextMonto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextMonto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextMontoKeyTyped(evt);
-            }
-        });
         getContentPane().add(jTextMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 170, 30));
 
         jEtiqStock_Insumos2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -285,11 +275,6 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
         getContentPane().add(jEtiqStock_Insumos3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         jTextDescripcion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextDescripcionKeyTyped(evt);
-            }
-        });
         getContentPane().add(jTextDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 450, 30));
 
         jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -425,33 +410,6 @@ public final class vGestion_Movimientos_Caja extends javax.swing.JInternalFrame 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosed
-
-    private void jTextDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDescripcionKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            String cadena = ("" + c).toUpperCase();
-            c = cadena.charAt(0);
-            evt.setKeyChar(c);
-        }
-    }//GEN-LAST:event_jTextDescripcionKeyTyped
-
-    private void jTextDetalleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDetalleKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            String cadena = ("" + c).toUpperCase();
-            c = cadena.charAt(0);
-            evt.setKeyChar(c);
-        }
-    }//GEN-LAST:event_jTextDetalleKeyTyped
-
-    private void jTextMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextMontoKeyTyped
-       char c = evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            String cadena = ("" + c).toUpperCase();
-            c = cadena.charAt(0);
-            evt.setKeyChar(c);
-        }
-    }//GEN-LAST:event_jTextMontoKeyTyped
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
         // TODO add your handling code here:

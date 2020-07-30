@@ -17,6 +17,7 @@ import static Vistas.vMenuPrincipal.jMenu2;
 import static Vistas.vMenuPrincipal.jMenu4;
 import static Vistas.vMenuPrincipal.jMenu6;
 import static Vistas.vMenuPrincipal.jMenu8;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -429,4 +431,5 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
     public static javax.swing.JLabel jLabelUsuario;
     public static javax.swing.JTextField jTextCajaChica;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -382,11 +382,6 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jLabel1.setText("Nombre Proveedor");
 
         jTextField5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField5KeyTyped(evt);
-            }
-        });
 
         jButton12.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton12.setText("Buscar");
@@ -619,9 +614,6 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField3KeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField3KeyTyped(evt);
             }
         });
         jLayeredPane3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 292, 30));
@@ -1621,15 +1613,6 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTable1MousePressed
 
-    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            String cadena = ("" + c).toUpperCase();
-            c = cadena.charAt(0);
-            evt.setKeyChar(c);
-        }
-    }//GEN-LAST:event_jTextField3KeyTyped
-
     private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
         char c = evt.getKeyChar();
         if (Character.isLowerCase(c)) {
@@ -1638,15 +1621,6 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             evt.setKeyChar(c);
         }
     }//GEN-LAST:event_jTextField2KeyTyped
-
-    private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            String cadena = ("" + c).toUpperCase();
-            c = cadena.charAt(0);
-            evt.setKeyChar(c);
-        }
-    }//GEN-LAST:event_jTextField5KeyTyped
 
     private void jTextField8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyTyped
         char c = evt.getKeyChar();

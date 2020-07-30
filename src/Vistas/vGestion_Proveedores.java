@@ -125,31 +125,16 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         jEtiqNomCom_Prov.setText("(*) Nombre Comercial:");
 
         jTextNomCom_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextNomCom_Prov.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextNomCom_ProvKeyTyped(evt);
-            }
-        });
 
         jEtiqDirec_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqDirec_Prov.setText("Dirección:");
 
         jTextDirec_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextDirec_Prov.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextDirec_ProvKeyTyped(evt);
-            }
-        });
 
         jEtiqTel_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqTel_Prov.setText("Teléfono:");
 
         jTextTel_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextTel_Prov.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextTel_ProvKeyTyped(evt);
-            }
-        });
 
         jTextNroDoc_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextNroDoc_Prov.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -386,24 +371,12 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-        char c = evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            String cadena = ("" + c).toUpperCase();
-            c = cadena.charAt(0);
-            evt.setKeyChar(c);
-        }
     }//GEN-LAST:event_jTextNom_ProvKeyTyped
 
     private void jTextApe_ProvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextApe_ProvKeyTyped
         if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
-        }
-        char c = evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            String cadena = ("" + c).toUpperCase();
-            c = cadena.charAt(0);
-            evt.setKeyChar(c);
         }
     }//GEN-LAST:event_jTextApe_ProvKeyTyped
 
@@ -420,33 +393,6 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
             Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_jTextNroDoc_ProvKeyTyped
-
-    private void jTextTel_ProvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextTel_ProvKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            String cadena = ("" + c).toUpperCase();
-            c = cadena.charAt(0);
-            evt.setKeyChar(c);
-        }
-    }//GEN-LAST:event_jTextTel_ProvKeyTyped
-
-    private void jTextNomCom_ProvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNomCom_ProvKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            String cadena = ("" + c).toUpperCase();
-            c = cadena.charAt(0);
-            evt.setKeyChar(c);
-        }
-    }//GEN-LAST:event_jTextNomCom_ProvKeyTyped
-
-    private void jTextDirec_ProvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDirec_ProvKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            String cadena = ("" + c).toUpperCase();
-            c = cadena.charAt(0);
-            evt.setKeyChar(c);
-        }
-    }//GEN-LAST:event_jTextDirec_ProvKeyTyped
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
         // TODO add your handling code here:
