@@ -19,18 +19,6 @@ import Modelo.Session;
 import Modelo.Turnos;
 import Modelo.Movimientos_Caja;
 import static Vistas.vAbrir_Caja.jTextCajaChica;
-import static Vistas.vMenuPrincipal.jButton1;
-import static Vistas.vMenuPrincipal.jButton2;
-import static Vistas.vMenuPrincipal.jButton3;
-import static Vistas.vMenuPrincipal.jButton5;
-import static Vistas.vMenuPrincipal.jButton6;
-import static Vistas.vMenuPrincipal.jMenu12;
-import static Vistas.vMenuPrincipal.jMenu13;
-import static Vistas.vMenuPrincipal.jMenu14;
-import static Vistas.vMenuPrincipal.jMenu2;
-import static Vistas.vMenuPrincipal.jMenu4;
-import static Vistas.vMenuPrincipal.jMenu6;
-import static Vistas.vMenuPrincipal.jMenu8;
 import static Vistas.vMenuPrincipal.jMenuItem12;
 import static Vistas.vMenuPrincipal.jMenuItem29;
 import static Vistas.vMenuPrincipal.jMenuItem30;
@@ -39,6 +27,18 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import static Vistas.vMenuPrincipal.jMenuCompras;
+import static Vistas.vMenuPrincipal.jMenuVentas;
+import static Vistas.vMenuPrincipal.JMenuInsumos;
+import static Vistas.vMenuPrincipal.jMenuEmpleados;
+import static Vistas.vMenuPrincipal.jMenuReportes;
+import static Vistas.vMenuPrincipal.jMenuGastos;
+import static Vistas.vMenuPrincipal.jMenuConfiguracion;
+import static Vistas.vMenuPrincipal.jButtonVentas;
+import static Vistas.vMenuPrincipal.jButtonCompras;
+import static Vistas.vMenuPrincipal.jButtonGastos;
+import static Vistas.vMenuPrincipal.jButtonInsumos;
+import static Vistas.vMenuPrincipal.jButtonProveedores;
 
 /**
  *
@@ -163,21 +163,21 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
     }
 
     public void DeshabilitarMenus() {
-        jMenu2.setEnabled(false);
-        jMenu12.setEnabled(false);
-        jMenu4.setEnabled(false);
-        jMenu8.setEnabled(false);
-        jMenu13.setEnabled(false);
-        jMenu6.setEnabled(false);
-        jMenu14.setEnabled(false);
+        jMenuCompras.setEnabled(false);
+        jMenuVentas.setEnabled(false);
+        JMenuInsumos.setEnabled(false);
+        jMenuEmpleados.setEnabled(false);
+        jMenuReportes.setEnabled(false);
+        jMenuGastos.setEnabled(false);
+        jMenuConfiguracion.setEnabled(false);
         jMenuItem12.setEnabled(false);
         jMenuItem30.setEnabled(false);
         jMenuItem29.setEnabled(false);
-        jButton5.setEnabled(false);
-        jButton6.setEnabled(false);
-        jButton3.setEnabled(false);
-        jButton2.setEnabled(false);
-        jButton1.setEnabled(false);
+        jButtonVentas.setEnabled(false);
+        jButtonCompras.setEnabled(false);
+        jButtonGastos.setEnabled(false);
+        jButtonProveedores.setEnabled(false);
+        jButtonInsumos.setEnabled(false);
     }
 
     public void desabilitarCampos() {
@@ -243,7 +243,7 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Cierre de Caja");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
 
         jTextCajaChica.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextCajaChica.setEnabled(false);

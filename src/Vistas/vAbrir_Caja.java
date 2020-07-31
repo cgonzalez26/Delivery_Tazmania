@@ -10,13 +10,6 @@ import Modelo.Caja_Turno;
 import Modelo.Movimientos_Caja;
 import Modelo.Session;
 import Modelo.Turnos;
-import static Vistas.vMenuPrincipal.jMenu12;
-import static Vistas.vMenuPrincipal.jMenu13;
-import static Vistas.vMenuPrincipal.jMenu14;
-import static Vistas.vMenuPrincipal.jMenu2;
-import static Vistas.vMenuPrincipal.jMenu4;
-import static Vistas.vMenuPrincipal.jMenu6;
-import static Vistas.vMenuPrincipal.jMenu8;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -27,6 +20,13 @@ import java.util.HashMap;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import static Vistas.vMenuPrincipal.jMenuCompras;
+import static Vistas.vMenuPrincipal.jMenuVentas;
+import static Vistas.vMenuPrincipal.JMenuInsumos;
+import static Vistas.vMenuPrincipal.jMenuEmpleados;
+import static Vistas.vMenuPrincipal.jMenuReportes;
+import static Vistas.vMenuPrincipal.jMenuGastos;
+import static Vistas.vMenuPrincipal.jMenuConfiguracion;
 
 /**
  *
@@ -75,6 +75,10 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
                     caja = cc.obtenerCaja(idcaja);
                 }
                 String dato = control_ct.ObtenerTurno();
+                //fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
+                //jDateChooser1.setDate(fechaseleccionada);
+                Date objFechaCaja = new Date(caja.getFecha_apertura().getTime());
+                jDateChooser1.setDate(objFechaCaja);
                 cbxTurnos.setSelectedItem(dato);
                 jTextCajaChica.setText(Float.toString(caja.getMonto()));
                 jLabelMensaje.setText("Existe una Caja Abierta para el Turno");
@@ -105,21 +109,21 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
     }
 
     public void HabilitarMenus() {
-        jMenu2.setEnabled(true);
-        jMenu12.setEnabled(true);
-        jMenu4.setEnabled(true);
-        jMenu8.setEnabled(true);
-        jMenu13.setEnabled(true);
-        jMenu6.setEnabled(true);
-        jMenu14.setEnabled(true);
+        jMenuCompras.setEnabled(true);
+        jMenuVentas.setEnabled(true);
+        JMenuInsumos.setEnabled(true);
+        jMenuEmpleados.setEnabled(true);
+        jMenuReportes.setEnabled(true);
+        jMenuGastos.setEnabled(true);
+        jMenuConfiguracion.setEnabled(true);
         vMenuPrincipal.jMenuItem12.setEnabled(true);
         vMenuPrincipal.jMenuItem30.setEnabled(true);
         vMenuPrincipal.jMenuItem29.setEnabled(true);
-        vMenuPrincipal.jButton5.setEnabled(true);
-        vMenuPrincipal.jButton6.setEnabled(true);
-        vMenuPrincipal.jButton3.setEnabled(true);
-        vMenuPrincipal.jButton2.setEnabled(true);
-        vMenuPrincipal.jButton1.setEnabled(true);
+        vMenuPrincipal.jButtonVentas.setEnabled(true);
+        vMenuPrincipal.jButtonCompras.setEnabled(true);
+        vMenuPrincipal.jButtonGastos.setEnabled(true);
+        vMenuPrincipal.jButtonProveedores.setEnabled(true);
+        vMenuPrincipal.jButtonInsumos.setEnabled(true);
     }
 
     private void ComboTurnos() {
