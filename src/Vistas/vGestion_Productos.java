@@ -326,7 +326,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
         jLayeredPane1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 100, 92, -1));
 
         jComboBox1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo..." }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Categoría..." }));
         jComboBox1.setOpaque(false);
         jLayeredPane1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 170, 30));
 
@@ -367,7 +367,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
 
         jLayeredPane1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 289, 1129, 241));
 
-        jButton3.setBackground(new java.awt.Color(237, 124, 61));
+        jButton3.setBackground(new java.awt.Color(252, 249, 57));
         jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton3.setText("Eliminar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -375,7 +375,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jLayeredPane1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(715, 548, 101, -1));
+        jLayeredPane1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 550, 101, -1));
 
         jButton4.setBackground(new java.awt.Color(252, 240, 0));
         jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -395,7 +395,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jLayeredPane1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 548, 101, -1));
+        jLayeredPane1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 550, 101, -1));
 
         jButton2.setBackground(new java.awt.Color(252, 249, 57));
         jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -405,7 +405,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jLayeredPane1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 548, 101, -1));
+        jLayeredPane1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 550, 101, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel3.setText("Precio Venta:");
@@ -436,7 +436,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
         jLayeredPane3.getAccessibleContext().setAccessibleName("Buscar Por:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel5.setText("(*) Tipo de Categoría:");
+        jLabel5.setText("(*) Categoría:");
         jLayeredPane1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 140, 22));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -447,7 +447,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
         );
 
         pack();

@@ -352,13 +352,13 @@ public final class vGestion_PermisosPantallasPerfiles extends javax.swing.JInter
         if (jTable2.getRowCount() != 0 && !jLabel2.getText().equals("Seleccionar Tipo Usuario")) {
             if (jButton4.getText().equals("Habilitar Permisos")) {
                 for (int i = 0; i < jTable2.getRowCount(); i++) {
-                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenu2.getText())) {
+                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenuCompras.getText())) {
                         compras = i;
                     }
                     if (jTable2.getValueAt(i, 0).equals(prove)) {
                         prov = i;
                     }
-                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenu12.getText())) {
+                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenuVentas.getText())) {
                         ventas = i;
                     }
                     if (jTable2.getValueAt(i, 0).equals(produ)) {
@@ -367,22 +367,22 @@ public final class vGestion_PermisosPantallasPerfiles extends javax.swing.JInter
                     if (jTable2.getValueAt(i, 0).equals(cliente)) {
                         cliet = i;
                     }
-                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenu4.getText())) {
+                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.JMenuInsumos.getText())) {
                         insumos = i;
                     }
-                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenu8.getText())) {
+                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenuEmpleados.getText())) {
                         empleados = i;
                     }
-                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenu13.getText())) {
+                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenuReportes.getText())) {
                         reportes = i;
                     }
-                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenu6.getText())) {
+                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenuGastos.getText())) {
                         gastos = i;
                     }
-                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenu3.getText())) {
+                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenuCaja.getText())) {
                         caja = i;
                     }
-                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenu14.getText())) {
+                    if (jTable2.getValueAt(i, 0).equals(vMenuPrincipal.jMenuConfiguracion.getText())) {
                         administrador = i;
                     }
                     if (jTable2.getValueAt(i, 0).equals(usuario)) {

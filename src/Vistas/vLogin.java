@@ -5,6 +5,7 @@ import Controlador.control_Cajas;
 import Controlador.control_TiposUsuarios;
 import Controlador.control_Turnos;
 import Controlador.control_Usuario;
+import Modelo.Caja;
 import Modelo.Session;
 import Modelo.TiposUsuarios;
 import Modelo.Usuarios;
@@ -141,9 +142,17 @@ public final class vLogin extends javax.swing.JFrame {
         } else if (jTextNomUser_Login.getText().trim().equals("") && !jTextoPass_Login.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Debes ingresar el nombre de usuario");
         } else if (user.InicioSesion(u)) {
+            //obtener datos del Usuario
             nombretu = tipousuario.TipoUsuarioInicioSesion(jTextNomUser_Login.getText());
             Session.setIdusuario(user.ObtenerIDUsuario(jTextNomUser_Login.getText()));
             Session.setLogin(jTextNomUser_Login.getText());
+            //Obtener ultima Caja
+            Caja caja = cc.obtenerUltimaCaja();
+            int idCaja = caja.getIdCaja();
+            if( idCaja != 0){
+                Session.setIdcaja_abierta(idCaja);
+            }
+            //abrir Pantalla Principal
             vMenuPrincipal menu = new vMenuPrincipal();
             menu.getFont();
             menu.setVisible(true);
