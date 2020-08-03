@@ -22,9 +22,14 @@ public class control_DetallesCompras {
         sql = new Sentencias_sql();
     }
 
-    public Object[][] MostrarDatos(String desde, String hasta) {
+    public Object[][] MostrarDatos(String desde, String hasta, String nrocompra) {
         String[] columnas = {"iddetallecompra", "idcompra", "idinsumo", "NroCompra", "descripcion", "Precio", "Cantidad", "FechaCompra"};
-        Object[][] datos = sql.GetTabla(columnas, "detallescompras", "select d.iddetallecompra,c.idcompra,i.idinsumo,c.NroCompra,i.descripcion,d.Precio,d.Cantidad,date_format(d.fechaCompra,'%d/%m/%Y %H:%i') as FechaCompra from compras c INNER JOIN detallescompras d on c.idcompra=d.idcompra INNER JOIN insumos i on i.idinsumo=d.idinsumo where date(d.fechaCompra) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and d.activo=1 order by c.NroCompra desc");
+        Object[][] datos = sql.GetTabla(columnas, "detallescompras", "select d.iddetallecompra,c.idcompra,i.idinsumo,c.NroCompra,i.descripcion,d.Precio,d.Cantidad,date_format(d.fechaCompra,'%d/%m/%Y %H:%i') as FechaCompra from compras c INNER JOIN detallescompras d on c.idcompra=d.idcompra INNER JOIN insumos i on i.idinsumo=d.idinsumo where c.NroCompra='" + nrocompra + "' and date(d.fechaCompra) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and d.activo=1 order by c.NroCompra desc");
+        return datos;
+    }
+    
+    public Object[][] DatosDetallesVentas(String desde, String hasta){
+        Object[][] datos = sql.DatosDetallesComprasVentas("select d.iddetallecompra as iddetalle,i.descripcion as descripcion,d.Precio as precio,d.Cantidad as cantidad from compras c INNER JOIN detallescompras d on c.idcompra=d.idcompra INNER JOIN insumos i on i.idinsumo=d.idinsumo where date(d.fechaCompra) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and d.activo=1");
         return datos;
     }
 

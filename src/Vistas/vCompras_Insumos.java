@@ -792,7 +792,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jLayeredPane3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 480, 136, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel9.setText("(*) Precio;");
+        jLabel9.setText("(*) Precio:");
         jLayeredPane3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 388, -1, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
