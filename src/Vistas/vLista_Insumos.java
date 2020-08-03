@@ -122,12 +122,12 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
     }
 
     public void Mostrar() {
-        String[] columnas = {"IDINSUMO", "IDTIPOINSUMO", "IDPROVEEDOR", "TIPO INSUMO", "PROVEEDOR", "DESCRIPCION", "PRECIO", "STOCK", "FECHA"};
+        String[] columnas = {"IDINSUMO", "IDTIPOINSUMO", "IDPROVEEDOR", "TIPO INSUMO", "PROVEEDOR", "DESCRIPCION", "PRECIO", "STOCK"};
         datostabla = insumo.MostrarDatos();
         datos = new DefaultTableModel(datostabla, columnas);
         jTabla_Insumos.setModel(datos);
         EliminarFilasVacias();
-        ReemplazarNulos();
+        //ReemplazarNulos();
         PintarPocoStock();
         AjustarTamañoFilas();
         ocultar_columnas();
@@ -142,7 +142,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                 int desc = (int) font.getStringBounds(jTabla_Insumos.getValueAt(i, 5).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
                 int precio = (int) font.getStringBounds(jTabla_Insumos.getValueAt(i, 6).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
                 int stock = (int) font.getStringBounds(jTabla_Insumos.getValueAt(i, 7).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int date = (int) font.getStringBounds(jTabla_Insumos.getValueAt(i, 8).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
+                //int date = (int) font.getStringBounds(jTabla_Insumos.getValueAt(i, 8).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
                 if (tipoinsu > jTabla_Insumos.getColumnModel().getColumn(3).getPreferredWidth()) {
                     jTabla_Insumos.getColumnModel().getColumn(3).setPreferredWidth(tipoinsu);
                 }
@@ -158,9 +158,9 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                 if (stock > jTabla_Insumos.getColumnModel().getColumn(7).getPreferredWidth()) {
                     jTabla_Insumos.getColumnModel().getColumn(7).setPreferredWidth(stock);
                 }
-                if (date > jTabla_Insumos.getColumnModel().getColumn(8).getPreferredWidth()) {
+                /*if (date > jTabla_Insumos.getColumnModel().getColumn(8).getPreferredWidth()) {
                     jTabla_Insumos.getColumnModel().getColumn(8).setPreferredWidth(date);
-                }
+                }*/
             }
         }
     }
@@ -451,7 +451,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         if (!jComboBox1.getSelectedItem().equals("Ninguno")) {
-            String[] columnas = {"IDINSUMO", "IDTIPOINSUMO", "IDPROVEEDOR", "TIPO INSUMO", "PROVEEDOR", "DESCRIPCION", "PRECIO", "STOCK", "FECHA"};
+            String[] columnas = {"IDINSUMO", "IDTIPOINSUMO", "IDPROVEEDOR", "TIPO INSUMO", "PROVEEDOR", "DESCRIPCION", "PRECIO", "STOCK"};
             datostablati = insumo.OrdenarInsumos(jComboBox1.getSelectedItem().toString());
             datos = new DefaultTableModel(datostablati, columnas);
             jTabla_Insumos.setModel(datos);
@@ -477,7 +477,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
         if (!jTextField1.getText().isEmpty()) {
             datostabla = insumo.MostrarDatosBusquedaInsumos(jTextField1.getText());
             if (datostabla.length != 0) {
-                String[] columnas = {"IDINSUMO", "IDTIPOINSUMO", "IDPROVEEDOR", "TIPO INSUMO", "PROVEEDOR", "DESCRIPCION", "PRECIO", "STOCK", "FECHA"};
+                String[] columnas = {"IDINSUMO", "IDTIPOINSUMO", "IDPROVEEDOR", "TIPO INSUMO", "PROVEEDOR", "DESCRIPCION", "PRECIO", "STOCK"};
                 datos = new DefaultTableModel(datostabla, columnas);
                 jTabla_Insumos.setModel(datos);
                 EliminarFilasVacias();

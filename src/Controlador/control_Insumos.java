@@ -20,14 +20,14 @@ public class control_Insumos {
     }
 
     public Object[][] MostrarDatos() {
-        String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "t.descripcion", "Nombre_comercial", "i.descripcion", "precio", "stock", "fecharegistro"};
-        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,t.descripcion,p.Nombre_comercial,i.descripcion,i.precio,i.stock,date_format(i.fecharegistro,'%d/%m/%Y %H:%i') as fecharegistro from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor where i.activo=1");
+        String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "t.descripcion", "Nombre_comercial", "i.descripcion", "precio", "stock"};
+        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,t.descripcion,p.Nombre_comercial,i.descripcion,i.precio,i.stock from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor where i.activo=1");
         return datos;
     }
     
     public Object[][] OrdenarInsumos(String tipo) {
-        String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "t.descripcion", "Nombre_comercial", "i.descripcion", "precio", "stock", "fecharegistro"};
-        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,t.descripcion,p.Nombre_comercial,i.descripcion,i.precio,i.stock,date_format(i.fecharegistro,'%d/%m/%Y %H:%i:%s') as fecharegistro from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor where i.activo=1 order by t.descripcion='" + tipo + "' desc");
+        String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "t.descripcion", "Nombre_comercial", "i.descripcion", "precio", "stock"};
+        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,t.descripcion,p.Nombre_comercial,i.descripcion,i.precio,i.stock from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor where i.activo=1 order by t.descripcion='" + tipo + "' desc");
         return datos;
     }
     
