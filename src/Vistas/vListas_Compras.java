@@ -45,49 +45,53 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         initComponents();
         IniciarFechas();
         MostrarCompras();
-        MostrarDetalleCompra();
 
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     if (VerificarCajaAbierta() == false) {
-                        int fila = jTable1.rowAtPoint(e.getPoint());
-                        int idmovimientocaja = com.ObtenerIDMovCajaCompra(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()), "CP");
-                        String estado = control_mc.getEstadoCajaByMovimiento(idmovimientocaja);
-                        if (estado.equals("CERRADA")) {
-                            JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
+                        //int fila = jTable1.rowAtPoint(e.getPoint());
+                        int seleccionado = jTable1.getSelectedRow();
+                        if (seleccionado == -1) {
+                            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
                         } else {
-                            fecha = (String) (jTable1.getValueAt(fila, 7));
-                            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                            try {
-                                fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
-                            } catch (ParseException ex) {
-                                Logger.getLogger(vListas_Compras.class.getName()).log(Level.SEVERE, null, ex);
+                            int idmovimientocaja = com.ObtenerIDMovCajaCompra(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()), "CP");
+                            String estado = control_mc.getEstadoCajaByMovimiento(idmovimientocaja);
+                            if (estado.equals("CERRADA")) {
+                                JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
+                            } else {
+                                fecha = (String) (jTable1.getValueAt(seleccionado, 7));
+                                DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                try {
+                                    fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
+                                } catch (ParseException ex) {
+                                    Logger.getLogger(vListas_Compras.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                if (compra == null || compra.isClosed()) {
+                                    compra = new vCompras_Insumos();
+                                    vMenuPrincipal.jDesktopPane1.add(compra);
+                                    compra.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                                    compra.setVisible(true);
+                                    compra.toFront();
+                                }
+                                vCompras_Insumos.jButton7.setEnabled(true);
+                                vCompras_Insumos.jButton1.setText("Cancelar");
+                                vCompras_Insumos.jButton1.setEnabled(true);
+                                idcompra = jTable1.getValueAt(seleccionado, 0).toString();
+                                vCompras_Insumos.jTextField3.setText(jTable1.getValueAt(seleccionado, 3).toString());
+                                vCompras_Insumos.jComboBox2.setSelectedItem(jTable1.getValueAt(seleccionado, 5).toString());
+                                vCompras_Insumos.jDateChooser1.setDate(fechaseleccionada);
+                                vCompras_Insumos.jTextField7.setText(jTable1.getValueAt(seleccionado, 6).toString());
+                                compra.setTitle("Modificar Compra");
+                                compra.total = (Float.parseFloat(jTable1.getValueAt(seleccionado, 6).toString()));
+                                compra.nrofactura = nrofactura;
+                                compra.idcompra = idcompra;
+                                PasarFilas2();
+                                IDdetalles2();
+                                CantidadFilas();
+                                dispose();
+                                vDetallesCompras.dispose();
                             }
-                            if (compra == null || compra.isClosed()) {
-                                compra = new vCompras_Insumos();
-                                vMenuPrincipal.jDesktopPane1.add(compra);
-                                compra.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                                compra.setVisible(true);
-                                compra.toFront();
-                            }
-                            vCompras_Insumos.jButton7.setEnabled(true);
-                            vCompras_Insumos.jButton1.setText("Cancelar");
-                            vCompras_Insumos.jButton1.setEnabled(true);
-                            idcompra = jTable1.getValueAt(fila, 0).toString();
-                            vCompras_Insumos.jTextField3.setText(jTable1.getValueAt(fila, 3).toString());
-                            nrofactura = jTable1.getValueAt(fila, 4).toString();
-                            vCompras_Insumos.jComboBox2.setSelectedItem(jTable1.getValueAt(fila, 5).toString());
-                            vCompras_Insumos.jDateChooser1.setDate(fechaseleccionada);
-                            vCompras_Insumos.jTextField7.setText(jTable1.getValueAt(fila, 6).toString());
-                            compra.setTitle("Modificar Compra");
-                            compra.total = (Float.parseFloat(jTable1.getValueAt(fila, 6).toString()));
-                            compra.nrofactura = nrofactura;
-                            compra.idcompra = idcompra;
-                            PasarFilas();
-                            IDdetalles();
-                            CantidadFilas();
-                            dispose();
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "No se puede Modificar. No hay CAJA ABIERTA.");
@@ -95,6 +99,26 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                 }
             }
         });
+
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int seleccionado = jTable1.getSelectedRow();
+                    if (seleccionado == -1) {
+                        JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
+                    } else {
+                        nrofactura = jTable1.getValueAt(seleccionado, 4).toString();
+                        MostrarDetalleCompra();
+                        Vistas.vListas_Compras lista = null;
+                        vDetallesCompras.setSize(817, 311);
+                        vDetallesCompras.setLocationRelativeTo(lista);
+                        vDetallesCompras.setModal(true);
+                        vDetallesCompras.setVisible(true);
+                    }
+                }
+            }
+        });
+
     }
 
     public boolean VerificarCajaAbierta() {
@@ -117,6 +141,12 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         }*/
     }
 
+    public void IDdetalles2() {
+        for (int i = 0; i < jTable2.getRowCount(); i++) {
+            compra.iddetalles.add(jTable2.getValueAt(i, 0).toString());
+        }
+    }
+
     public void CantidadFilas() {
         compra.filasdetalle = compra.iddetalles.size();
     }
@@ -135,6 +165,16 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
             fila[0] = datosdetalle.getValueAt(seleccionados[i], 4);
             fila[1] = datosdetalle.getValueAt(seleccionados[i], 5);
             fila[2] = datosdetalle.getValueAt(seleccionados[i], 6);
+            vCompras_Insumos.modelo.addRow(fila);
+        }
+    }
+
+    public void PasarFilas2() {
+        Object[] fila = new Object[3];
+        for (int i = 0; i < jTable2.getRowCount(); i++) {
+            fila[0] = datosdetalle.getValueAt(i, 4);
+            fila[1] = datosdetalle.getValueAt(i, 5);
+            fila[2] = datosdetalle.getValueAt(i, 6);
             vCompras_Insumos.modelo.addRow(fila);
         }
     }
@@ -172,7 +212,7 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         desde = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
         hasta = ((JTextField) jDateChooser2.getDateEditor().getUiComponent()).getText();
         String[] columnas = {"IDDETCOMPRA", "IDCOMPRA", "IDINSUMO", "NRO FACTURA COMPRA", "INSUMO", "PRECIO", "CANTIDAD", "FECHA"};
-        datosdetallecompra = detallecompra.MostrarDatos(desde, hasta);
+        datosdetallecompra = detallecompra.MostrarDatos(desde, hasta, nrofactura);
         datosdetalle = new DefaultTableModel(datosdetallecompra, columnas);
         jTable2.setModel(datosdetalle);
         EliminarFilasVaciasDetallesCompras();
@@ -303,6 +343,17 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        vDetallesCompras = new javax.swing.JDialog();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -310,22 +361,103 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
             }
         };
         jButton1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable(){
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return false; //Disallow the editing of any cell
-            }
-        };
-        jEtiqTitulo_DetalleCompras = new javax.swing.JLabel();
         jEtiqTitulo_Compras = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+
+        vDetallesCompras.setTitle("Detalle Compra");
+        java.awt.Image iconodeliv = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
+        vDetallesCompras.setIconImage(iconodeliv);
+        vDetallesCompras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vDetallesComprasMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
+        jLabel1.setText("Detalles Compras");
+
+        jTable2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        jButton3.setBackground(new java.awt.Color(252, 249, 57));
+        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButton3.setText("Nuevo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setBackground(new java.awt.Color(252, 249, 57));
+        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButton4.setText("Modificar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(252, 249, 57));
+        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout vDetallesComprasLayout = new javax.swing.GroupLayout(vDetallesCompras.getContentPane());
+        vDetallesCompras.getContentPane().setLayout(vDetallesComprasLayout);
+        vDetallesComprasLayout.setHorizontalGroup(
+            vDetallesComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vDetallesComprasLayout.createSequentialGroup()
+                .addGap(308, 308, 308)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(vDetallesComprasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(vDetallesComprasLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(176, 176, 176)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76))
+        );
+        vDetallesComprasLayout.setVerticalGroup(
+            vDetallesComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vDetallesComprasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(vDetallesComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -368,43 +500,8 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
-        jEtiqTitulo_DetalleCompras.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        jEtiqTitulo_DetalleCompras.setText("Detalle Compras");
-
         jEtiqTitulo_Compras.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         jEtiqTitulo_Compras.setText("Compras");
-
-        jButton2.setBackground(new java.awt.Color(252, 249, 57));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton2.setText("Eliminar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setBackground(new java.awt.Color(252, 249, 57));
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton4.setText("Modificar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
@@ -466,12 +563,21 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton5.setBackground(new java.awt.Color(252, 249, 57));
+        jButton5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButton5.setText("Ver Detalle");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(218, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jEtiqTitulo_Compras, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -480,24 +586,15 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(225, 225, 225))))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 887, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(353, 353, 353)
-                        .addComponent(jEtiqTitulo_DetalleCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 887, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(150, 150, 150)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(150, 150, 150)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10))
+                .addGap(198, 198, 198)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(244, 244, 244))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -508,16 +605,11 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                 .addComponent(jEtiqTitulo_Compras)
                 .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jEtiqTitulo_DetalleCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -536,16 +628,16 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         Compras c = new Compras();
         DetallesCompras dc = new DetallesCompras();
         Movimientos_Caja mc = new Movimientos_Caja();
-        control_Movimientos_Caja control_mc = new control_Movimientos_Caja();
+        control_Movimientos_Caja con_mc = new control_Movimientos_Caja();
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
-            int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "confirmar", JOptionPane.YES_NO_OPTION);
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 mc.setIdmovimiento(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
                 mc.setIdtipomovimiento(12);
-                if (control_mc.EliminarMovCajaCompraVenta(mc)) {
-                    int[] seleccionados = jTable2.getSelectedRows();
+                if (con_mc.EliminarMovCajaCompraVenta(mc)) {
+                    /*int[] seleccionados = jTable2.getSelectedRows();
                     for (int j = 0; j < seleccionados.length; j++) {
                         boolean stock = detallecompra.VerificarStock(Float.parseFloat(jTable2.getValueAt(seleccionados[j], 6).toString()), Integer.parseInt(jTable2.getValueAt(seleccionados[j], 2).toString()));
                         if (stock == true) {
@@ -555,11 +647,28 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                             dc.setCantidad(Float.parseFloat(jTable2.getValueAt(seleccionados[j], 6).toString()));
                             dc.setIdinsumo(Integer.parseInt(jTable2.getValueAt(seleccionados[j], 2).toString()));
                             if (detallecompra.RestarCantidadSumadaInsumos(dc)) {
-                                
+
                             }
                         }
 
                         dc.setIddetallecompra(Integer.parseInt(jTable2.getValueAt(seleccionados[j], 0).toString()));
+                        if (detallecompra.EliminarDetalleCompra(dc)) {
+
+                        }
+                    }*/
+                    for (int j = 0; j < jTable2.getRowCount(); j++) {
+                        boolean stock = detallecompra.VerificarStock(Float.parseFloat(jTable2.getValueAt(j, 6).toString()), Integer.parseInt(jTable2.getValueAt(j, 2).toString()));
+                        if (stock == true) {
+                            dc.setIdinsumo(Integer.parseInt(jTable2.getValueAt(j, 2).toString()));
+                            detallecompra.SetearCeroStock(dc);
+                        } else {
+                            dc.setCantidad(Float.parseFloat(jTable2.getValueAt(j, 6).toString()));
+                            dc.setIdinsumo(Integer.parseInt(jTable2.getValueAt(j, 2).toString()));
+                            if (detallecompra.RestarCantidadSumadaInsumos(dc)) {
+
+                            }
+                        }
+                        dc.setIddetallecompra(Integer.parseInt(jTable2.getValueAt(j, 0).toString()));
                         if (detallecompra.EliminarDetalleCompra(dc)) {
 
                         }
@@ -568,12 +677,10 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                     if (com.EliminarCompra(c)) {
                         JOptionPane.showMessageDialog(null, "Eliminado");
                         MostrarCompras();
-                        MostrarDetalleCompra();
+                        vDetallesCompras.dispose();
+                        //MostrarDetalleCompra();
                     }
                 }
-            } else {
-                LimpiarSeleccionCompra();
-                LimpiarSeleccionDetalle();
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -611,7 +718,6 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                     vCompras_Insumos.jButton7.setEnabled(true);
                     idcompra = jTable1.getValueAt(seleccionado, 0).toString();
                     vCompras_Insumos.jTextField3.setText(jTable1.getValueAt(seleccionado, 3).toString());
-                    nrofactura = jTable1.getValueAt(seleccionado, 4).toString();
                     vCompras_Insumos.jComboBox2.setSelectedItem(jTable1.getValueAt(seleccionado, 5).toString());
                     vCompras_Insumos.jDateChooser1.setDate(fechaseleccionada);
                     vCompras_Insumos.jTextField7.setText(jTable1.getValueAt(seleccionado, 6).toString());
@@ -619,10 +725,11 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                     compra.total = (Float.parseFloat(jTable1.getValueAt(seleccionado, 6).toString()));
                     compra.nrofactura = nrofactura;
                     compra.idcompra = idcompra;
-                    PasarFilas();
-                    IDdetalles();
+                    PasarFilas2();
+                    IDdetalles2();
                     CantidadFilas();
                     dispose();
+                    vDetallesCompras.dispose();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "No se puede Modificar. No hay CAJA ABIERTA.");
@@ -634,12 +741,12 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         desde = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
         hasta = ((JTextField) jDateChooser2.getDateEditor().getUiComponent()).getText();
         LimpiarSeleccionCompra();
-        LimpiarSeleccionDetalle();
+        //LimpiarSeleccionDetalle();
         desde = "";
         hasta = "";
         IniciarFechas();
         MostrarCompras();
-        MostrarDetalleCompra();
+        //MostrarDetalleCompra();
     }//GEN-LAST:event_formMouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -657,13 +764,13 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                         //AjustarTamañoFilasCompra();
                         ocultar_columnasCompra();
 
-                        String[] columnasdetalle = {"IDDETCOMPRA", "IDCOMPRA", "IDINSUMO", "NRO FACTURA COMPRA", "INSUMO", "PRECIO", "CANTIDAD", "FECHA"};
+                        /*String[] columnasdetalle = {"IDDETCOMPRA", "IDCOMPRA", "IDINSUMO", "NRO FACTURA COMPRA", "INSUMO", "PRECIO", "CANTIDAD", "FECHA"};
                         datosdetallecompra = busquedacompra.NroDetallesComprasFechas(desde, hasta);
                         datosdetalle = new DefaultTableModel(datosdetallecompra, columnasdetalle);
                         jTable2.setModel(datosdetalle);
                         EliminarFilasVaciasDetallesCompras();
                         //AjustarTamañoFilasDetalle();
-                        ocultar_columnasDetalle();
+                        ocultar_columnasDetalle();*/
                     } else {
                         JOptionPane.showMessageDialog(null, "No se encontraron datos");
                     }
@@ -680,25 +787,55 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        SeleccionarFilasNroFacturaCompra();
+        //SeleccionarFilasNroFacturaCompra();
     }//GEN-LAST:event_jTable1MousePressed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        compra = new vCompras_Insumos();
+        vMenuPrincipal.jDesktopPane1.add(compra);
+        compra.setVisible(true);
+        compra.toFront();
+        this.dispose();
+        vDetallesCompras.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        int seleccionado = jTable1.getSelectedRow();
+        if (seleccionado == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
+        } else {
+            nrofactura = jTable1.getValueAt(seleccionado, 4).toString();
+            MostrarDetalleCompra();
+            vDetallesCompras.setSize(817, 311);
+            vDetallesCompras.setLocationRelativeTo(this);
+            vDetallesCompras.setModal(true);
+            vDetallesCompras.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void vDetallesComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vDetallesComprasMouseClicked
+        LimpiarSeleccionDetalle();
+    }//GEN-LAST:event_vDetallesComprasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     public static com.toedter.calendar.JDateChooser jDateChooser1;
     public static com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jEtiqTitulo_Compras;
-    private javax.swing.JLabel jEtiqTitulo_DetalleCompras;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable jTable1;
-    public static javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JDialog vDetallesCompras;
     // End of variables declaration//GEN-END:variables
 }

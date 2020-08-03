@@ -202,29 +202,32 @@ public class Sentencias_sql {
         return data;
     }
 
-    public List<Object[][]> DatosDetallesComprasVentas(String colName[], int reg, String sql) {
-        List<Object[][]> lista = new ArrayList<>();
-        Object[][] dato = new Object[reg][colName.length];
-        Object datos[] = new Object[colName.length];
+    public Object[][] DatosDetallesComprasVentas(String sql) {
         try {
             ps = con.conectado().prepareStatement(sql);
             res = ps.executeQuery();
-            int s = 0;
+            boolean ultimo = res.last();
+            int total = 0;
+            if (ultimo) {
+                total = res.getRow();
+            }
+            Object[][] datos = new Object[total][4];
+            String col[] = new String[4];
+            int i = 0;
             while (res.next()) {
-                for (int i = 0; i < colName.length; i++) {
-                    datos[i] = res.getString(colName[i]);
-                    dato[s][i] = datos[i];
-                    //dato[s][i] = datos[i];                   
+                for (int j = 0; j <= 3; j++) {
+                    col[j] = res.getString(j);
+                    datos[i][j] = col[j];
                 }
-                s++;
-                lista.add(dato);
+                i++;
             }
             ps.close();
             res.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return datos;
+        } catch (SQLException ex) {
+            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return lista;
     }
 
     public ArrayList<String> NrosFacturasCompras(String sql) {

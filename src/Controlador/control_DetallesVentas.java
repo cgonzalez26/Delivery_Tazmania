@@ -19,9 +19,9 @@ public class control_DetallesVentas {
         sql = new Sentencias_sql();
     }
 
-    public Object[][] MostrarDatos(String desde, String hasta) {
+    public Object[][] MostrarDatos(String desde, String hasta, String nrofactura) {
         String[] columnas = {"iddetalleventa", "idventa", "idproducto", "NroFactura", "descripcion", "Precio", "Cantidad", "fechaVenta"};
-        Object[][] datos = sql.GetTabla(columnas, "detallesventas", "select d.iddetalleventa,v.idventa,p.idproducto,v.NroFactura,p.descripcion,d.Precio,d.Cantidad,date_format(d.fechaVenta, '%d/%m/%Y %H:%i') as FechaVenta from detallesventas d INNER JOIN ventas v on d.idventa=v.idventa INNER JOIN productos p on d.idproducto=p.idproducto where date(d.fechaVenta) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and d.activo=1 order by v.NroFactura desc");
+        Object[][] datos = sql.GetTabla(columnas, "detallesventas", "select d.iddetalleventa,v.idventa,p.idproducto,v.NroFactura,p.descripcion,d.Precio,d.Cantidad,date_format(d.fechaVenta, '%d/%m/%Y %H:%i') as FechaVenta from detallesventas d INNER JOIN ventas v on d.idventa=v.idventa INNER JOIN productos p on d.idproducto=p.idproducto where v.NroFactura='" + nrofactura + "' and date(d.fechaVenta) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and d.activo=1 order by v.NroFactura desc");
         return datos;
     }
 
