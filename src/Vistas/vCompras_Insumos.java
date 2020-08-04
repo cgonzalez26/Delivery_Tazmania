@@ -626,7 +626,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 jList1MouseClicked(evt);
             }
         });
-        jLayeredPane3.add(jList1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 290, 0));
+        jLayeredPane3.add(jList1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 290, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
         jButton2.setFocusable(false);
@@ -658,7 +658,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 jList2MouseClicked(evt);
             }
         });
-        jLayeredPane3.add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 222, 0));
+        jLayeredPane3.add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 222, -1));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -1078,7 +1078,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         int fila = jTable1.getSelectedRow();
-        if (jButton5.getText().equals("Quitar")) {
+        if (jButton5.getText().equals("Borrar")) {
             if (fila == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
@@ -1096,7 +1096,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                     total = total - (Float.parseFloat(jTable1.getValueAt(fila, 1).toString()) * Float.parseFloat(jTable1.getValueAt(fila, 2).toString()));
                     jTextField7.setText(Float.toString(total));
                     jTextField1.setText(Float.toString((float) 0.00));
-                    jButton5.setText("Quitar");
+                    jButton5.setText("Borrar");
                     if (sql.SafeUpdates()) {
                         iddetallescompras.add(Integer.parseInt(iddetalles.get(fila)));
                         idinsumos.add(detallecompra.ObtenerIDInsumo2(Integer.parseInt(iddetalles.get(fila))));
@@ -1145,7 +1145,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                                         jButton1.setText("Registrar Compra");
                                         jButton3.setText("Agregar");
                                         jButton6.setText("Modificar");
-                                        jButton5.setText("Quitar");
+                                        jButton5.setText("Borrar");
                                     } else {
                                         mc.setIdmovimiento(Integer.parseInt(idcompra));
                                         mc.setIdtipomovimiento(12);
@@ -1512,7 +1512,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         if (jButton6.getText().equals("Modificar") && jTable1.getRowCount() != 0) {
             jTable1.clearSelection();
             jTable1.getSelectionModel().clearSelection();
-            jButton5.setText("Quitar");
+            jButton5.setText("Borrar");
         }
     }//GEN-LAST:event_formMouseClicked
 
@@ -1603,12 +1603,13 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             int i = jTable1.getSelectedRow(), j = filasdetalle;
             for (int l = 0; l < j; l++) {
                 if (i == l) {
-                    jButton5.setText("Eliminar");
+                    jButton6.setText("Modificar Detalle");
+                    jButton5.setText("Borrar Detalle");
                     break;
                 }
             }
             if (i >= j) {
-                jButton5.setText("Quitar");
+                jButton5.setText("Borrar");
             }
         }
     }//GEN-LAST:event_jTable1MousePressed
