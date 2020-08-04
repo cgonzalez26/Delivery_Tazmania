@@ -556,10 +556,16 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Productos a Vender", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
+<<<<<<< HEAD
         btnBorrar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/delete16.png"))); // NOI18N
         btnBorrar.setText("Borrar");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+=======
+        jButton8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButton8.setText("Borrar");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> 02f64cb79204d14226051fd3b72534ff44adcf48
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarActionPerformed(evt);
             }
@@ -1086,7 +1092,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         int fila = jTable1.getSelectedRow();
+<<<<<<< HEAD
         if (btnBorrar.getText().equals("Quitar")) {
+=======
+        if (jButton8.getText().equals("Borrar")) {
+>>>>>>> 02f64cb79204d14226051fd3b72534ff44adcf48
             if (fila == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
@@ -1106,9 +1116,15 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 int j = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar un detalle venta?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (j == 0) {
                     total = total - (Float.parseFloat(jTable1.getValueAt(fila, 2).toString()) * Float.parseFloat(jTable1.getValueAt(fila, 1).toString()));
+<<<<<<< HEAD
                     txtTotal.setText(Float.toString(total));
                     //jTextField6.setText(Float.toString((float) 0.0));
                     btnBorrar.setText("Quitar");
+=======
+                    jTextField2.setText(Float.toString(total));
+                    jTextField6.setText(Float.toString((float) 0.0));
+                    jButton8.setText("Borrar");
+>>>>>>> 02f64cb79204d14226051fd3b72534ff44adcf48
                     if (sql.SafeUpdates()) {
                         iddetallesventas.add(Integer.parseInt(iddetalles.get(fila)));
                         idproductos.add(detalle.ObtenerIDProducto2(Integer.parseInt(iddetalles.get(fila))));
@@ -1145,6 +1161,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                                         this.setTitle("Registrando nueva venta Factura N° " + nrofactura);
                                         cbxUsuario.setSelectedIndex(0);
                                         ((JTextField) vCompras_Insumos.jDateChooser1.getDateEditor().getUiComponent()).setText("");
+<<<<<<< HEAD
                                         txtProducto.setText("");
                                         txtPrecio.setText("");
                                         txtCantidad.setText("");
@@ -1156,6 +1173,19 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                                         btnAgregar.setText("Agregar");
                                         btnModificar.setText("Modificar");
                                         btnBorrar.setText("Quitar");
+=======
+                                        jTextField3.setText("");
+                                        jTextField5.setText("");
+                                        jTextField4.setText("");
+                                        jTextField6.setText(Float.toString((float) 0.0));
+                                        jTextField2.setText(Float.toString((float) 0.0));
+                                        jButton1.setText("Registrar Venta");
+                                        jButton3.setEnabled(true);
+                                        jButton3.setText("Cancelar");
+                                        jButton6.setText("Agregar");
+                                        jButton7.setText("Modificar");
+                                        jButton8.setText("Borrar");
+>>>>>>> 02f64cb79204d14226051fd3b72534ff44adcf48
                                     } else {
                                         mc.setIdmovimiento(Integer.parseInt(idventa));
                                         mc.setIdtipomovimiento(10);
@@ -2074,8 +2104,13 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         if (jTable1.getRowCount() != 0 && btnModificar.getText().equals("Modificar") || btnModificar.getText().equals("Modificar Detalle")) {
             jTable1.clearSelection();
             jTable1.getSelectionModel().clearSelection();
+<<<<<<< HEAD
             btnBorrar.setText("Quitar");
             btnModificar.setText("Modificar");
+=======
+            jButton8.setText("Borrar");
+            jButton7.setText("Modificar");
+>>>>>>> 02f64cb79204d14226051fd3b72534ff44adcf48
         }
     }//GEN-LAST:event_formMouseClicked
 
@@ -2397,11 +2432,19 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
             //jTextField6.setText(String.valueOf(Float.parseFloat(modelo.getValueAt(jTable1.getSelectedRow(), 2).toString()) * Float.parseFloat(modelo.getValueAt(jTable1.getSelectedRow(), 1).toString())));
             int i = jTable1.getSelectedRow(), j = filasdetalle;
             if (i < j) {
+<<<<<<< HEAD
                 btnBorrar.setText("Eliminar");
                 btnModificar.setText("Modificar Detalle");
             } else if (i >= j) {
                 btnBorrar.setText("Quitar");
                 btnModificar.setText("Modificar");
+=======
+                jButton8.setText("Borrar Detalle");
+                jButton7.setText("Modificar Detalle");
+            } else if (i >= j) {
+                jButton8.setText("Borrar");
+                jButton7.setText("Modificar");
+>>>>>>> 02f64cb79204d14226051fd3b72534ff44adcf48
             }
         }
     }//GEN-LAST:event_jTable1MousePressed

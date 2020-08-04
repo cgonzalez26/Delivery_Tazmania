@@ -625,7 +625,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 jList1MouseClicked(evt);
             }
         });
-        jLayeredPane3.add(jList1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 290, 0));
+        jLayeredPane3.add(jList1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 290, -1));
 
         jButtonSeleccionarProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
         jButtonSeleccionarProv.setFocusable(false);
@@ -645,7 +645,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 jList2MouseClicked(evt);
             }
         });
-        jLayeredPane3.add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 222, 0));
+        jLayeredPane3.add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 222, -1));
 
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Insumos a Comprar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
@@ -1114,9 +1114,15 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
+<<<<<<< HEAD
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
         int fila = jTableDetalle.getSelectedRow();
         if (jButtonBorrar.getText().equals("Quitar")) {
+=======
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        int fila = jTable1.getSelectedRow();
+        if (jButton5.getText().equals("Borrar")) {
+>>>>>>> 02f64cb79204d14226051fd3b72534ff44adcf48
             if (fila == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
@@ -1131,10 +1137,17 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             } else {
                 int j = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar un detalle compra?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (j == 0) {
+<<<<<<< HEAD
                     total = total - (Float.parseFloat(jTableDetalle.getValueAt(fila, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(fila, 2).toString()));
                     jTextTotal.setText(Float.toString(total));
                     //jTextField1.setText(Float.toString((float) 0.00));
                     jButtonBorrar.setText("Quitar");
+=======
+                    total = total - (Float.parseFloat(jTable1.getValueAt(fila, 1).toString()) * Float.parseFloat(jTable1.getValueAt(fila, 2).toString()));
+                    jTextField7.setText(Float.toString(total));
+                    jTextField1.setText(Float.toString((float) 0.00));
+                    jButton5.setText("Borrar");
+>>>>>>> 02f64cb79204d14226051fd3b72534ff44adcf48
                     if (sql.SafeUpdates()) {
                         iddetallescompras.add(Integer.parseInt(iddetalles.get(fila)));
                         idinsumos.add(detallecompra.ObtenerIDInsumo2(Integer.parseInt(iddetalles.get(fila))));
@@ -1173,6 +1186,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                                         jTextProveedor.setText("");
                                         jCBUsuario.setSelectedIndex(0);
                                         ((JTextField) vCompras_Insumos.jDateChooser1.getDateEditor().getUiComponent()).setText("");
+<<<<<<< HEAD
                                         jTextInsumo.setText("");
                                         JtextCantidad.setText("");
                                         jTextPrecio.setText("");
@@ -1184,6 +1198,19 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                                         jButtonAgregar.setText("Agregar");
                                         jButtonModificar.setText("Modificar");
                                         jButtonBorrar.setText("Quitar");
+=======
+                                        jTextField2.setText("");
+                                        jTextField4.setText("");
+                                        jTextField6.setText("");
+                                        jTextField1.setText(Float.toString((float) 0.00));
+                                        jTextField7.setText(Float.toString((float) 0.00));
+                                        jButton7.setEnabled(true);
+                                        jButton7.setText("Cancelar");
+                                        jButton1.setText("Registrar Compra");
+                                        jButton3.setText("Agregar");
+                                        jButton6.setText("Modificar");
+                                        jButton5.setText("Borrar");
+>>>>>>> 02f64cb79204d14226051fd3b72534ff44adcf48
                                     } else {
                                         mc.setIdmovimiento(Integer.parseInt(idcompra));
                                         mc.setIdtipomovimiento(12);
@@ -1547,10 +1574,17 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonSeleccionarInsumoActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+<<<<<<< HEAD
         if (jButtonModificar.getText().equals("Modificar") && jTableDetalle.getRowCount() != 0) {
             jTableDetalle.clearSelection();
             jTableDetalle.getSelectionModel().clearSelection();
             jButtonBorrar.setText("Quitar");
+=======
+        if (jButton6.getText().equals("Modificar") && jTable1.getRowCount() != 0) {
+            jTable1.clearSelection();
+            jTable1.getSelectionModel().clearSelection();
+            jButton5.setText("Borrar");
+>>>>>>> 02f64cb79204d14226051fd3b72534ff44adcf48
         }
     }//GEN-LAST:event_formMouseClicked
 
@@ -1641,12 +1675,21 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             int i = jTableDetalle.getSelectedRow(), j = filasdetalle;
             for (int l = 0; l < j; l++) {
                 if (i == l) {
+<<<<<<< HEAD
                     jButtonBorrar.setText("Eliminar");
+=======
+                    jButton6.setText("Modificar Detalle");
+                    jButton5.setText("Borrar Detalle");
+>>>>>>> 02f64cb79204d14226051fd3b72534ff44adcf48
                     break;
                 }
             }
             if (i >= j) {
+<<<<<<< HEAD
                 jButtonBorrar.setText("Quitar");
+=======
+                jButton5.setText("Borrar");
+>>>>>>> 02f64cb79204d14226051fd3b72534ff44adcf48
             }
         }
     }//GEN-LAST:event_jTableDetalleMousePressed
