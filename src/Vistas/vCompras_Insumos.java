@@ -66,11 +66,11 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         EliminarItemsVacios();
         jList1.setVisible(false);
         jList2.setVisible(false);
-        jTextField1.setText(Float.toString((float) 0.00));
-        jTextField7.setText(Float.toString((float) 0.00));
-        jTextField1.setEditable(false);
-        jTextField7.setEditable(false);
-        jButton7.setEnabled(false);
+        //jTextField1.setText(Float.toString((float) 0.00));
+        jTextTotal.setText(Float.toString((float) 0.00));
+        //jTextField1.setEditable(false);
+        jTextTotal.setEditable(false);
+        jButtonModificarCompra.setEnabled(false);
     }
 
     public void VerificarCajaAbierta() {
@@ -84,39 +84,39 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     }
 
     public void DeshabilitarCampos() {
-        jTextField1.setEnabled(false);
-        jTextField2.setEnabled(false);
-        jTextField3.setEnabled(false);
-        jTextField3.setEnabled(false);
-        jTextField6.setEnabled(false);
-        jTextField4.setEnabled(false);
+        //jTextField1.setEnabled(false);
+        jTextInsumo.setEnabled(false);
+        jTextProveedor.setEnabled(false);
+        jTextProveedor.setEnabled(false);
+        jTextPrecio.setEnabled(false);
+        JtextCantidad.setEnabled(false);
         jDateChooser1.setEnabled(false);
-        jComboBox2.setEnabled(false);
-        jButton2.setEnabled(false);
-        jButton2.setEnabled(false);
-        jButton3.setEnabled(false);
-        jButton6.setEnabled(false);
-        jButton5.setEnabled(false);
-        jButton1.setEnabled(false);
-        jButton4.setEnabled(false);
+        jCBUsuario.setEnabled(false);
+        jButtonSeleccionarProv.setEnabled(false);
+        jButtonSeleccionarProv.setEnabled(false);
+        jButtonAgregar.setEnabled(false);
+        jButtonModificar.setEnabled(false);
+        jButtonBorrar.setEnabled(false);
+        jButtonAgregarCompra.setEnabled(false);
+        jButtonSeleccionarInsumo.setEnabled(false);
     }
 
     public void Limpiar() {
-        jTextField2.setText("");
-        jTextField4.setText("");
-        jTextField6.setText("");
+        jTextInsumo.setText("");
+        JtextCantidad.setText("");
+        jTextPrecio.setText("");
     }
 
     public void ComboUsuario() {
         user = combo.combox("usuarios", "Login");
         for (Object usuario : user) {
-            jComboBox2.addItem((String) usuario);
+            jCBUsuario.addItem((String) usuario);
         }
     }
 
     public void ListaProveedores() {
-        listprov = combo.list("proveedores", "Nombre_comercial", jTextField3.getText());
-        String substr = jTextField3.getText().toLowerCase();
+        listprov = combo.list("proveedores", "Nombre_comercial", jTextProveedor.getText());
+        String substr = jTextProveedor.getText().toLowerCase();
         listmodel = new DefaultListModel<>();
         jList1.setModel(listmodel);
         listmodel.removeAllElements();
@@ -129,7 +129,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                     if (sublist.contains(substr)) {
                         listmodel.addElement(listprov.get(i));
                         jList1.setVisible(true);
-                        if (jTextField3.getText().isEmpty()) {
+                        if (jTextProveedor.getText().isEmpty()) {
                             jList1.setVisible(false);
                         }
                     }
@@ -139,8 +139,8 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     }
 
     public void ListaInsumos() {
-        listprov = combo.list("insumos", "descripcion", jTextField2.getText());
-        String substr = jTextField2.getText().toLowerCase();
+        listprov = combo.list("insumos", "descripcion", jTextInsumo.getText());
+        String substr = jTextInsumo.getText().toLowerCase();
         listmodel = new DefaultListModel<>();
         jList2.setModel(listmodel);
         listmodel.removeAllElements();
@@ -154,7 +154,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                         //listmodel.addElement(listprov.get(i));
                         listmodel.add(i, listprov.get(i));
                         jList2.setVisible(true);
-                        if (jTextField2.getText().isEmpty()) {
+                        if (jTextInsumo.getText().isEmpty()) {
                             jList2.setVisible(false);
                         }
                     }
@@ -164,9 +164,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     }
 
     public void EliminarItemsVacios() {
-        for (int i = 0; i < jComboBox2.getItemCount(); i++) {
-            if (jComboBox2.getItemAt(i) == null) {
-                jComboBox2.removeItemAt(i);
+        for (int i = 0; i < jCBUsuario.getItemCount(); i++) {
+            if (jCBUsuario.getItemAt(i) == null) {
+                jCBUsuario.removeItemAt(i);
             }
         }
     }
@@ -248,16 +248,16 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     }
 
     public void CrearColumnas() {
-        Object[] columnas = {"INSUMO", "PRECIO", "CANTIDAD"};
+        Object[] columnas = {"INSUMO", "PRECIO", "CANTIDAD", "SUBTOTAL"};
         modelo = new DefaultTableModel();
         modelo.setColumnIdentifiers(columnas);
-        jTable1.setModel(modelo);
+        jTableDetalle.setModel(modelo);
     }
 
     public float CalcularMontoTotal() {
         try {
-            total = total + (Float.parseFloat(jTextField6.getText().trim()) * Float.parseFloat(jTextField4.getText().trim()));
-            vCompras_Insumos.jTextField7.setText(Float.toString(total));
+            total = total + (Float.parseFloat(jTextPrecio.getText().trim()) * Float.parseFloat(JtextCantidad.getText().trim()));
+            vCompras_Insumos.jTextTotal.setText(Float.toString(total));
 
         } catch (NullPointerException e) {
             System.out.println(e);
@@ -266,8 +266,8 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     }
 
     public void LimpiarSeleccion() {
-        jTable1.clearSelection();
-        jTable1.getSelectionModel().clearSelection();
+        jTableDetalle.clearSelection();
+        jTableDetalle.getSelectionModel().clearSelection();
     }
 
     @SuppressWarnings("unchecked")
@@ -301,39 +301,38 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jTextField8 = new javax.swing.JTextField();
         jButton13 = new javax.swing.JButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
-        jTextField3 = new javax.swing.JTextField();
+        jTextProveedor = new javax.swing.JTextField();
         jList1 = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        jButtonSeleccionarProv = new javax.swing.JButton();
         jList2 = new javax.swing.JList<>();
-        jButton4 = new javax.swing.JButton();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable(){
+        jTableDetalle = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        jButton3 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButtonAgregar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonBorrar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jTextInsumo = new javax.swing.JTextField();
+        jButtonSeleccionarInsumo = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jTextPrecio = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        JtextCantidad = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jCBUsuario = new javax.swing.JComboBox<>();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jButtonModificarCompra = new javax.swing.JButton();
+        jButtonAgregarCompra = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        jTextTotal = new javax.swing.JTextField();
         jlabelMensaje = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
 
         vSeleccionarNombreComercialProv.setTitle("Seleccionar Nombre Comercial Proveedor");
         java.awt.Image iconoprov = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
@@ -610,13 +609,13 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
 
         jLayeredPane3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextProveedor.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField3KeyReleased(evt);
+                jTextProveedorKeyReleased(evt);
             }
         });
-        jLayeredPane3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 292, 30));
+        jLayeredPane3.add(jTextProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 292, 30));
 
         jList1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jList1.setValueIsAdjusting(true);
@@ -628,26 +627,14 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         });
         jLayeredPane3.add(jList1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 290, 0));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-        jButton2.setFocusable(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSeleccionarProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
+        jButtonSeleccionarProv.setFocusable(false);
+        jButtonSeleccionarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonSeleccionarProvActionPerformed(evt);
             }
         });
-        jLayeredPane3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 44, 30));
-
-        jTextField2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField2.setToolTipText("");
-        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField2KeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField2KeyTyped(evt);
-            }
-        });
-        jLayeredPane3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 224, 30));
+        jLayeredPane3.add(jButtonSeleccionarProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 44, 30));
 
         jList2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jList2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -660,18 +647,10 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         });
         jLayeredPane3.add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 222, 0));
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jLayeredPane3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 46, 32));
-
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Insumos a Comprar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
-        jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableDetalle.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -682,41 +661,92 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
 
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable1MousePressed(evt);
+                jTableDetalleMousePressed(evt);
             }
         });
-        jScrollPane5.setViewportView(jTable1);
+        jScrollPane5.setViewportView(jTableDetalle);
 
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setText("Agregar ");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add16.png"))); // NOI18N
+        jButtonAgregar.setText("Agregar ");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton6.setText("Modificar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButtonAgregarActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton5.setText("Borrar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/edit16.png"))); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
+            }
+        });
+
+        jButtonBorrar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/delete16.png"))); // NOI18N
+        jButtonBorrar.setText("Borrar");
+        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabel3.setText("(*) Insumo:");
+
+        jTextInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextInsumo.setToolTipText("");
+        jTextInsumo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextInsumoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextInsumoKeyTyped(evt);
+            }
+        });
+
+        jButtonSeleccionarInsumo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
+        jButtonSeleccionarInsumo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSeleccionarInsumoActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabel9.setText("(*) Precio:");
+
+        jTextPrecio.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextPrecioKeyTyped(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabel7.setText("(*) Cantidad:");
+
+        JtextCantidad.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        JtextCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JtextCantidadKeyTyped(evt);
             }
         });
 
         jLayeredPane2.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jButtonAgregar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jButtonModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jButtonBorrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jTextInsumo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jButtonSeleccionarInsumo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jTextPrecio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(JtextCantidad, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -724,44 +754,69 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1066, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(243, 243, 243)
+                        .addComponent(jLabel9)
+                        .addGap(152, 152, 152)
+                        .addComponent(jLabel7))
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(jTextInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jButtonSeleccionarInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(jTextPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(JtextCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1066, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButtonModificar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(5, 5, 5))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSeleccionarInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JtextCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
-                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                                .addGap(120, 120, 120)
-                                .addComponent(jButton5))
-                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(jButton6)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButtonAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(jButtonModificar)
+                        .addGap(31, 31, 31)
+                        .addComponent(jButtonBorrar)
+                        .addGap(63, 63, 63))
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
-        jLayeredPane3.add(jLayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1220, -1));
+        jLayeredPane3.add(jLayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1220, 320));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel5.setText("Usuario:");
         jLayeredPane3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(514, 11, 232, -1));
 
-        jComboBox2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(*) Seleccionar Usuario.." }));
-        jLayeredPane3.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(514, 35, 250, 32));
-        jComboBox2.getAccessibleContext().setAccessibleParent(this);
+        jCBUsuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jCBUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(*) Seleccionar Usuario.." }));
+        jLayeredPane3.add(jCBUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(514, 35, 250, 32));
+        jCBUsuario.getAccessibleContext().setAccessibleParent(this);
 
         jDateChooser1.setDateFormatString("dd/MM/yyyy HH:mm");
         jDateChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -771,105 +826,83 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jLabel6.setText("(*) Fecha:");
         jLayeredPane3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 11, 80, 20));
 
-        jButton7.setBackground(new java.awt.Color(252, 249, 57));
-        jButton7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton7.setText("Modificar Compra");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificarCompra.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificarCompra.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificarCompra.setText("Modificar Compra");
+        jButtonModificarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jButtonModificarCompraActionPerformed(evt);
             }
         });
-        jLayeredPane3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 480, 150, -1));
+        jLayeredPane3.add(jButtonModificarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 460, 150, -1));
 
-        jButton1.setBackground(new java.awt.Color(252, 249, 57));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setText("Registrar Compra");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregarCompra.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregarCompra.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregarCompra.setText("Registrar Compra");
+        jButtonAgregarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAgregarCompraActionPerformed(evt);
             }
         });
-        jLayeredPane3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 480, 136, -1));
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel9.setText("(*) Precio:");
-        jLayeredPane3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 388, -1, 30));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel7.setText("(*) Cantidad:");
-        jLayeredPane3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 388, -1, 30));
-
-        jTextField4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField4KeyTyped(evt);
-            }
-        });
-        jLayeredPane3.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, 130, 30));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel8.setText("Sub Total:");
-        jLayeredPane3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(778, 391, -1, -1));
-
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLayeredPane3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(778, 415, 150, 32));
+        jLayeredPane3.add(jButtonAgregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 460, 136, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel10.setText("TOTAL:");
-        jLayeredPane3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1015, 391, -1, 20));
+        jLayeredPane3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 420, -1, 20));
 
-        jTextField6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField6KeyTyped(evt);
-            }
-        });
-        jLayeredPane3.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 420, 130, 32));
-
-        jTextField7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLayeredPane3.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1015, 417, 140, 32));
+        jTextTotal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLayeredPane3.add(jTextTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 410, 140, 32));
 
         jlabelMensaje.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jlabelMensaje.setForeground(new java.awt.Color(255, 0, 0));
         jlabelMensaje.setText("No hay CAJA ABIERTA.");
-        jLayeredPane3.add(jlabelMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(971, 485, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel3.setText("(*) Insumo:");
-        jLayeredPane3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, 30));
+        jLayeredPane3.add(jlabelMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, 20));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel4.setText("(*) Proveedor:");
         jLayeredPane3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
+
+        btnCancelar.setBackground(new java.awt.Color(240, 87, 49));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        jLayeredPane3.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 460, -1, -1));
 
         getContentPane().add(jLayeredPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1242, 519));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonAgregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarCompraActionPerformed
         String fecha = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-        if (!jButton1.getText().equals("Cancelar") && this.getTitle().equals("Registrar Compra")) {
-            if (!jTextField3.getText().equals("") && !jComboBox2.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextField7.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
+        if (!jButtonAgregarCompra.getText().equals("Cancelar") && this.getTitle().equals("Registrar Compra")) {
+            if (!jTextProveedor.getText().equals("") && !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextTotal.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
                 if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                    if (!jButton6.getText().equals("Cancelar")) {
-                        if (jTable1.getRowCount() != 0) {
-                            c.setIdproveedor(compra.ObtenerIDProveedor(jTextField3.getText()));
-                            c.setIdusuario(compra.ObtenerIDUsuario((String) jComboBox2.getSelectedItem()));
-                            c.setMontototal(Float.parseFloat(jTextField7.getText()));
+                    if (!jButtonModificar.getText().equals("Cancelar")) {
+                        if (jTableDetalle.getRowCount() != 0) {
+                            c.setIdproveedor(compra.ObtenerIDProveedor(jTextProveedor.getText()));
+                            c.setIdusuario(compra.ObtenerIDUsuario((String) jCBUsuario.getSelectedItem()));
+                            c.setMontototal(Float.parseFloat(jTextTotal.getText()));
+                            //Guardar Encabezado de Compra
                             if (compra.EfectuarCompra(c)) {
-                                for (int g = 0; g < jTable1.getRowCount(); g++) {
+                                //Guardar Detalle de Compra
+                                for (int g = 0; g < jTableDetalle.getRowCount(); g++) {
                                     d.setIdcompra(detallecompra.ObtenerIDCompra());
-                                    d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTable1.getValueAt(g, 0).toString()));
-                                    d.setPrecio(Float.parseFloat(jTable1.getValueAt(g, 1).toString()));
-                                    d.setCantidad(Float.parseFloat(jTable1.getValueAt(g, 2).toString()));
+                                    d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(g, 0).toString()));
+                                    d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(g, 1).toString()));
+                                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(g, 2).toString()));
                                     if (detallecompra.RegistrarDetalleCompra(d)) {
 
                                     }
                                 }
-                                for (int d = 0; d < jTable1.getRowCount(); d++) {
-                                    m.setPrecio(Float.parseFloat(jTable1.getValueAt(d, 1).toString()));
-                                    m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTable1.getValueAt(d, 0).toString()));
+                                //actuizar Precio de Insumo en caso de que se haya cambiado
+                                for (int d = 0; d < jTableDetalle.getRowCount(); d++) {
+                                    m.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(d, 1).toString()));
+                                    m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(d, 0).toString()));
                                     if (insumo.ActualizarPrecio(m)) {
 
                                     }
@@ -878,14 +911,16 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                                     if (detallecompra.ActualizarStockInsumos()) {
                                         JOptionPane.showMessageDialog(null, "Compra Registrada");
                                         int idmovimiento = sql.obtenerUltimoId("compras", "idcompra");
-                                        String codigo = sql.generaCodigo("compra");
-                                        sql.ejecutarSql("UPDATE compras SET NroCompra ='" + codigo + "' WHERE idcompra=" + idmovimiento);
-                                        c.setNrocompra(codigo);
+                                        //String codigo = sql.generaCodigo("compra");
+                                        //sql.ejecutarSql("UPDATE compras SET NroCompra ='" + codigo + "' WHERE idcompra=" + idmovimiento);
+                                        //c.setNrocompra(codigo);
+                                        
+                                        //Generamos el Movimmiento de Caja de la Compra
                                         mc.setDescripcion("COMPRA INSUMOS");
                                         mc.setIdcajaturno(Session.getIdcajaturno_abierta());
                                         mc.setIdtipomovimiento(12);
                                         mc.setIdusuario(Session.getIdusuario());
-                                        mc.setNromovimiento(codigo);
+                                        //mc.setNromovimiento(codigo);
                                         mc.setFecha_movimiento(fecha);
                                         mc.setMonto(c.getMontototal());
                                         mc.setIdmovimiento(idmovimiento);
@@ -910,7 +945,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
             }
-        } else if (jButton1.getText().equals("Cancelar") && cant > 0) {
+        } else if (jButtonAgregarCompra.getText().equals("Cancelar") && cant > 0) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 for (int x = 0; x < iddetallescompras.size(); x++) {
@@ -938,7 +973,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (jButton1.getText().equals("Cancelar") && cant == 0) {
+        } else if (jButtonAgregarCompra.getText().equals("Cancelar") && cant == 0) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 lista = new vListas_Compras();
@@ -948,28 +983,28 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (jButton1.getText().equals("Registrar Compra") && this.getTitle().equals("Registrando nueva compra Factura N° " + nrofactura)) {
-            if (!jTextField3.getText().equals("") && !jComboBox2.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextField7.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
+        } else if (jButtonAgregarCompra.getText().equals("Registrar Compra") && this.getTitle().equals("Registrando nueva compra Factura N° " + nrofactura)) {
+            if (!jTextProveedor.getText().equals("") && !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextTotal.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
                 if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                    if (!jButton6.getText().equals("Cancelar")) {
-                        if (jTable1.getRowCount() != 0) {
-                            c.setIdproveedor(compra.ObtenerIDProveedor(jTextField3.getText()));
-                            c.setIdusuario(compra.ObtenerIDUsuario((String) jComboBox2.getSelectedItem()));
-                            c.setMontototal(Float.parseFloat(jTextField7.getText()));
+                    if (!jButtonModificar.getText().equals("Cancelar")) {
+                        if (jTableDetalle.getRowCount() != 0) {
+                            c.setIdproveedor(compra.ObtenerIDProveedor(jTextProveedor.getText()));
+                            c.setIdusuario(compra.ObtenerIDUsuario((String) jCBUsuario.getSelectedItem()));
+                            c.setMontototal(Float.parseFloat(jTextTotal.getText()));
                             c.setIdcompra(Integer.parseInt(idcompra));
                             if (compra.EditarCompra(c)) {
-                                for (int g = 0; g < jTable1.getRowCount(); g++) {
+                                for (int g = 0; g < jTableDetalle.getRowCount(); g++) {
                                     d.setIdcompra(Integer.parseInt(idcompra));
-                                    d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTable1.getValueAt(g, 0).toString()));
-                                    d.setPrecio(Float.parseFloat(jTable1.getValueAt(g, 1).toString()));
-                                    d.setCantidad(Float.parseFloat(jTable1.getValueAt(g, 2).toString()));
+                                    d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(g, 0).toString()));
+                                    d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(g, 1).toString()));
+                                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(g, 2).toString()));
                                     if (detallecompra.RegistrarDetalleCompra(d)) {
 
                                     }
                                 }
-                                for (int d = 0; d < jTable1.getRowCount(); d++) {
-                                    m.setPrecio(Float.parseFloat(jTable1.getValueAt(d, 1).toString()));
-                                    m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTable1.getValueAt(d, 0).toString()));
+                                for (int d = 0; d < jTableDetalle.getRowCount(); d++) {
+                                    m.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(d, 1).toString()));
+                                    m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(d, 0).toString()));
                                     if (insumo.ActualizarPrecio(m)) {
 
                                     }
@@ -1005,41 +1040,44 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarCompraActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         boolean repetido = false;
-        if (!jTextField2.getText().equals("") && !jTextField6.getText().equals("") && !jTextField4.getText().equals("")) {
-            if (jTable1.getRowCount() != 0) {
-                for (int i = 0; i < jTable1.getRowCount(); i++) {
-                    if (jTextField2.getText().equals(jTable1.getValueAt(i, 0).toString()) && jButton6.getText().equals("Modificar")) {
+        if (!jTextInsumo.getText().equals("") && !jTextPrecio.getText().equals("") && !JtextCantidad.getText().equals("")) {
+            if (jTableDetalle.getRowCount() != 0) {
+                for (int i = 0; i < jTableDetalle.getRowCount(); i++) {
+                    if (jTextInsumo.getText().equals(jTableDetalle.getValueAt(i, 0).toString()) && jButtonModificar.getText().equals("Modificar")) {
                         JOptionPane.showMessageDialog(null, "Insumo ya agregado!");
                         repetido = true;
                     }
                 }
             }
             if (repetido == false) {
-                if (jButton6.getText().equals("Modificar")) {
-                    Object Datos[] = {jTextField2.getText(), (Float.parseFloat(jTextField6.getText())), (Float.parseFloat(jTextField4.getText()))};
+                Float precio = Float.parseFloat(jTextPrecio.getText());
+                Float cantidad = Float.parseFloat(JtextCantidad.getText());
+                if (jButtonModificar.getText().equals("Modificar")) {                   
+                    Object Datos[] = {jTextInsumo.getText(), precio, cantidad, precio * cantidad};
                     modelo.addRow(Datos);
-                    jTextField1.setText(String.valueOf(Float.parseFloat(jTextField6.getText()) * Float.parseFloat(jTextField4.getText())));
+                    //jTextField1.setText(String.valueOf(Float.parseFloat(jTextField6.getText()) * Float.parseFloat(jTextField4.getText())));
                     CalcularMontoTotal();
                     Limpiar();
                 } else {
-                    int i = jTable1.getSelectedRow();
+                    int i = jTableDetalle.getSelectedRow();
                     if (i == -1) {
                         JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
                     } else {
-                        modelo.setValueAt(jTextField2.getText(), i, 0);
-                        modelo.setValueAt((Float.parseFloat(jTextField6.getText())), i, 1);
-                        modelo.setValueAt((Float.parseFloat(jTextField4.getText())), i, 2);
-                        jTextField1.setText(String.valueOf(Float.parseFloat(jTextField6.getText()) * Float.parseFloat(jTextField4.getText())));
+                        modelo.setValueAt(jTextInsumo.getText(), i, 0);
+                        modelo.setValueAt((precio), i, 1);
+                        modelo.setValueAt((cantidad), i, 2);
+                        modelo.setValueAt((precio * cantidad), i, 2);
+                        //jTextField1.setText(String.valueOf(Float.parseFloat(jTextField6.getText()) * Float.parseFloat(jTextField4.getText())));
                         CalcularMontoTotal();
                         Limpiar();
-                        jTable1.clearSelection();
-                        jTable1.getSelectionModel().clearSelection();
-                        jButton6.setText("Modificar");
-                        jButton5.setEnabled(true);
+                        jTableDetalle.clearSelection();
+                        jTableDetalle.getSelectionModel().clearSelection();
+                        jButtonModificar.setText("Modificar");
+                        jButtonBorrar.setEnabled(true);
                         LimpiarSeleccion();
                     }
                 }
@@ -1047,44 +1085,44 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar los campos Insumo, Precio y Cantidad");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        int i = jTable1.getSelectedRow();
-        if (jButton6.getText().equals("Modificar")) {
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        int i = jTableDetalle.getSelectedRow();
+        if (jButtonModificar.getText().equals("Modificar")) {
             if (i == -1) {
                 JOptionPane.showMessageDialog(this, "Debes seleccionar una fila");
             } else {
-                jButton6.setText("Cancelar");
-                jButton5.setEnabled(false);
-                jTextField2.setText(jTable1.getValueAt(i, 0).toString());
-                jTextField6.setText(jTable1.getValueAt(i, 1).toString());
-                jTextField4.setText(jTable1.getValueAt(i, 2).toString());
-                total = total - (Float.parseFloat(jTable1.getValueAt(i, 1).toString()) * Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
-                jTextField7.setText(Float.toString(total));
-                jTextField1.setText(Float.toString((float) 0.00));
+                jButtonModificar.setText("Cancelar");
+                jButtonBorrar.setEnabled(false);
+                jTextInsumo.setText(jTableDetalle.getValueAt(i, 0).toString());
+                jTextPrecio.setText(jTableDetalle.getValueAt(i, 1).toString());
+                JtextCantidad.setText(jTableDetalle.getValueAt(i, 2).toString());
+                total = total - (Float.parseFloat(jTableDetalle.getValueAt(i, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
+                jTextTotal.setText(Float.toString(total));
+                //jTextField1.setText(Float.toString((float) 0.00));
             }
         } else {
-            total = total + (Float.parseFloat(jTextField6.getText().trim()) * Float.parseFloat(jTextField4.getText().trim()));
-            jTextField7.setText(Float.toString(total));
-            jButton6.setText("Modificar");
-            jButton5.setEnabled(true);
-            jTable1.clearSelection();
-            jTable1.getSelectionModel().clearSelection();
+            total = total + (Float.parseFloat(jTextPrecio.getText().trim()) * Float.parseFloat(JtextCantidad.getText().trim()));
+            jTextTotal.setText(Float.toString(total));
+            jButtonModificar.setText("Modificar");
+            jButtonBorrar.setEnabled(true);
+            jTableDetalle.clearSelection();
+            jTableDetalle.getSelectionModel().clearSelection();
             Limpiar();
             LimpiarSeleccion();
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int fila = jTable1.getSelectedRow();
-        if (jButton5.getText().equals("Quitar")) {
+    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
+        int fila = jTableDetalle.getSelectedRow();
+        if (jButtonBorrar.getText().equals("Quitar")) {
             if (fila == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
-                total = total - (Float.parseFloat(jTable1.getValueAt(fila, 1).toString()) * Float.parseFloat(jTable1.getValueAt(fila, 2).toString()));
-                jTextField7.setText(Float.toString(total));
-                jTextField1.setText(Float.toString((float) 0.00));
+                total = total - (Float.parseFloat(jTableDetalle.getValueAt(fila, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(fila, 2).toString()));
+                jTextTotal.setText(Float.toString(total));
+                //jTextField1.setText(Float.toString((float) 0.00));
                 modelo.removeRow(fila);
             }
         } else {
@@ -1093,10 +1131,10 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             } else {
                 int j = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar un detalle compra?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (j == 0) {
-                    total = total - (Float.parseFloat(jTable1.getValueAt(fila, 1).toString()) * Float.parseFloat(jTable1.getValueAt(fila, 2).toString()));
-                    jTextField7.setText(Float.toString(total));
-                    jTextField1.setText(Float.toString((float) 0.00));
-                    jButton5.setText("Quitar");
+                    total = total - (Float.parseFloat(jTableDetalle.getValueAt(fila, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(fila, 2).toString()));
+                    jTextTotal.setText(Float.toString(total));
+                    //jTextField1.setText(Float.toString((float) 0.00));
+                    jButtonBorrar.setText("Quitar");
                     if (sql.SafeUpdates()) {
                         iddetallescompras.add(Integer.parseInt(iddetalles.get(fila)));
                         idinsumos.add(detallecompra.ObtenerIDInsumo2(Integer.parseInt(iddetalles.get(fila))));
@@ -1106,7 +1144,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                             d.setIddetallecompra(Integer.parseInt(iddetalles.get(fila)));
                             if (detallecompra.EliminarDetalleCompra(d)) {
                                 cant++;
-                                if (filasdetalle - 1 == 0 && jTable1.getRowCount() == 1) {
+                                if (filasdetalle - 1 == 0 && jTableDetalle.getRowCount() == 1) {
                                     iddetalles.remove(fila);
                                     modelo.removeRow(fila);
                                     filasdetalle = filasdetalle - 1;
@@ -1132,20 +1170,20 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                                             }
                                         }*/
                                         this.setTitle("Registrando nueva compra Factura N° " + nrofactura);
-                                        jTextField3.setText("");
-                                        jComboBox2.setSelectedIndex(0);
+                                        jTextProveedor.setText("");
+                                        jCBUsuario.setSelectedIndex(0);
                                         ((JTextField) vCompras_Insumos.jDateChooser1.getDateEditor().getUiComponent()).setText("");
-                                        jTextField2.setText("");
-                                        jTextField4.setText("");
-                                        jTextField6.setText("");
-                                        jTextField1.setText(Float.toString((float) 0.00));
-                                        jTextField7.setText(Float.toString((float) 0.00));
-                                        jButton7.setEnabled(true);
-                                        jButton7.setText("Cancelar");
-                                        jButton1.setText("Registrar Compra");
-                                        jButton3.setText("Agregar");
-                                        jButton6.setText("Modificar");
-                                        jButton5.setText("Quitar");
+                                        jTextInsumo.setText("");
+                                        JtextCantidad.setText("");
+                                        jTextPrecio.setText("");
+                                        //jTextField1.setText(Float.toString((float) 0.00));
+                                        jTextTotal.setText(Float.toString((float) 0.00));
+                                        jButtonModificarCompra.setEnabled(true);
+                                        jButtonModificarCompra.setText("Cancelar");
+                                        jButtonAgregarCompra.setText("Registrar Compra");
+                                        jButtonAgregar.setText("Agregar");
+                                        jButtonModificar.setText("Modificar");
+                                        jButtonBorrar.setText("Quitar");
                                     } else {
                                         mc.setIdmovimiento(Integer.parseInt(idcompra));
                                         mc.setIdtipomovimiento(12);
@@ -1171,27 +1209,27 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButtonBorrarActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButtonModificarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarCompraActionPerformed
         String fecha = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-        filascompra = jTable1.getRowCount();
-        if (!jButton7.getText().equals("Cancelar") && !this.getTitle().equals("Registrando nueva compra Factura N° " + nrofactura)) {
-            if (!jTextField3.getText().equals("") && !jComboBox2.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextField7.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
+        filascompra = jTableDetalle.getRowCount();
+        if (!jButtonModificarCompra.getText().equals("Cancelar") && !this.getTitle().equals("Registrando nueva compra Factura N° " + nrofactura)) {
+            if (!jTextProveedor.getText().equals("") && !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextTotal.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
                 if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                    if (!jButton6.getText().equals("Cancelar")) {
-                        if (jTable1.getRowCount() != 0) {
+                    if (!jButtonModificar.getText().equals("Cancelar")) {
+                        if (jTableDetalle.getRowCount() != 0) {
                             int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                             if (i == 0) {
                                 if (filascompra > filasdetalle) {
                                     for (int l = filasdetalle; l < filascompra; l++) {
                                         d.setIdcompra(Integer.parseInt(idcompra));
-                                        d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTable1.getValueAt(l, 0).toString()));
-                                        d.setPrecio(Float.parseFloat(jTable1.getValueAt(l, 1).toString()));
-                                        d.setCantidad(Float.parseFloat(jTable1.getValueAt(l, 2).toString()));
+                                        d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(l, 0).toString()));
+                                        d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(l, 1).toString()));
+                                        d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(l, 2).toString()));
                                         if (detallecompra.RegistrarDetalleCompra(d)) {
-                                            m.setPrecio(Float.parseFloat(jTable1.getValueAt(l, 1).toString()));
-                                            m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTable1.getValueAt(l, 0).toString()));
+                                            m.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(l, 1).toString()));
+                                            m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(l, 0).toString()));
                                             if (insumo.ActualizarPrecio(m)) {
 
                                             }
@@ -1203,9 +1241,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                                             d.setIdinsumo(detallecompra.ObtenerIDInsumo2(Integer.parseInt(iddetalle)));
                                             d.setIddetallecompra(Integer.parseInt(iddetalle));
                                             if (detallecompra.SumarCantidadRestadoInsumos(d)) {
-                                                c.setIdproveedor(compra.ObtenerIDProveedor(jTextField3.getText()));
-                                                c.setIdusuario(compra.ObtenerIDUsuario((String) jComboBox2.getSelectedItem()));
-                                                c.setMontototal(Float.parseFloat(jTextField7.getText()));
+                                                c.setIdproveedor(compra.ObtenerIDProveedor(jTextProveedor.getText()));
+                                                c.setIdusuario(compra.ObtenerIDUsuario((String) jCBUsuario.getSelectedItem()));
+                                                c.setMontototal(Float.parseFloat(jTextTotal.getText()));
                                                 c.setIdcompra(Integer.parseInt(idcompra));
                                                 if (compra.EditarCompra(c)) {
 
@@ -1217,14 +1255,14 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                                         for (int k = 0; k < iddetalles.size(); k++) {
                                             iddetalle = iddetalles.get(k);
                                             d.setIdcompra(Integer.parseInt(idcompra));
-                                            d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTable1.getValueAt(p, 0).toString()));
-                                            d.setPrecio(Float.parseFloat(jTable1.getValueAt(p, 1).toString()));
-                                            d.setCantidad(Float.parseFloat(jTable1.getValueAt(p, 2).toString()));
+                                            d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(p, 0).toString()));
+                                            d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(p, 1).toString()));
+                                            d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(p, 2).toString()));
                                             d.setIddetallecompra(Integer.parseInt(iddetalle));
                                             if (detallecompra.EditarDetalleCompraLotes(d)) {
                                                 if (k + 1 < iddetalles.size()) {
-                                                    m.setPrecio(Float.parseFloat(jTable1.getValueAt(p, 1).toString()));
-                                                    m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTable1.getValueAt(p, 0).toString()));
+                                                    m.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(p, 1).toString()));
+                                                    m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(p, 0).toString()));
                                                     if (insumo.ActualizarPrecio(m)) {
                                                         p = p + 1;
                                                     }
@@ -1254,9 +1292,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                                             d.setIdinsumo(detallecompra.ObtenerIDInsumo2(Integer.parseInt(iddetalle)));
                                             d.setIddetallecompra(Integer.parseInt(iddetalle));
                                             if (detallecompra.SumarCantidadRestadoInsumos(d)) {
-                                                c.setIdproveedor(compra.ObtenerIDProveedor(jTextField3.getText()));
-                                                c.setIdusuario(compra.ObtenerIDUsuario((String) jComboBox2.getSelectedItem()));
-                                                c.setMontototal(Float.parseFloat(jTextField7.getText()));
+                                                c.setIdproveedor(compra.ObtenerIDProveedor(jTextProveedor.getText()));
+                                                c.setIdusuario(compra.ObtenerIDUsuario((String) jCBUsuario.getSelectedItem()));
+                                                c.setMontototal(Float.parseFloat(jTextTotal.getText()));
                                                 c.setIdcompra(Integer.parseInt(idcompra));
                                                 if (compra.EditarCompra(c)) {
 
@@ -1264,18 +1302,18 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                                             }
                                         }
                                     }
-                                    for (int tabla = 0; tabla < jTable1.getRowCount(); tabla++) {
+                                    for (int tabla = 0; tabla < jTableDetalle.getRowCount(); tabla++) {
                                         for (int k = 0; k < iddetalles.size(); k++) {
                                             iddetalle = iddetalles.get(k);
                                             d.setIdcompra(Integer.parseInt(idcompra));
-                                            d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTable1.getValueAt(tabla, 0).toString()));
-                                            d.setPrecio(Float.parseFloat(jTable1.getValueAt(tabla, 1).toString()));
-                                            d.setCantidad(Float.parseFloat(jTable1.getValueAt(tabla, 2).toString()));
+                                            d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(tabla, 0).toString()));
+                                            d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(tabla, 1).toString()));
+                                            d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(tabla, 2).toString()));
                                             d.setIddetallecompra(Integer.parseInt(iddetalle));
                                             if (detallecompra.EditarDetalleCompraLotes(d)) {
                                                 if (k + 1 < iddetalles.size()) {
-                                                    m.setPrecio(Float.parseFloat(jTable1.getValueAt(k, 1).toString()));
-                                                    m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTable1.getValueAt(k, 0).toString()));
+                                                    m.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(k, 1).toString()));
+                                                    m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(k, 0).toString()));
                                                     if (insumo.ActualizarPrecio(m)) {
                                                         tabla = tabla + 1;
                                                     }
@@ -1328,10 +1366,10 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jButtonModificarCompraActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jButton1.getText().equals("Cancelar") && cant > 0) {
+        if (jButtonAgregarCompra.getText().equals("Cancelar") && cant > 0) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 for (int x = 0; x < iddetallescompras.size(); x++) {
@@ -1359,7 +1397,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (jButton1.getText().equals("Cancelar") && cant == 0) {
+        } else if (jButtonAgregarCompra.getText().equals("Cancelar") && cant == 0) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 lista = new vListas_Compras();
@@ -1369,7 +1407,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (jButton1.getText().equals("Registrar Compra") && this.getTitle().equals("Registrando nueva compra Factura N° " + nrofactura)) {
+        } else if (jButtonAgregarCompra.getText().equals("Registrar Compra") && this.getTitle().equals("Registrando nueva compra Factura N° " + nrofactura)) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar nueva compra para Factura N° " + nrofactura + "?. De optar por si, la misma se eliminara", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 mc.setIdmovimiento(Integer.parseInt(idcompra));
@@ -1386,7 +1424,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (!jTextField3.getText().equals("") || !jComboBox2.getSelectedItem().equals("(*) Seleccionar Usuario..") || !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("") || jTable1.getRowCount() > 0 || !jTextField2.getText().equals("") || !jTextField6.getText().equals("") || !jTextField4.getText().equals("")) {
+        } else if (!jTextProveedor.getText().equals("") || !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") || !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("") || jTableDetalle.getRowCount() > 0 || !jTextInsumo.getText().equals("") || !jTextPrecio.getText().equals("") || !JtextCantidad.getText().equals("")) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Compra?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -1396,7 +1434,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_formInternalFrameClosing
 
-    private void jTextField4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyTyped
+    private void JtextCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JtextCantidadKeyTyped
         char[] p = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', KeyEvent.VK_BACK_SPACE};
         int b = 0;
         for (int i = 0; i <= 11; i++) {
@@ -1408,9 +1446,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_jTextField4KeyTyped
+    }//GEN-LAST:event_JtextCantidadKeyTyped
 
-    private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
+    private void jTextPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPrecioKeyTyped
         char[] p = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', KeyEvent.VK_BACK_SPACE};
         int b = 0;
         for (int i = 0; i <= 11; i++) {
@@ -1422,7 +1460,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_jTextField6KeyTyped
+    }//GEN-LAST:event_jTextPrecioKeyTyped
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         if (jTable2.getRowCount() != 0) {
@@ -1431,7 +1469,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
                 vSeleccionarNombreComercialProv.dispose();
-                jTextField3.setText(jTable2.getValueAt(m, 0).toString());
+                jTextProveedor.setText(jTable2.getValueAt(m, 0).toString());
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se han agregado dichos proveedores todavia");
@@ -1442,22 +1480,22 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         int p = JOptionPane.showConfirmDialog(null, "Esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (p == 0) {
             vSeleccionarNombreComercialProv.dispose();
-            jTextField3.setText("");
+            jTextProveedor.setText("");
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonSeleccionarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarProvActionPerformed
         vSeleccionarNombreComercialProv.setSize(345, 625);
         vSeleccionarNombreComercialProv.setLocationRelativeTo(this);
         vSeleccionarNombreComercialProv.setModal(true);
         vSeleccionarNombreComercialProv.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonSeleccionarProvActionPerformed
 
     private void vSeleccionarNombreComercialProvWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vSeleccionarNombreComercialProvWindowClosing
         int p = JOptionPane.showConfirmDialog(null, "Esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (p == 0) {
             vSeleccionarNombreComercialProv.dispose();
-            jTextField3.setText("");
+            jTextProveedor.setText("");
         } else {
             vSeleccionarNombreComercialProv.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
@@ -1470,9 +1508,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
                 vSeleccionarInsumo.dispose();
-                jTextField2.setText(jTable3.getValueAt(i, 0).toString());
-                jTextField6.setText(jTable3.getValueAt(i, 1).toString());
-                jTextField4.setText(jTable3.getValueAt(i, 2).toString());
+                jTextInsumo.setText(jTable3.getValueAt(i, 0).toString());
+                jTextPrecio.setText(jTable3.getValueAt(i, 1).toString());
+                JtextCantidad.setText(jTable3.getValueAt(i, 2).toString());
             }
         }
     }//GEN-LAST:event_jButton10ActionPerformed
@@ -1481,9 +1519,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         int j = JOptionPane.showConfirmDialog(null, "Esta Seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (j == 0) {
             vSeleccionarInsumo.dispose();
-            jTextField2.setText("");
-            jTextField6.setText("");
-            jTextField4.setText("");
+            jTextInsumo.setText("");
+            jTextPrecio.setText("");
+            JtextCantidad.setText("");
         } else {
             vSeleccionarInsumo.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
@@ -1493,26 +1531,26 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         int j = JOptionPane.showConfirmDialog(null, "Esta Seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (j == 0) {
             vSeleccionarInsumo.dispose();
-            jTextField2.setText("");
-            jTextField6.setText("");
-            jTextField4.setText("");
+            jTextInsumo.setText("");
+            jTextPrecio.setText("");
+            JtextCantidad.setText("");
         } else {
             vSeleccionarInsumo.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
     }//GEN-LAST:event_vSeleccionarInsumoWindowClosing
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonSeleccionarInsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarInsumoActionPerformed
         vSeleccionarInsumo.setSize(360, 608);
         vSeleccionarInsumo.setLocationRelativeTo(this);
         vSeleccionarInsumo.setModal(true);
         vSeleccionarInsumo.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonSeleccionarInsumoActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        if (jButton6.getText().equals("Modificar") && jTable1.getRowCount() != 0) {
-            jTable1.clearSelection();
-            jTable1.getSelectionModel().clearSelection();
-            jButton5.setText("Quitar");
+        if (jButtonModificar.getText().equals("Modificar") && jTableDetalle.getRowCount() != 0) {
+            jTableDetalle.clearSelection();
+            jTableDetalle.getSelectionModel().clearSelection();
+            jButtonBorrar.setText("Quitar");
         }
     }//GEN-LAST:event_formMouseClicked
 
@@ -1566,30 +1604,30 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         int i = jList1.getSelectedIndex();
         if (i != -1) {
-            jTextField3.setText(jList1.getSelectedValue());
+            jTextProveedor.setText(jList1.getSelectedValue());
             jList1.setVisible(false);
         }
     }//GEN-LAST:event_jList1MouseClicked
 
-    private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
+    private void jTextProveedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextProveedorKeyReleased
         ListaProveedores();
-    }//GEN-LAST:event_jTextField3KeyReleased
+    }//GEN-LAST:event_jTextProveedorKeyReleased
 
-    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+    private void jTextInsumoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextInsumoKeyReleased
         ListaInsumos();
-    }//GEN-LAST:event_jTextField2KeyReleased
+    }//GEN-LAST:event_jTextInsumoKeyReleased
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
         int i = jList2.getSelectedIndex();
         ArrayList<String> array;
         if (i != -1) {
-            jTextField2.setText(jList2.getSelectedValue());
-            array = compra.ObtenerDatosNumInsumos(jTextField2.getText());
+            jTextInsumo.setText(jList2.getSelectedValue());
+            array = compra.ObtenerDatosNumInsumos(jTextInsumo.getText());
             if (array.size() > 0) {
                 for (int j = 0; j < array.size(); j++) {
-                    jTextField6.setText(array.get(j));
+                    jTextPrecio.setText(array.get(j));
                     j++;
-                    jTextField4.setText(array.get(j));
+                    JtextCantidad.setText(array.get(j));
                     j++;
                     jList2.setVisible(false);
                 }
@@ -1597,30 +1635,30 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jList2MouseClicked
 
-    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        jTextField1.setText(String.valueOf(Float.parseFloat(modelo.getValueAt(vCompras_Insumos.jTable1.getSelectedRow(), 1).toString()) * Float.parseFloat(modelo.getValueAt(vCompras_Insumos.jTable1.getSelectedRow(), 2).toString())));
-        if (jButton4.isEnabled()) {
-            int i = jTable1.getSelectedRow(), j = filasdetalle;
+    private void jTableDetalleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDetalleMousePressed
+        //jTextField1.setText(String.valueOf(Float.parseFloat(modelo.getValueAt(vCompras_Insumos.jTable1.getSelectedRow(), 1).toString()) * Float.parseFloat(modelo.getValueAt(vCompras_Insumos.jTable1.getSelectedRow(), 2).toString())));
+        if (jButtonSeleccionarInsumo.isEnabled()) {
+            int i = jTableDetalle.getSelectedRow(), j = filasdetalle;
             for (int l = 0; l < j; l++) {
                 if (i == l) {
-                    jButton5.setText("Eliminar");
+                    jButtonBorrar.setText("Eliminar");
                     break;
                 }
             }
             if (i >= j) {
-                jButton5.setText("Quitar");
+                jButtonBorrar.setText("Quitar");
             }
         }
-    }//GEN-LAST:event_jTable1MousePressed
+    }//GEN-LAST:event_jTableDetalleMousePressed
 
-    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+    private void jTextInsumoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextInsumoKeyTyped
         char c = evt.getKeyChar();
         if (Character.isLowerCase(c)) {
             String cadena = ("" + c).toUpperCase();
             c = cadena.charAt(0);
             evt.setKeyChar(c);
         }
-    }//GEN-LAST:event_jTextField2KeyTyped
+    }//GEN-LAST:event_jTextInsumoKeyTyped
 
     private void jTextField8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyTyped
         char c = evt.getKeyChar();
@@ -1631,21 +1669,36 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextField8KeyTyped
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:       
+        int i = JOptionPane.showConfirmDialog(null, "Cancelar Operación?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            vListas_Compras lista_compras = new vListas_Compras();
+            vMenuPrincipal.jDesktopPane1.add(lista_compras);
+            lista_compras.setVisible(true);
+            dispose();
+        } else {
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        }        
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton jButton1;
+    public static javax.swing.JTextField JtextCantidad;
+    public static javax.swing.JButton btnCancelar;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton2;
-    public static javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    public static javax.swing.JButton jButton5;
-    public static javax.swing.JButton jButton6;
-    public static javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    public static javax.swing.JComboBox<String> jComboBox2;
+    public static javax.swing.JButton jButtonAgregar;
+    public static javax.swing.JButton jButtonAgregarCompra;
+    public static javax.swing.JButton jButtonBorrar;
+    public static javax.swing.JButton jButtonModificar;
+    public static javax.swing.JButton jButtonModificarCompra;
+    private javax.swing.JButton jButtonSeleccionarInsumo;
+    private javax.swing.JButton jButtonSeleccionarProv;
+    public static javax.swing.JComboBox<String> jCBUsuario;
     public static com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1655,7 +1708,6 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
@@ -1666,17 +1718,15 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
-    public static javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    public static javax.swing.JTextField jTextField1;
-    public static javax.swing.JTextField jTextField2;
-    public static javax.swing.JTextField jTextField3;
-    public static javax.swing.JTextField jTextField4;
+    public static javax.swing.JTable jTableDetalle;
     private javax.swing.JTextField jTextField5;
-    public static javax.swing.JTextField jTextField6;
-    public static javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    public static javax.swing.JTextField jTextInsumo;
+    public static javax.swing.JTextField jTextPrecio;
+    public static javax.swing.JTextField jTextProveedor;
+    public static javax.swing.JTextField jTextTotal;
     private javax.swing.JLabel jlabelMensaje;
     private javax.swing.JDialog vSeleccionarInsumo;
     private javax.swing.JDialog vSeleccionarNombreComercialProv;

@@ -40,8 +40,9 @@ public class control_Compras {
 
     public boolean EfectuarCompra(Compras compra) {
         String monto = (Float.toString(compra.getMontototal())), fecha = ((JTextField) vCompras_Insumos.jDateChooser1.getDateEditor().getUiComponent()).getText(), idprov = Integer.toString(compra.getIdproveedor()), iduser = Integer.toString(compra.getIdusuario());
-        String datos[] = {idprov, iduser, monto};
-        return sql.insertar(datos, "insert into compras (idproveedor,idusuario,FechaCompra,MontoTotal,activo) values (?,?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'),?,1)");
+        String codigo = sql.generaCodigo("compra");
+        String datos[] = {idprov, iduser, monto, codigo};
+        return sql.insertar(datos, "insert into compras (idproveedor,idusuario,FechaCompra,MontoTotal,NroCompra,activo) values (?,?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'),?,?,1)");
     }
 
     public boolean EditarCompra(Compras compra) {

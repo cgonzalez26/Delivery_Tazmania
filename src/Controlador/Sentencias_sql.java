@@ -103,10 +103,10 @@ public class Sentencias_sql {
         boolean estado = false;
         control_DetallesCompras dc = new control_DetallesCompras();
         try {
-            for (int i = 0; i < vCompras_Insumos.jTable1.getRowCount(); i++) {
+            for (int i = 0; i < vCompras_Insumos.jTableDetalle.getRowCount(); i++) {
                 ps = con.conectado().prepareStatement(sql);
-                ps.setFloat(1, Float.parseFloat(vCompras_Insumos.jTable1.getValueAt(i, 2).toString()));
-                ps.setInt(2, dc.ObtenerIDInsumo(vCompras_Insumos.jTable1.getValueAt(i, 0).toString()));
+                ps.setFloat(1, Float.parseFloat(vCompras_Insumos.jTableDetalle.getValueAt(i, 2).toString()));
+                ps.setInt(2, dc.ObtenerIDInsumo(vCompras_Insumos.jTableDetalle.getValueAt(i, 0).toString()));
                 ps.addBatch();
                 ps.executeBatch();
             }

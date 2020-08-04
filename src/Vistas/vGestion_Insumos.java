@@ -485,6 +485,7 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 I.setIdtipoinsumo(insumo.ObtenerIDTipoInsumo((String) jCBTipo_Insumos.getSelectedItem()));
                 I.setIdproveedor(insumo.ObtenerIDProveedor(jTextField1.getText()));
                 I.setDescripcion(jTextDesc_Insumos.getText());
+                I.setIdunidadmedida(insumo.ObtenerIDUnidadMedida((String) jCBUnidad_Medida.getSelectedItem()));
                 if (jTextPrecio_Insumos.getText().trim().length() == 0) {
                     I.setPrecio((float) 0.00);
                 } else {
@@ -639,6 +640,10 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
         // TODO add your handling code here:
+        //this.dispose();
+        lista = new vLista_Insumos();
+        vMenuPrincipal.jDesktopPane1.add(lista);
+        lista.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBotonCancelarActionPerformed
 

@@ -20,20 +20,20 @@ public class control_Insumos {
     }
 
     public Object[][] MostrarDatos() {
-        String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "t.descripcion", "Nombre_comercial", "i.descripcion", "precio", "stock"};
-        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,t.descripcion,p.Nombre_comercial,i.descripcion,i.precio,i.stock from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor where i.activo=1");
+        String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "i.descripcion", "tipoinsumo", "Nombre_comercial", "unidadmedida", "precio", "stock"};
+        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,i.descripcion,IFNULL(t.descripcion, '-') as tipoinsumo,p.Nombre_comercial,IFNULL(um.descripcion, '-') as unidadmedida,i.precio,i.stock from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor LEFT JOIN unidadesmedidas as um on um.idunidadmedida = i.idunidadmedida where i.activo=1");
         return datos;
     }
     
     public Object[][] OrdenarInsumos(String tipo) {
-        String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "t.descripcion", "Nombre_comercial", "i.descripcion", "precio", "stock"};
-        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,t.descripcion,p.Nombre_comercial,i.descripcion,i.precio,i.stock from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor where i.activo=1 order by t.descripcion='" + tipo + "' desc");
+        String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "i.descripcion", "tipoinsumo", "Nombre_comercial", "unidadmedida", "precio", "stock"};
+        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,i.descripcion,IFNULL(t.descripcion, '-') as tipoinsumo,p.Nombre_comercial,IFNULL(um.descripcion, '-') as unidadmedida,i.precio,i.stock  from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor where i.activo=1 order by t.descripcion='" + tipo + "' desc");
         return datos;
     }
     
     public Object[][] MostrarDatosBusquedaInsumos(String texto) {
-        String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "t.descripcion", "Nombre_comercial", "i.descripcion", "precio", "stock", "fecharegistro"};
-        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,t.descripcion,p.Nombre_comercial,i.descripcion,i.precio,i.stock,date_format(i.fecharegistro,'%d/%m/%Y %H:%i') as fecharegistro from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor where i.activo=1 and i.descripcion like '%"+texto+"%'");
+        String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "i.descripcion", "tipoinsumo", "Nombre_comercial", "unidadmedida","precio", "stock"};
+        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,i.descripcion,IFNULL(t.descripcion, '-') as tipoinsumo,p.Nombre_comercial,IFNULL(um.descripcion, '-') as unidadmedida,i.precio,i.stock from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor LEFT JOIN unidadesmedidas as um on um.idunidadmedida = i.idunidadmedida where i.activo=1 and i.descripcion like '%"+texto+"%'");
         return datos;
     }
     
@@ -59,14 +59,14 @@ public class control_Insumos {
         String idtipoinsumo = Integer.toString(insumos.getIdtipoinsumo()), idprov = Integer.toString(insumos.getIdproveedor()), fecha = "NOW()", idunidadmedida = Integer.toString(insumos.getIdunidadmedida());
         String precio = (Float.toString(insumos.getPrecio())), stock = (Float.toString(insumos.getStock()));
         String datos[] = {idtipoinsumo, idprov, idunidadmedida, insumos.getDescripcion(), precio, stock};
-        return sql.insertar(datos, "insert into insumos (idtipoinsumo,idproveedor,idunidadmedida,descripcion,precio,stock,fecharegistro,activo) values (?,?,?,?,?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),1)");
+        return sql.insertar(datos, "insert into insumos (idtipoinsumo,idproveedor,idunidadmedida,descripcion,precio,stock,fecharegistro,activo) values (?,?,?,?,?,?," + fecha + ",1)");
     }
 
     public boolean EditarInsumos(Insumos insumos) {
         String idtipoinsumo = Integer.toString(insumos.getIdtipoinsumo()), idprov = Integer.toString(insumos.getIdproveedor()), fecha = "NOW()", idunidadmedida = Integer.toString(insumos.getIdunidadmedida());
         String precio = (Float.toString(insumos.getPrecio())), stock = (Float.toString(insumos.getStock())), id = (Integer.toString(insumos.getIdinsumo()));
         String datos[] = {idtipoinsumo, idprov, idunidadmedida, insumos.getDescripcion(), precio, stock, id};
-        return sql.editar(datos, "update insumos set idtipoinsumo=?,idproveedor=?, idunidadmedida=? ,descripcion=?,precio=?,stock=?,fecharegistro=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s') where idinsumo=?");
+        return sql.editar(datos, "update insumos set idtipoinsumo=?,idproveedor=?, idunidadmedida=? ,descripcion=?,precio=?,stock=?,fecharegistro=" + fecha + " where idinsumo=?");
     }
 
     public boolean EliminarInsumos(Insumos insumos) {

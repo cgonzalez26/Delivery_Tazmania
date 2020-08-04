@@ -74,14 +74,14 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                                     compra.setVisible(true);
                                     compra.toFront();
                                 }
-                                vCompras_Insumos.jButton7.setEnabled(true);
-                                vCompras_Insumos.jButton1.setText("Cancelar");
-                                vCompras_Insumos.jButton1.setEnabled(true);
+                                vCompras_Insumos.jButtonModificarCompra.setEnabled(true);
+                                vCompras_Insumos.jButtonAgregarCompra.setText("Cancelar");
+                                vCompras_Insumos.jButtonAgregarCompra.setEnabled(true);
                                 idcompra = jTable1.getValueAt(seleccionado, 0).toString();
-                                vCompras_Insumos.jTextField3.setText(jTable1.getValueAt(seleccionado, 3).toString());
-                                vCompras_Insumos.jComboBox2.setSelectedItem(jTable1.getValueAt(seleccionado, 5).toString());
+                                vCompras_Insumos.jTextProveedor.setText(jTable1.getValueAt(seleccionado, 3).toString());
+                                vCompras_Insumos.jCBUsuario.setSelectedItem(jTable1.getValueAt(seleccionado, 5).toString());
                                 vCompras_Insumos.jDateChooser1.setDate(fechaseleccionada);
-                                vCompras_Insumos.jTextField7.setText(jTable1.getValueAt(seleccionado, 6).toString());
+                                vCompras_Insumos.jTextTotal.setText(jTable1.getValueAt(seleccionado, 6).toString());
                                 compra.setTitle("Modificar Compra");
                                 compra.total = (Float.parseFloat(jTable1.getValueAt(seleccionado, 6).toString()));
                                 compra.nrofactura = nrofactura;
@@ -711,16 +711,16 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                         compra.setVisible(true);
                         compra.toFront();
                     }
-                    vCompras_Insumos.jButton1.setText("Cancelar");
-                    vCompras_Insumos.jButton1.setEnabled(true);
-                    vCompras_Insumos.jTextField1.setEditable(false);
-                    vCompras_Insumos.jTextField7.setEditable(false);
-                    vCompras_Insumos.jButton7.setEnabled(true);
+                    vCompras_Insumos.jButtonAgregarCompra.setText("Cancelar");
+                    vCompras_Insumos.jButtonAgregarCompra.setEnabled(true);
+                    //vCompras_Insumos.jTextField1.setEditable(false);
+                    vCompras_Insumos.jTextTotal.setEditable(false);
+                    vCompras_Insumos.jButtonModificarCompra.setEnabled(true);
                     idcompra = jTable1.getValueAt(seleccionado, 0).toString();
-                    vCompras_Insumos.jTextField3.setText(jTable1.getValueAt(seleccionado, 3).toString());
-                    vCompras_Insumos.jComboBox2.setSelectedItem(jTable1.getValueAt(seleccionado, 5).toString());
+                    vCompras_Insumos.jTextProveedor.setText(jTable1.getValueAt(seleccionado, 3).toString());
+                    vCompras_Insumos.jCBUsuario.setSelectedItem(jTable1.getValueAt(seleccionado, 5).toString());
                     vCompras_Insumos.jDateChooser1.setDate(fechaseleccionada);
-                    vCompras_Insumos.jTextField7.setText(jTable1.getValueAt(seleccionado, 6).toString());
+                    vCompras_Insumos.jTextTotal.setText(jTable1.getValueAt(seleccionado, 6).toString());
                     compra.setTitle("Modificar Compra");
                     compra.total = (Float.parseFloat(jTable1.getValueAt(seleccionado, 6).toString()));
                     compra.nrofactura = nrofactura;

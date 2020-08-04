@@ -89,14 +89,14 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                                     venta.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                                     venta.toFront();
                                 }
-                                vVentas_Productos.jButton1.setText("Cancelar");
-                                vVentas_Productos.jButton1.setEnabled(true);
-                                vVentas_Productos.jButton3.setEnabled(true);
+                                vVentas_Productos.btnGuardarVenta.setText("Cancelar");
+                                vVentas_Productos.btnGuardarVenta.setEnabled(true);
+                                vVentas_Productos.btnModificarVenta.setEnabled(true);
                                 idventa = jTable1.getValueAt(seleccionado, 0).toString();
-                                vVentas_Productos.jComboBox1.setSelectedItem(jTable1.getValueAt(seleccionado, 2).toString());
-                                vVentas_Productos.jTextField2.setText(jTable1.getValueAt(seleccionado, 4).toString());
+                                vVentas_Productos.cbxUsuario.setSelectedItem(jTable1.getValueAt(seleccionado, 2).toString());
+                                vVentas_Productos.txtTotal.setText(jTable1.getValueAt(seleccionado, 4).toString());
                                 if (jTable1.getValueAt(seleccionado, 6).equals("Local")) {
-                                    vVentas_Productos.jRadioButton1.setSelected(true);
+                                    vVentas_Productos.rbTipoVenta.setSelected(true);
                                 } else {
                                     vVentas_Productos.jRadioButton2.setSelected(true);
                                 }
@@ -1178,14 +1178,14 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                         venta.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                         venta.toFront();
                     }
-                    vVentas_Productos.jButton1.setText("Cancelar");
-                    vVentas_Productos.jButton1.setEnabled(true);
-                    vVentas_Productos.jButton3.setEnabled(true);
+                    vVentas_Productos.btnGuardarVenta.setText("Cancelar");
+                    vVentas_Productos.btnGuardarVenta.setEnabled(true);
+                    vVentas_Productos.btnModificarVenta.setEnabled(true);
                     idventa = jTable1.getValueAt(seleccionado, 0).toString();
-                    vVentas_Productos.jComboBox1.setSelectedItem(jTable1.getValueAt(seleccionado, 2).toString());
-                    vVentas_Productos.jTextField2.setText(jTable1.getValueAt(seleccionado, 4).toString());
+                    vVentas_Productos.cbxUsuario.setSelectedItem(jTable1.getValueAt(seleccionado, 2).toString());
+                    vVentas_Productos.txtTotal.setText(jTable1.getValueAt(seleccionado, 4).toString());
                     if (jTable1.getValueAt(seleccionado, 6).equals("Local")) {
-                        vVentas_Productos.jRadioButton1.setSelected(true);
+                        vVentas_Productos.rbTipoVenta.setSelected(true);
                     } else {
                         vVentas_Productos.jRadioButton2.setSelected(true);
                     }
