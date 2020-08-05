@@ -877,169 +877,72 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void registrarMovimientoCaja(String fecha, int idmovimiento){
+        mc.setDescripcion("COMPRA INSUMOS");
+        mc.setIdcajaturno(Session.getIdcajaturno_abierta());
+        mc.setIdtipomovimiento(12);
+        mc.setIdusuario(Session.getIdusuario());
+        //mc.setNromovimiento(codigo);
+        mc.setFecha_movimiento(fecha);
+        mc.setMonto(c.getMontototal());
+        mc.setIdmovimiento(idmovimiento);
+        mc.setActivo(1);
+        control_mc.InsertarMovimientosCaja(mc);
+    }
+    
+    private void volverPantallaListadoCompras(){
+        lista = new vListas_Compras();
+        vMenuPrincipal.jDesktopPane1.add(lista);
+        lista.setVisible(true);
+        this.dispose();
+    }
+    
     private void jButtonAgregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarCompraActionPerformed
         String fecha = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-        if (!jButtonAgregarCompra.getText().equals("Cancelar") && this.getTitle().equals("Registrar Compra")) {
-            if (!jTextProveedor.getText().equals("") && !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextTotal.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
-                if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                    if (!jButtonModificar.getText().equals("Cancelar")) {
-                        if (jTableDetalle.getRowCount() != 0) {
-                            c.setIdproveedor(compra.ObtenerIDProveedor(jTextProveedor.getText()));
-                            c.setIdusuario(compra.ObtenerIDUsuario((String) jCBUsuario.getSelectedItem()));
-                            c.setMontototal(Float.parseFloat(jTextTotal.getText()));
-                            //Guardar Encabezado de Compra
-                            if (compra.EfectuarCompra(c)) {
-                                //Guardar Detalle de Compra
-                                for (int g = 0; g < jTableDetalle.getRowCount(); g++) {
-                                    d.setIdcompra(detallecompra.ObtenerIDCompra());
-                                    d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(g, 0).toString()));
-                                    d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(g, 1).toString()));
-                                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(g, 2).toString()));
-                                    if (detallecompra.RegistrarDetalleCompra(d)) {
-
-                                    }
-                                }
-                                //actuizar Precio de Insumo en caso de que se haya cambiado
-                                for (int d = 0; d < jTableDetalle.getRowCount(); d++) {
-                                    m.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(d, 1).toString()));
-                                    m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(d, 0).toString()));
-                                    if (insumo.ActualizarPrecio(m)) {
-
-                                    }
-                                }
-                                if (sql.SafeUpdates()) {
-                                    if (detallecompra.ActualizarStockInsumos()) {
-                                        JOptionPane.showMessageDialog(null, "Compra Registrada");
-                                        int idmovimiento = sql.obtenerUltimoId("compras", "idcompra");
-                                        //String codigo = sql.generaCodigo("compra");
-                                        //sql.ejecutarSql("UPDATE compras SET NroCompra ='" + codigo + "' WHERE idcompra=" + idmovimiento);
-                                        //c.setNrocompra(codigo);
-                                        
-                                        //Generamos el Movimmiento de Caja de la Compra
-                                        mc.setDescripcion("COMPRA INSUMOS");
-                                        mc.setIdcajaturno(Session.getIdcajaturno_abierta());
-                                        mc.setIdtipomovimiento(12);
-                                        mc.setIdusuario(Session.getIdusuario());
-                                        //mc.setNromovimiento(codigo);
-                                        mc.setFecha_movimiento(fecha);
-                                        mc.setMonto(c.getMontototal());
-                                        mc.setIdmovimiento(idmovimiento);
-                                        mc.setActivo(1);
-                                        control_mc.InsertarMovimientosCaja(mc);
-                                        lista = new vListas_Compras();
-                                        vMenuPrincipal.jDesktopPane1.add(lista);
-                                        lista.setVisible(true);
-                                        this.dispose();
-                                    }
+        if (!jTextProveedor.getText().equals("") && !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextTotal.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
+            if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+                    if (jTableDetalle.getRowCount() != 0) {
+                        c.setIdproveedor(compra.ObtenerIDProveedor(jTextProveedor.getText()));
+                        c.setIdusuario(compra.ObtenerIDUsuario((String) jCBUsuario.getSelectedItem()));
+                        c.setMontototal(Float.parseFloat(jTextTotal.getText()));
+                        //Guardar Encabezado de Compra
+                        if (compra.EfectuarCompra(c)) {
+                            //Guardar Detalle de Compra
+                            for (int g = 0; g < jTableDetalle.getRowCount(); g++) {
+                                d.setIdcompra(detallecompra.ObtenerIDCompra());
+                                d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(g, 0).toString()));
+                                d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(g, 1).toString()));
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(g, 2).toString()));
+                                if (!detallecompra.RegistrarDetalleCompra(d)) {
+                                    System.out.print("Error al agregar Detalle de Compra" + d);
                                 }
                             }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Debes generar al menos, una compra de insumo");
+                            //actualizar Precio de Insumo en caso de que se haya cambiado
+                            for (int d = 0; d < jTableDetalle.getRowCount(); d++) {
+                                m.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(d, 1).toString()));
+                                m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(d, 0).toString()));
+                                if (insumo.ActualizarPrecio(m)) {}
+                            }
+                            if (sql.SafeUpdates()) {
+                                //actuizar conviene hacer por detalles si se maneja las unidades de medidas
+                                if (detallecompra.ActualizarStockInsumos()) {
+                                    JOptionPane.showMessageDialog(null, "Compra Registrada");                                    
+                                    //Generamos el Movimmiento de Caja de la Compra
+                                    int idmovimiento = sql.obtenerUltimoId("compras", "idcompra");
+                                    registrarMovimientoCaja(fecha,idmovimiento);
+                                    volverPantallaListadoCompras();
+                                }
+                            }
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Por favor, termine de Modificar el/los dato/s");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
-                }
+                        JOptionPane.showMessageDialog(null, "Debes generar al menos, una compra de insumo");
+                    }                  
             } else {
-                JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
+                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
             }
-        } else if (jButtonAgregarCompra.getText().equals("Cancelar") && cant > 0) {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                for (int x = 0; x < iddetallescompras.size(); x++) {
-                    for (int m = 0; m < idinsumos.size(); m++) {
-                        if (sql.SafeUpdates()) {
-                            d.setIddetallecompra(iddetallescompras.get(x));
-                            d.setIdinsumo(idinsumos.get(m));
-                            if (detallecompra.ActualizarStockInsumos2(d)) {
-                                d.setIddetallecompra(iddetallescompras.get(x));
-                                d.setIdinsumo(idinsumos.get(m));
-                                if (detallecompra.ActualizarDevolverPrecio(d)) {
-                                    d.setIddetallecompra(iddetallescompras.get(x));
-                                    if (detallecompra.AnularEliminacionCompra(d)) {
-                                        x++;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                lista = new vListas_Compras();
-                vMenuPrincipal.jDesktopPane1.add(lista);
-                lista.setVisible(true);
-                dispose();
-            } else {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
-        } else if (jButtonAgregarCompra.getText().equals("Cancelar") && cant == 0) {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                lista = new vListas_Compras();
-                vMenuPrincipal.jDesktopPane1.add(lista);
-                lista.setVisible(true);
-                dispose();
-            } else {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
-        } else if (jButtonAgregarCompra.getText().equals("Registrar Compra") && this.getTitle().equals("Registrando nueva compra Factura N° " + nrofactura)) {
-            if (!jTextProveedor.getText().equals("") && !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextTotal.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
-                if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                    if (!jButtonModificar.getText().equals("Cancelar")) {
-                        if (jTableDetalle.getRowCount() != 0) {
-                            c.setIdproveedor(compra.ObtenerIDProveedor(jTextProveedor.getText()));
-                            c.setIdusuario(compra.ObtenerIDUsuario((String) jCBUsuario.getSelectedItem()));
-                            c.setMontototal(Float.parseFloat(jTextTotal.getText()));
-                            c.setIdcompra(Integer.parseInt(idcompra));
-                            if (compra.EditarCompra(c)) {
-                                for (int g = 0; g < jTableDetalle.getRowCount(); g++) {
-                                    d.setIdcompra(Integer.parseInt(idcompra));
-                                    d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(g, 0).toString()));
-                                    d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(g, 1).toString()));
-                                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(g, 2).toString()));
-                                    if (detallecompra.RegistrarDetalleCompra(d)) {
-
-                                    }
-                                }
-                                for (int d = 0; d < jTableDetalle.getRowCount(); d++) {
-                                    m.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(d, 1).toString()));
-                                    m.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(d, 0).toString()));
-                                    if (insumo.ActualizarPrecio(m)) {
-
-                                    }
-                                }
-                                if (sql.SafeUpdates()) {
-                                    if (detallecompra.ActualizarStockInsumos()) {
-                                        mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(idcompra), 12));
-                                        mc.setDescripcion("COMPRA INSUMOS");
-                                        mc.setIdtipomovimiento(12);
-                                        mc.setIdusuario(Session.getIdusuario());
-                                        mc.setFecha_movimiento(fecha);
-                                        mc.setMonto(c.getMontototal());
-                                        mc.setIdmovimiento(Integer.parseInt(idcompra));
-                                        control_mc.EditarMovimientosCaja(mc);
-                                        JOptionPane.showMessageDialog(null, "Modificacion completa de Factura N° " + nrofactura);
-                                        lista = new vListas_Compras();
-                                        vMenuPrincipal.jDesktopPane1.add(lista);
-                                        lista.setVisible(true);
-                                        dispose();
-                                    }
-                                }
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Debes generar al menos, una compra de insumo");
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Por favor, termine de Modificar el/los dato/s");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
-            }
-        }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
+        }                
     }//GEN-LAST:event_jButtonAgregarCompraActionPerformed
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
@@ -1214,10 +1117,10 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     private void jButtonModificarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarCompraActionPerformed
         String fecha = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
         filascompra = jTableDetalle.getRowCount();
-        if (!jButtonModificarCompra.getText().equals("Cancelar") && !this.getTitle().equals("Registrando nueva compra Factura N° " + nrofactura)) {
+//        if (!jButtonModificarCompra.getText().equals("Cancelar") && !this.getTitle().equals("Registrando nueva compra Factura N° " + nrofactura)) {
             if (!jTextProveedor.getText().equals("") && !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextTotal.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
                 if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                    if (!jButtonModificar.getText().equals("Cancelar")) {
+//                    if (!jButtonModificar.getText().equals("Cancelar")) {
                         if (jTableDetalle.getRowCount() != 0) {
                             int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                             if (i == 0) {
@@ -1341,31 +1244,31 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                         } else {
                             JOptionPane.showMessageDialog(null, "Debes generar al menos, una compra de insumo");
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Por favor, termine de Modificar el/los dato/s");
-                    }
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, "Por favor, termine de Modificar el/los dato/s");
+//                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
             }
-        } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar nueva compra para Factura N° " + nrofactura + "?. De optar por si, la misma se eliminara", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                mc.setIdmovimiento(Integer.parseInt(idcompra));
-                mc.setIdtipomovimiento(12);
-                if (control_mc.EliminarMovCajaCompraVenta(mc)) {
-                    c.setIdcompra(Integer.parseInt(idcompra));
-                    if (compra.EliminarCompra(c)) {
-                        lista = new vListas_Compras();
-                        vMenuPrincipal.jDesktopPane1.add(lista);
-                        lista.setVisible(true);
-                        dispose();
-                    }
-                }
-            }
-        }
+//        } else {
+//            int i = JOptionPane.showConfirmDialog(null, "Cancelar nueva compra para Factura N° " + nrofactura + "?. De optar por si, la misma se eliminara", "Confirmar", JOptionPane.YES_NO_OPTION);
+//            if (i == 0) {
+//                mc.setIdmovimiento(Integer.parseInt(idcompra));
+//                mc.setIdtipomovimiento(12);
+//                if (control_mc.EliminarMovCajaCompraVenta(mc)) {
+//                    c.setIdcompra(Integer.parseInt(idcompra));
+//                    if (compra.EliminarCompra(c)) {
+//                        lista = new vListas_Compras();
+//                        vMenuPrincipal.jDesktopPane1.add(lista);
+//                        lista.setVisible(true);
+//                        dispose();
+//                    }
+//                }
+//            }
+//        }
     }//GEN-LAST:event_jButtonModificarCompraActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
@@ -1671,7 +1574,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:       
-        int i = JOptionPane.showConfirmDialog(null, "Cancelar Operación?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        int i = JOptionPane.showConfirmDialog(null, "Desea cancelar la Operación?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             vListas_Compras lista_compras = new vListas_Compras();
             vMenuPrincipal.jDesktopPane1.add(lista_compras);
