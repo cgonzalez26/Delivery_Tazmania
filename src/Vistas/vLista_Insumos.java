@@ -42,26 +42,29 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
         initComponents();
         Mostrar();
         ComboTipoInsumo();
-        EliminarItemsVacios();
+        //EliminarItemsVacios();
         
 
         jTabla_Insumos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    int fila = jTabla_Insumos.rowAtPoint(e.getPoint());
+                    int seleccionado = jTabla_Insumos.rowAtPoint(e.getPoint());
                     tipo = new vGestion_Insumos();
                     vMenuPrincipal.jDesktopPane1.add(tipo);
                     tipo.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                     tipo.setVisible(true);
                     vGestion_Insumos.jBotonModif_Insumos.setEnabled(true);
-                    vGestion_Insumos.jBotonAgregar_Insumos.setText("Cancelar");
-                    idinsumo = (jTabla_Insumos.getValueAt(fila, 0).toString());
-                    vGestion_Insumos.jCBTipo_Insumos.setSelectedItem(jTabla_Insumos.getValueAt(fila, 3).toString());
-                    vGestion_Insumos.jTextField1.setText(jTabla_Insumos.getValueAt(fila, 4).toString());
-                    vGestion_Insumos.jTextDesc_Insumos.setText(jTabla_Insumos.getValueAt(fila, 5).toString());
-                    vGestion_Insumos.jTextPrecio_Insumos.setText(jTabla_Insumos.getValueAt(fila, 6).toString());
-                    vGestion_Insumos.jTextStock_Insumos.setText(jTabla_Insumos.getValueAt(fila, 7).toString());
-                    fecha = jTabla_Insumos.getValueAt(fila, 8).toString();
+                    vGestion_Insumos.jBotonAgregar_Insumos.setEnabled(false);
+                    //vGestion_Insumos.jBotonAgregar_Insumos.setText("Cancelar");
+                    idinsumo = (jTabla_Insumos.getValueAt(seleccionado, 0).toString());
+                    
+                    vGestion_Insumos.jTextDesc_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 3).toString());
+                    vGestion_Insumos.jCBTipo_Insumos.setSelectedItem(jTabla_Insumos.getValueAt(seleccionado, 4).toString());
+                    vGestion_Insumos.jTextField1.setText(jTabla_Insumos.getValueAt(seleccionado, 5).toString());///prov
+                    vGestion_Insumos.jCBUnidad_Medida.setSelectedItem(jTabla_Insumos.getValueAt(seleccionado, 6).toString());
+                    vGestion_Insumos.jTextPrecio_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 7).toString());
+                    vGestion_Insumos.jTextStock_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 8).toString());
+                    //fecha = jTabla_Insumos.getValueAt(fila, 8).toString();
                     /*if (!fecha.equals("-")) {
                         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                         try {
@@ -82,14 +85,14 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
     public void ComboTipoInsumo() {
         tipoinsumo = combo.combox("tiposinsumos", "descripcion");
         for (Object tiposinsumos : tipoinsumo) {
-            jComboBox1.addItem((String) tiposinsumos);
+            jComboBox_TipoINsumo.addItem((String) tiposinsumos);
         }
     }
 
     public void EliminarItemsVacios() {
-        for (int i = 0; i < jComboBox1.getItemCount(); i++) {
-            if (jComboBox1.getItemAt(i) == null) {
-                jComboBox1.removeItemAt(i);
+        for (int i = 0; i < jComboBox_TipoINsumo.getItemCount(); i++) {
+            if (jComboBox_TipoINsumo.getItemAt(i) == null) {
+                jComboBox_TipoINsumo.removeItemAt(i);
             }
         }
     }
@@ -126,7 +129,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
         datostabla = insumo.MostrarDatos();
         datos = new DefaultTableModel(datostabla, columnas);
         jTabla_Insumos.setModel(datos);
-        EliminarFilasVacias();
+        //EliminarFilasVacias();
         //ReemplazarNulos();
         PintarPocoStock();
         //AjustarTamañoFilas();
@@ -200,8 +203,8 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                 }
             }
         }*/
-        color = new ColorearFilas(7);
-        jTabla_Insumos.getColumnModel().getColumn(7).setCellRenderer(color);
+        color = new ColorearFilas(8);
+        jTabla_Insumos.getColumnModel().getColumn(8).setCellRenderer(color);
     }
 
     @SuppressWarnings("unchecked")
@@ -219,7 +222,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox_TipoINsumo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButtonBuscar = new javax.swing.JButton();
@@ -286,8 +289,8 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel1.setText("Tipo de Insumo:");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno" }));
+        jComboBox_TipoINsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jComboBox_TipoINsumo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno" }));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel2.setText("Insumo:");
@@ -318,7 +321,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, 0, 270, Short.MAX_VALUE)
+                    .addComponent(jComboBox_TipoINsumo, 0, 270, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -338,7 +341,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox_TipoINsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonBuscar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -382,8 +385,6 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
-
-        jPanel1.getAccessibleContext().setAccessibleName("Buscar Por:");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -453,13 +454,13 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccion();
         Mostrar();
-        jComboBox1.setSelectedItem("Ninguno");
+        jComboBox_TipoINsumo.setSelectedItem("Ninguno");
         jTextField1.setText("");
     }//GEN-LAST:event_formMouseClicked
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
 //        if (!jTextField1.getText().isEmpty() || jComboBox1.getSelectedIndex() != 0) {
-            datostabla = insumo.MostrarDatosBusquedaInsumos(jTextField1.getText());
+            datostabla = insumo.MostrarDatosBusquedaInsumos(jTextField1.getText(),Integer.toString(jComboBox_TipoINsumo.getSelectedIndex()));
             if (datostabla.length != 0) {
                 String[] columnas = {"IDINSUMO", "IDTIPOINSUMO", "IDPROVEEDOR", "DESCRIPCION", "TIPO INSUMO", "PROVEEDOR", "UNIDAD MEDIDA", "PRECIO", "STOCK"};
                 datos = new DefaultTableModel(datostabla, columnas);
@@ -492,7 +493,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonBuscar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox_TipoINsumo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

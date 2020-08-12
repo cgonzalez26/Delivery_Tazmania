@@ -60,6 +60,7 @@ public class control_DetallesCompras {
     public boolean RegistrarDetalleCompra(DetallesCompras dc) {
         String idcompra = Integer.toString(dc.getIdcompra()), idinsumo = Integer.toString(dc.getIdinsumo()), precio = Float.toString(dc.getPrecio()), cantidad = Float.toString(dc.getCantidad()), fecha = ((JTextField) vCompras_Insumos.jDateChooser1.getDateEditor().getUiComponent()).getText();
         String datos[] = {idcompra, idinsumo, precio, cantidad};
+        //ActualizarStockInsumo(dc);
         return sql.insertar(datos, "insert into detallescompras (idcompra,idinsumo,Precio,Cantidad,activo,fechaCompra) values (?,?,?,?,1,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'))");
     }
 
@@ -78,6 +79,11 @@ public class control_DetallesCompras {
         return true;
     }
 
+    public boolean ActualizarStockInsumo(DetallesCompras dc) {
+        String datos[] = {Float.toString(dc.getCantidad()), Integer.toString(dc.getIdinsumo())};
+        return sql.editar(datos,"update insumos set stock=stock+? where i.idinsumo=?");
+    }
+    
     public boolean ActualizarStockInsumos() {
         return sql.ActualizarStockInsumos("update insumos i INNER JOIN detallescompras d on d.idinsumo=i.idinsumo set stock=stock+? where i.idinsumo=?");
     }

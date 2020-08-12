@@ -913,7 +913,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                                 d.setIdinsumo(detallecompra.ObtenerIDInsumo(jTableDetalle.getValueAt(g, 0).toString()));
                                 d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(g, 1).toString()));
                                 d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(g, 2).toString()));
-                                if (!detallecompra.RegistrarDetalleCompra(d)) {
+                                if (detallecompra.RegistrarDetalleCompra(d)) {
+                                    if (detallecompra.ActualizarStockInsumo(d)) {}
+                                }else{
                                     System.out.print("Error al agregar Detalle de Compra" + d);
                                 }
                             }
@@ -925,13 +927,13 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                             }
                             if (sql.SafeUpdates()) {
                                 //actuizar conviene hacer por detalles si se maneja las unidades de medidas
-                                if (detallecompra.ActualizarStockInsumos()) {
+                                //if (detallecompra.ActualizarStockInsumos()) {
                                     JOptionPane.showMessageDialog(null, "Compra Registrada");                                    
                                     //Generamos el Movimmiento de Caja de la Compra
                                     int idmovimiento = sql.obtenerUltimoId("compras", "idcompra");
                                     registrarMovimientoCaja(fecha,idmovimiento);
                                     volverPantallaListadoCompras();
-                                }
+                                //}
                             }
                         }
                     } else {
@@ -1117,10 +1119,8 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     private void jButtonModificarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarCompraActionPerformed
         String fecha = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
         filascompra = jTableDetalle.getRowCount();
-//        if (!jButtonModificarCompra.getText().equals("Cancelar") && !this.getTitle().equals("Registrando nueva compra Factura N° " + nrofactura)) {
             if (!jTextProveedor.getText().equals("") && !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextTotal.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
                 if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-//                    if (!jButtonModificar.getText().equals("Cancelar")) {
                         if (jTableDetalle.getRowCount() != 0) {
                             int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                             if (i == 0) {
@@ -1244,31 +1244,14 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                         } else {
                             JOptionPane.showMessageDialog(null, "Debes generar al menos, una compra de insumo");
                         }
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Por favor, termine de Modificar el/los dato/s");
-//                    }
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
             }
-//        } else {
-//            int i = JOptionPane.showConfirmDialog(null, "Cancelar nueva compra para Factura N° " + nrofactura + "?. De optar por si, la misma se eliminara", "Confirmar", JOptionPane.YES_NO_OPTION);
-//            if (i == 0) {
-//                mc.setIdmovimiento(Integer.parseInt(idcompra));
-//                mc.setIdtipomovimiento(12);
-//                if (control_mc.EliminarMovCajaCompraVenta(mc)) {
-//                    c.setIdcompra(Integer.parseInt(idcompra));
-//                    if (compra.EliminarCompra(c)) {
-//                        lista = new vListas_Compras();
-//                        vMenuPrincipal.jDesktopPane1.add(lista);
-//                        lista.setVisible(true);
-//                        dispose();
-//                    }
-//                }
-//            }
-//        }
+
     }//GEN-LAST:event_jButtonModificarCompraActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing

@@ -21,7 +21,7 @@ public class control_Insumos {
 
     public Object[][] MostrarDatos() {
         String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "i.descripcion", "tipoinsumo", "Nombre_comercial", "unidadmedida", "precio", "stock"};
-        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,i.descripcion,IFNULL(t.descripcion, '-') as tipoinsumo,p.Nombre_comercial,IFNULL(um.descripcion, '-') as unidadmedida,i.precio,i.stock from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor LEFT JOIN unidadesmedidas as um on um.idunidadmedida = i.idunidadmedida where i.activo=1");
+        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,i.descripcion,IFNULL(t.descripcion, '-') as tipoinsumo,IFNULL(p.Nombre_comercial, '-') as Nombre_comercial,IFNULL(um.descripcion, '-') as unidadmedida,i.precio,i.stock FROM insumos i LEFT JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo LEFT JOIN proveedores p on i.idproveedor=p.idproveedor LEFT JOIN unidadesmedidas as um on um.idunidadmedida = i.idunidadmedida where i.activo=1 ORDER BY i.descripcion");
         return datos;
     }
     
@@ -31,7 +31,7 @@ public class control_Insumos {
         return datos;
     }
     
-    public Object[][] MostrarDatosBusquedaInsumos(String texto) {
+    public Object[][] MostrarDatosBusquedaInsumos(String texto, String idtipoinsumo) {
         String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "i.descripcion", "tipoinsumo", "Nombre_comercial", "unidadmedida","precio", "stock"};
         Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,i.descripcion,IFNULL(t.descripcion, '-') as tipoinsumo,p.Nombre_comercial,IFNULL(um.descripcion, '-') as unidadmedida,i.precio,i.stock from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor LEFT JOIN unidadesmedidas as um on um.idunidadmedida = i.idunidadmedida where i.activo=1 and i.descripcion like '%"+texto+"%'");
         return datos;

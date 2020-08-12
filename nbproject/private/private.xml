@@ -11,6 +11,12 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/E:/Proyectos/Delivey_Tazmania/src/Vistas/vLista_Insumos.java</file>
+            <file>file:/E:/Proyectos/Delivey_Tazmania/src/Vistas/vCompras_Insumos.java</file>
+            <file>file:/E:/Proyectos/Delivey_Tazmania/src/Controlador/control_Insumos.java</file>
+            <file>file:/E:/Proyectos/Delivey_Tazmania/src/Controlador/Sentencias_sql.java</file>
+            <file>file:/E:/Proyectos/Delivey_Tazmania/src/Controlador/control_DetallesCompras.java</file>
+        </group>
     </open-files>
 </project-private>
