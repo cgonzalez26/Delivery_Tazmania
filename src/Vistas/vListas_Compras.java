@@ -362,7 +362,6 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
             }
         };
         jButton1 = new javax.swing.JButton();
-        jEtiqTitulo_Compras = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
@@ -467,7 +466,7 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Listado de Compras y Detalle");
+        setTitle("Listado de Compras");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -502,9 +501,6 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jEtiqTitulo_Compras.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        jEtiqTitulo_Compras.setText("Compras");
 
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
@@ -546,10 +542,10 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4)
                         .addGap(66, 66, 66)))
                 .addGap(27, 27, 27))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(167, 167, 167)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(149, 149, 149))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -561,9 +557,9 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jButton6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jButton5.setBackground(new java.awt.Color(252, 249, 57));
@@ -577,14 +573,16 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
 
         jButton7.setBackground(new java.awt.Color(252, 249, 57));
         jButton7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton7.setText("Eliminar Compra");
+        jButton7.setText("Eliminar");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
 
-        jButton8.setText("jButton8");
+        jButton8.setBackground(new java.awt.Color(252, 249, 57));
+        jButton8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButton8.setText("Modificar");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -596,47 +594,39 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(174, 174, 174)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(164, 164, 164)
-                .addComponent(jButton7)
-                .addContainerGap(126, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane1)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jEtiqTitulo_Compras, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(393, 393, 393))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(225, 225, 225))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton8)
-                        .addGap(295, 295, 295))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jEtiqTitulo_Compras)
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8)
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -934,18 +924,51 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        int i = jTable1.getSelectedRow();
-        Object[][] datos = detallecompra.ObtenerDatosDetalleComprasDesdeListaCompras(jTable1.getValueAt(i, 4).toString());
-        for (int j = 0; j < datos.length; j++) {
-            for (int l = 0; l < datos.length; l++) {
-                JOptionPane.showMessageDialog(null, "id insumo " + datos[j][l]);
-                JOptionPane.showMessageDialog(null, "cantidad " + datos[j][l + 1]);
-                if (j < datos.length - 1) {
-                    j++;
-                    l--;
+        int seleccionado = jTable1.getSelectedRow();
+        if (seleccionado == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
+        } else {
+            //datoscompra = (DefaultTableModel) jTable1.getModel();
+            if (VerificarCajaAbierta() == false) {
+                int idmovimientocaja = com.ObtenerIDMovCajaCompra(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()), "CP");
+                String estado = control_mc.getEstadoCajaByMovimiento(idmovimientocaja);
+                if (estado.equals("CERRADA")) {
+                    JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                 } else {
-                    break;
+                    fecha = (String) (jTable1.getValueAt(seleccionado, 6));
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+                    try {
+                        fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
+                    } catch (ParseException ex) {
+                        Logger.getLogger(vListas_Compras.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    if (compra == null || compra.isClosed()) {
+                        compra = new vCompras_Insumos();
+                        vMenuPrincipal.jDesktopPane1.add(compra);
+                        compra.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                        compra.setVisible(true);
+                        compra.toFront();
+                    }
+                    
+                    /*vCompras_Insumos.jButton1.setEnabled(true);
+                    vCompras_Insumos.jTextField1.setEditable(false);
+                    vCompras_Insumos.jTextField7.setEditable(false);
+                    vCompras_Insumos.jButton7.setEnabled(true);
+                    idcompra = jTable1.getValueAt(seleccionado, 0).toString();
+                    vCompras_Insumos.jTextField3.setText(jTable1.getValueAt(seleccionado, 3).toString());
+                    vCompras_Insumos.jComboBox2.setSelectedItem(jTable1.getValueAt(seleccionado, 5).toString());
+                    vCompras_Insumos.jTextField5.setText(jTable1.getValueAt(seleccionado, 4).toString());
+                    vCompras_Insumos.jDateChooser1.setDate(fechaseleccionada);
+                    vCompras_Insumos.jTextField7.setText(jTable1.getValueAt(seleccionado, 7).toString());
+                    compra.total = (Float.parseFloat(jTable1.getValueAt(seleccionado, 7).toString()));*/
+                    compra.idcompra = idcompra;
+                    PasarFilas();
+                    IDdetalles();
+                    CantidadFilas();
+                    dispose();
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede Modificar. No hay CAJA ABIERTA.");
             }
         }
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -962,7 +985,6 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton8;
     public static com.toedter.calendar.JDateChooser jDateChooser1;
     public static com.toedter.calendar.JDateChooser jDateChooser2;
-    private javax.swing.JLabel jEtiqTitulo_Compras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
