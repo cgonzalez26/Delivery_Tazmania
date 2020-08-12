@@ -104,19 +104,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         ocultar_columnas();
     }
 
-    public void MostrarBusquedaFechas() {
-        String[] columnas = {"ID ASISTENCIA", "ID EMPLEADO", "NRO ASISTENCIA", "EMPLEADO", "DESCRIPCION", "SUELDO", "FECHA"};
-        Object[][] datostabla = asistencia.MostrarDatosFechas(desde, hasta);
-        if (datostabla.length != 0) {
-            buscarfechas = new DefaultTableModel(datostabla, columnas);
-            jTable1.setModel(buscarfechas);
-            EliminarFilasVacias();
-            //AjustarTamañoFilasAsistencias();
-            ocultar_columnas();
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontraron datos");
-        }
-    }
+    
 
     public void MostrarEmpleados() {
         String[] columnas = {"NOMBRE EMPLEADOS", "ROL DE TRABAJO"};
@@ -181,14 +169,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         }
     }
 
-    public void ocultar_columnas() {
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
-        jTable1.getColumnModel().getColumn(1).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(1).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(0);
-    }
+    
 
     public void EliminarFilasVacias() {
         if (jTable1.getRowCount() != 0) {
@@ -252,23 +233,11 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         jList2 = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable(){
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return false; //Disallow the editing of any cell
-            }
-        };
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jButton7 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
 
         vSeleccionarEmpleado.setTitle("Seleccionar Nombre Empleado");
         java.awt.Image icono = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
@@ -426,15 +395,15 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel2.setText("(*) Fecha:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(662, 139, 56, 19));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 56, 19));
 
         jDateChooser1.setDateFormatString("dd/MM/yyyy HH:mm");
         jDateChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(662, 164, 172, 30));
+        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 172, 30));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel7.setText("(*) Empleado:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 170, 30));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 170, 30));
 
         jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -445,7 +414,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                 jTextField1KeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 250, 30));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 250, 30));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -453,7 +422,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 38, 30));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 38, 30));
 
         jList2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -468,26 +437,10 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel3.setText("(*) Descripción:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 207, -1, 30));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 30));
 
         jTextField2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 243, 401, 35));
-
-        jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 296, 824, 272));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 300, 35));
 
         jButton1.setBackground(new java.awt.Color(252, 249, 57));
         jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -497,7 +450,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 586, 101, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 101, -1));
 
         jButton2.setBackground(new java.awt.Color(252, 249, 57));
         jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -507,82 +460,24 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 586, 101, -1));
-
-        jButton3.setBackground(new java.awt.Color(240, 87, 49));
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 586, 101, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 101, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel1.setText("Sueldo:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(662, 212, -1, 21));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, 21));
 
         jTextField3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(662, 243, 172, 35));
+        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 172, 35));
 
-        jPanel1.setBackground(new java.awt.Color(255, 248, 177));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jDateChooser2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-
-        jDateChooser3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-
-        jButton7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jButton7.setText("Buscar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(240, 87, 49));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel4.setText("Desde:");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel5.setText("Hasta:");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 384, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(28, 28, 28))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(357, 357, 357)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addComponent(jButton7)
-                .addContainerGap())
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -735,140 +630,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jButton3.getText().equals("Modificar")) {
-            if (!jTextField1.getText().trim().equals("") && !jTextField2.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
-                date = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-                if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                    if (jTextField3.getText().equals("")) {
-                        int i = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, guardar cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                        if (i == 0) {
-                            a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextField1.getText()));
-                            a.setDescripcion(jTextField2.getText());
-                            a.setSueldo((float) 0.0);
-                            a.setIdasistencia(Integer.parseInt(id));
-                            if (asistencia.EditarAsistencias(a)) {
-                                mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(id), 11));
-                                mc.setIdtipomovimiento(11);
-                                mc.setIdusuario(Session.getIdusuario());
-                                mc.setFecha_movimiento(date);
-                                mc.setMonto(a.getSueldo());
-                                mc.setIdmovimiento(Integer.parseInt(id));
-                                mc.setDetalle(a.getDescripcion());
-                                control_mc.EditarMovimientosCaja(mc);
-
-                                JOptionPane.showMessageDialog(null, "Modificado");
-                                jButton1.setEnabled(true);
-                                jButton2.setText("Modificar");
-                                jButton3.setText("Eliminar");
-                                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                                Mostrar();
-                                LimpiarSeleccion();
-                                limpiar();
-                            }
-                        }
-                    } else {
-                        String sueldo = jTextField3.getText(), svalor = "", svalordec = "", svalordecdob = "";
-                        int cant = jTextField3.getText().length();
-                        switch (cant) {
-                            case 1:
-                                svalor = sueldo.substring(0, 1);
-                                break;
-                            case 3:
-                                svalordec = sueldo.substring(0, 3);
-                                break;
-                            case 4:
-                                svalordecdob = sueldo.substring(0, 4);
-                                break;
-                            default:
-                                break;
-                        }
-                        if (svalor.equals(",") || svalor.equals(".")) { //svalor.equals(",") || svalor.equals(".")
-                            JOptionPane.showMessageDialog(null, "Ingrese correctamente el sueldo");
-                        } else if (svalor.equals("0") || svalordec.equals("0.0") || svalordecdob.equals("0.00")) {
-                            int j = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, guardar cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                            if (j == 0) {
-                                a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextField1.getText()));
-                                a.setDescripcion(jTextField2.getText());
-                                a.setSueldo((float) 0.0);
-                                a.setIdasistencia(Integer.parseInt(id));
-                                if (asistencia.EditarAsistencias(a)) {
-                                    mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(id), 11));
-                                    mc.setIdtipomovimiento(11);
-                                    mc.setIdusuario(Session.getIdusuario());
-                                    mc.setFecha_movimiento(date);
-                                    mc.setMonto(a.getSueldo());
-                                    mc.setIdmovimiento(Integer.parseInt(id));
-                                    mc.setDetalle(a.getDescripcion());
-                                    control_mc.EditarMovimientosCaja(mc);
-
-                                    JOptionPane.showMessageDialog(null, "Modificado");
-                                    jButton1.setEnabled(true);
-                                    jButton2.setText("Modificar");
-                                    jButton3.setText("Eliminar");
-                                    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                                    Mostrar();
-                                    LimpiarSeleccion();
-                                    limpiar();
-                                }
-                            }
-                        } else {
-                            a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextField1.getText()));
-                            a.setDescripcion(jTextField2.getText());
-                            a.setSueldo(Float.parseFloat(sueldo));
-                            a.setIdasistencia(Integer.parseInt(id));
-                            if (asistencia.EditarAsistencias(a)) {
-                                mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(id), 11));
-                                mc.setIdtipomovimiento(11);
-                                mc.setIdusuario(Session.getIdusuario());
-                                mc.setFecha_movimiento(date);
-                                mc.setMonto(a.getSueldo());
-                                mc.setIdmovimiento(Integer.parseInt(id));
-                                mc.setDetalle(a.getDescripcion());
-                                control_mc.EditarMovimientosCaja(mc);
-
-                                JOptionPane.showMessageDialog(null, "Modificado");
-                                jButton1.setEnabled(true);
-                                jButton2.setText("Modificar");
-                                jButton3.setText("Eliminar");
-                                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                                Mostrar();
-                                LimpiarSeleccion();
-                                limpiar();
-                            }
-                        }
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
-            }
-        } else {
-            int fila = jTable1.getSelectedRow();
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    String NroAsistencia = jTable1.getValueAt(fila, 2).toString();
-                    int idmovimientocaja = control_mc.getIdMovimientocaja(NroAsistencia);
-                    mc.setIdmovimientocaja(idmovimientocaja);
-                    if (control_mc.EliminarMovimientosCajaAbierta(mc)) {
-                        a.setIdasistencia(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
-                        if (asistencia.EliminarAsistencias(a)) {
-                            JOptionPane.showMessageDialog(null, "Eliminado");
-                            Mostrar();
-                        }
-                    }
-                } else {
-                    LimpiarSeleccion();
-                }
-            }
-        }
-
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         if (jButton2.isEnabled() && jButton2.getText().equals("Cancelar")) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -947,24 +708,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         jTextField4.setText("");
     }//GEN-LAST:event_vSeleccionarEmpleadoMouseClicked
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        desde = ((JTextField) jDateChooser2.getDateEditor().getUiComponent()).getText();
-        hasta = ((JTextField) jDateChooser3.getDateEditor().getUiComponent()).getText();
-        if (jDateChooser2.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-            if (jDateChooser3.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                if (!desde.isEmpty() && !hasta.isEmpty()) {
-                    MostrarBusquedaFechas();
-                } else if (desde.isEmpty() || hasta.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Debe ingresar la fecha que falta");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
-
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         if (!jTextField4.getText().isEmpty()) {
             String[] columnas = {"NOMBRE EMPLEADOS", "ROL DE TRABAJO"};
@@ -993,31 +736,40 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         ListasEmpleado();
     }//GEN-LAST:event_jTextField1KeyReleased
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        if (btnCancelar.getText().equals("Cancelar")) {
+            this.dispose();
+        } else {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificación?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                movimientoscajas = new vMovimientos_Caja();
+                vMenuPrincipal.jDesktopPane1.add(movimientoscajas);
+                movimientoscajas.setVisible(true);
+                dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnCancelar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     public static com.toedter.calendar.JDateChooser jDateChooser1;
-    public static com.toedter.calendar.JDateChooser jDateChooser2;
-    public static com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JList<String> jList2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     public static javax.swing.JTextField jTextField1;
     public static javax.swing.JTextField jTextField2;
