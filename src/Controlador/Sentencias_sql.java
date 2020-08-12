@@ -202,7 +202,7 @@ public class Sentencias_sql {
         return data;
     }
 
-    public Object[][] DatosDetallesComprasVentas(String sql) {
+    public int obtenercantidadfilas(String sql) {
         try {
             ps = con.conectado().prepareStatement(sql);
             res = ps.executeQuery();
@@ -211,14 +211,28 @@ public class Sentencias_sql {
             if (ultimo) {
                 total = res.getRow();
             }
-            Object[][] datos = new Object[total][4];
-            String col[] = new String[4];
-            int i = 0;
+            return total;
+        } catch (SQLException ex) {
+            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+
+    public Object[][] DatosDetallesComprasVentas(String sql) {
+        int total = obtenercantidadfilas(sql);
+        try {
+            ps = con.conectado().prepareStatement(sql);
+            res = ps.executeQuery();
+            Object[][] datos = new Object[total][2];
+            String col[] = new String[2];
+            int i = 0, m = 0;
             while (res.next()) {
-                for (int j = 0; j <= 3; j++) {
-                    col[j] = res.getString(j);
-                    datos[i][j] = col[j];
+                for (int j = 1; j <= 2; j++) {
+                    col[m] = res.getString(j);
+                    datos[i][m] = col[m];
+                    m++;
                 }
+                m = 0;
                 i++;
             }
             ps.close();
@@ -243,8 +257,10 @@ public class Sentencias_sql {
             ps.close();
             res.close();
             return nroFacturas;
+
         } catch (SQLException e) {
-            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Sentencias_sql.class
+                    .getName()).log(Level.SEVERE, null, e);
             return null;
         }
     }
@@ -565,8 +581,10 @@ public class Sentencias_sql {
             ps.executeUpdate();
             ps.close();
             return true;
+
         } catch (SQLException ex) {
-            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sentencias_sql.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
@@ -677,8 +695,10 @@ public class Sentencias_sql {
             ps.close();
             res.close();
             return tipouser;
+
         } catch (SQLException ex) {
-            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sentencias_sql.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return tipouser;
         }
     }
@@ -696,8 +716,10 @@ public class Sentencias_sql {
             ps.close();
             res.close();
             return nombres;
+
         } catch (SQLException ex) {
-            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sentencias_sql.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -718,8 +740,10 @@ public class Sentencias_sql {
             ps.close();
             res.close();
             return cont;
+
         } catch (SQLException e) {
-            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Sentencias_sql.class
+                    .getName()).log(Level.SEVERE, null, e);
             return 0;
         }
     }
@@ -740,8 +764,10 @@ public class Sentencias_sql {
             ps.close();
             res.close();
             return cont;
+
         } catch (SQLException e) {
-            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Sentencias_sql.class
+                    .getName()).log(Level.SEVERE, null, e);
             return 0;
         }
     }
@@ -762,8 +788,10 @@ public class Sentencias_sql {
             ps.close();
             res.close();
             return cont;
+
         } catch (SQLException e) {
-            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Sentencias_sql.class
+                    .getName()).log(Level.SEVERE, null, e);
             return 0;
         }
     }
@@ -784,8 +812,10 @@ public class Sentencias_sql {
             ps.close();
             res.close();
             return cont;
+
         } catch (SQLException e) {
-            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Sentencias_sql.class
+                    .getName()).log(Level.SEVERE, null, e);
             return 0;
         }
     }
@@ -805,8 +835,10 @@ public class Sentencias_sql {
             ps.close();
             res.close();
             return stock;
+
         } catch (SQLException e) {
-            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Sentencias_sql.class
+                    .getName()).log(Level.SEVERE, null, e);
             return stock;
         }
     }
@@ -824,8 +856,10 @@ public class Sentencias_sql {
             ps.close();
             res.close();
             return montos;
+
         } catch (SQLException ex) {
-            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sentencias_sql.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -871,9 +905,11 @@ public class Sentencias_sql {
             tabla.updateUI();
             res.close();
             ps.close();
+
         } catch (SQLException e) {
             //System.out.println(e);
-            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Sentencias_sql.class
+                    .getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -901,8 +937,10 @@ public class Sentencias_sql {
             ps.close();
             res.close();
             return id;
+
         } catch (SQLException e) {
-            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Sentencias_sql.class
+                    .getName()).log(Level.SEVERE, null, e);
             return 0;
         }
     }
