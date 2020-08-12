@@ -49,6 +49,11 @@ public class control_DetallesVentas {
         return datos;
     }
 
+    public Object[][] ObtenerDatosDetalleVentaDesdeListaVenta(String nrofactura) {
+        Object[][] datos = sql.DatosDetallesComprasVentas("select d.idproducto as idproducto, d.Cantidad as cantidad from detallesventas as d INNER JOIN ventas as v on d.idventa = v.idventa where v.NroFactura='" + nrofactura + "' and d.activo=1");
+        return datos;
+    }
+
     public boolean RegistrarDetalleVenta(DetallesVentas dv) {
         String idventa = Integer.toString(dv.getIdventa()), idproducto = Integer.toString(dv.getIdproducto()), Precio = Float.toString(dv.getPrecio()), Cantidad = Float.toString(dv.getCantidad()), fecha = ((JTextField) vVentas_Productos.jDateChooser1.getDateEditor().getUiComponent()).getText();
         String datos[] = {idventa, idproducto, Precio, Cantidad};
@@ -63,6 +68,11 @@ public class control_DetallesVentas {
 
     public boolean EliminarDetalleVenta(DetallesVentas detalleventa) {
         sql.baja_dedatos("detallesventas", "iddetalleventa", detalleventa.getIddetalleventa());
+        return true;
+    }
+    
+    public boolean EliminarDetalleDesdeListaVenta(DetallesVentas dv){
+        sql.baja_dedatos("detallesventas", "idventa", dv.getIdventa());
         return true;
     }
 

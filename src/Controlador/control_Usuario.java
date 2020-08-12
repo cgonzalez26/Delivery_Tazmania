@@ -3,60 +3,63 @@ package Controlador;
 import Modelo.Usuarios;
 import java.sql.Connection;
 
-
 /**
  *
  * @author Colo-PC
  */
 public class control_Usuario extends Usuarios {
-    private Sentencias_sql sql; 
+
+    private Sentencias_sql sql;
     private Conexion mysql = new Conexion();
     private final Connection cn = mysql.obtener();
 
     public control_Usuario() {
-        sql= new Sentencias_sql();
+        sql = new Sentencias_sql();
     }
-    
-    
-    public Object[][] MostrarDatos(){
-        String[] columnas={"idusuario","idtipousuario","descripcion","Login","Password","Nombre","Apellido","Direccion","Mail","Telefono","Estado"};
-        Object[][] datos=sql.GetTabla(columnas, "usuarios", "select u.idusuario,t.idtipousuario,t.descripcion,u.Login,u.Password,u.Nombre,u.Apellido,u.Direccion, u.Mail,u.Telefono,u.Estado from usuarios u INNER JOIN tiposusuarios t on u.idtipousuario=t.idtipousuario where u.activo=1");
-        return datos;       
+
+    public Object[][] MostrarDatos() {
+        String[] columnas = {"idusuario", "idtipousuario", "descripcion", "Login", "Password", "Nombre", "Apellido", "Direccion", "Mail", "Telefono", "Estado"};
+        Object[][] datos = sql.GetTabla(columnas, "usuarios", "select u.idusuario,t.idtipousuario,t.descripcion,u.Login,u.Password,u.Nombre,u.Apellido,u.Direccion, u.Mail,u.Telefono,u.Estado from usuarios u INNER JOIN tiposusuarios t on u.idtipousuario=t.idtipousuario where u.activo=1");
+        return datos;
     }
-    
-    public Object[][] MostrarDatosBusqueda(String texto){
-        String[] columnas={"idusuario","idtipousuario","descripcion","Login","Password","Nombre","Apellido","Direccion","Mail","Telefono","Estado"};
-        Object[][] datos=sql.GetTabla(columnas, "usuarios", "select u.idusuario,t.idtipousuario,t.descripcion,u.Login,u.Password,u.Nombre,u.Apellido,u.Direccion, u.Mail,u.Telefono,u.Estado from usuarios u INNER JOIN tiposusuarios t on u.idtipousuario=t.idtipousuario where u.activo=1 and u.Login like '%"+texto+"%'");
-        return datos;       
+
+    public Object[][] MostrarDatosBusqueda(String texto) {
+        String[] columnas = {"idusuario", "idtipousuario", "descripcion", "Login", "Password", "Nombre", "Apellido", "Direccion", "Mail", "Telefono", "Estado"};
+        Object[][] datos = sql.GetTabla(columnas, "usuarios", "select u.idusuario,t.idtipousuario,t.descripcion,u.Login,u.Password,u.Nombre,u.Apellido,u.Direccion, u.Mail,u.Telefono,u.Estado from usuarios u INNER JOIN tiposusuarios t on u.idtipousuario=t.idtipousuario where u.activo=1 and u.Login like '%" + texto + "%'");
+        return datos;
     }
-    
-    public boolean InsertarUsuarios(Usuarios user){
+
+    public boolean InsertarUsuarios(Usuarios user) {
         String idtipodoc = Integer.toString(user.getIdtipousuario());
-        String datos[]= {idtipodoc,user.getLogin(),user.getPassword(),user.getNombre(),user.getApellido(),user.getDireccion(),user.getEmail(),user.getTelefono(),user.getEstado()};
+        String datos[] = {idtipodoc, user.getLogin(), user.getPassword(), user.getNombre(), user.getApellido(), user.getDireccion(), user.getEmail(), user.getTelefono(), user.getEstado()};
         return sql.insertar(datos, "insert into usuarios (idtipousuario,Login,Password,Nombre,Apellido,Direccion,Mail,Telefono,Estado,activo) values (?,?,?,?,?,?,?,?,?,1)");
     }
-    
-    public boolean EditarUsuarios(Usuarios user){
-        String idusuario= (Integer.toString(user.getIdusuario())),idtipodoc = Integer.toString(user.getIdtipousuario());
-        String datos[]= {idtipodoc,user.getLogin(),user.getPassword(),user.getNombre(),user.getApellido(),user.getDireccion(),user.getEmail(),user.getTelefono(),user.getEstado(),idusuario};
-        return sql.insertar(datos,"update usuarios set idtipousuario=?,Login=?,Password=?,Nombre=?,Apellido=?,Direccion=?,Mail=?,Telefono=?,Estado=? where idusuario=?" );
+
+    public boolean EditarUsuarios(Usuarios user) {
+        String idusuario = (Integer.toString(user.getIdusuario())), idtipodoc = Integer.toString(user.getIdtipousuario());
+        String datos[] = {idtipodoc, user.getLogin(), user.getPassword(), user.getNombre(), user.getApellido(), user.getDireccion(), user.getEmail(), user.getTelefono(), user.getEstado(), idusuario};
+        return sql.insertar(datos, "update usuarios set idtipousuario=?,Login=?,Password=?,Nombre=?,Apellido=?,Direccion=?,Mail=?,Telefono=?,Estado=? where idusuario=?");
     }
-    
-    public boolean EliminarUsuarios(Usuarios user){
+
+    public boolean EliminarUsuarios(Usuarios user) {
         sql.baja_dedatos("usuarios", "idusuario", user.getIdusuario());
         return true;
     }
-    
-    public boolean InicioSesion(Usuarios user){
-      return sql.InicioSesion(user.getLogin(), user.getPassword());
+
+    public boolean InicioSesion(Usuarios user) {
+        return sql.InicioSesion(user.getLogin(), user.getPassword());
     }
-    
-    public int ObtenerIDTipoUsuario(String dato){
-        return sql.ObtenerID("select idtipousuario from tiposusuarios where descripcion='"+dato+"'");
+
+    public int ObtenerIDTipoUsuario(String dato) {
+        return sql.ObtenerID("select idtipousuario from tiposusuarios where descripcion='" + dato + "'");
     }
-    
-    public int ObtenerIDUsuario(String dato){
-        return sql.ObtenerID("select idusuario from usuarios where Login='"+dato+"'");
+
+    public int ObtenerIDUsuario(String dato) {
+        return sql.ObtenerID("select idusuario from usuarios where Login='" + dato + "'");
+    }
+
+    public int ObtenerIDCajaTurno() {
+        return sql.ObtenerID("select ct.idcajaturno as idcajaturno from caja_turno as ct where ct.estado='" + "ABIERTA" + "'and ct.activo=1");
     }
 
     /*@Override

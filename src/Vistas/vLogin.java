@@ -149,8 +149,10 @@ public final class vLogin extends javax.swing.JFrame {
             //Obtener ultima Caja
             Caja caja = cc.obtenerUltimaCaja();
             int idCaja = caja.getIdCaja();
-            if( idCaja != 0){
+            int idcajaturno = user.ObtenerIDCajaTurno();
+            if( idCaja != 0 && idcajaturno != 0){
                 Session.setIdcaja_abierta(idCaja);
+                Session.setIdcajaturno_abierta(idcajaturno);
             }
             //abrir Pantalla Principal
             vMenuPrincipal menu = new vMenuPrincipal();

@@ -3,7 +3,9 @@ package Controlador;
 import Modelo.DetallesCompras;
 import Vistas.vCompras_Insumos;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.swing.JTextField;
+import javax.xml.soap.Detail;
 
 /**
  *
@@ -27,12 +29,16 @@ public class control_DetallesCompras {
         Object[][] datos = sql.GetTabla(columnas, "detallescompras", "select d.iddetallecompra,c.idcompra,i.idinsumo,c.NroCompra,i.descripcion,d.Precio,d.Cantidad,date_format(d.fechaCompra,'%d/%m/%Y %H:%i') as FechaCompra from compras c INNER JOIN detallescompras d on c.idcompra=d.idcompra INNER JOIN insumos i on i.idinsumo=d.idinsumo where c.NroCompra='" + nrocompra + "' and date(d.fechaCompra) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and d.activo=1 order by c.NroCompra desc");
         return datos;
     }
-    
-    public Object[][] DatosDetallesVentas(String desde, String hasta){
-        Object[][] datos = sql.DatosDetallesComprasVentas("select d.iddetallecompra as iddetalle,i.descripcion as descripcion,d.Precio as precio,d.Cantidad as cantidad from compras c INNER JOIN detallescompras d on c.idcompra=d.idcompra INNER JOIN insumos i on i.idinsumo=d.idinsumo where date(d.fechaCompra) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and d.activo=1");
+
+    public Object[][] ObtenerDatosDetalleComprasDesdeListaCompras(String nrocompra) {
+        Object[][] datos = sql.DatosDetallesComprasVentas("select d.idinsumo as idinsumo, d.Cantidad as cantidad from detallescompras as d INNER JOIN compras as c on c.idcompra = d.idcompra where c.NroCompra='" + nrocompra + "' and d.activo=1");
         return datos;
     }
 
+    /*public Object[][] DatosDetallesVentas(String desde, String hasta){
+        Object[][] datos = sql.DatosDetallesComprasVentas("select d.iddetallecompra as iddetalle,i.descripcion as descripcion,d.Precio as precio,d.Cantidad as cantidad from compras c INNER JOIN detallescompras d on c.idcompra=d.idcompra INNER JOIN insumos i on i.idinsumo=d.idinsumo where date(d.fechaCompra) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and d.activo=1");
+        return datos;
+    }*/
     public Object[][] MostrarInsumos() {
         String[] columnas = {"descripcion", "precio", "stock"};
         Object[][] datos = sql.GetTabla(columnas, "insumos", "select descripcion,precio,stock from insumos where activo=1");
@@ -74,6 +80,10 @@ public class control_DetallesCompras {
         return sql.baja_dedatos("detallescompras", "iddetallecompra", dc.getIddetallecompra());
     }
 
+    public boolean EliminarDetalleDesdeListaCompra(DetallesCompras dc) {
+        return sql.baja_dedatos("detallescompras", "idcompra", dc.getIdcompra());
+    }
+
     public boolean AnularEliminacionCompra(DetallesCompras dc) {
         sql.AnularEliminacion("detallescompras", "iddetallecompra", dc.getIddetallecompra());
         return true;
@@ -105,8 +115,8 @@ public class control_DetallesCompras {
         String datos[] = {cantidad, idinsumo};
         return sql.editar(datos, "update insumos i INNER JOIN detallescompras d on d.idinsumo=i.idinsumo set i.stock=i.stock-? where i.idinsumo=?");
     }
-    
-    public boolean SetearCeroStock(DetallesCompras dc){
+
+    public boolean SetearCeroStock(DetallesCompras dc) {
         String idinsumo = Integer.toString(dc.getIdinsumo());
         String datos[] = {idinsumo};
         return sql.editar(datos, "update insumos i INNER JOIN detallescompras d on d.idinsumo=i.idinsumo set i.stock=0 where i.idinsumo=?");

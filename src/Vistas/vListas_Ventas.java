@@ -547,6 +547,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
 
         vImprimirFactura.setTitle("Cargar Factura Venta");
         java.awt.Image iconodeliv = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
@@ -1054,6 +1055,15 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton14.setBackground(new java.awt.Color(252, 249, 57));
+        jButton14.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButton14.setText("Eliminar");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1072,11 +1082,13 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(192, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(186, 186, 186)
+                .addGap(89, 89, 89)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(179, 179, 179))
+                .addGap(172, 172, 172)
+                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1085,13 +1097,14 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jEtiqTitulo_Compras)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -1099,19 +1112,28 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int fila = jTable1.getSelectedRow();
+        int seleccionado = jTable2.getSelectedRow();
         Ventas v = new Ventas();
         DetallesVentas dt = new DetallesVentas();
         Movimientos_Caja mc = new Movimientos_Caja();
         control_Movimientos_Caja control_mc = new control_Movimientos_Caja();
-        if (fila == -1) {
+        if (seleccionado == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
             int i = JOptionPane.showConfirmDialog(null, "Eliminar Venta?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                mc.setIdmovimiento(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
-                mc.setIdtipomovimiento(10);
-                if (control_mc.EliminarMovCajaCompraVenta(mc)) {
-                    /*int[] seleccionados = jTable2.getSelectedRows();
+                int cantidad = jTable2.getRowCount();
+                if (cantidad == 1) {
+                    mc.setIdmovimiento(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
+                    mc.setIdtipomovimiento(10);
+                    if (control_mc.EliminarMovCajaCompraVenta(mc)) {
+                        dt.setCantidad(Float.parseFloat(jTable2.getValueAt(seleccionado, 6).toString()));
+                        dt.setIdproducto(Integer.parseInt(jTable2.getValueAt(seleccionado, 2).toString()));
+                        detalle.SumarCantidadRestadaInsumos2(dt);
+                        dt.setIddetalleventa(Integer.parseInt(jTable2.getValueAt(seleccionado, 0).toString()));
+                        detalle.EliminarDetalleVenta(dt);
+                        v.setIdventa(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
+                        /*int[] seleccionados = jTable2.getSelectedRows();
                     for (int j = 0; j < seleccionados.length; j++) {
                         dt.setCantidad(Float.parseFloat(jTable2.getValueAt(seleccionados[j], 6).toString()));
                         dt.setIdproducto(Integer.parseInt(jTable2.getValueAt(seleccionados[j], 2).toString()));
@@ -1122,7 +1144,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                         if (detalle.EliminarDetalleVenta(dt)) {
 
                         }
-                    }*/
+                    }
                     for (int j = 0; j < jTable2.getRowCount(); j++) {
                         dt.setCantidad(Float.parseFloat(jTable2.getValueAt(j, 6).toString()));
                         dt.setIdproducto(Integer.parseInt(jTable2.getValueAt(j, 2).toString()));
@@ -1133,13 +1155,39 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                         if (detalle.EliminarDetalleVenta(dt)) {
 
                         }
+                    }*/
                     }
-                    v.setIdventa(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
                     if (ventas.EliminarVenta(v)) {
                         JOptionPane.showMessageDialog(null, "Eliminado");
                         MostrarVentas();
                         //MostrarDetallesVentas();
                         vDetallesVentas.dispose();
+                    }
+                } else {
+                    float totalventa = Float.parseFloat(jTable1.getValueAt(fila, 4).toString()),
+                            valor = Float.parseFloat(jTable2.getValueAt(seleccionado, 5).toString())
+                            * Float.parseFloat(jTable2.getValueAt(seleccionado, 6).toString()),
+                            totalfinal = totalventa - valor;
+                    v.setMontototal(totalfinal);
+                    v.setIdventa(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
+                    if (ventas.ActualizarTotalVenta(v)) {
+                        mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()), 10));
+                        mc.setDescripcion("VENTA PRODUCTOS");
+                        mc.setIdtipomovimiento(10);
+                        mc.setIdusuario(Session.getIdusuario());
+                        mc.setFecha_movimiento(jTable1.getValueAt(fila, 5).toString());
+                        mc.setMonto(v.getMontototal());
+                        mc.setIdmovimiento(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
+                        mc.setTipoVenta(jTable1.getValueAt(fila, 6).toString());
+                        if (control_mc.EditarMovimientosCaja(mc)) {
+                            dt.setCantidad(Float.parseFloat(jTable2.getValueAt(seleccionado, 6).toString()));
+                            dt.setIdproducto(Integer.parseInt(jTable2.getValueAt(seleccionado, 2).toString()));
+                            detalle.SumarCantidadRestadaInsumos2(dt);
+                            dt.setIddetalleventa(Integer.parseInt(jTable2.getValueAt(seleccionado, 0).toString()));
+                            detalle.EliminarDetalleVenta(dt);
+                            JOptionPane.showMessageDialog(null, "Eliminado");
+                            MostrarDetallesVentas();
+                        }
                     }
                 }
             }
@@ -1498,6 +1546,50 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         vDetallesVentas.dispose();
     }//GEN-LAST:event_jButton12ActionPerformed
 
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        Movimientos_Caja mc = new Movimientos_Caja();
+        DetallesVentas dv = new DetallesVentas();
+        Ventas v = new Ventas();
+        int seleccionado = jTable1.getSelectedRow();
+        if (seleccionado == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
+        } else {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar esta Venta?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                mc.setIdmovimiento(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()));
+                mc.setIdtipomovimiento(10);
+                if (control_mc.EliminarMovCajaCompraVenta(mc)) {
+                    if (sql.SafeUpdates()) {
+                        Object[][] datos = detalle.ObtenerDatosDetalleVentaDesdeListaVenta(jTable1.getValueAt(seleccionado, 3).toString());
+                        for (int j = 0; j < datos.length; j++) {
+                            for (int m = 0; m < datos.length; m++) {
+                                int idproducto = (int) datos[j][m];
+                                float cantidad = (float) datos[j][m + 1];
+                                dv.setCantidad(cantidad);
+                                dv.setIdproducto(idproducto);
+                                detalle.SumarCantidadRestadaInsumos2(dv);
+                                if (j < datos.length - 1) {
+                                    j++;
+                                    m--;
+                                } else {
+                                    break;
+                                }
+                            }
+                        }
+                        dv.setIdventa(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()));
+                        if (detalle.EliminarDetalleDesdeListaVenta(dv)) {
+                            v.setIdventa(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()));
+                            if (ventas.EliminarVenta(v)) {
+                                JOptionPane.showMessageDialog(null, "Venta Eliminada");
+                                MostrarVentas();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton14ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -1505,6 +1597,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
