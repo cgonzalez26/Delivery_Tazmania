@@ -29,7 +29,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     private vLista_Proveedores listaprov = null;
     private vCompras_Insumos compras = null;
     private vVentas_Productos ventas = null;
-    private vGestion_Asistencias asistencias = null;
+    private vLista_Asistencias asistencias = null;
     private vGestion_CategoriasProductos categoriasprod = null;
     private vGestion_Empleados empleados = null;
     private vGestion_FormasPagos formapagos = null;
@@ -1107,7 +1107,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
         if (asistencias == null || asistencias.isClosed()) {
-            asistencias = new vGestion_Asistencias();
+            asistencias = new vLista_Asistencias();
             jDesktopPane1.add(asistencias);
             asistencias.setVisible(true);
         }

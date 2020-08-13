@@ -181,7 +181,7 @@
                   </Group>
                   <EmptySpace pref="51" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jComboBox1" pref="270" max="32767" attributes="0"/>
+                      <Component id="jComboBox_TipoINsumo" pref="270" max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="166" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
@@ -206,7 +206,7 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel1" min="-2" pref="26" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jComboBox1" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jComboBox_TipoINsumo" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -228,7 +228,7 @@
             <Property name="text" type="java.lang.String" value="Tipo de Insumo:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="jComboBox_TipoINsumo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="13" style="0"/>
