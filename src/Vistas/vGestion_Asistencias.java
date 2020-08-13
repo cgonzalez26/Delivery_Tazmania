@@ -433,7 +433,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                 jList2MouseClicked(evt);
             }
         });
-        getContentPane().add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 189, -1));
+        getContentPane().add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 250, 0));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel3.setText("(*) Descripción:");
