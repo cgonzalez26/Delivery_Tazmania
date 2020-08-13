@@ -34,6 +34,7 @@
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_FormasPagos.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Movimientos_Caja.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_PermisosPantallasPerfiles.java</file>
+            <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Usuario.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_Asistencias.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_TiposUsuarios.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vLista_Egresos.java</file>
@@ -49,6 +50,7 @@
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Ventas.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_TiposGastos.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vAbrir_Caja.java</file>
+            <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Caja_Turno.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vLogin.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/Conexion.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vLista_Clientes.java</file>
@@ -56,6 +58,7 @@
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_Insumos.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vConsumosEmpleados.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Compras.java</file>
+            <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Cajas.java</file>
         </group>
     </open-files>
 </project-private>
