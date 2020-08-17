@@ -52,8 +52,8 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
         initComponents();
         jLabelMensaje.setText("");
         Date objDate = new Date();
-        jDateChooser1.setDate(objDate);
-        jLabelUsuario.setText(Session.getLogin());
+        jDateFecha.setDate(objDate);
+        jLabelNomUsuario.setText(Session.getLogin());
         ComboTurnos();
         EliminarItemsVacios();
         verificarCajaAbierta();
@@ -78,7 +78,7 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
                 //fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                 //jDateChooser1.setDate(fechaseleccionada);
                 Date objFechaCaja = new Date(caja.getFecha_apertura().getTime());
-                jDateChooser1.setDate(objFechaCaja);
+                jDateFecha.setDate(objFechaCaja);
                 cbxTurnos.setSelectedItem(dato);
                 jTextCajaChica.setText(Float.toString(caja.getMonto()));
                 jLabelMensaje.setText("Existe una Caja Abierta para el Turno");
@@ -152,14 +152,14 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
 
         btnCancelar = new javax.swing.JButton();
         btnAbrirCaja = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelFecha = new javax.swing.JLabel();
+        jDateFecha = new com.toedter.calendar.JDateChooser();
         jLabelUsuario = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelNomUsuario = new javax.swing.JLabel();
+        jLabelCajaChica = new javax.swing.JLabel();
         jTextCajaChica = new javax.swing.JTextField();
         cbxTurnos = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
+        jLabelTurno = new javax.swing.JLabel();
         jLabelMensaje = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 248, 177));
@@ -205,21 +205,21 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel6.setText("Fecha:");
+        jLabelFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelFecha.setText("Fecha:");
 
-        jDateChooser1.setDateFormatString("dd/MM/yyyy HH:mm:ss");
-        jDateChooser1.setEnabled(false);
-        jDateChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel7.setText("Usuario:");
+        jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm:ss");
+        jDateFecha.setEnabled(false);
+        jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jLabelUsuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelUsuario.setText("Usuario");
+        jLabelUsuario.setText("Usuario:");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("Caja chica:");
+        jLabelNomUsuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNomUsuario.setText("Usuario");
+
+        jLabelCajaChica.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelCajaChica.setText("Caja chica:");
 
         jTextCajaChica.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextCajaChica.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -231,8 +231,8 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
         cbxTurnos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         cbxTurnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel8.setText("Turno:");
+        jLabelTurno.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelTurno.setText("Turno:");
 
         jLabelMensaje.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
         jLabelMensaje.setForeground(new java.awt.Color(255, 0, 0));
@@ -253,22 +253,22 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
                                 .addComponent(btnCancelar))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
+                                    .addComponent(jLabelCajaChica)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jTextCajaChica))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel8))
+                                        .addComponent(jLabelFecha)
+                                        .addComponent(jLabelTurno))
                                     .addGap(33, 33, 33)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                                        .addComponent(jDateFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                                         .addComponent(cbxTurnos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(1, 1, 1)
-                                    .addComponent(jLabel7)
+                                    .addComponent(jLabelUsuario)
                                     .addGap(22, 22, 22)
-                                    .addComponent(jLabelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jLabelNomUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jLabelMensaje)))
@@ -279,20 +279,20 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabelUsuario))
+                    .addComponent(jLabelUsuario)
+                    .addComponent(jLabelNomUsuario))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelFecha)
+                    .addComponent(jDateFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+                    .addComponent(jLabelTurno)
                     .addComponent(cbxTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextCajaChica, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelCajaChica, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabelMensaje)
                 .addGap(18, 18, 18)
@@ -426,13 +426,13 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
     public static javax.swing.JButton btnAbrirCaja;
     public static javax.swing.JButton btnCancelar;
     public static javax.swing.JComboBox<String> cbxTurnos;
-    public static com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    public static com.toedter.calendar.JDateChooser jDateFecha;
+    private javax.swing.JLabel jLabelCajaChica;
+    private javax.swing.JLabel jLabelFecha;
     public static javax.swing.JLabel jLabelMensaje;
-    public static javax.swing.JLabel jLabelUsuario;
+    public static javax.swing.JLabel jLabelNomUsuario;
+    private javax.swing.JLabel jLabelTurno;
+    private javax.swing.JLabel jLabelUsuario;
     public static javax.swing.JTextField jTextCajaChica;
     // End of variables declaration//GEN-END:variables
 

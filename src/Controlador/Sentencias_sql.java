@@ -61,10 +61,10 @@ public class Sentencias_sql {
         control_Recetas receta = new control_Recetas();
         int fila;
         try {
-            for (fila = 0; fila < vGestion_Recetas.jTable1.getRowCount(); fila++) {
+            for (fila = 0; fila < vGestion_Recetas.jTableInsumosAElegir.getRowCount(); fila++) {
                 ps = con.conectado().prepareStatement(insert);
-                ps.setInt(1, receta.ObtenerIDProducto(vGestion_Recetas.jLabel2.getText()));
-                ps.setInt(2, receta.ObtenerIDInsumo(vGestion_Recetas.jTable1.getValueAt(fila, 0).toString()));
+                ps.setInt(1, receta.ObtenerIDProducto(vGestion_Recetas.jLabelNombreProductoElegido.getText()));
+                ps.setInt(2, receta.ObtenerIDInsumo(vGestion_Recetas.jTableInsumosAElegir.getValueAt(fila, 0).toString()));
                 ps.addBatch();
                 ps.executeBatch();
             }
@@ -218,13 +218,48 @@ public class Sentencias_sql {
         }
     }
 
-    public Object[][] DatosDetallesComprasVentas(String sql) {
+    public Object[][] DatosDetallesComprasVentasParaEliminar(String sql) {
         int total = obtenercantidadfilas(sql);
         try {
             ps = con.conectado().prepareStatement(sql);
             res = ps.executeQuery();
             Object[][] datos = new Object[total][2];
             String col[] = new String[2];
+            int i = 0, m = 0;
+            while (res.next()) {
+                for (int j = 1; j <= 2; j++) {
+                    col[m] = res.getString(j);
+                    datos[i][m] = col[m];
+                    m++;
+                }
+                m = 0;
+                i++;
+            }
+            ps.close();
+            res.close();
+            return datos;
+        } catch (SQLException ex) {
+            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public Object[][] DatosDetallesComprasVentasParaModificar(String sql) {
+        try {
+            ps = con.conectado().prepareStatement(sql);
+            res = ps.executeQuery();
+            boolean ultimo = res.last();
+            int total = 0;
+            if (ultimo) {
+                total = res.getRow();
+            }
+            ps.close();
+            res.close();
+
+            ps = con.conectado().prepareStatement(sql);
+            res = ps.executeQuery();
+            Object[][] datos = new Object[total][4];
+            String col[] = new String[4];
             int i = 0, m = 0;
             while (res.next()) {
                 for (int j = 1; j <= 2; j++) {
@@ -862,6 +897,43 @@ public class Sentencias_sql {
                     .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+    
+    public ArrayList<String> DatosID(String sql){
+        ArrayList<String> iddetalles = new ArrayList<>();
+        try {
+            String id;
+            ps = con.conectado().prepareStatement(sql);
+            res = ps.executeQuery();
+            while(res.next()){
+                id = res.getString(1);
+                iddetalles.add(id);
+            }
+            ps.close();
+            res.close();
+            return iddetalles;
+        } catch (SQLException e) {
+            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, e);
+            return null;
+        }
+    }
+    
+    public int CantidadID(String sql){
+        try {
+            ps = con.conectado().prepareStatement(sql);
+            res = ps.executeQuery();
+            boolean ultimo = res.last();
+            int total = 0;
+            if (ultimo) {
+                total = res.getRow();
+            }
+            ps.close();
+            res.close();
+            return total;
+        } catch (SQLException e) {
+            Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, e);
+            return 0;
+        }      
     }
 
     public DefaultTableModel ConsultarInsumos() {

@@ -88,9 +88,9 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
         };
         jBotonModif_TipoInsumo = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jLabelTipoInsumo = new javax.swing.JLabel();
+        jTextFieldTipoInsumoBuscar = new javax.swing.JTextField();
+        jButtonBuscarTipoInsumo = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -177,21 +177,22 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("Nombre Tipo");
+        jLabelTipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelTipoInsumo.setText("Nombre Tipo");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldTipoInsumoBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldTipoInsumoBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
+                jTextFieldTipoInsumoBuscarKeyTyped(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarTipoInsumo.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonBuscarTipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jButtonBuscarTipoInsumo.setText("Buscar");
+        jButtonBuscarTipoInsumo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonBuscarTipoInsumoActionPerformed(evt);
             }
         });
 
@@ -203,24 +204,24 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(104, 104, 104)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabelTipoInsumo))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(105, 105, 105)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonBuscarTipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldTipoInsumoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelTipoInsumo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldTipoInsumoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonBuscarTipoInsumo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -232,17 +233,17 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBotonAgregar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBotonAgregar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jBotonModif_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBotonModif_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(17, 17, 17)
-                        .addComponent(jBotonEliminar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jBotonEliminar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jEtiqNombre_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextDescripcion_TipoInsumo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,11 +259,11 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
                         .addComponent(jTextDescripcion_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBotonAgregar_TipoInsumo)
+                            .addComponent(jBotonAgregar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jBotonModif_TipoInsumo)
-                                .addComponent(jBotonEliminar_TipoInsumo)))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                                .addComponent(jBotonModif_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBotonEliminar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -373,13 +374,13 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
         jTabla_TiposInsumos.clearSelection();
         jTabla_TiposInsumos.getSelectionModel().clearSelection();
         MostrarDatos();
-        jTextField1.setText("");
+        jTextFieldTipoInsumoBuscar.setText("");
     }//GEN-LAST:event_formMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (!jTextField1.getText().isEmpty()) {
+    private void jButtonBuscarTipoInsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarTipoInsumoActionPerformed
+        if (!jTextFieldTipoInsumoBuscar.getText().isEmpty()) {
             String[] columnas = {"ID TIPOINSUMO", "DESCRIPCION"};
-            datostabla = tipoinsumo.MostrarDatosBuscado(jTextField1.getText());
+            datostabla = tipoinsumo.MostrarDatosBuscado(jTextFieldTipoInsumoBuscar.getText());
             if (datostabla.length != 0) {
                 datos = new DefaultTableModel(datostabla, columnas);
                 jTabla_TiposInsumos.setModel(datos);
@@ -391,7 +392,7 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar el campo");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarTipoInsumoActionPerformed
 
     private void jTextDescripcion_TipoInsumoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDescripcion_TipoInsumoKeyTyped
         char c = evt.getKeyChar();
@@ -402,27 +403,27 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextDescripcion_TipoInsumoKeyTyped
 
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    private void jTextFieldTipoInsumoBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTipoInsumoBuscarKeyTyped
         char c = evt.getKeyChar();
         if (Character.isLowerCase(c)) {
             String cadena = ("" + c).toUpperCase();
             c = cadena.charAt(0);
             evt.setKeyChar(c);
         }
-    }//GEN-LAST:event_jTextField1KeyTyped
+    }//GEN-LAST:event_jTextFieldTipoInsumoBuscarKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBotonAgregar_TipoInsumo;
     private javax.swing.JButton jBotonEliminar_TipoInsumo;
     private javax.swing.JButton jBotonModif_TipoInsumo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonBuscarTipoInsumo;
     private javax.swing.JLabel jEtiqNombre_TipoInsumo;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelTipoInsumo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTabla_TiposInsumos;
     public static javax.swing.JTextField jTextDescripcion_TipoInsumo;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldTipoInsumoBuscar;
     // End of variables declaration//GEN-END:variables
 }

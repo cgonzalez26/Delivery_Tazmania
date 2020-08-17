@@ -34,7 +34,7 @@ public class control_Caja_Turno {
     }
      
     public boolean InsertarCajaTurno(Caja_Turno cajaturno){ 
-        String fecha = ((JTextField)vAbrir_Caja.jDateChooser1.getDateEditor()).getText();
+        String fecha = ((JTextField)vAbrir_Caja.jDateFecha.getDateEditor()).getText();
         String datos[]= {Integer.toString(cajaturno.getIdCaja()),
                 Integer.toString(cajaturno.getIdTurno()),
                 Integer.toString(cajaturno.getIdusuario()),               
@@ -46,7 +46,7 @@ public class control_Caja_Turno {
     }
     
     public boolean EditarCajaTurno(Caja_Turno cajaturno){
-        String fecha = ((JTextField)vCerrar_Caja.jDateChooser1.getDateEditor()).getText();
+        String fecha = ((JTextField)vCerrar_Caja.jDateFecha.getDateEditor()).getText();
         String idcajaturno= (Integer.toString(cajaturno.getIdcajaturno()));
         String datos[]= {Integer.toString(cajaturno.getIdusuario()),                               
                 Float.toString(cajaturno.getMonto()),
@@ -56,7 +56,7 @@ public class control_Caja_Turno {
     }
     
     public boolean ModificarCajaTurno(Caja_Turno cajaturno){
-        String fecha = ((JTextField)vAbrir_Caja.jDateChooser1.getDateEditor()).getText();
+        String fecha = ((JTextField)vAbrir_Caja.jDateFecha.getDateEditor()).getText();
         String idcajaturno = Integer.toString(cajaturno.getIdcajaturno()), idusuario=Integer.toString(cajaturno.getIdusuario()),
         idturno = Integer.toString(cajaturno.getIdTurno()),monto=Float.toString(cajaturno.getMonto());
         String datos[]={idusuario,idturno,monto,idcajaturno};
@@ -87,7 +87,7 @@ public class control_Caja_Turno {
     
     public boolean AbrirCajaTurno(Caja caja, int idturno){
         //agregamos primero la Caja chica
-        String fecha = ((JTextField)vAbrir_Caja.jDateChooser1.getDateEditor()).getText();
+        String fecha = ((JTextField)vAbrir_Caja.jDateFecha.getDateEditor()).getText();
         Caja_Turno ct = new Caja_Turno();
         ct.setActivo(caja.getActivo());
         ct.setEstado(caja.getEstado());

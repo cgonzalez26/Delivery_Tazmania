@@ -34,6 +34,8 @@ public class vReportes_Anio extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel1.setText("Año:");
 
+        jYearChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+
         jButton1.setBackground(new java.awt.Color(252, 249, 57));
         jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton1.setText("Generar Reporte");

@@ -21,23 +21,23 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
     public vLista_Clientes() {
         initComponents();
         Mostrar();
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    int fila = jTable1.rowAtPoint(e.getPoint());
+                    int fila = jTableClientes.rowAtPoint(e.getPoint());
                     vcliente = new vGestion_Clientes();
                     vMenuPrincipal.jDesktopPane1.add(vcliente);
                     vcliente.setVisible(true);
-                    vGestion_Clientes.jButton3.setText("Cancelar");
-                    vGestion_Clientes.jButton1.setEnabled(true);
-                    id = jTable1.getValueAt(fila, 0).toString();
-                    vGestion_Clientes.jTextField6.setText(jTable1.getValueAt(fila, 1).toString());
-                    vGestion_Clientes.jTextField1.setText(jTable1.getValueAt(fila, 2).toString());
-                    vGestion_Clientes.jTextField2.setText(jTable1.getValueAt(fila, 3).toString());
-                    vGestion_Clientes.jTextField3.setText(jTable1.getValueAt(fila, 4).toString());
-                    vGestion_Clientes.jTextField4.setText(jTable1.getValueAt(fila, 5).toString());
-                    vGestion_Clientes.jTextField5.setText(jTable1.getValueAt(fila, 6).toString());
+                    vGestion_Clientes.jButtonAgregar.setText("Cancelar");
+                    vGestion_Clientes.jButtonModificar.setEnabled(true);
+                    id = jTableClientes.getValueAt(fila, 0).toString();
+                    vGestion_Clientes.jTextFieldNroDocumento.setText(jTableClientes.getValueAt(fila, 1).toString());
+                    vGestion_Clientes.jTextFieldNombre.setText(jTableClientes.getValueAt(fila, 2).toString());
+                    vGestion_Clientes.jTextFieldApellido.setText(jTableClientes.getValueAt(fila, 3).toString());
+                    vGestion_Clientes.jTextFieldDomicilio.setText(jTableClientes.getValueAt(fila, 4).toString());
+                    vGestion_Clientes.jTextFieldTelefono.setText(jTableClientes.getValueAt(fila, 5).toString());
+                    vGestion_Clientes.jTextFieldEmail.setText(jTableClientes.getValueAt(fila, 6).toString());
                     vcliente.idcliente = id;
                     dispose();
                 }
@@ -46,30 +46,30 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
     }
 
     public void LimpiarSeleccion() {
-        jTable1.clearSelection();
-        jTable1.getSelectionModel().clearSelection();
+        jTableClientes.clearSelection();
+        jTableClientes.getSelectionModel().clearSelection();
     }
 
     public void ocultar_columnas() {
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
+        jTableClientes.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableClientes.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableClientes.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
 
     public void Mostrar() {
         String[] columnas = {"IDCLIENTE", "NRO DOCUMENTO", "NOMBRES", "APELLIDOS", "DOMICILIO", "TELEFONO", "E-MAIL"};
         datostabla = contr_clientes.MostrarDatos();
         tabla = new DefaultTableModel(datostabla, columnas);
-        jTable1.setModel(tabla);
+        jTableClientes.setModel(tabla);
         EliminarFilasVacias();
         ocultar_columnas();
     }
 
     public void EliminarFilasVacias() {
-        if (jTable1.getRowCount() != 0) {
-            for (int columna = 0; columna < jTable1.getColumnCount(); columna++) {
-                for (int fila = 0; fila < jTable1.getRowCount(); fila++) {
-                    if (jTable1.getValueAt(fila, columna) == null) {
+        if (jTableClientes.getRowCount() != 0) {
+            for (int columna = 0; columna < jTableClientes.getColumnCount(); columna++) {
+                for (int fila = 0; fila < jTableClientes.getRowCount(); fila++) {
+                    if (jTableClientes.getValueAt(fila, columna) == null) {
                         tabla.removeRow(fila);
                     }
                 }
@@ -82,22 +82,22 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable(){
+        jTableClientes = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jLabelNombre = new javax.swing.JLabel();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jButtonBuscar = new javax.swing.JButton();
+        jLabelDNI = new javax.swing.JLabel();
+        jTextFieldDNI = new javax.swing.JTextField();
+        jLabelTelefono = new javax.swing.JLabel();
+        jTextFieldTelefono = new javax.swing.JTextField();
+        jButtonNuevo = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -112,8 +112,8 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableClientes.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -124,33 +124,34 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableClientes);
 
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Buscar Por", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("Nombre");
+        jLabelNombre.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombre.setText("Nombre");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldNombre.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonBuscarActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel2.setText("DNI");
+        jLabelDNI.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelDNI.setText("DNI");
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldDNI.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel3.setText("Telefono");
+        jLabelTelefono.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelTelefono.setText("Telefono");
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldTelefono.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,21 +159,21 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(jLabelDNI)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(jLabelNombre)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(96, 96, 96)
-                .addComponent(jLabel3)
+                .addComponent(jLabelTelefono)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(425, 425, 425))
         );
         jPanel1Layout.setVerticalGroup(
@@ -180,41 +181,41 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNombre)
+                    .addComponent(jLabelDNI)
+                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTelefono)
+                    .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonBuscar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton2.setBackground(new java.awt.Color(252, 249, 57));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton2.setText("Nuevo");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNuevo.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonNuevo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonNuevo.setText("Nuevo");
+        jButtonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonNuevoActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(252, 249, 57));
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setText("Modificar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(252, 249, 57));
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton4.setText("Eliminar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
 
@@ -224,11 +225,11 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(223, 223, 223)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(218, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -246,52 +247,52 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoActionPerformed
         vcliente = new vGestion_Clientes();
         vMenuPrincipal.jDesktopPane1.add(vcliente);
         vcliente.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonNuevoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int fila = jTable1.getSelectedRow();
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        int fila = jTableClientes.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
             vcliente = new vGestion_Clientes();
             vMenuPrincipal.jDesktopPane1.add(vcliente);
             vcliente.setVisible(true);
-            vGestion_Clientes.jButton3.setText("Cancelar");
-            vGestion_Clientes.jButton1.setEnabled(true);
-            id = jTable1.getValueAt(fila, 0).toString();
-            vGestion_Clientes.jTextField6.setText(jTable1.getValueAt(fila, 1).toString());
-            vGestion_Clientes.jTextField1.setText(jTable1.getValueAt(fila, 2).toString());
-            vGestion_Clientes.jTextField2.setText(jTable1.getValueAt(fila, 3).toString());
-            vGestion_Clientes.jTextField3.setText(jTable1.getValueAt(fila, 4).toString());
-            vGestion_Clientes.jTextField4.setText(jTable1.getValueAt(fila, 5).toString());
-            vGestion_Clientes.jTextField5.setText(jTable1.getValueAt(fila, 6).toString());
+            vGestion_Clientes.jButtonAgregar.setText("Cancelar");
+            vGestion_Clientes.jButtonModificar.setEnabled(true);
+            id = jTableClientes.getValueAt(fila, 0).toString();
+            vGestion_Clientes.jTextFieldNroDocumento.setText(jTableClientes.getValueAt(fila, 1).toString());
+            vGestion_Clientes.jTextFieldNombre.setText(jTableClientes.getValueAt(fila, 2).toString());
+            vGestion_Clientes.jTextFieldApellido.setText(jTableClientes.getValueAt(fila, 3).toString());
+            vGestion_Clientes.jTextFieldDomicilio.setText(jTableClientes.getValueAt(fila, 4).toString());
+            vGestion_Clientes.jTextFieldTelefono.setText(jTableClientes.getValueAt(fila, 5).toString());
+            vGestion_Clientes.jTextFieldEmail.setText(jTableClientes.getValueAt(fila, 6).toString());
             vcliente.idcliente = id;
             dispose();
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        int fila = jTable1.getSelectedRow();
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        int fila = jTableClientes.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                cliente.setIdcliente(Integer.parseInt(jTable1.getValueAt(i, 0).toString()));
+                cliente.setIdcliente(Integer.parseInt(jTableClientes.getValueAt(i, 0).toString()));
                 if (contr_clientes.EliminarClientes(cliente)) {
                     JOptionPane.showMessageDialog(null, "Eliminado");
                     Mostrar();
@@ -300,81 +301,81 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
                 LimpiarSeleccion();
             }
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (!jTextField1.getText().isEmpty()) {
-            datostabla = contr_clientes.MostrarDatosBusquedaCliente(jTextField1.getText());
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        if (!jTextFieldNombre.getText().isEmpty()) {
+            datostabla = contr_clientes.MostrarDatosBusquedaCliente(jTextFieldNombre.getText());
             if (datostabla.length != 0) {
                 String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
-                jTable1.setModel(tabla);
+                jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
                 ocultar_columnas();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
-        } else if (!jTextField2.getText().isEmpty()) {
-            datostabla = contr_clientes.MostrarDatosBusquedaDNI(jTextField2.getText());
+        } else if (!jTextFieldDNI.getText().isEmpty()) {
+            datostabla = contr_clientes.MostrarDatosBusquedaDNI(jTextFieldDNI.getText());
             if (datostabla.length != 0) {
                 String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
-                jTable1.setModel(tabla);
+                jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
                 ocultar_columnas();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
-        } else if (!jTextField3.getText().isEmpty()) {
-            datostabla = contr_clientes.MostrarDatosBusquedaTelefono(jTextField3.getText());
+        } else if (!jTextFieldTelefono.getText().isEmpty()) {
+            datostabla = contr_clientes.MostrarDatosBusquedaTelefono(jTextFieldTelefono.getText());
             if (datostabla.length != 0) {
                 String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
-                jTable1.setModel(tabla);
+                jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
                 ocultar_columnas();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
-        } else if (!jTextField2.getText().isEmpty() && !jTextField1.getText().isEmpty()) {
-            datostabla = contr_clientes.MostrarDatosBusquedaDNICliente(jTextField2.getText(), jTextField1.getText());
+        } else if (!jTextFieldDNI.getText().isEmpty() && !jTextFieldNombre.getText().isEmpty()) {
+            datostabla = contr_clientes.MostrarDatosBusquedaDNICliente(jTextFieldDNI.getText(), jTextFieldNombre.getText());
             if (datostabla.length != 0) {
                 String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
-                jTable1.setModel(tabla);
+                jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
                 ocultar_columnas();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
-        } else if (!jTextField3.getText().isEmpty() && jTextField1.getText().isEmpty()) {
-            datostabla = contr_clientes.MostrarDatosBusquedaClienteTelefono(jTextField1.getText(), jTextField3.getText());
+        } else if (!jTextFieldTelefono.getText().isEmpty() && jTextFieldNombre.getText().isEmpty()) {
+            datostabla = contr_clientes.MostrarDatosBusquedaClienteTelefono(jTextFieldNombre.getText(), jTextFieldTelefono.getText());
             if (datostabla.length != 0) {
                 String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
-                jTable1.setModel(tabla);
+                jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
                 ocultar_columnas();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
-        } else if (!jTextField2.getText().isEmpty() && !jTextField3.getText().isEmpty()) {
-            datostabla = contr_clientes.MostrarDatosBusquedaDNITelefono(jTextField2.getText(), jTextField3.getText());
+        } else if (!jTextFieldDNI.getText().isEmpty() && !jTextFieldTelefono.getText().isEmpty()) {
+            datostabla = contr_clientes.MostrarDatosBusquedaDNITelefono(jTextFieldDNI.getText(), jTextFieldTelefono.getText());
             if (datostabla.length != 0) {
                 String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
-                jTable1.setModel(tabla);
+                jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
                 ocultar_columnas();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
             }
-        } else if (!jTextField1.getText().isEmpty() && !jTextField2.getText().isEmpty() && !jTextField3.getText().isEmpty()) {
-            datostabla = contr_clientes.MostrarDatosBusquedaDNIClienteTelefono(jTextField2.getText(), jTextField1.getText(), jTextField3.getText());
+        } else if (!jTextFieldNombre.getText().isEmpty() && !jTextFieldDNI.getText().isEmpty() && !jTextFieldTelefono.getText().isEmpty()) {
+            datostabla = contr_clientes.MostrarDatosBusquedaDNIClienteTelefono(jTextFieldDNI.getText(), jTextFieldNombre.getText(), jTextFieldTelefono.getText());
             if (datostabla.length != 0) {
                 String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
-                jTable1.setModel(tabla);
+                jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
                 ocultar_columnas();
             } else {
@@ -383,30 +384,30 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar los campos");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccion();
         Mostrar();
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
+        jTextFieldNombre.setText("");
+        jTextFieldDNI.setText("");
+        jTextFieldTelefono.setText("");
     }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonNuevo;
+    private javax.swing.JLabel jLabelDNI;
+    private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelTelefono;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable jTableClientes;
+    private javax.swing.JTextField jTextFieldDNI;
+    private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldTelefono;
     // End of variables declaration//GEN-END:variables
 }

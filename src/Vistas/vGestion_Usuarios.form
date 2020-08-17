@@ -64,7 +64,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="309" max="-2" attributes="0"/>
-                              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCheckBoxVerContraseña" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="52" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -92,11 +92,11 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jBotonAgre_Usuario" min="-2" pref="101" max="-2" attributes="0"/>
+                              <Component id="jBotonAgre_Usuario" min="-2" pref="100" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jBotonModif_Usuario" min="-2" pref="99" max="-2" attributes="0"/>
+                              <Component id="jBotonModif_Usuario" min="-2" pref="100" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                              <Component id="jBotonCancelar" min="-2" pref="91" max="-2" attributes="0"/>
+                              <Component id="jBotonCancelar" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
@@ -132,7 +132,7 @@
                   </Group>
               </Group>
               <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+              <Component id="jCheckBoxVerContraseña" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Component id="jEtiqDireccion_Usuario" min="-2" pref="20" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -157,13 +157,13 @@
                   <Component id="jComboBox1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jComboEstado_Usuario" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jBotonAgre_Usuario" alignment="3" max="32767" attributes="0"/>
-                  <Component id="jBotonModif_Usuario" alignment="3" max="32767" attributes="0"/>
-                  <Component id="jBotonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBotonAgre_Usuario" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jBotonModif_Usuario" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jBotonCancelar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -353,7 +353,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+    <Component class="javax.swing.JCheckBox" name="jCheckBoxVerContrase&#xf1;a">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="b1" green="f8" red="ff" type="rgb"/>
@@ -364,7 +364,7 @@
         <Property name="text" type="java.lang.String" value="Ver Contrase&#xf1;a"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxVerContrase&#xf1;aActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox1">

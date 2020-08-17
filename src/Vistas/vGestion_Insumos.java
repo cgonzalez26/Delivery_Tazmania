@@ -38,23 +38,23 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         MostrarProveedores();
         EliminarItemsVacios();
         jBotonModif_Insumos.setEnabled(false);
-        jList2.setVisible(false);
+        jListProveedores.setVisible(false);
     }
 
     public void MostrarProveedores() {
         String[] columnas = {"NOMBRE COMERCIAL PROVEEDOR"};
         Object[][] datos = insumo.MostrarProveedores();
         modelprov = new DefaultTableModel(datos, columnas);
-        jTable1.setModel(modelprov);
+        jTableProveedores.setModel(modelprov);
         EliminarFilasVaciasProveedores();
         //AjustarTamañoFilasProveedores();
     }
 
     public void ListaProveedores() {
-        listprov = combo.list("proveedores", "Nombre_comercial", jTextField1.getText());
-        String substr = jTextField1.getText().toLowerCase();
+        listprov = combo.list("proveedores", "Nombre_comercial", jTextFieldProveedor.getText());
+        String substr = jTextFieldProveedor.getText().toLowerCase();
         list = new DefaultListModel();
-        jList2.setModel(list);
+        jListProveedores.setModel(list);
         list.removeAllElements();
         for (int i = 0; i < listprov.size(); i++) {
             if (listprov.get(i) == null) {
@@ -63,9 +63,9 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 String sublist = listprov.get(i).toLowerCase();
                 if (sublist.contains(substr)) {
                     list.addElement(listprov.get(i));
-                    jList2.setVisible(true);
-                    if (jTextField1.getText().isEmpty()) {
-                        jList2.setVisible(false);
+                    jListProveedores.setVisible(true);
+                    if (jTextFieldProveedor.getText().isEmpty()) {
+                        jListProveedores.setVisible(false);
                     }
                 }
             }
@@ -73,12 +73,12 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
     }
 
     public void AjustarTamañoFilasProveedores() {
-        if (jTable1.getRowCount() != 0) {
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
+        if (jTableProveedores.getRowCount() != 0) {
+            for (int i = 0; i < jTableProveedores.getRowCount(); i++) {
                 Font font = new Font("Segoe UI Semibold", 0, 13);
-                int nomprov = (int) font.getStringBounds(jTable1.getValueAt(i, 0).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                if (nomprov > jTable1.getColumnModel().getColumn(0).getPreferredWidth()) {
-                    jTable1.getColumnModel().getColumn(0).setPreferredWidth(nomprov);
+                int nomprov = (int) font.getStringBounds(jTableProveedores.getValueAt(i, 0).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
+                if (nomprov > jTableProveedores.getColumnModel().getColumn(0).getPreferredWidth()) {
+                    jTableProveedores.getColumnModel().getColumn(0).setPreferredWidth(nomprov);
                 }
             }
         }
@@ -107,11 +107,11 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
     }
 
     public void EliminarFilasVaciasProveedores() {
-        if (jTable1.getRowCount() != 0) {
-            int filas = jTable1.getRowCount();
+        if (jTableProveedores.getRowCount() != 0) {
+            int filas = jTableProveedores.getRowCount();
             filas--;
             for (int fila = filas; fila >= 0; fila--) {
-                if (jTable1.getValueAt(fila, 0) == null) {
+                if (jTableProveedores.getValueAt(fila, 0) == null) {
                     modelprov.removeRow(fila);
                 }
             }
@@ -119,7 +119,7 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
     }
 
     public void Limpiar() {
-        jTextField1.setText("");
+        jTextFieldProveedor.setText("");
         jTextDesc_Insumos.setText("");
         jTextPrecio_Insumos.setText("");
         jTextStock_Insumos.setText("");
@@ -127,7 +127,7 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
     }
 
     public void Cerrar() {
-        if (!jTextField1.getText().equals("") || !jCBTipo_Insumos.getSelectedItem().equals("(*) Seleccionar Tipo Insumo..") || !jTextDesc_Insumos.getText().trim().isEmpty()) {
+        if (!jTextFieldProveedor.getText().equals("") || !jCBTipo_Insumos.getSelectedItem().equals("(*) Seleccionar Tipo Insumo..") || !jTextDesc_Insumos.getText().trim().isEmpty()) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -145,21 +145,21 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
 
         vSeleccionarNombreComercialProv = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable(){
+        jTableProveedores = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonAgregarProv = new javax.swing.JButton();
+        jButtonCancelarProv = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jLabelNomProveedor = new javax.swing.JLabel();
+        jTextFieldNomProvedor = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jList2 = new javax.swing.JList<>();
+        jTextFieldProveedor = new javax.swing.JTextField();
+        jButtonSeleccionarProveedor = new javax.swing.JButton();
+        jListProveedores = new javax.swing.JList<>();
         jEtiqDesc_Insumos = new javax.swing.JLabel();
         jEtiqPrecio_Insumos = new javax.swing.JLabel();
         jTextPrecio_Insumos = new javax.swing.JTextField();
@@ -169,13 +169,13 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         jBotonAgregar_Insumos = new javax.swing.JButton();
         jBotonModif_Insumos = new javax.swing.JButton();
         jTextDesc_Insumos = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelProveedor = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jCBUnidad_Medida = new javax.swing.JComboBox<>();
         jBotonCancelar = new javax.swing.JButton();
 
         vSeleccionarNombreComercialProv.setTitle("Seleccionar Nombre Comercial Proveedor");
-        java.awt.Image icono = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
+        java.awt.Image icono = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
         vSeleccionarNombreComercialProv.setIconImage(icono);
         vSeleccionarNombreComercialProv.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -188,8 +188,8 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableProveedores.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jTableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -200,32 +200,35 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableProveedores);
 
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton2.setText("Aceptar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregarProv.setBackground(new java.awt.Color(252, 240, 0));
+        jButtonAgregarProv.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregarProv.setText("Agregar");
+        jButtonAgregarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonAgregarProvActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setText("Cancelar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelarProv.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonCancelarProv.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelarProv.setText("Cancelar");
+        jButtonCancelarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonCancelarProvActionPerformed(evt);
             }
         });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel2.setText("Nombre Proveedor");
+        jLabelNomProveedor.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNomProveedor.setText("Nombre Proveedor");
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldNomProvedor.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButton4.setBackground(new java.awt.Color(252, 240, 0));
+        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jButton4.setText("Buscar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,11 +242,11 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(77, 77, 77)
-                .addComponent(jLabel2)
+                .addComponent(jLabelNomProveedor)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField2)
+                .addComponent(jTextFieldNomProvedor)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(98, 98, 98)
@@ -254,9 +257,9 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(jLabelNomProveedor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldNomProvedor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -270,14 +273,15 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(vSeleccionarNombreComercialProvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(vSeleccionarNombreComercialProvLayout.createSequentialGroup()
-                        .addGroup(vSeleccionarNombreComercialProvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(vSeleccionarNombreComercialProvLayout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(vSeleccionarNombreComercialProvLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButtonAgregarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCancelarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)))
                 .addContainerGap())
         );
         vSeleccionarNombreComercialProvLayout.setVerticalGroup(
@@ -289,8 +293,8 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(vSeleccionarNombreComercialProvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButtonAgregarProv)
+                    .addComponent(jButtonCancelarProv))
                 .addContainerGap())
         );
 
@@ -325,32 +329,32 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         jLabel3.setText("Unidad de Medida:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, 30));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldProveedor.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldProveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField1KeyReleased(evt);
+                jTextFieldProveedorKeyReleased(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 270, 30));
+        getContentPane().add(jTextFieldProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 270, 30));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSeleccionarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
+        jButtonSeleccionarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonSeleccionarProveedorActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, 43, 30));
+        getContentPane().add(jButtonSeleccionarProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, 43, 30));
 
-        jList2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList2.setValueIsAdjusting(true);
-        jList2.setVisibleRowCount(0);
-        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jListProveedores.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jListProveedores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListProveedores.setValueIsAdjusting(true);
+        jListProveedores.setVisibleRowCount(0);
+        jListProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList2MouseClicked(evt);
+                jListProveedoresMouseClicked(evt);
             }
         });
-        getContentPane().add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 270, 0));
+        getContentPane().add(jListProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 270, 0));
 
         jEtiqDesc_Insumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqDesc_Insumos.setText("(*) Descripción:");
@@ -412,9 +416,9 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jTextDesc_Insumos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 270, 30));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel5.setText("(*) Proveedor:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, 20));
+        jLabelProveedor.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelProveedor.setText("(*) Proveedor:");
+        getContentPane().add(jLabelProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, 20));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel4.setText("(*) Tipo de Insumo:");
@@ -439,10 +443,10 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
 
     private void jBotonAgregar_InsumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAgregar_InsumosActionPerformed
         if (jBotonAgregar_Insumos.getText().equals("Agregar")) {
-            if (!jCBTipo_Insumos.getSelectedItem().equals("(*) Seleccionar Tipo Insumo..") && !jTextField1.getText().equals("") && !jTextDesc_Insumos.getText().trim().equals("")) {               
+            if (!jCBTipo_Insumos.getSelectedItem().equals("(*) Seleccionar Tipo Insumo..") && !jTextFieldProveedor.getText().equals("") && !jTextDesc_Insumos.getText().trim().equals("")) {               
                 I.setIdtipoinsumo(insumo.ObtenerIDTipoInsumo((String) jCBTipo_Insumos.getSelectedItem()));
                 I.setIdunidadmedida(insumo.ObtenerIDUnidadMedida((String) jCBUnidad_Medida.getSelectedItem()));
-                I.setIdproveedor(insumo.ObtenerIDProveedor((jTextField1.getText())));
+                I.setIdproveedor(insumo.ObtenerIDProveedor((jTextFieldProveedor.getText())));
                 I.setDescripcion(jTextDesc_Insumos.getText());
                 if (jTextPrecio_Insumos.getText().trim().length() == 0) {
                     I.setPrecio((float) 0.00);
@@ -478,12 +482,12 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBotonAgregar_InsumosActionPerformed
 
     private void jBotonModif_InsumosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonModif_InsumosActionPerformed
-        if (!jCBTipo_Insumos.getSelectedItem().equals("(*) Seleccionar Tipo Insumo..") && !jTextField1.getText().equals("") && !jTextDesc_Insumos.getText().trim().equals("")) {
+        if (!jCBTipo_Insumos.getSelectedItem().equals("(*) Seleccionar Tipo Insumo..") && !jTextFieldProveedor.getText().equals("") && !jTextDesc_Insumos.getText().trim().equals("")) {
            
             int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 I.setIdtipoinsumo(insumo.ObtenerIDTipoInsumo((String) jCBTipo_Insumos.getSelectedItem()));
-                I.setIdproveedor(insumo.ObtenerIDProveedor(jTextField1.getText()));
+                I.setIdproveedor(insumo.ObtenerIDProveedor(jTextFieldProveedor.getText()));
                 I.setDescripcion(jTextDesc_Insumos.getText());
                 I.setIdunidadmedida(insumo.ObtenerIDUnidadMedida((String) jCBUnidad_Medida.getSelectedItem()));
                 if (jTextPrecio_Insumos.getText().trim().length() == 0) {
@@ -555,59 +559,59 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextPrecio_InsumosKeyTyped
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonCancelarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarProvActionPerformed
         int i = JOptionPane.showConfirmDialog(null, "Esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             vSeleccionarNombreComercialProv.dispose();
-            jTextField1.setText("");
+            jTextFieldProveedor.setText("");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonCancelarProvActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jTable1.getRowCount() != 0) {
-            int i = jTable1.getSelectedRow();
+    private void jButtonAgregarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarProvActionPerformed
+        if (jTableProveedores.getRowCount() != 0) {
+            int i = jTableProveedores.getSelectedRow();
             if (i == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
                 vSeleccionarNombreComercialProv.dispose();
-                jTextField1.setText(jTable1.getValueAt(i, 0).toString());
+                jTextFieldProveedor.setText(jTableProveedores.getValueAt(i, 0).toString());
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se han agregado dichos proveedores todavia");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarProvActionPerformed
 
     private void vSeleccionarNombreComercialProvWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vSeleccionarNombreComercialProvWindowClosing
         int i = JOptionPane.showConfirmDialog(null, "Esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             vSeleccionarNombreComercialProv.dispose();
-            jTextField1.setText("");
+            jTextFieldProveedor.setText("");
         } else {
             vSeleccionarNombreComercialProv.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
     }//GEN-LAST:event_vSeleccionarNombreComercialProvWindowClosing
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonSeleccionarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarProveedorActionPerformed
         vSeleccionarNombreComercialProv.setSize(330, 645);
         vSeleccionarNombreComercialProv.setLocationRelativeTo(this);
         vSeleccionarNombreComercialProv.setModal(true);
         vSeleccionarNombreComercialProv.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonSeleccionarProveedorActionPerformed
 
     private void vSeleccionarNombreComercialProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarNombreComercialProvMouseClicked
-        jTable1.clearSelection();
-        jTable1.getSelectionModel().clearSelection();
+        jTableProveedores.clearSelection();
+        jTableProveedores.getSelectionModel().clearSelection();
         MostrarProveedores();
-        jTextField2.setText("");
+        jTextFieldNomProvedor.setText("");
     }//GEN-LAST:event_vSeleccionarNombreComercialProvMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (!jTextField2.getText().isEmpty()) {
+        if (!jTextFieldNomProvedor.getText().isEmpty()) {
             String[] columnas = {"NOMBRE COMERCIAL PROVEEDOR"};
-            Object[][] datos = insumo.MostrarProveedorBuscado(jTextField2.getText());
+            Object[][] datos = insumo.MostrarProveedorBuscado(jTextFieldNomProvedor.getText());
             if (datos.length != 0) {
                 modelprov = new DefaultTableModel(datos, columnas);
-                jTable1.setModel(modelprov);
+                jTableProveedores.setModel(modelprov);
                 EliminarFilasVaciasProveedores();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
@@ -617,17 +621,17 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
-        int i = jList2.getSelectedIndex();
+    private void jListProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListProveedoresMouseClicked
+        int i = jListProveedores.getSelectedIndex();
         if (i != -1) {
-            jTextField1.setText(jList2.getSelectedValue());
-            jList2.setVisible(false);
+            jTextFieldProveedor.setText(jListProveedores.getSelectedValue());
+            jListProveedores.setVisible(false);
         }
-    }//GEN-LAST:event_jList2MouseClicked
+    }//GEN-LAST:event_jListProveedoresMouseClicked
 
-    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+    private void jTextFieldProveedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldProveedorKeyReleased
         ListaProveedores();
-    }//GEN-LAST:event_jTextField1KeyReleased
+    }//GEN-LAST:event_jTextFieldProveedorKeyReleased
 
     private void jTextDesc_InsumosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDesc_InsumosKeyTyped
         char c = evt.getKeyChar();
@@ -652,26 +656,26 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
     public static javax.swing.JButton jBotonAgregar_Insumos;
     public static javax.swing.JButton jBotonCancelar;
     public static javax.swing.JButton jBotonModif_Insumos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonAgregarProv;
+    private javax.swing.JButton jButtonCancelarProv;
+    private javax.swing.JButton jButtonSeleccionarProveedor;
     public static javax.swing.JComboBox<String> jCBTipo_Insumos;
     public static javax.swing.JComboBox<String> jCBUnidad_Medida;
     private javax.swing.JLabel jEtiqDesc_Insumos;
     private javax.swing.JLabel jEtiqPrecio_Insumos;
     private javax.swing.JLabel jEtiqStock_Insumos;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JLabel jLabelNomProveedor;
+    private javax.swing.JLabel jLabelProveedor;
+    private javax.swing.JList<String> jListProveedores;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableProveedores;
     public static javax.swing.JTextField jTextDesc_Insumos;
-    public static javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextFieldNomProvedor;
+    public static javax.swing.JTextField jTextFieldProveedor;
     public static javax.swing.JTextField jTextPrecio_Insumos;
     public static javax.swing.JTextField jTextStock_Insumos;
     private javax.swing.JDialog vSeleccionarNombreComercialProv;

@@ -23,46 +23,46 @@ public final class vGestion_TiposEmpleados extends javax.swing.JInternalFrame {
         initComponents();
         Mostrar();
 
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableTiposEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                    jButton1.setEnabled(false);
-                    jButton2.setText("Cancelar");
-                    jButton3.setText("Modificar");
-                    int fila = jTable1.rowAtPoint(e.getPoint());
-                    id = (jTable1.getValueAt(fila, 0).toString());
-                    jTextField1.setText(jTable1.getValueAt(fila, 1).toString());
+                    jButtonAgregar.setEnabled(false);
+                    jButtonModificar.setText("Cancelar");
+                    jButtonEliminar.setText("Modificar");
+                    int fila = jTableTiposEmpleado.rowAtPoint(e.getPoint());
+                    id = (jTableTiposEmpleado.getValueAt(fila, 0).toString());
+                    jTextFieldNombreTipo.setText(jTableTiposEmpleado.getValueAt(fila, 1).toString());
                 }
             }
         });
     }
 
     public void LimpiarSeleccion() {
-        jTable1.clearSelection();
-        jTable1.getSelectionModel().clearSelection();
+        jTableTiposEmpleado.clearSelection();
+        jTableTiposEmpleado.getSelectionModel().clearSelection();
     }
 
     public void Mostrar() {
         String[] columnas = {"IDTIPOEMP", "DESCRIPCION"};
         Object[][] datostabla = tipoempleado.MostrarDatos();
         datos = new DefaultTableModel(datostabla, columnas);
-        jTable1.setModel(datos);
+        jTableTiposEmpleado.setModel(datos);
         EliminarFilasVacias();
         ocultar_columnas();
     }
 
     public void ocultar_columnas() {
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
+        jTableTiposEmpleado.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableTiposEmpleado.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableTiposEmpleado.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
 
     public void EliminarFilasVacias() {
-        if (jTable1.getRowCount() != 0) {
-            for (int columna = 0; columna < jTable1.getColumnCount(); columna++) {
-                for (int fila = 0; fila < jTable1.getRowCount(); fila++) {
-                    if (jTable1.getValueAt(fila, columna) == null) {
+        if (jTableTiposEmpleado.getRowCount() != 0) {
+            for (int columna = 0; columna < jTableTiposEmpleado.getColumnCount(); columna++) {
+                for (int fila = 0; fila < jTableTiposEmpleado.getRowCount(); fila++) {
+                    if (jTableTiposEmpleado.getValueAt(fila, columna) == null) {
                         datos.removeRow(fila);
                     }
                 }
@@ -75,20 +75,20 @@ public final class vGestion_TiposEmpleados extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable(){
+        jTableTiposEmpleado = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jLabelNombreTipo = new javax.swing.JLabel();
+        jTextFieldNombreTipo = new javax.swing.JTextField();
+        jButtonAgregar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        jLabelNombreTipos = new javax.swing.JLabel();
+        jTextFieldNombresTipoBuscar = new javax.swing.JTextField();
+        jButtonBuscarTipo = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -119,8 +119,8 @@ public final class vGestion_TiposEmpleados extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTiposEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableTiposEmpleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -131,59 +131,60 @@ public final class vGestion_TiposEmpleados extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setPreferredSize(new java.awt.Dimension(300, 65));
-        jScrollPane1.setViewportView(jTable1);
+        jTableTiposEmpleado.setPreferredSize(new java.awt.Dimension(300, 65));
+        jScrollPane1.setViewportView(jTableTiposEmpleado);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("(*) Nombre");
+        jLabelNombreTipo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombreTipo.setText("(*) Nombre");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldNombreTipo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldNombreTipo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
+                jTextFieldNombreTipoKeyTyped(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(252, 249, 57));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAgregarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(252, 249, 57));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(252, 249, 57));
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel2.setText("Nombre Tipo");
+        jLabelNombreTipos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombreTipos.setText("Nombre Tipo");
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldNombresTipoBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton4.setText("Buscar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarTipo.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonBuscarTipo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jButtonBuscarTipo.setText("Buscar");
+        jButtonBuscarTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonBuscarTipoActionPerformed(evt);
             }
         });
 
@@ -195,24 +196,24 @@ public final class vGestion_TiposEmpleados extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(130, 130, 130)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabelNombreTipos))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldNombresTipoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonBuscarTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(jLabelNombreTipos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldNombresTipoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(jButtonBuscarTipo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -221,25 +222,25 @@ public final class vGestion_TiposEmpleados extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(jLabelNombreTipo)
                         .addGap(0, 326, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField1)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(37, 37, 37)
+                                    .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(34, 34, 34)
+                                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldNombreTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,69 +250,69 @@ public final class vGestion_TiposEmpleados extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)
+                        .addComponent(jLabelNombreTipo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldNombreTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1)))
+                            .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (!jTextField1.getText().trim().equals("")) {
-            te.setDescripcion(jTextField1.getText());
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        if (!jTextFieldNombreTipo.getText().trim().equals("")) {
+            te.setDescripcion(jTextFieldNombreTipo.getText());
             if (tipoempleado.InsertarTiposEmpleados(te)) {
                 JOptionPane.showMessageDialog(null, "Nuevo tipo empleado agregado");
                 Mostrar();
-                jTextField1.setText("");
+                jTextFieldNombreTipo.setText("");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar el campo obligatorio");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jButton2.getText().equals("Modificar")) {
-            int s = jTable1.getSelectedRow();
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        if (jButtonModificar.getText().equals("Modificar")) {
+            int s = jTableTiposEmpleado.getSelectedRow();
             if (s == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                jButton1.setEnabled(false);
-                jButton2.setText("Cancelar");
-                jButton3.setText("Modificar");
-                id = (jTable1.getValueAt(s, 0).toString());
-                jTextField1.setText(jTable1.getValueAt(s, 1).toString());
+                jButtonAgregar.setEnabled(false);
+                jButtonModificar.setText("Cancelar");
+                jButtonEliminar.setText("Modificar");
+                id = (jTableTiposEmpleado.getValueAt(s, 0).toString());
+                jTextFieldNombreTipo.setText(jTableTiposEmpleado.getValueAt(s, 1).toString());
             }
         } else {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                jButton1.setEnabled(true);
-                jButton2.setText("Modificar");
-                jButton3.setText("Eliminar");
-                jTextField1.setText("");
+                jButtonAgregar.setEnabled(true);
+                jButtonModificar.setText("Modificar");
+                jButtonEliminar.setText("Eliminar");
+                jTextFieldNombreTipo.setText("");
                 LimpiarSeleccion();
                 setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jButton3.getText().equals("Eliminar")) {
-            int seleccionado = jTable1.getSelectedRow();
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        if (jButtonEliminar.getText().equals("Eliminar")) {
+            int seleccionado = jTableTiposEmpleado.getSelectedRow();
             if (seleccionado == -1) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
             } else {
                 int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    te.setIdtipoempleado(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()));
+                    te.setIdtipoempleado(Integer.parseInt(jTableTiposEmpleado.getValueAt(seleccionado, 0).toString()));
                     if (tipoempleado.EliminarTiposEmpleados(te)) {
                         JOptionPane.showMessageDialog(null, "Eliminado");
                         Mostrar();
@@ -322,17 +323,17 @@ public final class vGestion_TiposEmpleados extends javax.swing.JInternalFrame {
                 }
             }
         } else {
-            if (!jTextField1.getText().trim().equals("")) {
+            if (!jTextFieldNombreTipo.getText().trim().equals("")) {
                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    te.setDescripcion(jTextField1.getText());
+                    te.setDescripcion(jTextFieldNombreTipo.getText());
                     te.setIdtipoempleado(Integer.parseInt(id));
                     if (tipoempleado.EditarTiposEmpleados(te)) {
                         JOptionPane.showMessageDialog(null, "Modificado");
-                        jButton1.setEnabled(true);
-                        jButton2.setText("Modificar");
-                        jButton3.setText("Eliminar");
-                        jTextField1.setText("");
+                        jButtonAgregar.setEnabled(true);
+                        jButtonModificar.setText("Modificar");
+                        jButtonEliminar.setText("Eliminar");
+                        jTextFieldNombreTipo.setText("");
                         LimpiarSeleccion();
                         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                         Mostrar();
@@ -342,17 +343,17 @@ public final class vGestion_TiposEmpleados extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Debes completar el campo obligatorio");
             }
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jButton2.getText().equals("Cancelar")) {
+        if (jButtonModificar.getText().equals("Cancelar")) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (!jTextField1.getText().trim().isEmpty()) {
+        } else if (!jTextFieldNombreTipo.getText().trim().isEmpty()) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -364,26 +365,26 @@ public final class vGestion_TiposEmpleados extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_formInternalFrameClosing
 
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    private void jTextFieldNombreTipoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreTipoKeyTyped
         if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_jTextField1KeyTyped
+    }//GEN-LAST:event_jTextFieldNombreTipoKeyTyped
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccion();
         Mostrar();
-        jTextField2.setText("");
+        jTextFieldNombresTipoBuscar.setText("");
     }//GEN-LAST:event_formMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (!jTextField2.getText().isEmpty()) {
+    private void jButtonBuscarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarTipoActionPerformed
+        if (!jTextFieldNombresTipoBuscar.getText().isEmpty()) {
             String[] columnas = {"IDTIPOEMP", "DESCRIPCION"};
-            Object[][] datostabla = tipoempleado.MostrarDatoBuscadoTipoEmpleado(jTextField2.getText());
+            Object[][] datostabla = tipoempleado.MostrarDatoBuscadoTipoEmpleado(jTextFieldNombresTipoBuscar.getText());
             if (datostabla.length != 0) {
                 datos = new DefaultTableModel(datostabla, columnas);
-                jTable1.setModel(datos);
+                jTableTiposEmpleado.setModel(datos);
                 EliminarFilasVacias();
                 ocultar_columnas();
             } else {
@@ -392,20 +393,20 @@ public final class vGestion_TiposEmpleados extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar el campo");
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarTipoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jButtonAgregar;
+    private javax.swing.JButton jButtonBuscarTipo;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JLabel jLabelNombreTipo;
+    private javax.swing.JLabel jLabelNombreTipos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable jTableTiposEmpleado;
+    private javax.swing.JTextField jTextFieldNombreTipo;
+    private javax.swing.JTextField jTextFieldNombresTipoBuscar;
     // End of variables declaration//GEN-END:variables
 }

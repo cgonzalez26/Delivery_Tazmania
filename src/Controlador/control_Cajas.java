@@ -31,7 +31,7 @@ public class control_Cajas {
     }
 
     public boolean InsertarCaja(Caja caja) {
-        String fecha =((JTextField)vAbrir_Caja.jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String fecha =((JTextField)vAbrir_Caja.jDateFecha.getDateEditor().getUiComponent()).getText();
         String datos[] = {Integer.toString(caja.getIdusuario()),
             Float.toString(caja.getMonto()),
             caja.getEstado()
@@ -41,7 +41,7 @@ public class control_Cajas {
     }
 
     public boolean EditarCaja(Caja caja) {
-        String fecha = ((JTextField)vCerrar_Caja.jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String fecha = ((JTextField)vCerrar_Caja.jDateFecha.getDateEditor().getUiComponent()).getText();
         String idcaja = (Integer.toString(caja.getIdCaja()));
         String datos[] = {Integer.toString(caja.getIdusuario()),
             Float.toString(caja.getMonto()),
@@ -51,7 +51,7 @@ public class control_Cajas {
     }
     
     public boolean ModificarCaja(Caja caja){
-        String fecha =((JTextField)vAbrir_Caja.jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String fecha =((JTextField)vAbrir_Caja.jDateFecha.getDateEditor().getUiComponent()).getText();
         String idcaja = (Integer.toString(caja.getIdCaja())), idusuario = (Integer.toString(caja.getIdusuario())),
         monto =Float.toString(caja.getMonto());        
         String datos[] = {idusuario,monto,idcaja};
@@ -72,7 +72,7 @@ public class control_Cajas {
 
     public boolean AbrirCaja(Caja caja, int idturno) {
         //agregamos primero la Caja chica
-        String fecha =((JTextField)vAbrir_Caja.jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String fecha =((JTextField)vAbrir_Caja.jDateFecha.getDateEditor().getUiComponent()).getText();
         if (InsertarCaja(caja)) {
             int idcaja = sql.obtenerUltimoId("caja", "idcaja");
             caja.setIdCaja(idcaja);
@@ -105,7 +105,7 @@ public class control_Cajas {
     }
 
     public boolean CerrarCaja(Caja caja, int idturno) {
-        String fecha = ((JTextField)vCerrar_Caja.jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String fecha = ((JTextField)vCerrar_Caja.jDateFecha.getDateEditor().getUiComponent()).getText();
         //agregamos primero la Caja chica
         if (EditarCaja(caja)) {
             //agregamos la caja del turno

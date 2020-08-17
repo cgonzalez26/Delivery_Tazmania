@@ -22,46 +22,46 @@ public final class vGestion_FormasPagos extends javax.swing.JInternalFrame {
         initComponents();
         Mostrar();
 
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableFormasPago.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                    jButton1.setEnabled(false);
-                    jButton2.setText("Cancelar");
-                    jButton3.setText("Modificar");
-                    int fila = jTable1.rowAtPoint(e.getPoint());
-                    id = (jTable1.getValueAt(fila, 0).toString());
-                    jTextField1.setText(jTable1.getValueAt(fila, 1).toString());
+                    jButtonAgregar.setEnabled(false);
+                    jButtonModificar.setText("Cancelar");
+                    jButtonEliminar.setText("Modificar");
+                    int fila = jTableFormasPago.rowAtPoint(e.getPoint());
+                    id = (jTableFormasPago.getValueAt(fila, 0).toString());
+                    jTextFieldFormaPago.setText(jTableFormasPago.getValueAt(fila, 1).toString());
                 }
             }
         });
     }
 
     public void LimpiarSeleccion() {
-        jTable1.clearSelection();
-        jTable1.getSelectionModel().clearSelection();
+        jTableFormasPago.clearSelection();
+        jTableFormasPago.getSelectionModel().clearSelection();
     }
 
     public void Mostrar() {
         String[] columnas = {"ID FORMAPAGO", "DESCRIPCION"};
         Object[][] datostabla = formapago.MostrarDatos();
         datos = new DefaultTableModel(datostabla, columnas);
-        jTable1.setModel(datos);
+        jTableFormasPago.setModel(datos);
         EliminarFilasVacias();
         ocultar_columnas();
     }
 
     public void ocultar_columnas() {
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
+        jTableFormasPago.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableFormasPago.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableFormasPago.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
 
     public void EliminarFilasVacias() {
-        if (jTable1.getRowCount() != 0) {
-            for (int columna = 0; columna < jTable1.getColumnCount(); columna++) {
-                for (int fila = 0; fila < jTable1.getRowCount(); fila++) {
-                    if (jTable1.getValueAt(fila, columna) == null) {
+        if (jTableFormasPago.getRowCount() != 0) {
+            for (int columna = 0; columna < jTableFormasPago.getColumnCount(); columna++) {
+                for (int fila = 0; fila < jTableFormasPago.getRowCount(); fila++) {
+                    if (jTableFormasPago.getValueAt(fila, columna) == null) {
                         datos.removeRow(fila);
                     }
                 }
@@ -74,16 +74,16 @@ public final class vGestion_FormasPagos extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable(){
+        jTableFormasPago = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jLabelNombreForma = new javax.swing.JLabel();
+        jTextFieldFormaPago = new javax.swing.JTextField();
+        jButtonAgregar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -115,8 +115,8 @@ public final class vGestion_FormasPagos extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFormasPago.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableFormasPago.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -127,42 +127,42 @@ public final class vGestion_FormasPagos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableFormasPago);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("(*) Nombre Forma:");
+        jLabelNombreForma.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombreForma.setText("(*) Nombre Forma:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldFormaPago.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldFormaPago.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
+                jTextFieldFormaPagoKeyTyped(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(252, 249, 57));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAgregarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(252, 249, 57));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(237, 124, 61));
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
 
@@ -174,18 +174,19 @@ public final class vGestion_FormasPagos extends javax.swing.JInternalFrame {
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                        .addGap(138, 138, 138))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelNombreForma, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldFormaPago))
+                        .addGap(28, 28, 28)))
+                .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -195,14 +196,14 @@ public final class vGestion_FormasPagos extends javax.swing.JInternalFrame {
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelNombreForma, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldFormaPago, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)))
+                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -210,54 +211,54 @@ public final class vGestion_FormasPagos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (!jTextField1.getText().trim().equals("")) {
-            fp.setDescripcion(jTextField1.getText());
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        if (!jTextFieldFormaPago.getText().trim().equals("")) {
+            fp.setDescripcion(jTextFieldFormaPago.getText());
             if (formapago.InsertarFormasPagos(fp)) {
                 JOptionPane.showMessageDialog(null, "Nuevo Forma Pago agregado");
                 Mostrar();
-                jTextField1.setText("");
+                jTextFieldFormaPago.setText("");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe completar el campo obligatorio");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jButton2.getText().equals("Modificar")) {
-            int s = jTable1.getSelectedRow();
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        if (jButtonModificar.getText().equals("Modificar")) {
+            int s = jTableFormasPago.getSelectedRow();
             if (s == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                jButton1.setEnabled(false);
-                jButton2.setText("Cancelar");
-                jButton3.setText("Modificar");
-                id = (jTable1.getValueAt(s, 0).toString());
-                jTextField1.setText(jTable1.getValueAt(s, 1).toString());
+                jButtonAgregar.setEnabled(false);
+                jButtonModificar.setText("Cancelar");
+                jButtonEliminar.setText("Modificar");
+                id = (jTableFormasPago.getValueAt(s, 0).toString());
+                jTextFieldFormaPago.setText(jTableFormasPago.getValueAt(s, 1).toString());
             }
         } else {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                jButton1.setEnabled(true);
-                jButton2.setText("Modificar");
-                jButton3.setText("Eliminar");
-                jTextField1.setText("");
+                jButtonAgregar.setEnabled(true);
+                jButtonModificar.setText("Modificar");
+                jButtonEliminar.setText("Eliminar");
+                jTextFieldFormaPago.setText("");
                 LimpiarSeleccion();
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jButton3.getText().equals("Eliminar")) {
-            int seleccionado = jTable1.getSelectedRow();
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        if (jButtonEliminar.getText().equals("Eliminar")) {
+            int seleccionado = jTableFormasPago.getSelectedRow();
             if (seleccionado == -1) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
             } else {
                 int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    fp.setIdformapago(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()));
+                    fp.setIdformapago(Integer.parseInt(jTableFormasPago.getValueAt(seleccionado, 0).toString()));
                     if (formapago.EliminarFormasPagos(fp)) {
                         JOptionPane.showMessageDialog(null, "Eliminado");
                         Mostrar();
@@ -268,37 +269,37 @@ public final class vGestion_FormasPagos extends javax.swing.JInternalFrame {
                 }
             }
         } else {
-            if (!jTextField1.getText().trim().equals("")) {
+            if (!jTextFieldFormaPago.getText().trim().equals("")) {
                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    fp.setDescripcion(jTextField1.getText());
+                    fp.setDescripcion(jTextFieldFormaPago.getText());
                     fp.setIdformapago(Integer.parseInt(id));
                     if (formapago.EditarFormasPagos(fp)) {
                         JOptionPane.showMessageDialog(null, "Modificado");
                         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                         Mostrar();
-                        jTextField1.setText("");
+                        jTextFieldFormaPago.setText("");
                         LimpiarSeleccion();
-                        jButton1.setEnabled(true);
-                        jButton3.setText("Eliminar");
-                        jButton2.setText("Modificar");
+                        jButtonAgregar.setEnabled(true);
+                        jButtonEliminar.setText("Eliminar");
+                        jButtonModificar.setText("Modificar");
                     }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Debes completar el campo obligatario");
             }
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jButton2.getText().equals("Cancelar")) {
+        if (jButtonModificar.getText().equals("Cancelar")) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (!jTextField1.getText().trim().isEmpty()) {
+        } else if (!jTextFieldFormaPago.getText().trim().isEmpty()) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -310,12 +311,12 @@ public final class vGestion_FormasPagos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_formInternalFrameClosing
 
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    private void jTextFieldFormaPagoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFormaPagoKeyTyped
         if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_jTextField1KeyTyped
+    }//GEN-LAST:event_jTextFieldFormaPagoKeyTyped
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccion();
@@ -323,12 +324,12 @@ public final class vGestion_FormasPagos extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButtonAgregar;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JLabel jLabelNombreForma;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTableFormasPago;
+    private javax.swing.JTextField jTextFieldFormaPago;
     // End of variables declaration//GEN-END:variables
 }

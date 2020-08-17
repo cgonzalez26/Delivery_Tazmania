@@ -64,8 +64,8 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         MostrarInsumos();
         MostrarProveedores();
         EliminarItemsVacios();
-        jList1.setVisible(false);
-        jList2.setVisible(false);
+        jListProveedores.setVisible(false);
+        jListInsumos.setVisible(false);
         //jTextField1.setText(Float.toString((float) 0.00));
         jTextTotal.setText(Float.toString((float) 0.00));
         //jTextField1.setEditable(false);
@@ -90,7 +90,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jTextProveedor.setEnabled(false);
         jTextPrecio.setEnabled(false);
         JtextCantidad.setEnabled(false);
-        jDateChooser1.setEnabled(false);
+        jDateFecha.setEnabled(false);
         jCBUsuario.setEnabled(false);
         jButtonSeleccionarProv.setEnabled(false);
         jButtonSeleccionarProv.setEnabled(false);
@@ -118,7 +118,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         listprov = combo.list("proveedores", "Nombre_comercial", jTextProveedor.getText());
         String substr = jTextProveedor.getText().toLowerCase();
         listmodel = new DefaultListModel<>();
-        jList1.setModel(listmodel);
+        jListProveedores.setModel(listmodel);
         listmodel.removeAllElements();
         if (listprov.size() > 0) {
             for (int i = 0; i < listprov.size(); i++) {
@@ -128,9 +128,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                     String sublist = listprov.get(i).toLowerCase();
                     if (sublist.contains(substr)) {
                         listmodel.addElement(listprov.get(i));
-                        jList1.setVisible(true);
+                        jListProveedores.setVisible(true);
                         if (jTextProveedor.getText().isEmpty()) {
-                            jList1.setVisible(false);
+                            jListProveedores.setVisible(false);
                         }
                     }
                 }
@@ -142,7 +142,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         listprov = combo.list("insumos", "descripcion", jTextInsumo.getText());
         String substr = jTextInsumo.getText().toLowerCase();
         listmodel = new DefaultListModel<>();
-        jList2.setModel(listmodel);
+        jListInsumos.setModel(listmodel);
         listmodel.removeAllElements();
         if (listprov.size() > 0) {
             for (int i = 0; i < listprov.size(); i++) {
@@ -153,9 +153,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                     if (sublist.contains(substr)) {
                         //listmodel.addElement(listprov.get(i));
                         listmodel.add(i, listprov.get(i));
-                        jList2.setVisible(true);
+                        jListInsumos.setVisible(true);
                         if (jTextInsumo.getText().isEmpty()) {
-                            jList2.setVisible(false);
+                            jListInsumos.setVisible(false);
                         }
                     }
                 }
@@ -175,7 +175,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         String[] columnas = {"NOMBRE COMERCIAL PROVEEDORES"};
         proveedores = compra.MostrarProveedores();
         modelprov = new DefaultTableModel(proveedores, columnas);
-        jTable2.setModel(modelprov);
+        jTableProveedores.setModel(modelprov);
         EliminarFilasVaciasProveedores();
         //AjustarTamañoFilasProveedores();
     }
@@ -184,51 +184,51 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         String[] columnas = {"INSUMOS", "PRECIO", "CANTIDAD"};
         insumos = detallecompra.MostrarInsumos();
         modelinsumo = new DefaultTableModel(insumos, columnas);
-        jTable3.setModel(modelinsumo);
+        jTableInsumos.setModel(modelinsumo);
         ocultarColumnasIns();
         EliminarFilasVaciasInsumos();
         AjustarTamañoFilasInsumos();
     }
 
     public void ocultarColumnasIns() {
-        jTable3.getColumnModel().getColumn(1).setMaxWidth(0);
-        jTable3.getColumnModel().getColumn(1).setMinWidth(0);
-        jTable3.getColumnModel().getColumn(1).setPreferredWidth(0);
-        jTable3.getColumnModel().getColumn(2).setMaxWidth(0);
-        jTable3.getColumnModel().getColumn(2).setMinWidth(0);
-        jTable3.getColumnModel().getColumn(2).setPreferredWidth(0);
+        jTableInsumos.getColumnModel().getColumn(1).setMaxWidth(0);
+        jTableInsumos.getColumnModel().getColumn(1).setMinWidth(0);
+        jTableInsumos.getColumnModel().getColumn(1).setPreferredWidth(0);
+        jTableInsumos.getColumnModel().getColumn(2).setMaxWidth(0);
+        jTableInsumos.getColumnModel().getColumn(2).setMinWidth(0);
+        jTableInsumos.getColumnModel().getColumn(2).setPreferredWidth(0);
     }
 
     public void AjustarTamañoFilasProveedores() {
-        if (jTable2.getRowCount() != 0) {
-            for (int i = 0; i < jTable2.getRowCount(); i++) {
+        if (jTableProveedores.getRowCount() != 0) {
+            for (int i = 0; i < jTableProveedores.getRowCount(); i++) {
                 Font font = new Font("Segoe UI Semibold", 0, 13);
-                int nomprov = (int) font.getStringBounds(jTable2.getValueAt(i, 0).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                if (nomprov > jTable2.getColumnModel().getColumn(0).getPreferredWidth()) {
-                    jTable2.getColumnModel().getColumn(0).setPreferredWidth(nomprov);
+                int nomprov = (int) font.getStringBounds(jTableProveedores.getValueAt(i, 0).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
+                if (nomprov > jTableProveedores.getColumnModel().getColumn(0).getPreferredWidth()) {
+                    jTableProveedores.getColumnModel().getColumn(0).setPreferredWidth(nomprov);
                 }
             }
         }
     }
 
     public void AjustarTamañoFilasInsumos() {
-        if (jTable3.getRowCount() != 0) {
-            for (int i = 0; i < jTable3.getRowCount(); i++) {
+        if (jTableInsumos.getRowCount() != 0) {
+            for (int i = 0; i < jTableInsumos.getRowCount(); i++) {
                 Font font = new Font("Segoe UI Semibold", 0, 13);
-                int nomins = (int) font.getStringBounds(jTable3.getValueAt(i, 0).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                if (nomins > jTable3.getColumnModel().getColumn(0).getPreferredWidth()) {
-                    jTable3.getColumnModel().getColumn(0).setPreferredWidth(nomins);
+                int nomins = (int) font.getStringBounds(jTableInsumos.getValueAt(i, 0).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
+                if (nomins > jTableInsumos.getColumnModel().getColumn(0).getPreferredWidth()) {
+                    jTableInsumos.getColumnModel().getColumn(0).setPreferredWidth(nomins);
                 }
             }
         }
     }
 
     public void EliminarFilasVaciasProveedores() {
-        if (jTable2.getRowCount() != 0) {
-            int filas = jTable2.getRowCount();
+        if (jTableProveedores.getRowCount() != 0) {
+            int filas = jTableProveedores.getRowCount();
             filas--;
             for (int fila = filas; fila >= 0; fila--) {
-                if (jTable2.getValueAt(fila, 0) == null) {
+                if (jTableProveedores.getValueAt(fila, 0) == null) {
                     modelprov.removeRow(fila);
                 }
             }
@@ -236,11 +236,11 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     }
 
     public void EliminarFilasVaciasInsumos() {
-        if (jTable3.getRowCount() != 0) {
-            int filas = jTable3.getRowCount();
+        if (jTableInsumos.getRowCount() != 0) {
+            int filas = jTableInsumos.getRowCount();
             filas--;
             for (int fila = filas; fila >= 0; fila--) {
-                if (jTable3.getValueAt(fila, 0) == null) {
+                if (jTableInsumos.getValueAt(fila, 0) == null) {
                     modelinsumo.removeRow(fila);
                 }
             }
@@ -276,33 +276,33 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
 
         vSeleccionarNombreComercialProv = new javax.swing.JDialog();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable(){
+        jTableProveedores = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        jButtonAgregarProv = new javax.swing.JButton();
+        jButtonCancelarProv = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton12 = new javax.swing.JButton();
+        jLabelNombreProveedor = new javax.swing.JLabel();
+        jTextFieldProveedor = new javax.swing.JTextField();
+        jButtonBuscarProv = new javax.swing.JButton();
         vSeleccionarInsumo = new javax.swing.JDialog();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable(){
+        jTableInsumos = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        jButtonAgregarIns = new javax.swing.JButton();
+        jButtonCancelarIns = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jButton13 = new javax.swing.JButton();
+        jLabelNombreInsumo = new javax.swing.JLabel();
+        jTextFieldInsumo = new javax.swing.JTextField();
+        jButtonBuscarInsumo = new javax.swing.JButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jTextProveedor = new javax.swing.JTextField();
-        jList1 = new javax.swing.JList<>();
+        jListProveedores = new javax.swing.JList<>();
         jButtonSeleccionarProv = new javax.swing.JButton();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -314,28 +314,28 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jButtonAgregar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
         jButtonBorrar = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelInsumo = new javax.swing.JLabel();
         jTextInsumo = new javax.swing.JTextField();
         jButtonSeleccionarInsumo = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        jLabelPrecio = new javax.swing.JLabel();
         jTextPrecio = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelCantidad = new javax.swing.JLabel();
         JtextCantidad = new javax.swing.JTextField();
-        jList2 = new javax.swing.JList<>();
-        jLabel5 = new javax.swing.JLabel();
+        jListInsumos = new javax.swing.JList<>();
+        jLabelUsuario = new javax.swing.JLabel();
         jCBUsuario = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jLabel6 = new javax.swing.JLabel();
+        jDateFecha = new com.toedter.calendar.JDateChooser();
+        jLabelFecha = new javax.swing.JLabel();
         jButtonModificarCompra = new javax.swing.JButton();
         jButtonAgregarCompra = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        jLabelTotal = new javax.swing.JLabel();
         jTextTotal = new javax.swing.JTextField();
         jlabelMensaje = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelProveedor = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
 
         vSeleccionarNombreComercialProv.setTitle("Seleccionar Nombre Comercial Proveedor");
-        java.awt.Image iconoprov = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
+        java.awt.Image iconoprov = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
         vSeleccionarNombreComercialProv.setIconImage(iconoprov);
         vSeleccionarNombreComercialProv.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -348,8 +348,8 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableProveedores.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -357,36 +357,39 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTableProveedores);
 
-        jButton8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton8.setText("Aceptar");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregarProv.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregarProv.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregarProv.setText("Agregar");
+        jButtonAgregarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jButtonAgregarProvActionPerformed(evt);
             }
         });
 
-        jButton9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton9.setText("Cancelar");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelarProv.setBackground(new java.awt.Color(240, 87, 49));
+        jButtonCancelarProv.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelarProv.setText("Cancelar");
+        jButtonCancelarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                jButtonCancelarProvActionPerformed(evt);
             }
         });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("Nombre Proveedor");
+        jLabelNombreProveedor.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombreProveedor.setText("Nombre Proveedor");
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldProveedor.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jButton12.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton12.setText("Buscar");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarProv.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonBuscarProv.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jButtonBuscarProv.setText("Buscar");
+        jButtonBuscarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                jButtonBuscarProvActionPerformed(evt);
             }
         });
 
@@ -398,27 +401,26 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTextField5))
+                        .addComponent(jTextFieldProveedor))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(85, 85, 85)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(85, 85, 85)
+                        .addComponent(jLabelNombreProveedor)
+                        .addGap(0, 104, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(jButtonBuscarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelNombreProveedor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton12)
+                .addComponent(jButtonBuscarProv)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -431,9 +433,11 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 .addGroup(vSeleccionarNombreComercialProvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(vSeleccionarNombreComercialProvLayout.createSequentialGroup()
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addComponent(jButtonAgregarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCancelarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -446,13 +450,13 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(vSeleccionarNombreComercialProvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9)
-                    .addComponent(jButton8))
+                    .addComponent(jButtonCancelarProv)
+                    .addComponent(jButtonAgregarProv))
                 .addContainerGap())
         );
 
         vSeleccionarInsumo.setTitle("Seleccionar Insumo");
-        java.awt.Image icono = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
+        java.awt.Image icono = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
         vSeleccionarInsumo.setIconImage(icono);
         vSeleccionarInsumo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -465,8 +469,8 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTableInsumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableInsumos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -474,41 +478,44 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(jTableInsumos);
 
-        jButton10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton10.setText("Aceptar");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregarIns.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregarIns.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregarIns.setText("Agregar");
+        jButtonAgregarIns.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jButtonAgregarInsActionPerformed(evt);
             }
         });
 
-        jButton11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton11.setText("Cancelar");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelarIns.setBackground(new java.awt.Color(240, 87, 49));
+        jButtonCancelarIns.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelarIns.setText("Cancelar");
+        jButtonCancelarIns.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                jButtonCancelarInsActionPerformed(evt);
             }
         });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel2.setText("Nombre Insumo");
+        jLabelNombreInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombreInsumo.setText("Nombre Insumo");
 
-        jTextField8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField8.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldInsumo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField8KeyTyped(evt);
+                jTextFieldInsumoKeyTyped(evt);
             }
         });
 
-        jButton13.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton13.setText("Buscar");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarInsumo.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonBuscarInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jButtonBuscarInsumo.setText("Buscar");
+        jButtonBuscarInsumo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                jButtonBuscarInsumoActionPerformed(evt);
             }
         });
 
@@ -520,26 +527,26 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTextField8))
+                        .addComponent(jTextFieldInsumo))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
-                        .addComponent(jLabel2)
+                        .addComponent(jLabelNombreInsumo)
                         .addGap(0, 98, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(96, 96, 96)
-                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonBuscarInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(jLabelNombreInsumo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton13)
+                .addComponent(jButtonBuscarInsumo)
                 .addContainerGap())
         );
 
@@ -553,9 +560,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(vSeleccionarInsumoLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonAgregarIns, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonCancelarIns, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -569,8 +576,8 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(vSeleccionarInsumoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10)
-                    .addComponent(jButton11))
+                    .addComponent(jButtonAgregarIns)
+                    .addComponent(jButtonCancelarIns))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -617,15 +624,15 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         });
         jLayeredPane3.add(jTextProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 292, 30));
 
-        jList1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jList1.setValueIsAdjusting(true);
-        jList1.setVisibleRowCount(0);
-        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jListProveedores.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jListProveedores.setValueIsAdjusting(true);
+        jListProveedores.setVisibleRowCount(0);
+        jListProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList1MouseClicked(evt);
+                jListProveedoresMouseClicked(evt);
             }
         });
-        jLayeredPane3.add(jList1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 290, -1));
+        jLayeredPane3.add(jListProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 290, -1));
 
         jButtonSeleccionarProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
         jButtonSeleccionarProv.setFocusable(false);
@@ -684,8 +691,8 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel3.setText("(*) Insumo:");
+        jLabelInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelInsumo.setText("(*) Insumo:");
 
         jTextInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextInsumo.setToolTipText("");
@@ -705,8 +712,8 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel9.setText("(*) Precio:");
+        jLabelPrecio.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelPrecio.setText("(*) Precio:");
 
         jTextPrecio.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -715,8 +722,8 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel7.setText("(*) Cantidad:");
+        jLabelCantidad.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelCantidad.setText("(*) Cantidad:");
 
         JtextCantidad.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         JtextCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -725,13 +732,13 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             }
         });
 
-        jList2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jList2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jList2.setValueIsAdjusting(true);
-        jList2.setVisibleRowCount(0);
-        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jListInsumos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jListInsumos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jListInsumos.setValueIsAdjusting(true);
+        jListInsumos.setVisibleRowCount(0);
+        jListInsumos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList2MouseClicked(evt);
+                jListInsumosMouseClicked(evt);
             }
         });
 
@@ -739,14 +746,14 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jLayeredPane2.setLayer(jButtonAgregar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jButtonModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jButtonBorrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabelInsumo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jTextInsumo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jButtonSeleccionarInsumo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabelPrecio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jTextPrecio, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabelCantidad, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(JtextCantidad, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jList2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jListInsumos, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -756,15 +763,15 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(jLabelInsumo)
                         .addGap(243, 243, 243)
-                        .addComponent(jLabel9)
+                        .addComponent(jLabelPrecio)
                         .addGap(152, 152, 152)
-                        .addComponent(jLabel7))
+                        .addComponent(jLabelCantidad))
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jList2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jListInsumos, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6)
                         .addComponent(jButtonSeleccionarInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
@@ -787,14 +794,14 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabelInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addComponent(jTextInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
-                        .addComponent(jList2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jListInsumos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jButtonSeleccionarInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JtextCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -814,22 +821,22 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
 
         jLayeredPane3.add(jLayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1220, 320));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel5.setText("Usuario:");
-        jLayeredPane3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(514, 11, 232, -1));
+        jLabelUsuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelUsuario.setText("Usuario:");
+        jLayeredPane3.add(jLabelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(514, 11, 232, -1));
 
         jCBUsuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jCBUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(*) Seleccionar Usuario.." }));
         jLayeredPane3.add(jCBUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(514, 35, 250, 32));
         jCBUsuario.getAccessibleContext().setAccessibleParent(this);
 
-        jDateChooser1.setDateFormatString("dd/MM/yyyy HH:mm");
-        jDateChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLayeredPane3.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 37, 175, 30));
+        jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm");
+        jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLayeredPane3.add(jDateFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 37, 175, 30));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel6.setText("(*) Fecha:");
-        jLayeredPane3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 11, 80, 20));
+        jLabelFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelFecha.setText("(*) Fecha:");
+        jLayeredPane3.add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 11, 80, 20));
 
         jButtonModificarCompra.setBackground(new java.awt.Color(252, 249, 57));
         jButtonModificarCompra.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -851,9 +858,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         });
         jLayeredPane3.add(jButtonAgregarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 460, 136, -1));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel10.setText("TOTAL:");
-        jLayeredPane3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 420, -1, 20));
+        jLabelTotal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelTotal.setText("TOTAL:");
+        jLayeredPane3.add(jLabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 420, -1, 20));
 
         jTextTotal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLayeredPane3.add(jTextTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 410, 140, 32));
@@ -863,9 +870,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jlabelMensaje.setText("No hay CAJA ABIERTA.");
         jLayeredPane3.add(jlabelMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, 20));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel4.setText("(*) Proveedor:");
-        jLayeredPane3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
+        jLabelProveedor.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelProveedor.setText("(*) Proveedor:");
+        jLayeredPane3.add(jLabelProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
 
         btnCancelar.setBackground(new java.awt.Color(240, 87, 49));
         btnCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -903,9 +910,9 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     }
     
     private void jButtonAgregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarCompraActionPerformed
-        String fecha = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-        if (!jTextProveedor.getText().equals("") && !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextTotal.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
-            if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+        String fecha = ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText();
+        if (!jTextProveedor.getText().equals("") && !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextTotal.getText().trim().equals("") && !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().equals("")) {
+            if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
                     if (jTableDetalle.getRowCount() != 0) {
                         c.setIdproveedor(compra.ObtenerIDProveedor(jTextProveedor.getText()));
                         c.setIdusuario(compra.ObtenerIDUsuario((String) jCBUsuario.getSelectedItem()));
@@ -1082,7 +1089,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                                         this.setTitle("Registrando nueva compra Factura N° " + nrofactura);
                                         jTextProveedor.setText("");
                                         jCBUsuario.setSelectedIndex(0);
-                                        ((JTextField) vCompras_Insumos.jDateChooser1.getDateEditor().getUiComponent()).setText("");
+                                        ((JTextField) vCompras_Insumos.jDateFecha.getDateEditor().getUiComponent()).setText("");
                                         jTextInsumo.setText("");
                                         JtextCantidad.setText("");
                                         jTextPrecio.setText("");
@@ -1122,10 +1129,10 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     private void jButtonModificarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarCompraActionPerformed
-        String fecha = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String fecha = ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText();
         filascompra = jTableDetalle.getRowCount();
-            if (!jTextProveedor.getText().equals("") && !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextTotal.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
-                if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+            if (!jTextProveedor.getText().equals("") && !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") && !jTextTotal.getText().trim().equals("") && !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().equals("")) {
+                if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
                         if (jTableDetalle.getRowCount() != 0) {
                             int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                             if (i == 0) {
@@ -1315,7 +1322,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (!jTextProveedor.getText().equals("") || !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") || !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("") || jTableDetalle.getRowCount() > 0 || !jTextInsumo.getText().equals("") || !jTextPrecio.getText().equals("") || !JtextCantidad.getText().equals("")) {
+        } else if (!jTextProveedor.getText().equals("") || !jCBUsuario.getSelectedItem().equals("(*) Seleccionar Usuario..") || !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().equals("") || jTableDetalle.getRowCount() > 0 || !jTextInsumo.getText().equals("") || !jTextPrecio.getText().equals("") || !JtextCantidad.getText().equals("")) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Compra?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -1353,27 +1360,27 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextPrecioKeyTyped
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if (jTable2.getRowCount() != 0) {
-            int m = jTable2.getSelectedRow();
+    private void jButtonAgregarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarProvActionPerformed
+        if (jTableProveedores.getRowCount() != 0) {
+            int m = jTableProveedores.getSelectedRow();
             if (m == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
                 vSeleccionarNombreComercialProv.dispose();
-                jTextProveedor.setText(jTable2.getValueAt(m, 0).toString());
+                jTextProveedor.setText(jTableProveedores.getValueAt(m, 0).toString());
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se han agregado dichos proveedores todavia");
         }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarProvActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void jButtonCancelarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarProvActionPerformed
         int p = JOptionPane.showConfirmDialog(null, "Esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (p == 0) {
             vSeleccionarNombreComercialProv.dispose();
             jTextProveedor.setText("");
         }
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_jButtonCancelarProvActionPerformed
 
     private void jButtonSeleccionarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarProvActionPerformed
         vSeleccionarNombreComercialProv.setSize(345, 625);
@@ -1392,21 +1399,21 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_vSeleccionarNombreComercialProvWindowClosing
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        if (jTable3.getRowCount() != 0) {
-            int i = jTable3.getSelectedRow();
+    private void jButtonAgregarInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarInsActionPerformed
+        if (jTableInsumos.getRowCount() != 0) {
+            int i = jTableInsumos.getSelectedRow();
             if (i == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
                 vSeleccionarInsumo.dispose();
-                jTextInsumo.setText(jTable3.getValueAt(i, 0).toString());
-                jTextPrecio.setText(jTable3.getValueAt(i, 1).toString());
-                JtextCantidad.setText(jTable3.getValueAt(i, 2).toString());
+                jTextInsumo.setText(jTableInsumos.getValueAt(i, 0).toString());
+                jTextPrecio.setText(jTableInsumos.getValueAt(i, 1).toString());
+                JtextCantidad.setText(jTableInsumos.getValueAt(i, 2).toString());
             }
         }
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarInsActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void jButtonCancelarInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarInsActionPerformed
         int j = JOptionPane.showConfirmDialog(null, "Esta Seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (j == 0) {
             vSeleccionarInsumo.dispose();
@@ -1416,7 +1423,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         } else {
             vSeleccionarInsumo.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_jButtonCancelarInsActionPerformed
 
     private void vSeleccionarInsumoWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vSeleccionarInsumoWindowClosing
         int j = JOptionPane.showConfirmDialog(null, "Esta Seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -1446,26 +1453,26 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void vSeleccionarNombreComercialProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarNombreComercialProvMouseClicked
-        jTable2.clearSelection();
-        jTable2.getSelectionModel().clearSelection();
+        jTableProveedores.clearSelection();
+        jTableProveedores.getSelectionModel().clearSelection();
         MostrarProveedores();
-        jTextField5.setText("");
+        jTextFieldProveedor.setText("");
     }//GEN-LAST:event_vSeleccionarNombreComercialProvMouseClicked
 
     private void vSeleccionarInsumoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarInsumoMouseClicked
-        jTable3.clearSelection();
-        jTable3.getSelectionModel().clearSelection();
+        jTableInsumos.clearSelection();
+        jTableInsumos.getSelectionModel().clearSelection();
         MostrarInsumos();
-        jTextField8.setText("");
+        jTextFieldInsumo.setText("");
     }//GEN-LAST:event_vSeleccionarInsumoMouseClicked
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        if (!jTextField5.getText().isEmpty()) {
+    private void jButtonBuscarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarProvActionPerformed
+        if (!jTextFieldProveedor.getText().isEmpty()) {
             String[] columnas = {"NOMBRE COMERCIAL PROVEEDORES"};
-            proveedores = compra.MostrarProveedorBuscado(jTextField5.getText());
+            proveedores = compra.MostrarProveedorBuscado(jTextFieldProveedor.getText());
             if (proveedores.length != 0) {
                 modelprov = new DefaultTableModel(proveedores, columnas);
-                jTable2.setModel(modelprov);
+                jTableProveedores.setModel(modelprov);
                 EliminarFilasVaciasProveedores();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
@@ -1473,15 +1480,15 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar el campo");
         }
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarProvActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        if (!jTextField8.getText().isEmpty()) {
+    private void jButtonBuscarInsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarInsumoActionPerformed
+        if (!jTextFieldInsumo.getText().isEmpty()) {
             String[] columnas = {"INSUMOS", "PRECIO", "CANTIDAD"};
-            insumos = detallecompra.MostrarInsumosBuscado(jTextField8.getText());
+            insumos = detallecompra.MostrarInsumosBuscado(jTextFieldInsumo.getText());
             if (insumos.length != 0) {
                 modelinsumo = new DefaultTableModel(insumos, columnas);
-                jTable3.setModel(modelinsumo);
+                jTableInsumos.setModel(modelinsumo);
                 ocultarColumnasIns();
                 EliminarFilasVaciasInsumos();
             } else {
@@ -1490,15 +1497,15 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar el campo");
         }
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarInsumoActionPerformed
 
-    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
-        int i = jList1.getSelectedIndex();
+    private void jListProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListProveedoresMouseClicked
+        int i = jListProveedores.getSelectedIndex();
         if (i != -1) {
-            jTextProveedor.setText(jList1.getSelectedValue());
-            jList1.setVisible(false);
+            jTextProveedor.setText(jListProveedores.getSelectedValue());
+            jListProveedores.setVisible(false);
         }
-    }//GEN-LAST:event_jList1MouseClicked
+    }//GEN-LAST:event_jListProveedoresMouseClicked
 
     private void jTextProveedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextProveedorKeyReleased
         ListaProveedores();
@@ -1508,11 +1515,11 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         ListaInsumos();
     }//GEN-LAST:event_jTextInsumoKeyReleased
 
-    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
-        int i = jList2.getSelectedIndex();
+    private void jListInsumosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListInsumosMouseClicked
+        int i = jListInsumos.getSelectedIndex();
         ArrayList<String> array;
         if (i != -1) {
-            jTextInsumo.setText(jList2.getSelectedValue());
+            jTextInsumo.setText(jListInsumos.getSelectedValue());
             array = compra.ObtenerDatosNumInsumos(jTextInsumo.getText());
             if (array.size() > 0) {
                 for (int j = 0; j < array.size(); j++) {
@@ -1520,11 +1527,11 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
                     j++;
                     JtextCantidad.setText(array.get(j));
                     j++;
-                    jList2.setVisible(false);
+                    jListInsumos.setVisible(false);
                 }
             }
         }
-    }//GEN-LAST:event_jList2MouseClicked
+    }//GEN-LAST:event_jListInsumosMouseClicked
 
     private void jTableDetalleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDetalleMousePressed
         //jTextField1.setText(String.valueOf(Float.parseFloat(modelo.getValueAt(vCompras_Insumos.jTable1.getSelectedRow(), 1).toString()) * Float.parseFloat(modelo.getValueAt(vCompras_Insumos.jTable1.getSelectedRow(), 2).toString())));
@@ -1551,14 +1558,14 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextInsumoKeyTyped
 
-    private void jTextField8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyTyped
+    private void jTextFieldInsumoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldInsumoKeyTyped
         char c = evt.getKeyChar();
         if (Character.isLowerCase(c)) {
             String cadena = ("" + c).toUpperCase();
             c = cadena.charAt(0);
             evt.setKeyChar(c);
         }
-    }//GEN-LAST:event_jTextField8KeyTyped
+    }//GEN-LAST:event_jTextFieldInsumoKeyTyped
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:       
@@ -1576,44 +1583,44 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField JtextCantidad;
     public static javax.swing.JButton btnCancelar;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     public static javax.swing.JButton jButtonAgregar;
     public static javax.swing.JButton jButtonAgregarCompra;
+    private javax.swing.JButton jButtonAgregarIns;
+    private javax.swing.JButton jButtonAgregarProv;
     public static javax.swing.JButton jButtonBorrar;
+    private javax.swing.JButton jButtonBuscarInsumo;
+    private javax.swing.JButton jButtonBuscarProv;
+    private javax.swing.JButton jButtonCancelarIns;
+    private javax.swing.JButton jButtonCancelarProv;
     public static javax.swing.JButton jButtonModificar;
     public static javax.swing.JButton jButtonModificarCompra;
     private javax.swing.JButton jButtonSeleccionarInsumo;
     private javax.swing.JButton jButtonSeleccionarProv;
     public static javax.swing.JComboBox<String> jCBUsuario;
-    public static com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
+    public static com.toedter.calendar.JDateChooser jDateFecha;
+    private javax.swing.JLabel jLabelCantidad;
+    private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelInsumo;
+    private javax.swing.JLabel jLabelNombreInsumo;
+    private javax.swing.JLabel jLabelNombreProveedor;
+    private javax.swing.JLabel jLabelPrecio;
+    private javax.swing.JLabel jLabelProveedor;
+    private javax.swing.JLabel jLabelTotal;
+    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JList<String> jListInsumos;
+    private javax.swing.JList<String> jListProveedores;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     public static javax.swing.JTable jTableDetalle;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTable jTableInsumos;
+    private javax.swing.JTable jTableProveedores;
+    private javax.swing.JTextField jTextFieldInsumo;
+    private javax.swing.JTextField jTextFieldProveedor;
     public static javax.swing.JTextField jTextInsumo;
     public static javax.swing.JTextField jTextPrecio;
     public static javax.swing.JTextField jTextProveedor;
