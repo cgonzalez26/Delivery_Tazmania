@@ -392,7 +392,7 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
                 jButtonEliminarInsumoElegidoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonEliminarInsumoElegido, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, 100, 30));
+        jPanel1.add(jButtonEliminarInsumoElegido, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 340, 100, 30));
 
         jButtonAgregarInsumoElegido.setBackground(new java.awt.Color(252, 249, 57));
         jButtonAgregarInsumoElegido.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -402,7 +402,7 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
                 jButtonAgregarInsumoElegidoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonAgregarInsumoElegido, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 100, 30));
+        jPanel1.add(jButtonAgregarInsumoElegido, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 100, 30));
 
         jButtonModificarInsumosElegido.setBackground(new java.awt.Color(252, 249, 57));
         jButtonModificarInsumosElegido.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -412,7 +412,7 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
                 jButtonModificarInsumosElegidoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonModificarInsumosElegido, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 200, 100, 30));
+        jPanel1.add(jButtonModificarInsumosElegido, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, 100, 30));
 
         jTableInsumosAElegir.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTableInsumosAElegir.setModel(new javax.swing.table.DefaultTableModel(
