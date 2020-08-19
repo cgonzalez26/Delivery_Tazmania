@@ -11,12 +11,25 @@ import Controlador.control_Movimientos_Caja;
 import Controlador.control_existencias;
 import Modelo.Asistencias;
 import Modelo.Movimientos_Caja;
+import static Vistas.vGestion_Asistencias.jDateChooser1;
+import java.awt.Color;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import static Vistas.vGestion_Asistencias.txtEmpleado;
+import static Vistas.vGestion_Asistencias.txtDescripcion;
+import java.awt.Font;
+import java.awt.font.FontRenderContext;
 
 /**
  *
@@ -26,6 +39,7 @@ public class vLista_Asistencias extends javax.swing.JInternalFrame {
 
     String id, fecha, date, desde, hasta;
     control_Asistencias asistencia = new control_Asistencias();
+    vGestion_Asistencias vAsistencias = new vGestion_Asistencias();
     Asistencias a = new Asistencias();
     control_existencias con = new control_existencias();
     control_Movimientos_Caja control_mc = new control_Movimientos_Caja();
@@ -35,14 +49,75 @@ public class vLista_Asistencias extends javax.swing.JInternalFrame {
     Timestamp fechaseleccionada;
     DefaultListModel list;
     ArrayList<String> listemp;
+    Date fechatoday = new Date();
     /**
      * Creates new form vLista_Asistencias
      */
     public vLista_Asistencias() {
         initComponents();
+        
+        //java.util.Date fechaParseada= new SimpleDateFormat("dd/MM/yyyy").format(fecha);
+        jDateChooser2.setDate(fechatoday);
+        jDateChooser3.setDate(fechatoday);
         Mostrar();
+        
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                    vGestion_Asistencias.btnAgregar.setEnabled(true);
+                    vGestion_Asistencias.btnModificar.setEnabled(false);
+
+                    int fila = jTable1.rowAtPoint(e.getPoint());
+                    fecha = (String) (jTable1.getValueAt(fila, 6));
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    try {
+                        fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
+                    } catch (ParseException ex) {
+                        Logger.getLogger(vListas_Compras.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    id = (jTable1.getValueAt(fila, 0).toString());
+                    vGestion_Asistencias.txtEmpleado.setText(jTable1.getValueAt(fila, 3).toString());
+                    vGestion_Asistencias.txtDescripcion.setText(jTable1.getValueAt(fila, 4).toString());
+                    vGestion_Asistencias.txtSueldo.setText(jTable1.getValueAt(fila, 5).toString());
+                    vGestion_Asistencias.jDateChooser1.setDate(fechaseleccionada);
+                }
+            }
+        });
     }
 
+    public void AjustarTamañoFilasAsistencias() {
+        if (jTable1.getRowCount() != 0) {
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                Font font = new Font("Segoe UI Semibold", 0, 13);
+                int nomemp = (int) font.getStringBounds(jTable1.getValueAt(i, 2).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
+                int desc = (int) font.getStringBounds(jTable1.getValueAt(i, 3).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
+                int date = (int) font.getStringBounds(jTable1.getValueAt(i, 4).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
+                if (nomemp > jTable1.getColumnModel().getColumn(2).getPreferredWidth()) {
+                    jTable1.getColumnModel().getColumn(2).setPreferredWidth(nomemp);
+                }
+                if (desc > jTable1.getColumnModel().getColumn(3).getPreferredWidth()) {
+                    jTable1.getColumnModel().getColumn(3).setPreferredWidth(desc);
+                }
+                if (date > jTable1.getColumnModel().getColumn(4).getPreferredWidth()) {
+                    jTable1.getColumnModel().getColumn(4).setPreferredWidth(date);
+                }
+            }
+        }
+    }
+    
+     public void EliminarFilasVacias() {
+        if (jTable1.getRowCount() != 0) {
+            for (int columna = 0; columna < jTable1.getColumnCount(); columna++) {
+                for (int fila = 0; fila < jTable1.getRowCount(); fila++) {
+                    if (jTable1.getValueAt(fila, columna) == null) {
+                        row.removeRow(fila);
+                    }
+                }
+            }
+        }
+    }
+     
     public void Mostrar() {
         String[] columnas = {"ID ASISTENCIA", "ID EMPLEADO", "NRO ASISTENCIA", "EMPLEADO", "DESCRIPCION", "SUELDO", "FECHA"};
         Object[][] datostabla = asistencia.MostrarDatos();
@@ -70,14 +145,18 @@ public class vLista_Asistencias extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jButton7 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonAgregar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Listado de Asistencias");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
 
@@ -98,15 +177,17 @@ public class vLista_Asistencias extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jDateChooser2.setDateFormatString("dd/MM/yyyy");
         jDateChooser2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
+        jDateChooser3.setDateFormatString("dd/MM/yyyy");
         jDateChooser3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jButton7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jButton7.setText("Buscar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -132,7 +213,7 @@ public class vLista_Asistencias extends javax.swing.JInternalFrame {
                 .addContainerGap(47, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(222, 222, 222))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,34 +228,34 @@ public class vLista_Asistencias extends javax.swing.JInternalFrame {
                     .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
-                .addComponent(jButton7)
+                .addComponent(btnBuscar)
                 .addContainerGap())
         );
 
-        jButton1.setBackground(new java.awt.Color(252, 249, 57));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAgregarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(252, 249, 57));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(240, 87, 49));
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
 
@@ -192,11 +273,11 @@ public class vLista_Asistencias extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(136, 136, 136))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(194, 194, 194))))
         );
         layout.setVerticalGroup(
@@ -208,27 +289,15 @@ public class vLista_Asistencias extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButtonAgregar)
+                    .addComponent(jButtonModificar)
+                    .addComponent(jButtonEliminar))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public void EliminarFilasVacias() {
-        if (jTable1.getRowCount() != 0) {
-            for (int columna = 0; columna < jTable1.getColumnCount(); columna++) {
-                for (int fila = 0; fila < jTable1.getRowCount(); fila++) {
-                    if (jTable1.getValueAt(fila, columna) == null) {
-                        row.removeRow(fila);
-                    }
-                }
-            }
-        }
-    }
-    
+        
     public void MostrarBusquedaFechas() {
         String[] columnas = {"ID ASISTENCIA", "ID EMPLEADO", "NRO ASISTENCIA", "EMPLEADO", "DESCRIPCION", "SUELDO", "FECHA"};
         Object[][] datostabla = asistencia.MostrarDatosFechas(desde, hasta);
@@ -252,7 +321,7 @@ public class vLista_Asistencias extends javax.swing.JInternalFrame {
         jTable1.getColumnModel().getColumn(1).setPreferredWidth(0);
     }
     
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         desde = ((JTextField) jDateChooser2.getDateEditor().getUiComponent()).getText();
         hasta = ((JTextField) jDateChooser3.getDateEditor().getUiComponent()).getText();
         if (jDateChooser2.getDateEditor().getUiComponent().getForeground() != Color.RED) {
@@ -268,295 +337,89 @@ public class vLista_Asistencias extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (!jTextField1.getText().trim().equals("") && !jTextField2.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
-            if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                date = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-                if (jTextField3.getText().equals("")) {
-                    int i = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                    if (i == 0) {
-                        a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextField1.getText()));
-                        a.setDescripcion(jTextField2.getText());
-                        a.setSueldo((float) 0.0);
-                        if (asistencia.InsertarAsistencias(a)) {
-                            int idmovimiento = sql.obtenerUltimoId("asistencias", "idasistencia");
-                            String codigo = sql.generaCodigo("pago_emp");
-                            sql.ejecutarSql("UPDATE asistencias SET NroAsistencia ='" + codigo + "' WHERE idasistencia=" + Integer.toString(idmovimiento));
-                            a.setNroAsistencia(codigo);
-                            mc.setDescripcion("PAGO EMPLEADOS");
-                            mc.setIdcajaturno(Session.getIdcajaturno_abierta());
-                            mc.setIdtipomovimiento(11);
-                            mc.setIdusuario(Session.getIdusuario());
-                            mc.setNromovimiento(codigo);
-                            mc.setFecha_movimiento(date);
-                            mc.setMonto(a.getSueldo());
-                            mc.setIdmovimiento(idmovimiento);
-                            mc.setDetalle(a.getDescripcion());
-                            mc.setActivo(1);
-                            control_mc.InsertarMovimientosCaja(mc);
-                            JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
-                            Mostrar();
-                            limpiar();
-                        }
-                    }
-                } else {
-                    String sueldo = jTextField3.getText(), svalor = "", svalordec = "", svalordecdob = "";
-                    int cant = jTextField3.getText().length();
-                    switch (cant) {
-                        case 1:
-                        svalor = sueldo.substring(0, 1);
-                        break;
-                        case 3:
-                        svalordec = sueldo.substring(0, 3);
-                        break;
-                        case 4:
-                        svalordecdob = sueldo.substring(0, 4);
-                        break;
-                        default:
-                        break;
-                    }
-                    if (svalor.equals(",") || svalor.equals(".")) { //svalor.equals(",") || svalor.equals(".")
-                        JOptionPane.showMessageDialog(null, "Ingrese correctamente el sueldo");
-                    } else if (svalor.equals("0") || svalordec.equals("0.0") || svalordecdob.equals("0.00")) {
-                        int j = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                        if (j == 0) {
-                            a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextField1.getText()));
-                            a.setDescripcion(jTextField2.getText());
-                            a.setSueldo((float) 0.0);
-                            if (asistencia.InsertarAsistencias(a)) {
-                                int idmovimiento = sql.obtenerUltimoId("asistencias", "idasistencia");
-                                String codigo = sql.generaCodigo("pago_emp");
-                                sql.ejecutarSql("UPDATE asistencias SET NroAsistencia ='" + codigo + "' WHERE idasistencia=" + Integer.toString(idmovimiento));
-                                a.setNroAsistencia(codigo);
-                                mc.setDescripcion("PAGO EMPLEADOS");
-                                mc.setIdcajaturno(Session.getIdcajaturno_abierta());
-                                mc.setIdtipomovimiento(11);
-                                mc.setIdusuario(Session.getIdusuario());
-                                mc.setNromovimiento(codigo);
-                                mc.setFecha_movimiento(date);
-                                mc.setMonto(a.getSueldo());
-                                mc.setIdmovimiento(idmovimiento);
-                                mc.setDetalle(a.getDescripcion());
-                                mc.setActivo(1);
-                                control_mc.InsertarMovimientosCaja(mc);
-                                JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
-                                Mostrar();
-                                limpiar();
-                            }
-                        }
-                    } else {
-                        a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextField1.getText()));
-                        a.setDescripcion(jTextField2.getText());
-                        a.setSueldo(Float.parseFloat(sueldo));
-                        if (asistencia.InsertarAsistencias(a)) {
-                            int idmovimiento = sql.obtenerUltimoId("asistencias", "idasistencia");
-                            String codigo = sql.generaCodigo("pago_emp");
-                            sql.ejecutarSql("UPDATE asistencias SET NroAsistencia ='" + codigo + "' WHERE idasistencia=" + Integer.toString(idmovimiento));
-                            a.setNroAsistencia(codigo);
-                            mc.setDescripcion("PAGO EMPLEADOS");
-                            mc.setIdcajaturno(Session.getIdcajaturno_abierta());
-                            mc.setIdtipomovimiento(11);
-                            mc.setIdusuario(Session.getIdusuario());
-                            mc.setNromovimiento(codigo);
-                            mc.setFecha_movimiento(date);
-                            mc.setMonto(a.getSueldo());
-                            mc.setIdmovimiento(idmovimiento);
-                            mc.setDetalle(a.getDescripcion());
-                            mc.setActivo(1);
-                            control_mc.InsertarMovimientosCaja(mc);
-                            JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
-                            Mostrar();
-                            limpiar();
-                        }
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
-            }
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        vAsistencias = new vGestion_Asistencias();
+        vGestion_Asistencias.btnAgregar.setEnabled(true);
+        vGestion_Asistencias.btnModificar.setEnabled(false);
+        vGestion_Asistencias.jDateChooser1.setDate(fechatoday);
+        
+        vMenuPrincipal.jDesktopPane1.add(vAsistencias);
+        vAsistencias.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
+
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        int fila = jTable1.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
-            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
+            vAsistencias = new vGestion_Asistencias();
+            vMenuPrincipal.jDesktopPane1.add(vAsistencias);
+            vAsistencias.setVisible(true);
+            vGestion_Asistencias.btnAgregar.setEnabled(false);
+            vGestion_Asistencias.btnModificar.setEnabled(true);
+            id = jTable1.getValueAt(fila, 0).toString();
+            vGestion_Asistencias.txtEmpleado.setText(jTable1.getValueAt(fila, 3).toString());
+            vGestion_Asistencias.txtDescripcion.setText(jTable1.getValueAt(fila, 4).toString());
+            vGestion_Asistencias.txtSueldo.setText(jTable1.getValueAt(fila, 5).toString());
+            
+            fecha = (String) (jTable1.getValueAt(fila, 6));
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            try {
+                fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
+            } catch (ParseException ex) {
+                Logger.getLogger(vListas_Compras.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            vGestion_Asistencias.jDateChooser1.setDate(fechaseleccionada);
+                    
+            vAsistencias.idasistencia = id;
+            dispose();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jButton2.getText().equals("Modificar")) {
-            int s = jTable1.getSelectedRow();
-            if (s == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                jButton1.setEnabled(false);
-                jButton3.setText("Modificar");
-                jButton2.setText("Cancelar");
-                fecha = (String) (jTable1.getValueAt(s, 6));
-                DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                try {
-                    fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
-
-                } catch (ParseException ex) {
-                    Logger.getLogger(vListas_Compras.class
-                        .getName()).log(Level.SEVERE, null, ex);
-                }
-                id = (jTable1.getValueAt(s, 0).toString());
-                jTextField1.setText(jTable1.getValueAt(s, 3).toString());
-                jTextField2.setText(jTable1.getValueAt(s, 4).toString());
-                jTextField3.setText(jTable1.getValueAt(s, 5).toString());
-                jDateChooser1.setDate(fechaseleccionada);
-            }
+    public void IniciarFechas() {
+        Date hoy = new Date();
+        jDateChooser2.setDate(hoy);
+        jDateChooser3.setDate(hoy);
+    }
+    public void LimpiarSeleccion() {
+        jTable1.clearSelection();
+        jTable1.getSelectionModel().clearSelection();
+    }
+    
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        
+        int fila = jTable1.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                jButton1.setEnabled(true);
-                limpiar();
+                String NroAsistencia = jTable1.getValueAt(fila, 2).toString();
+                int idmovimientocaja = control_mc.getIdMovimientocaja(NroAsistencia);
+                mc.setIdmovimientocaja(idmovimientocaja);
+                if (control_mc.EliminarMovimientosCajaAbierta(mc)) {
+                    a.setIdasistencia(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
+                    if (asistencia.EliminarAsistencias(a)) {
+                        JOptionPane.showMessageDialog(null, "Eliminado");
+                        Mostrar();
+                    }
+                }
+            } else {
                 LimpiarSeleccion();
-                jButton2.setText("Modificar");
-                jButton3.setText("Eliminar");
-                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jButton3.getText().equals("Modificar")) {
-            if (!jTextField1.getText().trim().equals("") && !jTextField2.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
-                date = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-                if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                    if (jTextField3.getText().equals("")) {
-                        int i = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, guardar cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                        if (i == 0) {
-                            a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextField1.getText()));
-                            a.setDescripcion(jTextField2.getText());
-                            a.setSueldo((float) 0.0);
-                            a.setIdasistencia(Integer.parseInt(id));
-                            if (asistencia.EditarAsistencias(a)) {
-                                mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(id), 11));
-                                mc.setIdtipomovimiento(11);
-                                mc.setIdusuario(Session.getIdusuario());
-                                mc.setFecha_movimiento(date);
-                                mc.setMonto(a.getSueldo());
-                                mc.setIdmovimiento(Integer.parseInt(id));
-                                mc.setDetalle(a.getDescripcion());
-                                control_mc.EditarMovimientosCaja(mc);
-
-                                JOptionPane.showMessageDialog(null, "Modificado");
-                                jButton1.setEnabled(true);
-                                jButton2.setText("Modificar");
-                                jButton3.setText("Eliminar");
-                                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                                Mostrar();
-                                LimpiarSeleccion();
-                                limpiar();
-                            }
-                        }
-                    } else {
-                        String sueldo = jTextField3.getText(), svalor = "", svalordec = "", svalordecdob = "";
-                        int cant = jTextField3.getText().length();
-                        switch (cant) {
-                            case 1:
-                            svalor = sueldo.substring(0, 1);
-                            break;
-                            case 3:
-                            svalordec = sueldo.substring(0, 3);
-                            break;
-                            case 4:
-                            svalordecdob = sueldo.substring(0, 4);
-                            break;
-                            default:
-                            break;
-                        }
-                        if (svalor.equals(",") || svalor.equals(".")) { //svalor.equals(",") || svalor.equals(".")
-                            JOptionPane.showMessageDialog(null, "Ingrese correctamente el sueldo");
-                        } else if (svalor.equals("0") || svalordec.equals("0.0") || svalordecdob.equals("0.00")) {
-                            int j = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, guardar cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                            if (j == 0) {
-                                a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextField1.getText()));
-                                a.setDescripcion(jTextField2.getText());
-                                a.setSueldo((float) 0.0);
-                                a.setIdasistencia(Integer.parseInt(id));
-                                if (asistencia.EditarAsistencias(a)) {
-                                    mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(id), 11));
-                                    mc.setIdtipomovimiento(11);
-                                    mc.setIdusuario(Session.getIdusuario());
-                                    mc.setFecha_movimiento(date);
-                                    mc.setMonto(a.getSueldo());
-                                    mc.setIdmovimiento(Integer.parseInt(id));
-                                    mc.setDetalle(a.getDescripcion());
-                                    control_mc.EditarMovimientosCaja(mc);
-
-                                    JOptionPane.showMessageDialog(null, "Modificado");
-                                    jButton1.setEnabled(true);
-                                    jButton2.setText("Modificar");
-                                    jButton3.setText("Eliminar");
-                                    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                                    Mostrar();
-                                    LimpiarSeleccion();
-                                    limpiar();
-                                }
-                            }
-                        } else {
-                            a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextField1.getText()));
-                            a.setDescripcion(jTextField2.getText());
-                            a.setSueldo(Float.parseFloat(sueldo));
-                            a.setIdasistencia(Integer.parseInt(id));
-                            if (asistencia.EditarAsistencias(a)) {
-                                mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(id), 11));
-                                mc.setIdtipomovimiento(11);
-                                mc.setIdusuario(Session.getIdusuario());
-                                mc.setFecha_movimiento(date);
-                                mc.setMonto(a.getSueldo());
-                                mc.setIdmovimiento(Integer.parseInt(id));
-                                mc.setDetalle(a.getDescripcion());
-                                control_mc.EditarMovimientosCaja(mc);
-
-                                JOptionPane.showMessageDialog(null, "Modificado");
-                                jButton1.setEnabled(true);
-                                jButton2.setText("Modificar");
-                                jButton3.setText("Eliminar");
-                                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                                Mostrar();
-                                LimpiarSeleccion();
-                                limpiar();
-                            }
-                        }
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
-            }
-        } else {
-            int fila = jTable1.getSelectedRow();
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    String NroAsistencia = jTable1.getValueAt(fila, 2).toString();
-                    int idmovimientocaja = control_mc.getIdMovimientocaja(NroAsistencia);
-                    mc.setIdmovimientocaja(idmovimientocaja);
-                    if (control_mc.EliminarMovimientosCajaAbierta(mc)) {
-                        a.setIdasistencia(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
-                        if (asistencia.EliminarAsistencias(a)) {
-                            JOptionPane.showMessageDialog(null, "Eliminado");
-                            Mostrar();
-                        }
-                    }
-                } else {
-                    LimpiarSeleccion();
-                }
-            }
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
+        
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton jButtonAgregar;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonModificar;
     public static com.toedter.calendar.JDateChooser jDateChooser2;
     public static com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel4;

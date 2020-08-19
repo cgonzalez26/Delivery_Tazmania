@@ -1,6 +1,7 @@
 package Controlador;
 
 import Modelo.Asistencias;
+import Vistas.vLista_Asistencias;
 import Vistas.vGestion_Asistencias;
 import java.sql.Connection;
 import javax.swing.JTextField;
@@ -20,15 +21,15 @@ public class control_Asistencias {
     }
 
     public Object[][] MostrarDatos() {
-        String[] columnas = {"idasistencia", "idempleado", "NroAsistencia", "Nombre", "descripcion", "Sueldo", "fecha_asistencia"};
-        String desde = ((JTextField) vGestion_Asistencias.jDateChooser2.getDateEditor().getUiComponent()).getText(), hasta = ((JTextField) vGestion_Asistencias.jDateChooser3.getDateEditor().getUiComponent()).getText();
-        Object[][] datos = sql.GetTabla(columnas, "asistencias", "select a.idasistencia,e.idempleado,a.NroAsistencia,e.Nombre,a.descripcion,a.sueldo,date_format(a.fecha_asistencia,'%d/%m/%Y %H:%i') as fecha_asistencia from asistencias a INNER JOIN empleados e on a.idempleado=e.idempleado where date(a.fecha_asistencia) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and a.activo=1");
+        String[] columnas = {"idasistencia", "idempleado", "NroAsistencia", "Nombre", "descripcion", "sueldo", "fecha_asistencia"};
+        String desde = ((JTextField) vLista_Asistencias.jDateChooser2.getDateEditor().getUiComponent()).getText(), hasta = ((JTextField) vLista_Asistencias.jDateChooser3.getDateEditor().getUiComponent()).getText();
+        Object[][] datos = sql.GetTabla(columnas, "asistencias", "select a.idasistencia,e.idempleado,IFNULL(a.NroAsistencia,'') NroAsistencia,e.Nombre,IFNULL(a.descripcion,'') descripcion,IFNULL(a.sueldo,'') sueldo,date_format(a.fecha_asistencia,'%d/%m/%Y %H:%i') as fecha_asistencia from asistencias a INNER JOIN empleados e on a.idempleado=e.idempleado where date(a.fecha_asistencia) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and a.activo=1");
         return datos;
     }
 
     public Object[][] MostrarDatosFechas(String desde, String hasta) {
         String[] columnas = {"idasistencia", "idempleado", "NroAsistencia", "Nombre", "descripcion", "Sueldo", "fecha_asistencia"};
-        Object[][] datos = sql.GetTabla(columnas, "asistencias", "select a.idasistencia,e.idempleado,a.NroAsistencia,e.Nombre,a.descripcion,a.sueldo,date_format(a.fecha_asistencia,'%d/%m/%Y %H:%i') as fecha_asistencia from asistencias a INNER JOIN empleados e on a.idempleado=e.idempleado where date(a.fecha_asistencia) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and a.activo=1");
+        Object[][] datos = sql.GetTabla(columnas, "asistencias", "select a.idasistencia,e.idempleado,IFNULL(a.NroAsistencia,'') NroAsistencia,e.Nombre,IFNULL(a.descripcion,'') descripcion,IFNULL(a.sueldo,'') sueldo,date_format(a.fecha_asistencia,'%d/%m/%Y %H:%i') as fecha_asistencia from asistencias a INNER JOIN empleados e on a.idempleado=e.idempleado where date(a.fecha_asistencia) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and a.activo=1");
         return datos;
     }
 
