@@ -68,14 +68,14 @@ public class control_ConsumosEmpleados {
     }
 
     public boolean InsertarConsumosEmpleados(ConsumosEmpleados consemp) {
-        String fecha = ((JTextField) vConsumosEmpleados.jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String fecha = ((JTextField) vConsumosEmpleados.jDateFecha.getDateEditor().getUiComponent()).getText();
         String idprod = Integer.toString(consemp.getIdproducto()), cant = Float.toString(consemp.getCantidad());
         String datos[] = {idprod, consemp.getNomempleado(), consemp.getProducto(), cant};
         return sql.insertar(datos, "insert into consumosempleados (idproducto,nombreEmp,producto,cantidad,fecha,activo) values (?,?,?,?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'),1)");
     }
 
     public boolean EditarConsumosEmpleados(ConsumosEmpleados consemp) {
-        String fecha = ((JTextField) vConsumosEmpleados.jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String fecha = ((JTextField) vConsumosEmpleados.jDateFecha.getDateEditor().getUiComponent()).getText();
         String idprod = Integer.toString(consemp.getIdproducto()), cant = Float.toString(consemp.getCantidad()), id = Integer.toString(consemp.getIdconsumo());
         String datos[] = {idprod, consemp.getNomempleado(), consemp.getProducto(), cant, id};
         return sql.editar(datos, "update consumosempleados set idproducto=?,nombreEmp=?,producto=?,cantidad=?,fecha=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i') where idconsumo=?");

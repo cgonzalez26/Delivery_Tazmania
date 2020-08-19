@@ -47,21 +47,21 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         IniciarFechas();
         MostrarCompras();
 
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableDetallesCompras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     if (VerificarCajaAbierta() == false) {
                         //int fila = jTable1.rowAtPoint(e.getPoint());
-                        int seleccionado = jTable1.getSelectedRow();
+                        int seleccionado = jTableCompras.getSelectedRow();
                         if (seleccionado == -1) {
                             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
                         } else {
-                            int idmovimientocaja = com.ObtenerIDMovCajaCompra(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()), "CP");
+                            int idmovimientocaja = com.ObtenerIDMovCajaCompra(Integer.parseInt(jTableCompras.getValueAt(seleccionado, 0).toString()), "CP");
                             String estado = control_mc.getEstadoCajaByMovimiento(idmovimientocaja);
                             if (estado.equals("CERRADA")) {
                                 JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                             } else {
-                                fecha = (String) (jTable1.getValueAt(seleccionado, 7));
+                                fecha = (String) (jTableCompras.getValueAt(seleccionado, 7));
                                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                                 try {
                                     fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
@@ -78,18 +78,18 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                                 vCompras_Insumos.jButtonModificarCompra.setEnabled(true);
                                 vCompras_Insumos.jButtonAgregarCompra.setText("Cancelar");
                                 vCompras_Insumos.jButtonAgregarCompra.setEnabled(true);
-                                idcompra = jTable1.getValueAt(seleccionado, 0).toString();
-                                vCompras_Insumos.jTextProveedor.setText(jTable1.getValueAt(seleccionado, 3).toString());
-                                vCompras_Insumos.jCBUsuario.setSelectedItem(jTable1.getValueAt(seleccionado, 5).toString());
-                                vCompras_Insumos.jDateChooser1.setDate(fechaseleccionada);
-                                vCompras_Insumos.jTextTotal.setText(jTable1.getValueAt(seleccionado, 6).toString());
+                                idcompra = jTableCompras.getValueAt(seleccionado, 0).toString();
+                                vCompras_Insumos.jTextProveedor.setText(jTableCompras.getValueAt(seleccionado, 3).toString());
+                                vCompras_Insumos.jCBUsuario.setSelectedItem(jTableCompras.getValueAt(seleccionado, 5).toString());
+                                vCompras_Insumos.jDateFecha.setDate(fechaseleccionada);
+                                vCompras_Insumos.jTextTotal.setText(jTableCompras.getValueAt(seleccionado, 6).toString());
                                 compra.setTitle("Modificar Compra");
-                                compra.total = (Float.parseFloat(jTable1.getValueAt(seleccionado, 6).toString()));
+                                compra.total = (Float.parseFloat(jTableCompras.getValueAt(seleccionado, 6).toString()));
                                 compra.nrofactura = nrofactura;
                                 compra.idcompra = idcompra;
-                                PasarFilas2();
-                                IDdetalles2();
-                                CantidadFilas();
+                                PasarFilasDatosDetalle();
+                                IDdetallescompras();
+                                CantidadFilasRegistrado();
                                 dispose();
                                 vDetallesCompras.dispose();
                             }
@@ -101,14 +101,14 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableCompras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    int seleccionado = jTable1.getSelectedRow();
+                    int seleccionado = jTableCompras.getSelectedRow();
                     if (seleccionado == -1) {
                         JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
                     } else {
-                        nrofactura = jTable1.getValueAt(seleccionado, 4).toString();
+                        nrofactura = jTableCompras.getValueAt(seleccionado, 4).toString();
                         MostrarDetalleCompra();
                         Vistas.vListas_Compras lista = null;
                         vDetallesCompras.setSize(817, 311);
@@ -131,7 +131,7 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         return est;
     }
 
-    public void IDdetalles() {
+    /*public void IDdetalles() {
         int[] id = jTable2.getSelectedRows();
         for (int i = 0; i < id.length; i++) {
             compra.iddetalles.add(jTable2.getValueAt(id[i], 0).toString());
@@ -139,20 +139,40 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         //JOptionPane.showMessageDialog(null, compra.iddetalles);
         /*for(int i=0; i < compra.iddetalles.size(); i++){
             JOptionPane.showMessageDialog(null, compra.iddetalles.get(i));
-        }*/
-    }
-
-    public void IDdetalles2() {
-        for (int i = 0; i < jTable2.getRowCount(); i++) {
-            compra.iddetalles.add(jTable2.getValueAt(i, 0).toString());
+        }
+    }*/
+    public void IDdetallescompras() {
+        for (int i = 0; i < jTableDetallesCompras.getRowCount(); i++) {
+            compra.iddetalles.add(jTableDetallesCompras.getValueAt(i, 0).toString());
         }
     }
 
-    public void CantidadFilas() {
+    public ArrayList<String> ObtenerIDDetallesDesdeListaCompras() {
+        int i = jTableCompras.getSelectedRow();
+        if (i == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
+        } else {
+            compra.iddetalles = detallecompra.ObtenerIDDetalleDesdeListaCompra(jTableCompras.getValueAt(i, 4).toString());
+        }
+        return compra.iddetalles;
+    }
+
+    public void CantidadFilasRegistrado() {
         compra.filasdetalle = compra.iddetalles.size();
     }
 
-    public void PasarFilas() {
+    public int CantidadFilasDetalles() {
+        int i = jTableCompras.getSelectedRow();
+
+        if (i == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
+        } else {
+            compra.filasdetalle = detallecompra.CantidadTotalIDDetalles(jTableCompras.getValueAt(i, 4).toString());
+        }
+        return compra.filasdetalle;
+    }
+
+    /*public void PasarFilas() {
         if (compra == null || compra.isClosed()) {
             compra = new vCompras_Insumos();
             vMenuPrincipal.jDesktopPane1.add(compra);
@@ -168,19 +188,34 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
             fila[2] = datosdetalle.getValueAt(seleccionados[i], 6);
             vCompras_Insumos.modelo.addRow(fila);
         }
-    }
-
-    public void PasarFilas2() {
-        Object[] fila = new Object[3];
-        for (int i = 0; i < jTable2.getRowCount(); i++) {
+    }*/
+    public void PasarFilasDatosDetalle() {
+        Object[] fila = new Object[4];
+        for (int i = 0; i < jTableDetallesCompras.getRowCount(); i++) {
+            float precio = Float.parseFloat(datosdetalle.getValueAt(i, 5).toString()), cant = Float.parseFloat(datosdetalle.getValueAt(i, 6).toString());
+            float subtotal = precio * cant;
+            String subtotalstr = String.valueOf(subtotal);
             fila[0] = datosdetalle.getValueAt(i, 4);
             fila[1] = datosdetalle.getValueAt(i, 5);
             fila[2] = datosdetalle.getValueAt(i, 6);
+            fila[3] = subtotalstr;
             vCompras_Insumos.modelo.addRow(fila);
         }
     }
 
-    public void SeleccionarFilasNroFacturaCompra() {
+    public void ObtenerDatosDetalleDesdeListaCompras() {
+        int i = jTableCompras.getSelectedRow();
+        if (i == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
+        } else {
+            Object[][] datos = detallecompra.DatosDetalleDesdeListaComprasModificar(jTableCompras.getValueAt(i, 4).toString());
+            Object[] columnas = {"INSUMO", "PRECIO", "CANTIDAD", "SUBTOTAL"};
+            vCompras_Insumos.modelo = new DefaultTableModel(datos, columnas);
+            vCompras_Insumos.jTableDetalle.setModel(vCompras_Insumos.modelo);
+        }
+    }
+
+    /*public void SeleccionarFilasNroFacturaCompra() {
         int seleccionado = jTable1.getSelectedRow();
         ArrayList<Integer> numeros = new ArrayList<>();
         for (int j = 0; j < jTable2.getRowCount(); j++) {
@@ -195,27 +230,26 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
             num = numeros.get(i);
         }
         jTable2.getSelectionModel().setSelectionInterval(numeros.get(0), num);
-    }
-
+    }*/
     public void MostrarCompras() {
-        desde = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-        hasta = ((JTextField) jDateChooser2.getDateEditor().getUiComponent()).getText();
+        desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText();
+        hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
         String[] columnas = {"IDCOMPRA", "IDPROV", "IDUSER", "PROVEEDOR", "NROCOMPRA", "USUARIO", "MONTO TOTAL", "FECHA"};
         datoscompras = com.MostrarDatos(desde, hasta);
         datoscompra = new DefaultTableModel(datoscompras, columnas);
-        jTable1.setModel(datoscompra);
+        jTableCompras.setModel(datoscompra);
         EliminarFilasVaciasCompras();
         //AjustarTamañoFilasCompra();
         ocultar_columnasCompra();
     }
 
     public void MostrarDetalleCompra() {
-        desde = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-        hasta = ((JTextField) jDateChooser2.getDateEditor().getUiComponent()).getText();
+        desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText();
+        hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
         String[] columnas = {"IDDETCOMPRA", "IDCOMPRA", "IDINSUMO", "NRO FACTURA COMPRA", "INSUMO", "PRECIO", "CANTIDAD", "FECHA"};
         datosdetallecompra = detallecompra.MostrarDatos(desde, hasta, nrofactura);
         datosdetalle = new DefaultTableModel(datosdetallecompra, columnas);
-        jTable2.setModel(datosdetalle);
+        jTableDetallesCompras.setModel(datosdetalle);
         EliminarFilasVaciasDetallesCompras();
         //AjustarTamañoFilasDetalle();
         ocultar_columnasDetalle();
@@ -223,104 +257,52 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
 
     public void IniciarFechas() {
         Date date = new Date();
-        jDateChooser1.setDate(date);
-        jDateChooser2.setDate(date);
-    }
-
-    public void AjustarTamañoFilasCompra() {
-        if (jTable1.getRowCount() != 0) {
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                Font font = new Font("Segoe UI Semibold", 0, 13);
-                int prov = (int) font.getStringBounds(jTable1.getValueAt(i, 3).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int nrocompra = (int) font.getStringBounds(jTable1.getValueAt(i, 4).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int user = (int) font.getStringBounds(jTable1.getValueAt(i, 5).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int date = (int) font.getStringBounds(jTable1.getValueAt(i, 6).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int montotal = (int) font.getStringBounds(jTable1.getValueAt(i, 7).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                if (prov > jTable1.getColumnModel().getColumn(3).getPreferredWidth()) {
-                    jTable1.getColumnModel().getColumn(3).setPreferredWidth(prov);
-                }
-                if (nrocompra > jTable1.getColumnModel().getColumn(4).getPreferredWidth()) {
-                    jTable1.getColumnModel().getColumn(4).setPreferredWidth(nrocompra);
-                }
-                if (user > jTable1.getColumnModel().getColumn(5).getPreferredWidth()) {
-                    jTable1.getColumnModel().getColumn(5).setPreferredWidth(user);
-                }
-                if (date > jTable1.getColumnModel().getColumn(6).getPreferredWidth()) {
-                    jTable1.getColumnModel().getColumn(6).setPreferredWidth(date);
-                }
-                if (montotal > jTable1.getColumnModel().getColumn(7).getPreferredWidth()) {
-                    jTable1.getColumnModel().getColumn(7).setPreferredWidth(montotal);
-                }
-            }
-        }
-    }
-
-    public void AjustarTamañoFilasDetalle() {
-        if (jTable2.getRowCount() != 0) {
-            for (int i = 0; i < jTable2.getRowCount(); i++) {
-                Font font = new Font("Segoe UI Semibold", 0, 13);
-                int nrocompra = (int) font.getStringBounds(jTable2.getValueAt(i, 3).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int insumo = (int) font.getStringBounds(jTable2.getValueAt(i, 4).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int precio = (int) font.getStringBounds(jTable2.getValueAt(i, 5).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int cant = (int) font.getStringBounds(jTable2.getValueAt(i, 6).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                if (nrocompra > jTable2.getColumnModel().getColumn(3).getPreferredWidth()) {
-                    jTable2.getColumnModel().getColumn(3).setPreferredWidth(nrocompra);
-                }
-                if (insumo > jTable2.getColumnModel().getColumn(4).getPreferredWidth()) {
-                    jTable2.getColumnModel().getColumn(4).setPreferredWidth(insumo);
-                }
-                if (precio > jTable2.getColumnModel().getColumn(5).getPreferredWidth()) {
-                    jTable2.getColumnModel().getColumn(5).setPreferredWidth(precio);
-                }
-                if (cant > jTable2.getColumnModel().getColumn(6).getPreferredWidth()) {
-                    jTable2.getColumnModel().getColumn(6).setPreferredWidth(cant);
-                }
-            }
-        }
+        jDateFechaDesde.setDate(date);
+        jDateFechaHasta.setDate(date);
     }
 
     public void ocultar_columnasCompra() {
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
-        jTable1.getColumnModel().getColumn(1).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(1).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(0);
-        jTable1.getColumnModel().getColumn(2).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(2).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(0);
+        jTableCompras.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableCompras.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableCompras.getColumnModel().getColumn(0).setPreferredWidth(0);
+        jTableCompras.getColumnModel().getColumn(1).setMaxWidth(0);
+        jTableCompras.getColumnModel().getColumn(1).setMinWidth(0);
+        jTableCompras.getColumnModel().getColumn(1).setPreferredWidth(0);
+        jTableCompras.getColumnModel().getColumn(2).setMaxWidth(0);
+        jTableCompras.getColumnModel().getColumn(2).setMinWidth(0);
+        jTableCompras.getColumnModel().getColumn(2).setPreferredWidth(0);
     }
 
     public void ocultar_columnasDetalle() {
-        jTable2.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable2.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable2.getColumnModel().getColumn(0).setPreferredWidth(0);
-        jTable2.getColumnModel().getColumn(1).setMaxWidth(0);
-        jTable2.getColumnModel().getColumn(1).setMinWidth(0);
-        jTable2.getColumnModel().getColumn(1).setPreferredWidth(0);
-        jTable2.getColumnModel().getColumn(2).setMaxWidth(0);
-        jTable2.getColumnModel().getColumn(2).setMinWidth(0);
-        jTable2.getColumnModel().getColumn(2).setPreferredWidth(0);
-        jTable2.getColumnModel().getColumn(7).setMaxWidth(0);
-        jTable2.getColumnModel().getColumn(7).setMinWidth(0);
-        jTable2.getColumnModel().getColumn(7).setPreferredWidth(0);
+        jTableDetallesCompras.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableDetallesCompras.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableDetallesCompras.getColumnModel().getColumn(0).setPreferredWidth(0);
+        jTableDetallesCompras.getColumnModel().getColumn(1).setMaxWidth(0);
+        jTableDetallesCompras.getColumnModel().getColumn(1).setMinWidth(0);
+        jTableDetallesCompras.getColumnModel().getColumn(1).setPreferredWidth(0);
+        jTableDetallesCompras.getColumnModel().getColumn(2).setMaxWidth(0);
+        jTableDetallesCompras.getColumnModel().getColumn(2).setMinWidth(0);
+        jTableDetallesCompras.getColumnModel().getColumn(2).setPreferredWidth(0);
+        jTableDetallesCompras.getColumnModel().getColumn(7).setMaxWidth(0);
+        jTableDetallesCompras.getColumnModel().getColumn(7).setMinWidth(0);
+        jTableDetallesCompras.getColumnModel().getColumn(7).setPreferredWidth(0);
     }
 
     public void LimpiarSeleccionCompra() {
-        jTable1.clearSelection();
-        jTable1.getSelectionModel().clearSelection();
+        jTableCompras.clearSelection();
+        jTableCompras.getSelectionModel().clearSelection();
     }
 
     public void LimpiarSeleccionDetalle() {
-        jTable2.clearSelection();
-        jTable2.getSelectionModel().clearSelection();
+        jTableDetallesCompras.clearSelection();
+        jTableDetallesCompras.getSelectionModel().clearSelection();
     }
 
     public void EliminarFilasVaciasCompras() {
-        if (jTable1.getRowCount() != 0) {
-            for (int columna = 0; columna < jTable1.getColumnCount(); columna++) {
-                for (int fila = 0; fila < jTable1.getRowCount(); fila++) {
-                    if (jTable1.getValueAt(fila, columna) == null) {
+        if (jTableCompras.getRowCount() != 0) {
+            for (int columna = 0; columna < jTableCompras.getColumnCount(); columna++) {
+                for (int fila = 0; fila < jTableCompras.getRowCount(); fila++) {
+                    if (jTableCompras.getValueAt(fila, columna) == null) {
                         datoscompra.removeRow(fila);
                     }
                 }
@@ -329,10 +311,10 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
     }
 
     public void EliminarFilasVaciasDetallesCompras() {
-        if (jTable2.getRowCount() != 0) {
-            for (int columna = 0; columna < jTable2.getColumnCount(); columna++) {
-                for (int fila = 0; fila < jTable2.getRowCount(); fila++) {
-                    if (jTable2.getValueAt(fila, columna) == null) {
+        if (jTableDetallesCompras.getRowCount() != 0) {
+            for (int columna = 0; columna < jTableDetallesCompras.getColumnCount(); columna++) {
+                for (int fila = 0; fila < jTableDetallesCompras.getRowCount(); fila++) {
+                    if (jTableDetallesCompras.getValueAt(fila, columna) == null) {
                         datosdetalle.removeRow(fila);
                     }
                 }
@@ -345,32 +327,31 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         vDetallesCompras = new javax.swing.JDialog();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable(){
+        jTableDetallesCompras = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonNuevoDesdeDetalle = new javax.swing.JButton();
+        jButtonModificarDesdeDetalle = new javax.swing.JButton();
+        jButtonEliminarDesdeDetalle = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable(){
+        jTableCompras = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        jButton1 = new javax.swing.JButton();
+        jButtonNuevo = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jButtonBuscarPorFechas = new javax.swing.JButton();
+        jDateFechaDesde = new com.toedter.calendar.JDateChooser();
+        jDateFechaHasta = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        jButtonVerDetalle = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
 
         vDetallesCompras.setTitle("Detalle Compra");
         java.awt.Image iconodeliv = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
@@ -381,11 +362,8 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        jLabel1.setText("Detalles Compras");
-
-        jTable2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableDetallesCompras.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableDetallesCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -396,32 +374,32 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTableDetallesCompras);
 
-        jButton3.setBackground(new java.awt.Color(252, 249, 57));
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setText("Nuevo");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNuevoDesdeDetalle.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonNuevoDesdeDetalle.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonNuevoDesdeDetalle.setText("Nuevo");
+        jButtonNuevoDesdeDetalle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonNuevoDesdeDetalleActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(252, 249, 57));
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton4.setText("Modificar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificarDesdeDetalle.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificarDesdeDetalle.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificarDesdeDetalle.setText("Modificar");
+        jButtonModificarDesdeDetalle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonModificarDesdeDetalleActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(252, 249, 57));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton2.setText("Eliminar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminarDesdeDetalle.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonEliminarDesdeDetalle.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonEliminarDesdeDetalle.setText("Eliminar");
+        jButtonEliminarDesdeDetalle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonEliminarDesdeDetalleActionPerformed(evt);
             }
         });
 
@@ -430,35 +408,29 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         vDetallesComprasLayout.setHorizontalGroup(
             vDetallesComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vDetallesComprasLayout.createSequentialGroup()
-                .addGap(308, 308, 308)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(vDetallesComprasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2)
                 .addContainerGap())
             .addGroup(vDetallesComprasLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonNuevoDesdeDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(176, 176, 176)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonModificarDesdeDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEliminarDesdeDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76))
         );
         vDetallesComprasLayout.setVerticalGroup(
             vDetallesComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vDetallesComprasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(24, 24, 24)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(vDetallesComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jButtonNuevoDesdeDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonModificarDesdeDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEliminarDesdeDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setBackground(new java.awt.Color(255, 248, 177));
@@ -474,8 +446,8 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCompras.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -486,19 +458,14 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable1MousePressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableCompras);
 
-        jButton1.setBackground(new java.awt.Color(252, 249, 57));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setText("Nuevo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNuevo.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonNuevo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonNuevo.setText("Nuevo");
+        jButtonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonNuevoActionPerformed(evt);
             }
         });
 
@@ -508,18 +475,19 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel3.setText("Desde");
 
-        jButton6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton6.setText("BUSCAR");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarPorFechas.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonBuscarPorFechas.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jButtonBuscarPorFechas.setText("Buscar");
+        jButtonBuscarPorFechas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButtonBuscarPorFechasActionPerformed(evt);
             }
         });
 
-        jDateChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jDateChooser1.setMinimumSize(new java.awt.Dimension(32, 20));
+        jDateFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jDateFechaDesde.setMinimumSize(new java.awt.Dimension(32, 20));
 
-        jDateChooser2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jDateFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel4.setText("Hasta");
@@ -532,9 +500,9 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jDateFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jDateFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jLabel3)
@@ -544,7 +512,7 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(167, 167, 167)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonBuscarPorFechas, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -555,37 +523,37 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(jButton6)
+                .addComponent(jButtonBuscarPorFechas)
                 .addContainerGap())
         );
 
-        jButton5.setBackground(new java.awt.Color(252, 249, 57));
-        jButton5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton5.setText("Ver Detalle");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVerDetalle.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonVerDetalle.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonVerDetalle.setText("Ver Detalle");
+        jButtonVerDetalle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonVerDetalleActionPerformed(evt);
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(252, 249, 57));
-        jButton7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton7.setText("Eliminar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(252, 249, 57));
-        jButton8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton8.setText("Modificar");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
@@ -594,24 +562,26 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(73, 73, 73)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(75, 75, 75)
+                                .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(84, 84, 84)
+                                .addComponent(jButtonVerDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(73, 73, 73)
+                                .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(158, 158, 158)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 49, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -620,29 +590,29 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonVerDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoActionPerformed
         compra = new vCompras_Insumos();
         vMenuPrincipal.jDesktopPane1.add(compra);
         compra.setVisible(true);
         compra.toFront();
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonNuevoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int fila = jTable1.getSelectedRow();
-        int seleccionado = jTable2.getSelectedRow();
+    private void jButtonEliminarDesdeDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarDesdeDetalleActionPerformed
+        int fila = jTableCompras.getSelectedRow();
+        int seleccionado = jTableDetallesCompras.getSelectedRow();
         Compras c = new Compras();
         DetallesCompras dc = new DetallesCompras();
         Movimientos_Caja mc = new Movimientos_Caja();
@@ -651,54 +621,54 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         } else {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                int cantidad = jTable2.getRowCount();
+                int cantidad = jTableDetallesCompras.getRowCount();
                 if (cantidad == 1) {
-                    mc.setIdmovimiento(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
+                    mc.setIdmovimiento(Integer.parseInt(jTableCompras.getValueAt(fila, 0).toString()));
                     mc.setIdtipomovimiento(12);
                     if (control_mc.EliminarMovCajaCompraVenta(mc)) {
-                        boolean stock = detallecompra.VerificarStock(Float.parseFloat(jTable2.getValueAt(seleccionado, 6).toString()), Integer.parseInt(jTable2.getValueAt(seleccionado, 2).toString()));
+                        boolean stock = detallecompra.VerificarStock(Float.parseFloat(jTableDetallesCompras.getValueAt(seleccionado, 6).toString()), Integer.parseInt(jTableDetallesCompras.getValueAt(seleccionado, 2).toString()));
                         if (stock == true) {
-                            dc.setIdinsumo(Integer.parseInt(jTable2.getValueAt(seleccionado, 2).toString()));
+                            dc.setIdinsumo(Integer.parseInt(jTableDetallesCompras.getValueAt(seleccionado, 2).toString()));
                             detallecompra.SetearCeroStock(dc);
                         } else {
-                            dc.setCantidad(Float.parseFloat(jTable2.getValueAt(seleccionado, 6).toString()));
-                            dc.setIdinsumo(Integer.parseInt(jTable2.getValueAt(seleccionado, 2).toString()));
+                            dc.setCantidad(Float.parseFloat(jTableDetallesCompras.getValueAt(seleccionado, 6).toString()));
+                            dc.setIdinsumo(Integer.parseInt(jTableDetallesCompras.getValueAt(seleccionado, 2).toString()));
                             detallecompra.RestarCantidadSumadaInsumos(dc);
                         }
-                        dc.setIddetallecompra(Integer.parseInt(jTable2.getValueAt(seleccionado, 0).toString()));
+                        dc.setIddetallecompra(Integer.parseInt(jTableDetallesCompras.getValueAt(seleccionado, 0).toString()));
                         detallecompra.EliminarDetalleCompra(dc);
                     }
-                    c.setIdcompra(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
+                    c.setIdcompra(Integer.parseInt(jTableCompras.getValueAt(fila, 0).toString()));
                     if (com.EliminarCompra(c)) {
                         JOptionPane.showMessageDialog(null, "Compra Eliminada");
                         MostrarCompras();
                         vDetallesCompras.dispose();
                     }
                 } else {
-                    float totalcompra = Float.parseFloat(jTable1.getValueAt(fila, 6).toString()),
-                            valor = Float.parseFloat(jTable2.getValueAt(seleccionado, 5).toString()) * Float.parseFloat(jTable2.getValueAt(seleccionado, 6).toString()),
+                    float totalcompra = Float.parseFloat(jTableCompras.getValueAt(fila, 6).toString()),
+                            valor = Float.parseFloat(jTableDetallesCompras.getValueAt(seleccionado, 5).toString()) * Float.parseFloat(jTableDetallesCompras.getValueAt(seleccionado, 6).toString()),
                             totalfinal = totalcompra - valor;
                     c.setMontototal(totalfinal);
-                    c.setIdcompra(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()));
+                    c.setIdcompra(Integer.parseInt(jTableCompras.getValueAt(fila, 0).toString()));
                     if (com.ActualizarTotalCompra(c)) {
-                        mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(jTable1.getValueAt(fila, 0).toString()), 12));
+                        mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(jTableCompras.getValueAt(fila, 0).toString()), 12));
                         mc.setDescripcion("COMPRA INSUMOS");
                         mc.setIdtipomovimiento(12);
                         mc.setIdusuario(Session.getIdusuario());
-                        mc.setFecha_movimiento(jTable1.getValueAt(fila, 7).toString());
+                        mc.setFecha_movimiento(jTableCompras.getValueAt(fila, 7).toString());
                         mc.setMonto(c.getMontototal());
-                        mc.setIdmovimiento((Integer.parseInt(jTable1.getValueAt(fila, 0).toString())));
+                        mc.setIdmovimiento((Integer.parseInt(jTableCompras.getValueAt(fila, 0).toString())));
                         if (control_mc.EditarMovimientosCaja(mc)) {
-                            boolean stock = detallecompra.VerificarStock(Float.parseFloat(jTable2.getValueAt(seleccionado, 6).toString()), Integer.parseInt(jTable2.getValueAt(seleccionado, 2).toString()));
+                            boolean stock = detallecompra.VerificarStock(Float.parseFloat(jTableDetallesCompras.getValueAt(seleccionado, 6).toString()), Integer.parseInt(jTableDetallesCompras.getValueAt(seleccionado, 2).toString()));
                             if (stock == true) {
-                                dc.setIdinsumo(Integer.parseInt(jTable2.getValueAt(seleccionado, 2).toString()));
+                                dc.setIdinsumo(Integer.parseInt(jTableDetallesCompras.getValueAt(seleccionado, 2).toString()));
                                 detallecompra.SetearCeroStock(dc);
                             } else {
-                                dc.setCantidad(Float.parseFloat(jTable2.getValueAt(seleccionado, 6).toString()));
-                                dc.setIdinsumo(Integer.parseInt(jTable2.getValueAt(seleccionado, 2).toString()));
+                                dc.setCantidad(Float.parseFloat(jTableDetallesCompras.getValueAt(seleccionado, 6).toString()));
+                                dc.setIdinsumo(Integer.parseInt(jTableDetallesCompras.getValueAt(seleccionado, 2).toString()));
                                 detallecompra.RestarCantidadSumadaInsumos(dc);
                             }
-                            dc.setIddetallecompra(Integer.parseInt(jTable2.getValueAt(seleccionado, 0).toString()));
+                            dc.setIddetallecompra(Integer.parseInt(jTableDetallesCompras.getValueAt(seleccionado, 0).toString()));
                             detallecompra.EliminarDetalleCompra(dc);
                             JOptionPane.showMessageDialog(null, "Eliminado");
                             MostrarDetalleCompra();
@@ -744,21 +714,20 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonEliminarDesdeDetalleActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        int seleccionado = jTable1.getSelectedRow();
-        if (seleccionado == -1) {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-        } else {
-            //datoscompra = (DefaultTableModel) jTable1.getModel();
-            if (VerificarCajaAbierta() == false) {
-                int idmovimientocaja = com.ObtenerIDMovCajaCompra(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()), "CP");
+    private void jButtonModificarDesdeDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarDesdeDetalleActionPerformed
+        if (VerificarCajaAbierta() == false) {
+            int seleccionado = jTableCompras.getSelectedRow();
+            if (seleccionado == -1) {
+                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
+            } else {
+                int idmovimientocaja = com.ObtenerIDMovCajaCompra(Integer.parseInt(jTableCompras.getValueAt(seleccionado, 0).toString()), "CP");
                 String estado = control_mc.getEstadoCajaByMovimiento(idmovimientocaja);
                 if (estado.equals("CERRADA")) {
                     JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                 } else {
-                    fecha = (String) (jTable1.getValueAt(seleccionado, 7));
+                    fecha = (String) (jTableCompras.getValueAt(seleccionado, 7));
                     DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     try {
                         fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
@@ -777,30 +746,30 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                     //vCompras_Insumos.jTextField1.setEditable(false);
                     vCompras_Insumos.jTextTotal.setEditable(false);
                     vCompras_Insumos.jButtonModificarCompra.setEnabled(true);
-                    idcompra = jTable1.getValueAt(seleccionado, 0).toString();
-                    vCompras_Insumos.jTextProveedor.setText(jTable1.getValueAt(seleccionado, 3).toString());
-                    vCompras_Insumos.jCBUsuario.setSelectedItem(jTable1.getValueAt(seleccionado, 5).toString());
-                    vCompras_Insumos.jDateChooser1.setDate(fechaseleccionada);
-                    vCompras_Insumos.jTextTotal.setText(jTable1.getValueAt(seleccionado, 6).toString());
+                    idcompra = jTableCompras.getValueAt(seleccionado, 0).toString();
+                    vCompras_Insumos.jTextProveedor.setText(jTableCompras.getValueAt(seleccionado, 3).toString());
+                    vCompras_Insumos.jCBUsuario.setSelectedItem(jTableCompras.getValueAt(seleccionado, 5).toString());
+                    vCompras_Insumos.jDateFecha.setDate(fechaseleccionada);
+                    vCompras_Insumos.jTextTotal.setText(jTableCompras.getValueAt(seleccionado, 6).toString());
                     compra.setTitle("Modificar Compra");
-                    compra.total = (Float.parseFloat(jTable1.getValueAt(seleccionado, 6).toString()));
+                    compra.total = (Float.parseFloat(jTableCompras.getValueAt(seleccionado, 6).toString()));
                     compra.nrofactura = nrofactura;
                     compra.idcompra = idcompra;
-                    PasarFilas2();
-                    IDdetalles2();
-                    CantidadFilas();
+                    PasarFilasDatosDetalle();
+                    IDdetallescompras();
+                    CantidadFilasRegistrado();
                     dispose();
                     vDetallesCompras.dispose();
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "No se puede Modificar. No hay CAJA ABIERTA.");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se puede Modificar. No hay CAJA ABIERTA.");
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonModificarDesdeDetalleActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        desde = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-        hasta = ((JTextField) jDateChooser2.getDateEditor().getUiComponent()).getText();
+        desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText();
+        hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
         LimpiarSeleccionCompra();
         //LimpiarSeleccionDetalle();
         desde = "";
@@ -810,17 +779,17 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         //MostrarDetalleCompra();
     }//GEN-LAST:event_formMouseClicked
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        desde = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-        hasta = ((JTextField) jDateChooser2.getDateEditor().getUiComponent()).getText();
-        if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-            if (jDateChooser2.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+    private void jButtonBuscarPorFechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarPorFechasActionPerformed
+        desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText();
+        hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
+        if (jDateFechaDesde.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+            if (jDateFechaHasta.getDateEditor().getUiComponent().getForeground() != Color.RED) {
                 if (!desde.isEmpty() && !hasta.isEmpty()) {
                     datoscompras = busquedacompra.NroComprasFechas(desde, hasta);
                     if (datoscompras.length != 0) {
                         String[] columnas = {"IDCOMPRA", "IDPROV", "IDUSER", "PROVEEDOR", "NROCOMPRA", "USUARIO", "MONTO TOTAL", "FECHA"};
                         datoscompra = new DefaultTableModel(datoscompras, columnas);
-                        jTable1.setModel(datoscompra);
+                        jTableCompras.setModel(datoscompra);
                         EliminarFilasVaciasCompras();
                         //AjustarTamañoFilasCompra();
                         ocultar_columnasCompra();
@@ -845,55 +814,51 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarPorFechasActionPerformed
 
-    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        //SeleccionarFilasNroFacturaCompra();
-    }//GEN-LAST:event_jTable1MousePressed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonNuevoDesdeDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoDesdeDetalleActionPerformed
         compra = new vCompras_Insumos();
         vMenuPrincipal.jDesktopPane1.add(compra);
         compra.setVisible(true);
         compra.toFront();
         this.dispose();
         vDetallesCompras.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonNuevoDesdeDetalleActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int seleccionado = jTable1.getSelectedRow();
+    private void jButtonVerDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerDetalleActionPerformed
+        int seleccionado = jTableCompras.getSelectedRow();
         if (seleccionado == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
-            nrofactura = jTable1.getValueAt(seleccionado, 4).toString();
+            nrofactura = jTableCompras.getValueAt(seleccionado, 4).toString();
             MostrarDetalleCompra();
             vDetallesCompras.setSize(817, 311);
             vDetallesCompras.setLocationRelativeTo(this);
             vDetallesCompras.setModal(true);
             vDetallesCompras.setVisible(true);
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButtonVerDetalleActionPerformed
 
     private void vDetallesComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vDetallesComprasMouseClicked
         LimpiarSeleccionDetalle();
     }//GEN-LAST:event_vDetallesComprasMouseClicked
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         Compras c = new Compras();
         Movimientos_Caja mc = new Movimientos_Caja();
         DetallesCompras dc = new DetallesCompras();
         Sentencias_sql sql = new Sentencias_sql();
-        int seleccionado = jTable1.getSelectedRow();
+        int seleccionado = jTableCompras.getSelectedRow();
         if (seleccionado == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar esta Compra?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                mc.setIdmovimiento(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()));
+                mc.setIdmovimiento(Integer.parseInt(jTableCompras.getValueAt(seleccionado, 0).toString()));
                 mc.setIdtipomovimiento(12);
                 if (control_mc.EliminarMovCajaCompraVenta(mc)) {
                     if (sql.SafeUpdates()) {
-                        Object[][] datos = detallecompra.ObtenerDatosDetalleComprasDesdeListaCompras(jTable1.getValueAt(i, 4).toString());
+                        Object[][] datos = detallecompra.ObtenerDatosDetalleComprasDesdeListaCompras(jTableCompras.getValueAt(i, 4).toString());
                         for (int j = 0; j < datos.length; j++) {
                             for (int l = 0; l < datos.length; l++) {
                                 int idinsumo = (int) datos[j][l];
@@ -909,9 +874,9 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                                 }
                             }
                         }
-                        dc.setIdcompra(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()));
+                        dc.setIdcompra(Integer.parseInt(jTableCompras.getValueAt(seleccionado, 0).toString()));
                         if (detallecompra.EliminarDetalleDesdeListaCompra(dc)) {
-                            c.setIdcompra(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()));
+                            c.setIdcompra(Integer.parseInt(jTableCompras.getValueAt(seleccionado, 0).toString()));
                             if (com.EliminarCompra(c)) {
                                 MostrarCompras();
                                 JOptionPane.showMessageDialog(null, "Compra Eliminada");
@@ -921,22 +886,21 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        int seleccionado = jTable1.getSelectedRow();
-        if (seleccionado == -1) {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-        } else {
-            //datoscompra = (DefaultTableModel) jTable1.getModel();
-            if (VerificarCajaAbierta() == false) {
-                int idmovimientocaja = com.ObtenerIDMovCajaCompra(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()), "CP");
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        if (VerificarCajaAbierta() == false) {
+            int seleccionado = jTableCompras.getSelectedRow();
+            if (seleccionado == -1) {
+                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
+            } else {
+                int idmovimientocaja = com.ObtenerIDMovCajaCompra(Integer.parseInt(jTableCompras.getValueAt(seleccionado, 0).toString()), "CP");
                 String estado = control_mc.getEstadoCajaByMovimiento(idmovimientocaja);
                 if (estado.equals("CERRADA")) {
                     JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                 } else {
-                    fecha = (String) (jTable1.getValueAt(seleccionado, 6));
-                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+                    fecha = (String) (jTableCompras.getValueAt(seleccionado, 7));
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     try {
                         fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                     } catch (ParseException ex) {
@@ -949,50 +913,48 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                         compra.setVisible(true);
                         compra.toFront();
                     }
-                    
-                    /*vCompras_Insumos.jButton1.setEnabled(true);
-                    vCompras_Insumos.jTextField1.setEditable(false);
-                    vCompras_Insumos.jTextField7.setEditable(false);
-                    vCompras_Insumos.jButton7.setEnabled(true);
-                    idcompra = jTable1.getValueAt(seleccionado, 0).toString();
-                    vCompras_Insumos.jTextField3.setText(jTable1.getValueAt(seleccionado, 3).toString());
-                    vCompras_Insumos.jComboBox2.setSelectedItem(jTable1.getValueAt(seleccionado, 5).toString());
-                    vCompras_Insumos.jTextField5.setText(jTable1.getValueAt(seleccionado, 4).toString());
-                    vCompras_Insumos.jDateChooser1.setDate(fechaseleccionada);
-                    vCompras_Insumos.jTextField7.setText(jTable1.getValueAt(seleccionado, 7).toString());
-                    compra.total = (Float.parseFloat(jTable1.getValueAt(seleccionado, 7).toString()));*/
+                    vCompras_Insumos.jButtonModificarCompra.setEnabled(true);
+                    vCompras_Insumos.jButtonAgregarCompra.setText("Cancelar");
+                    vCompras_Insumos.jButtonAgregarCompra.setEnabled(true);
+                    idcompra = jTableCompras.getValueAt(seleccionado, 0).toString();
+                    vCompras_Insumos.jTextProveedor.setText(jTableCompras.getValueAt(seleccionado, 3).toString());
+                    vCompras_Insumos.jCBUsuario.setSelectedItem(jTableCompras.getValueAt(seleccionado, 5).toString());
+                    vCompras_Insumos.jDateFecha.setDate(fechaseleccionada);
+                    vCompras_Insumos.jTextTotal.setText(jTableCompras.getValueAt(seleccionado, 6).toString());
+                    compra.setTitle("Modificar Compra");
+                    compra.total = (Float.parseFloat(jTableCompras.getValueAt(seleccionado, 6).toString()));
+                    compra.nrofactura = nrofactura;
                     compra.idcompra = idcompra;
-                    PasarFilas();
-                    IDdetalles();
-                    CantidadFilas();
+                    ObtenerDatosDetalleDesdeListaCompras();
+                    ObtenerIDDetallesDesdeListaCompras();
+                    CantidadFilasDetalles();
                     dispose();
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "No se puede Modificar. No hay CAJA ABIERTA.");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se puede Modificar. No hay CAJA ABIERTA.");
         }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    public static com.toedter.calendar.JDateChooser jDateChooser1;
-    public static com.toedter.calendar.JDateChooser jDateChooser2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButtonBuscarPorFechas;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonEliminarDesdeDetalle;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonModificarDesdeDetalle;
+    private javax.swing.JButton jButtonNuevo;
+    private javax.swing.JButton jButtonNuevoDesdeDetalle;
+    private javax.swing.JButton jButtonVerDetalle;
+    public static com.toedter.calendar.JDateChooser jDateFechaDesde;
+    public static com.toedter.calendar.JDateChooser jDateFechaHasta;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    public static javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    public static javax.swing.JTable jTableCompras;
+    private javax.swing.JTable jTableDetallesCompras;
     private javax.swing.JDialog vDetallesCompras;
     // End of variables declaration//GEN-END:variables
 }

@@ -80,13 +80,13 @@ public class control_Ventas {
     }
 
     public boolean EfectuarVenta(Ventas venta) {
-        String montototal = (Float.toString(venta.getMontototal())), fecha = ((JTextField) vVentas_Productos.jDateChooser1.getDateEditor().getUiComponent()).getText(), iduser = Integer.toString(venta.getIdusuario());
+        String montototal = (Float.toString(venta.getMontototal())), fecha = ((JTextField) vVentas_Productos.jDateFecha.getDateEditor().getUiComponent()).getText(), iduser = Integer.toString(venta.getIdusuario());
         String datos[] = {iduser, montototal, venta.getTipoVenta()};
         return sql.insertar(datos, "insert into ventas (idusuario,FechaVenta,MontoTotal,activo,tipoVenta) values (?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'),?,1,?)");
     }
 
     public boolean EditarVenta(Ventas venta) {
-        String id = (Integer.toString(venta.getIdventa())), montototal = (Float.toString(venta.getMontototal())), fecha = ((JTextField) vVentas_Productos.jDateChooser1.getDateEditor().getUiComponent()).getText(), iduser = Integer.toString(venta.getIdusuario());
+        String id = (Integer.toString(venta.getIdventa())), montototal = (Float.toString(venta.getMontototal())), fecha = ((JTextField) vVentas_Productos.jDateFecha.getDateEditor().getUiComponent()).getText(), iduser = Integer.toString(venta.getIdusuario());
         String datos[] = {iduser, montototal, venta.getTipoVenta(), id};
         return sql.editar(datos, "update ventas set idusuario=?,FechaVenta=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'), MontoTotal=?, tipoVenta=? where idventa=?");
     }

@@ -89,7 +89,7 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
         jBotonAgre_Usuario = new javax.swing.JButton();
         jBotonModif_Usuario = new javax.swing.JButton();
         jTextPass_Usuario = new javax.swing.JPasswordField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBoxVerContraseña = new javax.swing.JCheckBox();
         jComboBox1 = new javax.swing.JComboBox<>();
         jBotonCancelar = new javax.swing.JButton();
         jEtiqtMail_Usuario1 = new javax.swing.JLabel();
@@ -187,12 +187,12 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
 
         jTextPass_Usuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 248, 177));
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jCheckBox1.setText("Ver Contraseña");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxVerContraseña.setBackground(new java.awt.Color(255, 248, 177));
+        jCheckBoxVerContraseña.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jCheckBoxVerContraseña.setText("Ver Contraseña");
+        jCheckBoxVerContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                jCheckBoxVerContraseñaActionPerformed(evt);
             }
         });
 
@@ -240,7 +240,7 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(309, 309, 309)
-                                .addComponent(jCheckBox1)
+                                .addComponent(jCheckBoxVerContraseña)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(213, 213, 213)
@@ -260,11 +260,11 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
                                         .addComponent(jComboEstado_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jEtiqtMail_Usuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jBotonAgre_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBotonAgre_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBotonModif_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBotonModif_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(86, 86, 86)
-                                .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(67, 67, 67))))
         );
         layout.setVerticalGroup(
@@ -289,7 +289,7 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jTextPass_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(2, 2, 2)
-                .addComponent(jCheckBox1)
+                .addComponent(jCheckBoxVerContraseña)
                 .addGap(8, 8, 8)
                 .addComponent(jEtiqDireccion_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -310,12 +310,12 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboEstado_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBotonAgre_Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBotonModif_Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBotonCancelar))
-                .addContainerGap())
+                    .addComponent(jBotonAgre_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBotonModif_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -455,13 +455,13 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextApe_UsuarioKeyTyped
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        if (jCheckBox1.isSelected()) {
+    private void jCheckBoxVerContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxVerContraseñaActionPerformed
+        if (jCheckBoxVerContraseña.isSelected()) {
             jTextPass_Usuario.setEchoChar((char) 0);
         } else {
             jTextPass_Usuario.setEchoChar('\u25cf');
         }
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_jCheckBoxVerContraseñaActionPerformed
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
         // TODO add your handling code here:
@@ -472,7 +472,7 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
     public static javax.swing.JButton jBotonAgre_Usuario;
     public static javax.swing.JButton jBotonCancelar;
     public static javax.swing.JButton jBotonModif_Usuario;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBoxVerContraseña;
     public static javax.swing.JComboBox<String> jComboBox1;
     public static javax.swing.JComboBox<String> jComboEstado_Usuario;
     private javax.swing.JLabel jEtiqApe_Usuario;

@@ -32,13 +32,17 @@ public class control_Productos {
     }
         
     public boolean InsertarProductos(Productos producto){
-        String precio= Float.toString(producto.getPrecioventa()), fecha=((JTextField)vGestion_Productos.jDateChooser1.getDateEditor().getUiComponent()).getText(),idcatprod=Integer.toString(producto.getIdcategoriaproducto());
+        String precio= Float.toString(producto.getPrecioventa()), fecha=((JTextField)vGestion_Productos.jDateFecha.getDateEditor().getUiComponent()).getText(),idcatprod=Integer.toString(producto.getIdcategoriaproducto());
         String datos[]={idcatprod,producto.getDescripcion(),precio};
         return sql.insertar(datos, "insert into productos (idcategoriaproducto,descripcion,precioventa,fecharegistro,activo) values (?,?,?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),1)");
     }
     
+    public String ObtenerProducto(String descripcion){
+        return sql.datos_string("descripcion", "select descripcion from productos where descripcion='"+descripcion+"' and activo=1");
+    }
+    
     public boolean EditarProductos(Productos producto){
-        String precio= Float.toString(producto.getPrecioventa()), fecha=((JTextField)vGestion_Productos.jDateChooser1.getDateEditor().getUiComponent()).getText(), id=Integer.toString(producto.getIdproducto()),idcatprod=Integer.toString(producto.getIdcategoriaproducto());
+        String precio= Float.toString(producto.getPrecioventa()), fecha=((JTextField)vGestion_Productos.jDateFecha.getDateEditor().getUiComponent()).getText(), id=Integer.toString(producto.getIdproducto()),idcatprod=Integer.toString(producto.getIdcategoriaproducto());
         String datos[]={idcatprod,producto.getDescripcion(),precio,id};
         return sql.editar(datos, "update productos set idcategoriaproducto=?,descripcion=?,precioventa=?,fecharegistro=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s') where idproducto=?");
     }

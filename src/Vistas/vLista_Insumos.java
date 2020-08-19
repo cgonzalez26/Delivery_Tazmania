@@ -60,7 +60,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                     
                     vGestion_Insumos.jTextDesc_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 3).toString());
                     vGestion_Insumos.jCBTipo_Insumos.setSelectedItem(jTabla_Insumos.getValueAt(seleccionado, 4).toString());
-                    vGestion_Insumos.jTextField1.setText(jTabla_Insumos.getValueAt(seleccionado, 5).toString());///prov
+                    vGestion_Insumos.jTextFieldProveedor.setText(jTabla_Insumos.getValueAt(seleccionado, 5).toString());///prov
                     vGestion_Insumos.jCBUnidad_Medida.setSelectedItem(jTabla_Insumos.getValueAt(seleccionado, 6).toString());
                     vGestion_Insumos.jTextPrecio_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 7).toString());
                     vGestion_Insumos.jTextStock_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 8).toString());
@@ -85,14 +85,14 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
     public void ComboTipoInsumo() {
         tipoinsumo = combo.combox("tiposinsumos", "descripcion");
         for (Object tiposinsumos : tipoinsumo) {
-            jComboBox_TipoINsumo.addItem((String) tiposinsumos);
+            jComboBox_TipoInsumo.addItem((String) tiposinsumos);
         }
     }
 
     public void EliminarItemsVacios() {
-        for (int i = 0; i < jComboBox_TipoINsumo.getItemCount(); i++) {
-            if (jComboBox_TipoINsumo.getItemAt(i) == null) {
-                jComboBox_TipoINsumo.removeItemAt(i);
+        for (int i = 0; i < jComboBox_TipoInsumo.getItemCount(); i++) {
+            if (jComboBox_TipoInsumo.getItemAt(i) == null) {
+                jComboBox_TipoInsumo.removeItemAt(i);
             }
         }
     }
@@ -217,14 +217,14 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                 return false; //Disallow the editing of any cell
             }
         };
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonNuevo = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox_TipoINsumo = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jLabelTipoInsumoBuscar = new javax.swing.JLabel();
+        jComboBox_TipoInsumo = new javax.swing.JComboBox<>();
+        jLabelInsumoBuscar = new javax.swing.JLabel();
+        jTextFieldInsumoBuscar = new javax.swing.JTextField();
         jButtonBuscar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
@@ -255,54 +255,55 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTabla_Insumos);
 
-        jButton1.setBackground(new java.awt.Color(252, 249, 57));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setText("Nuevo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNuevo.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonNuevo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonNuevo.setText("Nuevo");
+        jButtonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonNuevoActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(252, 249, 57));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton2.setText("Eliminar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(252, 249, 57));
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setText("Modificar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Buscar Por:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
-        jLabel1.setBackground(new java.awt.Color(255, 248, 177));
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("Tipo de Insumo:");
+        jLabelTipoInsumoBuscar.setBackground(new java.awt.Color(255, 248, 177));
+        jLabelTipoInsumoBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelTipoInsumoBuscar.setText("Tipo de Insumo:");
 
-        jComboBox_TipoINsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jComboBox_TipoINsumo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno" }));
+        jComboBox_TipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jComboBox_TipoInsumo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno" }));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel2.setText("Insumo:");
+        jLabelInsumoBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelInsumoBuscar.setText("Insumo:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldInsumoBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldInsumoBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
+                jTextFieldInsumoBuscarKeyTyped(evt);
             }
         });
 
-        jButtonBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonBuscar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jButtonBuscar.setText("Buscar");
         jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,12 +318,12 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jTextFieldInsumoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelInsumoBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox_TipoINsumo, 0, 270, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox_TipoInsumo, 0, 270, Short.MAX_VALUE)
+                    .addComponent(jLabelTipoInsumoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                 .addGap(273, 273, 273)
@@ -335,13 +336,13 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jLabelInsumoBuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldInsumoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelTipoInsumoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox_TipoINsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonBuscar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -353,23 +354,21 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1072, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(276, 276, 276)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(130, 130, 130)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(130, 130, 130)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(234, 234, 234)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(276, 276, 276)
+                        .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130)
+                        .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130)
+                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(234, 234, 234)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(198, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1051, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,23 +379,23 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoActionPerformed
         tipo = new vGestion_Insumos();
         vMenuPrincipal.jDesktopPane1.add(tipo);
         tipo.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonNuevoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         int seleccionado = jTabla_Insumos.getSelectedRow();
         if (seleccionado == -1) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
@@ -412,9 +411,9 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                 LimpiarSeleccion();
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         int seleccionado = jTabla_Insumos.getSelectedRow();
         if (seleccionado == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
@@ -429,7 +428,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
             idinsumo = (jTabla_Insumos.getValueAt(seleccionado, 0).toString());
             vGestion_Insumos.jTextDesc_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 3).toString());
             vGestion_Insumos.jCBTipo_Insumos.setSelectedItem(jTabla_Insumos.getValueAt(seleccionado, 4).toString());
-            vGestion_Insumos.jTextField1.setText(jTabla_Insumos.getValueAt(seleccionado, 5).toString());///prov
+            vGestion_Insumos.jTextFieldProveedor.setText(jTabla_Insumos.getValueAt(seleccionado, 5).toString());///prov
             vGestion_Insumos.jCBUnidad_Medida.setSelectedItem(jTabla_Insumos.getValueAt(seleccionado, 6).toString());
             vGestion_Insumos.jTextPrecio_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 7).toString());
             vGestion_Insumos.jTextStock_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 8).toString());
@@ -449,18 +448,18 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
             dispose();
             LimpiarSeleccion();
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccion();
         Mostrar();
-        jComboBox_TipoINsumo.setSelectedItem("Ninguno");
-        jTextField1.setText("");
+        jComboBox_TipoInsumo.setSelectedItem("Ninguno");
+        jTextFieldInsumoBuscar.setText("");
     }//GEN-LAST:event_formMouseClicked
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
 //        if (!jTextField1.getText().isEmpty() || jComboBox1.getSelectedIndex() != 0) {
-            datostabla = insumo.MostrarDatosBusquedaInsumos(jTextField1.getText(),Integer.toString(jComboBox_TipoINsumo.getSelectedIndex()));
+            datostabla = insumo.MostrarDatosBusquedaInsumos(jTextFieldInsumoBuscar.getText(),Integer.toString(jComboBox_TipoInsumo.getSelectedIndex()));
             if (datostabla.length != 0) {
                 String[] columnas = {"IDINSUMO", "IDTIPOINSUMO", "IDPROVEEDOR", "DESCRIPCION", "TIPO INSUMO", "PROVEEDOR", "UNIDAD MEDIDA", "PRECIO", "STOCK"};
                 datos = new DefaultTableModel(datostabla, columnas);
@@ -478,27 +477,27 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
 //        }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    private void jTextFieldInsumoBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldInsumoBuscarKeyTyped
         char c = evt.getKeyChar();
         if (Character.isLowerCase(c)) {
             String cadena = ("" + c).toUpperCase();
             c = cadena.charAt(0);
             evt.setKeyChar(c);
         }
-    }//GEN-LAST:event_jTextField1KeyTyped
+    }//GEN-LAST:event_jTextFieldInsumoBuscarKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonBuscar;
-    private javax.swing.JComboBox<String> jComboBox_TipoINsumo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonNuevo;
+    private javax.swing.JComboBox<String> jComboBox_TipoInsumo;
+    private javax.swing.JLabel jLabelInsumoBuscar;
+    private javax.swing.JLabel jLabelTipoInsumoBuscar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTabla_Insumos;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldInsumoBuscar;
     // End of variables declaration//GEN-END:variables
 }

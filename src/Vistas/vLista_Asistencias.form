@@ -8,7 +8,10 @@
     <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
+<<<<<<< HEAD
     <Property name="resizable" type="boolean" value="true"/>
+=======
+>>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
     <Property name="title" type="java.lang.String" value="Listado de Asistencias"/>
     <Property name="frameIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
       <Image iconType="3" name="/Imagenes/LogoDelivery.png"/>
@@ -17,6 +20,10 @@
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="internalFrameClosing" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="formInternalFrameClosing"/>
+    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="formMouseClicked"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -43,6 +50,7 @@
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                   </Group>
+<<<<<<< HEAD
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jButtonAgregar" min="-2" pref="101" max="-2" attributes="0"/>
                       <EmptySpace min="69" pref="69" max="-2" attributes="0"/>
@@ -51,7 +59,18 @@
                       <Component id="jButtonEliminar" min="-2" pref="101" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
                   </Group>
+=======
+>>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
               </Group>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+              <Component id="jButtonNuevaAsistencia" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButtonModificar" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
+              <Component id="jButtonEliminar" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,12 +82,19 @@
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="261" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+<<<<<<< HEAD
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButtonAgregar" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonModificar" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonEliminar" min="-2" max="-2" attributes="0"/>
+=======
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonModificar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jButtonNuevaAsistencia" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jButtonEliminar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+>>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
               </Group>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -81,7 +107,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="jTableAsistencias">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="13" style="0"/>
@@ -119,19 +145,23 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jDateChooser2" min="-2" pref="170" max="-2" attributes="0"/>
+                      <Component id="jDateFechaDesde" min="-2" pref="170" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jDateChooser3" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                      <Component id="jDateFechaHasta" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="47" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
+<<<<<<< HEAD
                   <Component id="btnBuscar" min="-2" pref="105" max="-2" attributes="0"/>
+=======
+                  <Component id="jButtonBuscarAsistencia" min="-2" pref="105" max="-2" attributes="0"/>
+>>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
                   <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -146,18 +176,22 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jDateChooser2" alignment="0" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="jDateChooser3" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jDateFechaDesde" alignment="0" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="jDateFechaHasta" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
+=======
+                  <Component id="jButtonBuscarAsistencia" min="-2" max="-2" attributes="0"/>
+>>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateFechaDesde">
           <Properties>
             <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -168,7 +202,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser3">
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateFechaHasta">
           <Properties>
             <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -179,7 +213,11 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
+<<<<<<< HEAD
         <Component class="javax.swing.JButton" name="btnBuscar">
+=======
+        <Component class="javax.swing.JButton" name="jButtonBuscarAsistencia">
+>>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="13" style="0"/>
@@ -187,7 +225,11 @@
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
+<<<<<<< HEAD
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
+=======
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBuscarAsistenciaActionPerformed"/>
+>>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -208,7 +250,11 @@
         </Component>
       </SubComponents>
     </Container>
+<<<<<<< HEAD
     <Component class="javax.swing.JButton" name="jButtonAgregar">
+=======
+    <Component class="javax.swing.JButton" name="jButtonNuevaAsistencia">
+>>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="39" green="f9" red="fc" type="rgb"/>
@@ -216,10 +262,14 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="12" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Agregar"/>
+        <Property name="text" type="java.lang.String" value="Nuevo"/>
       </Properties>
       <Events>
+<<<<<<< HEAD
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAgregarActionPerformed"/>
+=======
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNuevaAsistenciaActionPerformed"/>
+>>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonModificar">

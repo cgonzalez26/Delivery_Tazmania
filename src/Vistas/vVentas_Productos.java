@@ -81,7 +81,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         if (idcaja == 0) {
             DeshabilitarCampos();
         } else {
-            jLabel5.setVisible(false);
+            jLabelMensaje.setVisible(false);
         }
     }
 
@@ -92,14 +92,14 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         txtCantidad.setEnabled(false);
         txtPrecio.setEnabled(false);
         //jTextField6.setEnabled(false);
-        jDateChooser1.setEnabled(false);
-        jButton2.setEnabled(false);
+        jDateFecha.setEnabled(false);
+        jButtonSeleccionarProducto.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnModificar.setEnabled(false);
         btnBorrar.setEnabled(false);
         btnGuardarVenta.setEnabled(false);
         btnModificarVenta.setEnabled(false);
-        jLabel5.setVisible(true);
+        jLabelMensaje.setVisible(true);
     }
 
     public void CrearColumnas() {
@@ -108,14 +108,14 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         modelo.addColumn("PRECIO");
         modelo.addColumn("CANTIDAD");
         modelo.addColumn("SUBTOTAL");
-        jTable1.setModel(modelo);
+        jTableDetalle.setModel(modelo);
     }
 
     public void MostrarProductos() {
         String[] columnas = {"PRODUCTOS", "PRECIO"};
         produc = detalle.MostrarProductos();
         modelprod = new DefaultTableModel(produc, columnas);
-        jTable2.setModel(modelprod);
+        jTableProductos.setModel(modelprod);
         EliminarFilasVaciasProductos();
         ocultar_columnasprod();
     }
@@ -133,17 +133,17 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         }
         stockprod = detalle.MostrarProductoStockN_MOD(txtProducto.getText(), Float.parseFloat(txtCantidad.getText()));
         modelstockprod = new DefaultTableModel(stockprod, columnas);
-        jTable3.setModel(modelstockprod);
+        jTableInforme.setModel(modelstockprod);
         EliminiarFilasVaciasStockProd();
     }
 
     public void MostrarProductosStockMOD() {
-        if (jTable1.getRowCount() != 0) {
+        if (jTableDetalle.getRowCount() != 0) {
             String[] columnas = {"INSUMOS", "STOCK ACTUAL", "STOCK MODIFICANDO VENTA", "STOCK FINAL VENTA"};
-            int i = jTable1.getSelectedRow();
-            stockprod = detalle.MostrarProductosStockMOD(txtProducto.getText(), Float.parseFloat(jTable1.getValueAt(i, 2).toString()), Float.parseFloat(txtCantidad.getText()));
+            int i = jTableDetalle.getSelectedRow();
+            stockprod = detalle.MostrarProductosStockMOD(txtProducto.getText(), Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()), Float.parseFloat(txtCantidad.getText()));
             modelstockprod = new DefaultTableModel(stockprod, columnas);
-            jTable3.setModel(modelstockprod);
+            jTableInforme.setModel(modelstockprod);
             EliminiarFilasVaciasStockProd();
         }
     }
@@ -152,7 +152,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         listprod = combo.list("productos", "descripcion", txtProducto.getText());
         String substr = txtProducto.getText().toLowerCase();
         listmodel = new DefaultListModel<>();
-        jList2.setModel(listmodel);
+        jListProductos.setModel(listmodel);
         listmodel.removeAllElements();
         if (listprod.size() > 0) {
             for (int i = 0; i < listprod.size(); i++) {
@@ -162,9 +162,9 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                     String sublist = listprod.get(i).toLowerCase();
                     if (sublist.contains(substr)) {
                         listmodel.addElement(listprod.get(i));
-                        jList2.setVisible(true);
+                        jListProductos.setVisible(true);
                         if (txtProducto.getText().isEmpty()) {
-                            jList2.setVisible(false);
+                            jListProductos.setVisible(false);
                         }
                     }
                 }
@@ -173,9 +173,9 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
     }
 
     public void ocultar_columnasprod() {
-        jTable2.getColumnModel().getColumn(1).setMaxWidth(0);
-        jTable2.getColumnModel().getColumn(1).setMinWidth(0);
-        jTable2.getColumnModel().getColumn(1).setPreferredWidth(0);
+        jTableProductos.getColumnModel().getColumn(1).setMaxWidth(0);
+        jTableProductos.getColumnModel().getColumn(1).setMinWidth(0);
+        jTableProductos.getColumnModel().getColumn(1).setPreferredWidth(0);
     }
 
     public void EliminarItemsVacios() {
@@ -187,11 +187,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
     }
 
     public void EliminarFilasVaciasProductos() {
-        if (jTable2.getRowCount() != 0) {
-            int filas = jTable2.getRowCount();
+        if (jTableProductos.getRowCount() != 0) {
+            int filas = jTableProductos.getRowCount();
             filas--;
             for (int fila = filas; fila >= 0; fila--) {
-                if (jTable2.getValueAt(fila, 0) == null) {
+                if (jTableProductos.getValueAt(fila, 0) == null) {
                     modelprod.removeRow(fila);
                 }
             }
@@ -199,11 +199,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
     }
 
     public void EliminiarFilasVaciasStockProd() {
-        if (jTable3.getRowCount() != 0) {
-            int filas = jTable3.getRowCount();
+        if (jTableInforme.getRowCount() != 0) {
+            int filas = jTableInforme.getRowCount();
             filas--;
             for (int fila = filas; fila >= 0; fila--) {
-                if (jTable3.getValueAt(fila, 0) == null) {
+                if (jTableInforme.getValueAt(fila, 0) == null) {
                     modelstockprod.removeRow(fila);
                 }
             }
@@ -235,8 +235,8 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
     }
 
     public void LimpiarSeleccion() {
-        jTable1.clearSelection();
-        jTable1.getSelectionModel().clearSelection();
+        jTableDetalle.clearSelection();
+        jTableDetalle.getSelectionModel().clearSelection();
     }
 
     @SuppressWarnings("unchecked")
@@ -245,27 +245,27 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
 
         vSeleccionarProducto = new javax.swing.JDialog();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable(){
+        jTableProductos = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButtonAgregar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
+        jLabelSeleccionarProducto = new javax.swing.JLabel();
+        jTextFieldProductoBuscar = new javax.swing.JTextField();
+        jButtonBuscarProducto = new javax.swing.JButton();
         vStocksProductos = new javax.swing.JDialog();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabelNombreProductoElegido = new javax.swing.JLabel();
+        jLabelNombreProducto = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jButton10 = new javax.swing.JButton();
+        jTableInforme = new javax.swing.JTable();
+        jButtonAceptarInforme = new javax.swing.JButton();
         cbxUsuario = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelFecha = new javax.swing.JLabel();
+        jDateFecha = new com.toedter.calendar.JDateChooser();
+        jLabelTotal = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         btnGuardarVenta = new javax.swing.JButton();
         btnModificarVenta = new javax.swing.JButton();
@@ -274,28 +274,28 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         btnAgregar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable(){
+        jTableDetalle = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        jLabel9 = new javax.swing.JLabel();
+        jLabelProducto = new javax.swing.JLabel();
         txtProducto = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelPrecio = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelCantidad = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jButtonSeleccionarProducto = new javax.swing.JButton();
+        jListProductos = new javax.swing.JList<>();
+        jLabelUsuarioVenta = new javax.swing.JLabel();
+        jLabelMensaje = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        rbTipoVenta = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jList2 = new javax.swing.JList<>();
+        jRadioLocal = new javax.swing.JRadioButton();
+        jRadioOnline = new javax.swing.JRadioButton();
         btnCancelar = new javax.swing.JButton();
 
         vSeleccionarProducto.setTitle("Seleccionar Producto");
-        java.awt.Image icono = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
+        java.awt.Image icono = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
         vSeleccionarProducto.setIconImage(icono);
         vSeleccionarProducto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -308,8 +308,8 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableProductos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jTableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -317,36 +317,39 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTableProductos);
 
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton4.setText("Aceptar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonAgregarActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton5.setText("Cancelar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelar.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonCancelarActionPerformed(evt);
             }
         });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel2.setText("Nombre Producto");
+        jLabelSeleccionarProducto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelSeleccionarProducto.setText("Nombre Producto");
 
-        jTextField7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldProductoBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jButton9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton9.setText("Buscar");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarProducto.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonBuscarProducto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jButtonBuscarProducto.setText("Buscar");
+        jButtonBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                jButtonBuscarProductoActionPerformed(evt);
             }
         });
 
@@ -358,26 +361,26 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTextField7))
+                        .addComponent(jTextFieldProductoBuscar))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(87, 87, 87)
-                        .addComponent(jLabel2)
+                        .addComponent(jLabelSeleccionarProducto)
                         .addGap(0, 86, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(99, 99, 99)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelSeleccionarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldProductoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9)
+                .addComponent(jButtonBuscarProducto)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -389,11 +392,12 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(vSeleccionarProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                    .addGroup(vSeleccionarProductoLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vSeleccionarProductoLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -406,13 +410,13 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(vSeleccionarProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(jButtonAgregar)
+                    .addComponent(jButtonCancelar))
                 .addContainerGap())
         );
 
         vStocksProductos.setTitle("Informe Producto Stock");
-        java.awt.Image iconodeliv = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
+        java.awt.Image iconodeliv = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
         vStocksProductos.setIconImage(iconodeliv);
         vStocksProductos.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -420,13 +424,13 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel10.setText("Producto:");
+        jLabelNombreProductoElegido.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombreProductoElegido.setText("Producto:");
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombreProducto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jTable3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTableInforme.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableInforme.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -437,13 +441,13 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(jTableInforme);
 
-        jButton10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton10.setText("Aceptar");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAceptarInforme.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAceptarInforme.setText("Aceptar");
+        jButtonAceptarInforme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jButtonAceptarInformeActionPerformed(evt);
             }
         });
 
@@ -458,12 +462,12 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                         .addGap(0, 260, Short.MAX_VALUE)
                         .addGroup(vStocksProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vStocksProductosLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
+                                .addComponent(jLabelNombreProductoElegido)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(174, 174, 174))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vStocksProductosLayout.createSequentialGroup()
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonAceptarInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(303, 303, 303))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vStocksProductosLayout.createSequentialGroup()
                         .addComponent(jScrollPane3)
@@ -474,12 +478,12 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
             .addGroup(vStocksProductosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(vStocksProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelNombreProductoElegido, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton10)
+                .addComponent(jButtonAceptarInforme)
                 .addContainerGap())
         );
 
@@ -518,17 +522,17 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         cbxUsuario.setFocusable(false);
         getContentPane().add(cbxUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 202, 33));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel3.setText("(*) Fecha.");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 161, 29));
+        jLabelFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelFecha.setText("(*) Fecha.");
+        getContentPane().add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 161, 29));
 
-        jDateChooser1.setDateFormatString("dd/MM/yyyy HH:mm");
-        jDateChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 196, 33));
+        jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm");
+        jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        getContentPane().add(jDateFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 196, 33));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel4.setText("TOTAL:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 50, 23));
+        jLabelTotal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelTotal.setText("TOTAL:");
+        getContentPane().add(jLabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 50, 23));
 
         txtTotal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 440, 140, 32));
@@ -555,6 +559,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Productos a Vender", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnBorrar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/delete16.png"))); // NOI18N
@@ -564,6 +569,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 btnBorrarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1066, 224, 110, -1));
 
         btnAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add16.png"))); // NOI18N
@@ -573,6 +579,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1066, 100, 110, -1));
 
         btnModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/edit16.png"))); // NOI18N
@@ -582,9 +589,10 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1066, 162, 110, -1));
 
-        jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableDetalle.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -595,15 +603,18 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable1MousePressed(evt);
+                jTableDetalleMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableDetalle);
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel9.setText("(*) Producto:");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1036, 216));
+
+        jLabelProducto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelProducto.setText("(*) Producto:");
+        jPanel1.add(jLabelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 30));
 
         txtProducto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         txtProducto.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -614,9 +625,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 txtProductoKeyTyped(evt);
             }
         });
+        jPanel1.add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 221, 30));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel7.setText("(*) Precio:");
+        jLabelPrecio.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelPrecio.setText("(*) Precio:");
+        jPanel1.add(jLabelPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 20, 113, 23));
 
         txtPrecio.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -624,9 +637,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 txtPrecioKeyTyped(evt);
             }
         });
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 50, 148, 32));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel6.setText("(*) Cantidad:");
+        jLabelCantidad.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelCantidad.setText("(*) Cantidad:");
+        jPanel1.add(jLabelCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 99, 23));
 
         txtCantidad.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -634,98 +649,48 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 txtCantidadKeyTyped(evt);
             }
         });
+        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 143, 32));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSeleccionarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
+        jButtonSeleccionarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonSeleccionarProductoActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonSeleccionarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 50, 39, 32));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1036, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(6, 6, 6))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                                .addGap(19, 19, 19))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnAgregar)
-                                .addGap(37, 37, 37)
-                                .addComponent(btnModificar)
-                                .addGap(37, 37, 37)
-                                .addComponent(btnBorrar)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
+        jListProductos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jListProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListProductos.setValueIsAdjusting(true);
+        jListProductos.setVisibleRowCount(0);
+        jListProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListProductosMouseClicked(evt);
+            }
+        });
+        jPanel1.add(jListProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 221, 0));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 1188, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("Usuario responsable de la venta");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 202, -1));
+        jLabelUsuarioVenta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelUsuarioVenta.setText("Usuario responsable de la venta");
+        getContentPane().add(jLabelUsuarioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 202, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel5.setText("No Hay CAJA ABIERTA.");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 150, 30));
+        jLabelMensaje.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelMensaje.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelMensaje.setText("No Hay CAJA ABIERTA.");
+        getContentPane().add(jLabelMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 150, 30));
 
         jPanel2.setBackground(new java.awt.Color(255, 248, 177));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "(*) Tipo de Venta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
-        rbTipoVenta.setBackground(new java.awt.Color(255, 248, 177));
-        rbTipoVenta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        rbTipoVenta.setText("Local");
+        jRadioLocal.setBackground(new java.awt.Color(255, 248, 177));
+        jRadioLocal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jRadioLocal.setText("Local");
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 248, 177));
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jRadioButton2.setText("Online");
+        jRadioOnline.setBackground(new java.awt.Color(255, 248, 177));
+        jRadioOnline.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jRadioOnline.setText("Online");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -734,33 +699,22 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                    .addComponent(jRadioOnline, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(rbTipoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jRadioLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(rbTipoVenta)
+                .addComponent(jRadioLocal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE)
+                .addComponent(jRadioOnline, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, -1, 80));
-
-        jList2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList2.setValueIsAdjusting(true);
-        jList2.setVisibleRowCount(0);
-        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList2MouseClicked(evt);
-            }
-        });
-        getContentPane().add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 500, 221, -1));
 
         btnCancelar.setBackground(new java.awt.Color(240, 87, 49));
         btnCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -778,9 +732,9 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         boolean repetido = false;
         if (!txtProducto.getText().equals("") && !txtCantidad.getText().equals("") && !txtPrecio.getText().equals("")) {
-            if (jTable1.getRowCount() != 0) {
-                for (int i = 0; i < jTable1.getRowCount(); i++) {
-                    if (txtProducto.getText().equals(jTable1.getValueAt(i, 0).toString()) && btnModificar.getText().equals("Modificar")) {
+            if (jTableDetalle.getRowCount() != 0) {
+                for (int i = 0; i < jTableDetalle.getRowCount(); i++) {
+                    if (txtProducto.getText().equals(jTableDetalle.getValueAt(i, 0).toString()) && btnModificar.getText().equals("Modificar")) {
                         JOptionPane.showMessageDialog(null, "Producto ya ingresado!");
                         repetido = true;
                     }
@@ -796,9 +750,9 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                         int i = JOptionPane.showOptionDialog(null, "Hemos verificado que dichos stocks de los insumos del producto " + txtProducto.getText() + ", puede tener problemas a futuro. Por lo tanto no se cargara el mismo, por favor revea los insumos de este producto.", "ATENCION!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
                         if (i == 0) {
                             MostrarProductosStockN_MOD();
-                            jLabel11.setText(txtProducto.getText());
+                            jLabelNombreProducto.setText(txtProducto.getText());
                             color = new ColorearFilas(2);
-                            jTable3.getColumnModel().getColumn(2).setCellRenderer(color);
+                            jTableInforme.getColumnModel().getColumn(2).setCellRenderer(color);
                             vStocksProductos.setSize(727, 560); //728, 524
                             vStocksProductos.setLocationRelativeTo(this);
                             vStocksProductos.setModal(true);
@@ -811,9 +765,9 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                         int i = JOptionPane.showOptionDialog(null, "Hemos verificado que si aplica la venta para este producto " + txtProducto.getText() + ", dichos stocks de los insumos de la misma puede tener un stock 0", "ADVERTENCIA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opc, opc[0]);
                         if (i == 0) {
                             MostrarProductosStockN_MOD();
-                            jLabel11.setText(txtProducto.getText());
+                            jLabelNombreProducto.setText(txtProducto.getText());
                             color = new ColorearFilas(2);
-                            jTable3.getColumnModel().getColumn(2).setCellRenderer(color);
+                            jTableInforme.getColumnModel().getColumn(2).setCellRenderer(color);
                             vStocksProductos.setSize(727, 560);
                             vStocksProductos.setLocationRelativeTo(this);
                             vStocksProductos.setModal(true);
@@ -846,12 +800,12 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                         }
                     }
                 } else if (btnModificar.getText().equals("Cancelar")) {
-                    int i = jTable1.getSelectedRow();
+                    int i = jTableDetalle.getSelectedRow();
                     if (i == -1) {
                         JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
                     } else {
-                        d.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
-                        d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(i, 0).toString()));
+                        d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
+                        d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(i, 0).toString()));
                         detalle.SumarCantidadRestadaInsumos(d);
                         int stockneg = 0, stockcero = 0;
                         stockneg = detalle.ConsultarStockNegativosN_MOD(txtProducto.getText(), Float.parseFloat(txtCantidad.getText()));
@@ -863,18 +817,18 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                             int l = JOptionPane.showOptionDialog(null, "Hemos verificado que dichos stocks de los insumos del producto " + txtProducto.getText() + ", puede tener problemas a futuro. Por lo tanto no se cargara el mismo, por favor revea los insumos de este producto.", "ATENCION!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
                             if (l == 0) {
                                 MostrarProductosStockN_MOD();
-                                jLabel11.setText(txtProducto.getText());
+                                jLabelNombreProducto.setText(txtProducto.getText());
                                 color = new ColorearFilas(2);
-                                jTable3.getColumnModel().getColumn(2).setCellRenderer(color);
+                                jTableInforme.getColumnModel().getColumn(2).setCellRenderer(color);
                                 vStocksProductos.setSize(727, 560);
                                 vStocksProductos.setLocationRelativeTo(this);
                                 vStocksProductos.setModal(true);
                                 vStocksProductos.setVisible(true);
                             } else {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(i, 0).toString()));
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(i, 0).toString()));
                                 if (detalle.ActualizarStockInsumos(d)) {
-                                    total = total + (Float.parseFloat(jTable1.getValueAt(i, 1).toString()) * Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
+                                    total = total + (Float.parseFloat(jTableDetalle.getValueAt(i, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
                                     txtTotal.setText(Float.toString(total));
                                     btnModificar.setText("Modificar");
                                     btnBorrar.setEnabled(true);
@@ -887,9 +841,9 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                             int j = JOptionPane.showOptionDialog(null, "Hemos verificado que si aplica la venta para este producto " + txtProducto.getText() + ", dichos stocks de los insumos de la misma puede tener un stock 0", "ADVERTENCIA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opc, opc[0]);
                             if (j == 0) {
                                 MostrarProductosStockN_MOD();
-                                jLabel11.setText(txtProducto.getText());
+                                jLabelNombreProducto.setText(txtProducto.getText());
                                 color = new ColorearFilas(2);
-                                jTable3.getColumnModel().getColumn(2).setCellRenderer(color);
+                                jTableInforme.getColumnModel().getColumn(2).setCellRenderer(color);
                                 vStocksProductos.setSize(727, 560);
                                 vStocksProductos.setLocationRelativeTo(this);
                                 vStocksProductos.setModal(true);
@@ -911,10 +865,10 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                                         LimpiarSeleccion();
                                     }
                                 } else {
-                                    d.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
-                                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(i, 0).toString()));
+                                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
+                                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(i, 0).toString()));
                                     if (detalle.ActualizarStockInsumos(d)) {
-                                        total = total + (Float.parseFloat(jTable1.getValueAt(i, 1).toString()) * Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
+                                        total = total + (Float.parseFloat(jTableDetalle.getValueAt(i, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
                                         txtTotal.setText(Float.toString(total));
                                         btnModificar.setText("Modificar");
                                         btnBorrar.setEnabled(true);
@@ -940,12 +894,12 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                         }
                     }
                 } else if (btnModificar.getText().equals("Cancelar Modificar Detalle")) {
-                    int k = jTable1.getSelectedRow();
+                    int k = jTableDetalle.getSelectedRow();
                     if (k == -1) {
                         JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
                     } else {
-                        d.setCantidad(Float.parseFloat(jTable1.getValueAt(k, 2).toString()));
-                        d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(k, 0).toString()));
+                        d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(k, 2).toString()));
+                        d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(k, 0).toString()));
                         detalle.SumarCantidadRestadaInsumos(d);
                         int stockneg = 0, stockcero = 0;
                         stockneg = detalle.ConsultarStockNegativosN_MOD(txtProducto.getText(), Float.parseFloat(txtCantidad.getText()));
@@ -956,18 +910,18 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                             int l = JOptionPane.showOptionDialog(null, "Hemos verificado que dichos stocks de los insumos del producto " + txtProducto.getText() + ", puede tener problemas a futuro. Por lo tanto no se cargara el mismo, por favor revea los insumos de este producto.", "ATENCION!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
                             if (l == 0) {
                                 MostrarProductosStockN_MOD();
-                                jLabel11.setText(txtProducto.getText());
+                                jLabelNombreProducto.setText(txtProducto.getText());
                                 color = new ColorearFilas(2);
-                                jTable3.getColumnModel().getColumn(2).setCellRenderer(color);
+                                jTableInforme.getColumnModel().getColumn(2).setCellRenderer(color);
                                 vStocksProductos.setSize(727, 560);
                                 vStocksProductos.setLocationRelativeTo(this);
                                 vStocksProductos.setModal(true);
                                 vStocksProductos.setVisible(true);
                             } else {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(k, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(k, 0).toString()));
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(k, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(k, 0).toString()));
                                 if (detalle.ActualizarStockInsumos(d)) {
-                                    total = total + (Float.parseFloat(jTable1.getValueAt(k, 1).toString()) * Float.parseFloat(jTable1.getValueAt(k, 2).toString()));
+                                    total = total + (Float.parseFloat(jTableDetalle.getValueAt(k, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(k, 2).toString()));
                                     txtTotal.setText(Float.toString(total));
                                     btnModificar.setText("Modificar");
                                     btnBorrar.setEnabled(true);
@@ -980,9 +934,9 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                             int j = JOptionPane.showOptionDialog(null, "Hemos verificado que si aplica la venta para este producto " + txtProducto.getText() + ", dichos stocks de los insumos de la misma puede tener un stock 0", "ADVERTENCIA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opc, opc[0]);
                             if (j == 0) {
                                 MostrarProductosStockN_MOD();
-                                jLabel11.setText(txtProducto.getText());
+                                jLabelNombreProducto.setText(txtProducto.getText());
                                 color = new ColorearFilas(2);
-                                jTable3.getColumnModel().getColumn(2).setCellRenderer(color);
+                                jTableInforme.getColumnModel().getColumn(2).setCellRenderer(color);
                                 vStocksProductos.setSize(727, 560);
                                 vStocksProductos.setLocationRelativeTo(this);
                                 vStocksProductos.setModal(true);
@@ -1006,10 +960,10 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                                     }
 
                                 } else {
-                                    d.setCantidad(Float.parseFloat(jTable1.getValueAt(k, 2).toString()));
-                                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(k, 0).toString()));
+                                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(k, 2).toString()));
+                                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(k, 0).toString()));
                                     if (detalle.ActualizarStockInsumos(d)) {
-                                        total = total + (Float.parseFloat(jTable1.getValueAt(k, 1).toString()) * Float.parseFloat(jTable1.getValueAt(k, 2).toString()));
+                                        total = total + (Float.parseFloat(jTableDetalle.getValueAt(k, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(k, 2).toString()));
                                         txtTotal.setText(Float.toString(total));
                                         btnModificar.setText("Modificar");
                                         btnBorrar.setEnabled(true);
@@ -1043,7 +997,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        int fila = jTable1.getSelectedRow();
+        int fila = jTableDetalle.getSelectedRow();
         switch (btnModificar.getText()) {
             case "Modificar":
                 if (fila == -1) {
@@ -1051,10 +1005,10 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 } else {
                     btnModificar.setText("Cancelar");
                     btnBorrar.setEnabled(false);
-                    txtProducto.setText(jTable1.getValueAt(fila, 0).toString());
-                    txtPrecio.setText(jTable1.getValueAt(fila, 1).toString());
-                    txtCantidad.setText(jTable1.getValueAt(fila, 2).toString());
-                    total = total - (Float.parseFloat(jTable1.getValueAt(fila, 2).toString()) * Float.parseFloat(jTable1.getValueAt(fila, 1).toString()));
+                    txtProducto.setText(jTableDetalle.getValueAt(fila, 0).toString());
+                    txtPrecio.setText(jTableDetalle.getValueAt(fila, 1).toString());
+                    txtCantidad.setText(jTableDetalle.getValueAt(fila, 2).toString());
+                    total = total - (Float.parseFloat(jTableDetalle.getValueAt(fila, 2).toString()) * Float.parseFloat(jTableDetalle.getValueAt(fila, 1).toString()));
                     txtTotal.setText(Float.toString(total));
                     //jTextField6.setText(Float.toString((float) 0.0));
                 }
@@ -1065,16 +1019,16 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 } else {
                     btnModificar.setText("Cancelar Modificar Detalle");
                     btnBorrar.setEnabled(false);
-                    txtProducto.setText(jTable1.getValueAt(fila, 0).toString());
-                    txtPrecio.setText(jTable1.getValueAt(fila, 1).toString());
-                    txtCantidad.setText(jTable1.getValueAt(fila, 2).toString());
-                    total = total - (Float.parseFloat(jTable1.getValueAt(fila, 2).toString()) * Float.parseFloat(jTable1.getValueAt(fila, 1).toString()));
+                    txtProducto.setText(jTableDetalle.getValueAt(fila, 0).toString());
+                    txtPrecio.setText(jTableDetalle.getValueAt(fila, 1).toString());
+                    txtCantidad.setText(jTableDetalle.getValueAt(fila, 2).toString());
+                    total = total - (Float.parseFloat(jTableDetalle.getValueAt(fila, 2).toString()) * Float.parseFloat(jTableDetalle.getValueAt(fila, 1).toString()));
                     txtTotal.setText(Float.toString(total));
                     //jTextField6.setText(Float.toString((float) 0.0));
                 }
                 break;
             default:
-                total = total + (Float.parseFloat(jTable1.getValueAt(fila, 2).toString()) * Float.parseFloat(jTable1.getValueAt(fila, 1).toString()));
+                total = total + (Float.parseFloat(jTableDetalle.getValueAt(fila, 2).toString()) * Float.parseFloat(jTableDetalle.getValueAt(fila, 1).toString()));
                 txtTotal.setText(Float.toString(total));
                 btnModificar.setText("Modificar");
                 btnBorrar.setEnabled(true);
@@ -1085,15 +1039,15 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        int fila = jTable1.getSelectedRow();
+        int fila = jTableDetalle.getSelectedRow();
         if (btnBorrar.getText().equals("Borrar")) {
             if (fila == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
-                d.setCantidad(Float.parseFloat(jTable1.getValueAt(fila, 2).toString()));
-                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(fila, 0).toString()));
+                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(fila, 2).toString()));
+                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(fila, 0).toString()));
                 if (detalle.SumarCantidadRestadaInsumos(d)) {
-                    total = total - (Float.parseFloat(jTable1.getValueAt(fila, 2).toString()) * Float.parseFloat(jTable1.getValueAt(fila, 1).toString()));
+                    total = total - (Float.parseFloat(jTableDetalle.getValueAt(fila, 2).toString()) * Float.parseFloat(jTableDetalle.getValueAt(fila, 1).toString()));
                     txtTotal.setText(Float.toString(total));
                     //jTextField6.setText(Float.toString((float) 0.0));
                     modelo.removeRow(fila);
@@ -1105,20 +1059,20 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
             } else {
                 int j = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar un detalle venta?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (j == 0) {
-                    total = total - (Float.parseFloat(jTable1.getValueAt(fila, 2).toString()) * Float.parseFloat(jTable1.getValueAt(fila, 1).toString()));
+                    total = total - (Float.parseFloat(jTableDetalle.getValueAt(fila, 2).toString()) * Float.parseFloat(jTableDetalle.getValueAt(fila, 1).toString()));
                     txtTotal.setText(Float.toString(total));
                     //jTextField6.setText(Float.toString((float) 0.0));
                     btnBorrar.setText("Borrar");
                     if (sql.SafeUpdates()) {
                         iddetallesventas.add(Integer.parseInt(iddetalles.get(fila)));
                         idproductos.add(detalle.ObtenerIDProducto2(Integer.parseInt(iddetalles.get(fila))));
-                        d.setCantidad(Float.parseFloat(jTable1.getValueAt(fila, 2).toString()));
-                        d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(fila, 0).toString()));
+                        d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(fila, 2).toString()));
+                        d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(fila, 0).toString()));
                         if (detalle.SumarCantidadRestadaInsumos(d)) {
                             d.setIddetalleventa(Integer.parseInt(iddetalles.get(fila)));
                             if (detalle.EliminarDetalleVenta(d)) {
                                 cant++;
-                                if (filasdetalle - 1 == 0 && jTable1.getRowCount() == 1) {
+                                if (filasdetalle - 1 == 0 && jTableDetalle.getRowCount() == 1) {
                                     iddetalles.remove(fila);
                                     modelo.removeRow(fila);
                                     filasdetalle = filasdetalle - 1;
@@ -1144,7 +1098,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                                         }*/
                                         this.setTitle("Registrando nueva venta Factura N° " + nrofactura);
                                         cbxUsuario.setSelectedIndex(0);
-                                        ((JTextField) vCompras_Insumos.jDateChooser1.getDateEditor().getUiComponent()).setText("");
+                                        ((JTextField) vCompras_Insumos.jDateFecha.getDateEditor().getUiComponent()).setText("");
                                         txtProducto.setText("");
                                         txtPrecio.setText("");
                                         txtCantidad.setText("");
@@ -1188,33 +1142,33 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         if (filasdetalle == 0) {
             cantmod = 0;
         }
-        String fecha = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String fecha = ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText();
         if (btnGuardarVenta.getText().equals("Registrar Venta") && this.getTitle().equals("Registrar Venta")) {
-            if (!cbxUsuario.getSelectedItem().equals("(*) Seleccione Usuario..") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
-                if (rbTipoVenta.isSelected() || jRadioButton2.isSelected()) {
+            if (!cbxUsuario.getSelectedItem().equals("(*) Seleccione Usuario..") && !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().equals("")) {
+                if (jRadioLocal.isSelected() || jRadioOnline.isSelected()) {
                     if (!btnModificar.getText().equals("Cancelar")) {
-                        if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                            if (jTable1.getRowCount() != 0) {
+                        if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+                            if (jTableDetalle.getRowCount() != 0) {
                                 v.setIdusuario(venta.ObtenerIDUsuario((String) cbxUsuario.getSelectedItem()));
                                 v.setMontototal(Float.parseFloat(txtTotal.getText()));
-                                if (rbTipoVenta.isSelected()) {
-                                    v.setTipoVenta(rbTipoVenta.getText());
+                                if (jRadioLocal.isSelected()) {
+                                    v.setTipoVenta(jRadioLocal.getText());
                                 } else {
-                                    v.setTipoVenta(jRadioButton2.getText());
+                                    v.setTipoVenta(jRadioOnline.getText());
                                 }
                                 if (venta.EfectuarVenta(v)) {
-                                    for (int g = 0; g < jTable1.getRowCount(); g++) {
+                                    for (int g = 0; g < jTableDetalle.getRowCount(); g++) {
                                         d.setIdventa(detalle.ObtenerIDVenta());
-                                        d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(g, 0).toString()));
-                                        d.setCantidad((int) Float.parseFloat(jTable1.getValueAt(g, 2).toString()));
-                                        d.setPrecio(Float.parseFloat(jTable1.getValueAt(g, 1).toString()));
+                                        d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(g, 0).toString()));
+                                        d.setCantidad((int) Float.parseFloat(jTableDetalle.getValueAt(g, 2).toString()));
+                                        d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(g, 1).toString()));
                                         if (detalle.RegistrarDetalleVenta(d)) {
 
                                         }
                                     }
-                                    for (int h = 0; h < jTable1.getRowCount(); h++) {
-                                        p.setPrecioventa(Float.parseFloat(jTable1.getValueAt(h, 1).toString()));
-                                        p.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(h, 0).toString()));
+                                    for (int h = 0; h < jTableDetalle.getRowCount(); h++) {
+                                        p.setPrecioventa(Float.parseFloat(jTableDetalle.getValueAt(h, 1).toString()));
+                                        p.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(h, 0).toString()));
                                         if (productos.ActualizarPrecios(p)) {
 
                                         }
@@ -1261,30 +1215,30 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         } else if (btnGuardarVenta.getText().trim().equals("Cancelar") && cant > 0 && cantmod > 0) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                int filasventa = jTable1.getRowCount();
+                int filasventa = jTableDetalle.getRowCount();
                 if (sql.SafeUpdates()) {
                     if (filasventa > filasdetalle) {
                         for (int q = filasdetalle; q < filasventa; q++) {
-                            d.setCantidad(Float.parseFloat(jTable1.getValueAt(q, 2).toString()));
-                            d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(q, 0).toString()));
+                            d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(q, 2).toString()));
+                            d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(q, 0).toString()));
                             detalle.SumarCantidadRestadaInsumos(d);
                         }
 
                         for (int b = 0; b < filasdetalle; b++) {
                             String prod = detalle.ObtenerDescripcionProd(Integer.parseInt(iddetalles.get(b)));
-                            if (jTable1.getValueAt(b, 0).toString().equals(prod)) {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                            if (jTableDetalle.getValueAt(b, 0).toString().equals(prod)) {
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
-                                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                     if (detalle.ActualizarStockInsumos2(d)) {
 
                                     }
                                 }
                             } else {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
@@ -1298,19 +1252,19 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                     } else {
                         for (int b = 0; b < filasdetalle; b++) {
                             String prod = detalle.ObtenerDescripcionProd(Integer.parseInt(iddetalles.get(b)));
-                            if (jTable1.getValueAt(b, 0).toString().equals(prod)) {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                            if (jTableDetalle.getValueAt(b, 0).toString().equals(prod)) {
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
-                                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                     if (detalle.ActualizarStockInsumos2(d)) {
 
                                     }
                                 }
                             } else {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
@@ -1352,11 +1306,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         } else if (btnGuardarVenta.getText().trim().equals("Cancelar") && cant > 0 && cantmod == 0) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                if (jTable1.getRowCount() != 0) {
+                if (jTableDetalle.getRowCount() != 0) {
                     if (sql.SafeUpdates()) {
-                        for (int n = 0; n < jTable1.getRowCount(); n++) {
-                            d.setCantidad(Float.parseFloat(jTable1.getValueAt(n, 2).toString()));
-                            d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(n, 0).toString()));
+                        for (int n = 0; n < jTableDetalle.getRowCount(); n++) {
+                            d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(n, 2).toString()));
+                            d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(n, 0).toString()));
                             detalle.SumarCantidadRestadaInsumos(d);
                         }
                     }
@@ -1390,30 +1344,30 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         } else if (btnGuardarVenta.getText().trim().equals("Cancelar") && cant == 0 && cantmod > 0) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                int filasventa = jTable1.getRowCount();
+                int filasventa = jTableDetalle.getRowCount();
                 if (sql.SafeUpdates()) {
                     if (filasventa > filasdetalle) {
                         for (int q = filasdetalle; q < filasventa; q++) {
-                            d.setCantidad(Float.parseFloat(jTable1.getValueAt(q, 2).toString()));
-                            d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(q, 0).toString()));
+                            d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(q, 2).toString()));
+                            d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(q, 0).toString()));
                             detalle.SumarCantidadRestadaInsumos(d);
                         }
 
                         for (int b = 0; b < filasdetalle; b++) {
                             String prod = detalle.ObtenerDescripcionProd(Integer.parseInt(iddetalles.get(b)));
-                            if (jTable1.getValueAt(b, 0).toString().equals(prod)) {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                            if (jTableDetalle.getValueAt(b, 0).toString().equals(prod)) {
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
-                                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                     if (detalle.ActualizarStockInsumos2(d)) {
 
                                     }
                                 }
                             } else {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
@@ -1427,19 +1381,19 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                     } else {
                         for (int b = 0; b < filasdetalle; b++) {
                             String prod = detalle.ObtenerDescripcionProd(Integer.parseInt(iddetalles.get(b)));
-                            if (jTable1.getValueAt(b, 0).toString().equals(prod)) {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                            if (jTableDetalle.getValueAt(b, 0).toString().equals(prod)) {
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
-                                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                     if (detalle.ActualizarStockInsumos2(d)) {
 
                                     }
                                 }
                             } else {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
@@ -1463,11 +1417,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 if (sql.SafeUpdates()) {
-                    int filasventa = jTable1.getRowCount();
+                    int filasventa = jTableDetalle.getRowCount();
                     if (filasventa > filasdetalle) {
                         for (int q = filasdetalle; q < filasventa; q++) {
-                            d.setCantidad(Float.parseFloat(jTable1.getValueAt(q, 2).toString()));
-                            d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(q, 0).toString()));
+                            d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(q, 2).toString()));
+                            d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(q, 0).toString()));
                             detalle.SumarCantidadRestadaInsumos(d);
                         }
                     }
@@ -1481,32 +1435,32 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
         } else if (btnGuardarVenta.getText().equals("Registrar Venta") && this.getTitle().equals("Registrando nueva venta Factura N° " + nrofactura)) {
-            if (!cbxUsuario.getSelectedItem().equals("(*) Seleccione Usuario..") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
-                if (rbTipoVenta.isSelected() || jRadioButton2.isSelected()) {
+            if (!cbxUsuario.getSelectedItem().equals("(*) Seleccione Usuario..") && !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().equals("")) {
+                if (jRadioLocal.isSelected() || jRadioOnline.isSelected()) {
                     if (!btnModificar.getText().equals("Cancelar")) {
-                        if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                            if (jTable1.getRowCount() != 0) {
+                        if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+                            if (jTableDetalle.getRowCount() != 0) {
                                 v.setIdusuario(venta.ObtenerIDUsuario((String) cbxUsuario.getSelectedItem()));
                                 v.setMontototal(Float.parseFloat(txtTotal.getText()));
-                                if (rbTipoVenta.isSelected()) {
-                                    v.setTipoVenta(rbTipoVenta.getText());
+                                if (jRadioLocal.isSelected()) {
+                                    v.setTipoVenta(jRadioLocal.getText());
                                 } else {
-                                    v.setTipoVenta(jRadioButton2.getText());
+                                    v.setTipoVenta(jRadioOnline.getText());
                                 }
                                 v.setIdventa(Integer.parseInt(idventa));
                                 if (venta.EditarVenta(v)) {
-                                    for (int g = 0; g < jTable1.getRowCount(); g++) {
+                                    for (int g = 0; g < jTableDetalle.getRowCount(); g++) {
                                         d.setIdventa(Integer.parseInt(idventa));
-                                        d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(g, 0).toString()));
-                                        d.setCantidad((int) Float.parseFloat(jTable1.getValueAt(g, 2).toString()));
-                                        d.setPrecio(Float.parseFloat(jTable1.getValueAt(g, 1).toString()));
+                                        d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(g, 0).toString()));
+                                        d.setCantidad((int) Float.parseFloat(jTableDetalle.getValueAt(g, 2).toString()));
+                                        d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(g, 1).toString()));
                                         if (detalle.RegistrarDetalleVenta(d)) {
 
                                         }
                                     }
-                                    for (int h = 0; h < jTable1.getRowCount(); h++) {
-                                        p.setPrecioventa(Float.parseFloat(jTable1.getValueAt(h, 1).toString()));
-                                        p.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(h, 0).toString()));
+                                    for (int h = 0; h < jTableDetalle.getRowCount(); h++) {
+                                        p.setPrecioventa(Float.parseFloat(jTableDetalle.getValueAt(h, 1).toString()));
+                                        p.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(h, 0).toString()));
                                         if (productos.ActualizarPrecios(p)) {
 
                                         }
@@ -1548,25 +1502,25 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarVentaActionPerformed
 
     private void btnModificarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarVentaActionPerformed
-        String fecha = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-        int filasventa = jTable1.getRowCount();
+        String fecha = ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText();
+        int filasventa = jTableDetalle.getRowCount();
         if (!btnModificarVenta.getText().equals("Cancelar") && !this.getTitle().equals("Registrando nueva venta Factura N° " + nrofactura)) {
-            if (!cbxUsuario.getSelectedItem().equals("(*) Seleccione Usuario..") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
-                if (rbTipoVenta.isSelected() || jRadioButton2.isSelected()) {
-                    if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+            if (!cbxUsuario.getSelectedItem().equals("(*) Seleccione Usuario..") && !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().equals("")) {
+                if (jRadioLocal.isSelected() || jRadioOnline.isSelected()) {
+                    if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
                         if (!btnModificar.getText().equals("Cancelar")) {
-                            if (jTable1.getRowCount() != 0) {
+                            if (jTableDetalle.getRowCount() != 0) {
                                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                                 if (i == 0) {
                                     if (filasventa > filasdetalle) {
                                         for (int l = filasdetalle; l < filasventa; l++) {
                                             d.setIdventa(Integer.parseInt(idventa));
-                                            d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(l, 0).toString()));
-                                            d.setCantidad((int) Float.parseFloat(jTable1.getValueAt(l, 2).toString()));
-                                            d.setPrecio(Float.parseFloat(jTable1.getValueAt(l, 1).toString()));
+                                            d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(l, 0).toString()));
+                                            d.setCantidad((int) Float.parseFloat(jTableDetalle.getValueAt(l, 2).toString()));
+                                            d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(l, 1).toString()));
                                             if (detalle.RegistrarDetalleVenta(d)) {
-                                                p.setPrecioventa(Float.parseFloat(jTable1.getValueAt(l, 1).toString()));
-                                                p.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(l, 0).toString()));
+                                                p.setPrecioventa(Float.parseFloat(jTableDetalle.getValueAt(l, 1).toString()));
+                                                p.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(l, 0).toString()));
                                                 if (productos.ActualizarPrecios(p)) {
 
                                                 }
@@ -1577,10 +1531,10 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                                             if (sql.SafeUpdates()) {
                                                 v.setIdusuario(venta.ObtenerIDUsuario((String) cbxUsuario.getSelectedItem()));
                                                 v.setMontototal(Float.parseFloat(txtTotal.getText()));
-                                                if (rbTipoVenta.isSelected()) {
-                                                    v.setTipoVenta(rbTipoVenta.getText());
+                                                if (jRadioLocal.isSelected()) {
+                                                    v.setTipoVenta(jRadioLocal.getText());
                                                 } else {
-                                                    v.setTipoVenta(jRadioButton2.getText());
+                                                    v.setTipoVenta(jRadioOnline.getText());
                                                 }
                                                 v.setIdventa(Integer.parseInt(idventa));
                                                 if (venta.EditarVenta(v)) {
@@ -1592,14 +1546,14 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                                             for (int k = 0; k < iddetalles.size(); k++) {
                                                 iddetalle = iddetalles.get(k);
                                                 d.setIdventa(Integer.parseInt(idventa));
-                                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(ñ, 0).toString()));
-                                                d.setCantidad((int) Float.parseFloat(jTable1.getValueAt(ñ, 2).toString()));
-                                                d.setPrecio(Float.parseFloat(jTable1.getValueAt(ñ, 1).toString()));
+                                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(ñ, 0).toString()));
+                                                d.setCantidad((int) Float.parseFloat(jTableDetalle.getValueAt(ñ, 2).toString()));
+                                                d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(ñ, 1).toString()));
                                                 d.setIddetalleventa(Integer.parseInt(iddetalle));
                                                 if (detalle.EditarDetalleVenta(d)) {
                                                     if (k + 1 < iddetalles.size()) {
-                                                        p.setPrecioventa(Float.parseFloat(jTable1.getValueAt(ñ, 1).toString()));
-                                                        p.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(ñ, 0).toString()));
+                                                        p.setPrecioventa(Float.parseFloat(jTableDetalle.getValueAt(ñ, 1).toString()));
+                                                        p.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(ñ, 0).toString()));
                                                         if (productos.ActualizarPrecios(p)) {
                                                             ñ = ñ + 1;
                                                         }
@@ -1629,10 +1583,10 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                                             if (sql.SafeUpdates()) {
                                                 v.setIdusuario(venta.ObtenerIDUsuario((String) cbxUsuario.getSelectedItem()));
                                                 v.setMontototal(Float.parseFloat(txtTotal.getText()));
-                                                if (rbTipoVenta.isSelected()) {
-                                                    v.setTipoVenta(rbTipoVenta.getText());
+                                                if (jRadioLocal.isSelected()) {
+                                                    v.setTipoVenta(jRadioLocal.getText());
                                                 } else {
-                                                    v.setTipoVenta(jRadioButton2.getText());
+                                                    v.setTipoVenta(jRadioOnline.getText());
                                                 }
                                                 v.setIdventa(Integer.parseInt(idventa));
                                                 if (venta.EditarVenta(v)) {
@@ -1644,14 +1598,14 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                                             for (int k = 0; k < iddetalles.size(); k++) {
                                                 iddetalle = iddetalles.get(k);
                                                 d.setIdventa(Integer.parseInt(idventa));
-                                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(z, 0).toString()));
-                                                d.setCantidad((int) Float.parseFloat(jTable1.getValueAt(z, 2).toString()));
-                                                d.setPrecio(Float.parseFloat(jTable1.getValueAt(z, 1).toString()));
+                                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(z, 0).toString()));
+                                                d.setCantidad((int) Float.parseFloat(jTableDetalle.getValueAt(z, 2).toString()));
+                                                d.setPrecio(Float.parseFloat(jTableDetalle.getValueAt(z, 1).toString()));
                                                 d.setIddetalleventa(Integer.parseInt(iddetalle));
                                                 if (detalle.EditarDetalleVenta(d)) {
                                                     if (k + 1 < iddetalles.size()) {
-                                                        p.setPrecioventa(Float.parseFloat(jTable1.getValueAt(z, 1).toString()));
-                                                        p.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(z, 0).toString()));
+                                                        p.setPrecioventa(Float.parseFloat(jTableDetalle.getValueAt(z, 1).toString()));
+                                                        p.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(z, 0).toString()));
                                                         if (productos.ActualizarPrecios(p)) {
                                                             z = z + 1;
                                                         }
@@ -1695,11 +1649,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         } else {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar nueva venta para Factura N° " + nrofactura + "?. De optar por si, la misma se eliminara", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                if (jTable1.getRowCount() != 0) {
+                if (jTableDetalle.getRowCount() != 0) {
                     if (sql.SafeUpdates()) {
-                        for (int n = 0; n < jTable1.getRowCount(); n++) {
-                            d.setCantidad(Float.parseFloat(jTable1.getValueAt(n, 2).toString()));
-                            d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(n, 0).toString()));
+                        for (int n = 0; n < jTableDetalle.getRowCount(); n++) {
+                            d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(n, 2).toString()));
+                            d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(n, 0).toString()));
                             detalle.SumarCantidadRestadaInsumos(d);
                         }
                     }
@@ -1727,29 +1681,29 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         if (btnGuardarVenta.getText().trim().equals("Cancelar") && cant > 0 && cantmod > 0) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                int filasventa = jTable1.getRowCount();
+                int filasventa = jTableDetalle.getRowCount();
                 if (sql.SafeUpdates()) {
                     if (filasventa > filasdetalle) {
                         for (int q = filasdetalle; q < filasventa; q++) {
-                            d.setCantidad(Float.parseFloat(jTable1.getValueAt(q, 2).toString()));
-                            d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(q, 0).toString()));
+                            d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(q, 2).toString()));
+                            d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(q, 0).toString()));
                             detalle.SumarCantidadRestadaInsumos(d);
                         }
                         for (int b = 0; b < filasdetalle; b++) {
                             String prod = detalle.ObtenerDescripcionProd(Integer.parseInt(iddetalles.get(b)));
-                            if (jTable1.getValueAt(b, 0).toString().equals(prod)) {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                            if (jTableDetalle.getValueAt(b, 0).toString().equals(prod)) {
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
-                                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                     if (detalle.ActualizarStockInsumos2(d)) {
 
                                     }
                                 }
                             } else {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
@@ -1763,19 +1717,19 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                     } else {
                         for (int b = 0; b < filasdetalle; b++) {
                             String prod = detalle.ObtenerDescripcionProd(Integer.parseInt(iddetalles.get(b)));
-                            if (jTable1.getValueAt(b, 0).toString().equals(prod)) {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                            if (jTableDetalle.getValueAt(b, 0).toString().equals(prod)) {
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
-                                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                     if (detalle.ActualizarStockInsumos2(d)) {
 
                                     }
                                 }
                             } else {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
@@ -1817,11 +1771,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         } else if (btnGuardarVenta.getText().trim().equals("Cancelar") && cant > 0 && cantmod == 0) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                if (jTable1.getRowCount() != 0) {
+                if (jTableDetalle.getRowCount() != 0) {
                     if (sql.SafeUpdates()) {
-                        for (int n = 0; n < jTable1.getRowCount(); n++) {
-                            d.setCantidad(Float.parseFloat(jTable1.getValueAt(n, 2).toString()));
-                            d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(n, 0).toString()));
+                        for (int n = 0; n < jTableDetalle.getRowCount(); n++) {
+                            d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(n, 2).toString()));
+                            d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(n, 0).toString()));
                             detalle.SumarCantidadRestadaInsumos(d);
                         }
                     }
@@ -1855,30 +1809,30 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         } else if (btnGuardarVenta.getText().trim().equals("Cancelar") && cant == 0 && cantmod > 0) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                int filasventa = jTable1.getRowCount();
+                int filasventa = jTableDetalle.getRowCount();
                 if (sql.SafeUpdates()) {
                     if (filasventa > filasdetalle) {
                         for (int q = filasdetalle; q < filasventa; q++) {
-                            d.setCantidad(Float.parseFloat(jTable1.getValueAt(q, 2).toString()));
-                            d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(q, 0).toString()));
+                            d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(q, 2).toString()));
+                            d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(q, 0).toString()));
                             detalle.SumarCantidadRestadaInsumos(d);
                         }
 
                         for (int b = 0; b < filasdetalle; b++) {
                             String prod = detalle.ObtenerDescripcionProd(Integer.parseInt(iddetalles.get(b)));
-                            if (jTable1.getValueAt(b, 0).toString().equals(prod)) {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                            if (jTableDetalle.getValueAt(b, 0).toString().equals(prod)) {
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
-                                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                     if (detalle.ActualizarStockInsumos2(d)) {
 
                                     }
                                 }
                             } else {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
@@ -1892,19 +1846,19 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                     } else {
                         for (int b = 0; b < filasdetalle; b++) {
                             String prod = detalle.ObtenerDescripcionProd(Integer.parseInt(iddetalles.get(b)));
-                            if (jTable1.getValueAt(b, 0).toString().equals(prod)) {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                            if (jTableDetalle.getValueAt(b, 0).toString().equals(prod)) {
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
-                                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                     if (detalle.ActualizarStockInsumos2(d)) {
 
                                     }
                                 }
                             } else {
-                                d.setCantidad(Float.parseFloat(jTable1.getValueAt(b, 2).toString()));
-                                d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(b, 0).toString()));
+                                d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(b, 2).toString()));
+                                d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(b, 0).toString()));
                                 if (detalle.SumarCantidadRestadaInsumos(d)) {
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
                                     d.setIddetalleventa(Integer.parseInt(iddetalles.get(b)));
@@ -1928,11 +1882,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 if (sql.SafeUpdates()) {
-                    int filasventa = jTable1.getRowCount();
+                    int filasventa = jTableDetalle.getRowCount();
                     if (filasventa > filasdetalle) {
                         for (int q = filasdetalle; q < filasventa; q++) {
-                            d.setCantidad(Float.parseFloat(jTable1.getValueAt(q, 2).toString()));
-                            d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(q, 0).toString()));
+                            d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(q, 2).toString()));
+                            d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(q, 0).toString()));
                             detalle.SumarCantidadRestadaInsumos(d);
                         }
                     }
@@ -1948,11 +1902,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         } else if (btnModificarVenta.getText().equals("Cancelar") && this.getTitle().equals("Registrando nueva venta Factura N° " + nrofactura)) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar nueva venta para Factura N° " + nrofactura + "?. De optar por si, la misma se eliminara", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                if (jTable1.getRowCount() != 0) {
+                if (jTableDetalle.getRowCount() != 0) {
                     if (sql.SafeUpdates()) {
-                        for (int n = 0; n < jTable1.getRowCount(); n++) {
-                            d.setCantidad(Float.parseFloat(jTable1.getValueAt(n, 2).toString()));
-                            d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(n, 0).toString()));
+                        for (int n = 0; n < jTableDetalle.getRowCount(); n++) {
+                            d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(n, 2).toString()));
+                            d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(n, 0).toString()));
                             detalle.SumarCantidadRestadaInsumos(d);
                         }
                     }
@@ -1972,13 +1926,13 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (jTable1.getRowCount() != 0 || !cbxUsuario.getSelectedItem().equals("(*) Seleccione Usuario..") || !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("") || !txtProducto.getText().equals("") || !txtPrecio.getText().equals("") || !txtCantidad.getText().equals("") || rbTipoVenta.isSelected() || jRadioButton2.isSelected()) {
+        } else if (jTableDetalle.getRowCount() != 0 || !cbxUsuario.getSelectedItem().equals("(*) Seleccione Usuario..") || !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().equals("") || !txtProducto.getText().equals("") || !txtPrecio.getText().equals("") || !txtCantidad.getText().equals("") || jRadioLocal.isSelected() || jRadioOnline.isSelected()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Venta?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                if (jTable1.getRowCount() != 0) {
-                    for (int q = 0; q < jTable1.getRowCount(); q++) {
-                        d.setCantidad(Float.parseFloat(jTable1.getValueAt(q, 2).toString()));
-                        d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(q, 0).toString()));
+                if (jTableDetalle.getRowCount() != 0) {
+                    for (int q = 0; q < jTableDetalle.getRowCount(); q++) {
+                        d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(q, 2).toString()));
+                        d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(q, 0).toString()));
                         detalle.SumarCantidadRestadaInsumos(d);
                     }
                 }
@@ -2026,22 +1980,22 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtPrecioKeyTyped
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (jTable2.getRowCount() != 0) {
-            int i = jTable2.getSelectedRow();
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        if (jTableProductos.getRowCount() != 0) {
+            int i = jTableProductos.getSelectedRow();
             if (i == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
                 vSeleccionarProducto.dispose();
-                txtProducto.setText(jTable2.getValueAt(i, 0).toString());
-                txtPrecio.setText(jTable2.getValueAt(i, 1).toString());
+                txtProducto.setText(jTableProductos.getValueAt(i, 0).toString());
+                txtPrecio.setText(jTableProductos.getValueAt(i, 1).toString());
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se han agregado dichos productos todavia");
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         int i = JOptionPane.showConfirmDialog(null, "Esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             vSeleccionarProducto.dispose();
@@ -2050,7 +2004,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         } else {
             vSeleccionarProducto.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void vSeleccionarProductoWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vSeleccionarProductoWindowClosing
         int i = JOptionPane.showConfirmDialog(null, "Esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -2063,36 +2017,36 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_vSeleccionarProductoWindowClosing
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonSeleccionarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarProductoActionPerformed
         vSeleccionarProducto.setSize(330, 612);
         vSeleccionarProducto.setLocationRelativeTo(this);
         vSeleccionarProducto.setModal(true);
         vSeleccionarProducto.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonSeleccionarProductoActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        if (jTable1.getRowCount() != 0 && btnModificar.getText().equals("Modificar") || btnModificar.getText().equals("Modificar Detalle")) {
-            jTable1.clearSelection();
-            jTable1.getSelectionModel().clearSelection();
+        if (jTableDetalle.getRowCount() != 0 && btnModificar.getText().equals("Modificar") || btnModificar.getText().equals("Modificar Detalle")) {
+            jTableDetalle.clearSelection();
+            jTableDetalle.getSelectionModel().clearSelection();
             btnBorrar.setText("Borrar");
             btnModificar.setText("Modificar");
         }
     }//GEN-LAST:event_formMouseClicked
 
     private void vSeleccionarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarProductoMouseClicked
-        jTable2.clearSelection();
-        jTable2.getSelectionModel().clearSelection();
+        jTableProductos.clearSelection();
+        jTableProductos.getSelectionModel().clearSelection();
         MostrarProductos();
-        jTextField7.setText("");
+        jTextFieldProductoBuscar.setText("");
     }//GEN-LAST:event_vSeleccionarProductoMouseClicked
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        if (!jTextField7.getText().isEmpty()) {
+    private void jButtonBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarProductoActionPerformed
+        if (!jTextFieldProductoBuscar.getText().isEmpty()) {
             String[] columnas = {"PRODUCTOS", "PRECIO"};
-            produc = detalle.MostrarProductoBuscado(jTextField7.getText());
+            produc = detalle.MostrarProductoBuscado(jTextFieldProductoBuscar.getText());
             if (produc.length != 0) {
                 modelprod = new DefaultTableModel(produc, columnas);
-                jTable2.setModel(modelprod);
+                jTableProductos.setModel(modelprod);
                 EliminarFilasVaciasProductos();
                 ocultar_columnasprod();
             } else {
@@ -2101,37 +2055,37 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar el campo");
         }
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarProductoActionPerformed
 
-    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
-        int i = jList2.getSelectedIndex();
+    private void jListProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListProductosMouseClicked
+        int i = jListProductos.getSelectedIndex();
         ArrayList<String> array;
         if (i != -1) {
-            txtProducto.setText(jList2.getSelectedValue());
+            txtProducto.setText(jListProductos.getSelectedValue());
             array = venta.ObtenerDatosProd(txtProducto.getText());
             if (array.size() > 0) {
                 for (int j = 0; j < array.size(); j++) {
                     txtPrecio.setText(array.get(j));
-                    jList2.setVisible(false);
+                    jListProductos.setVisible(false);
                 }
             }
         }
-    }//GEN-LAST:event_jList2MouseClicked
+    }//GEN-LAST:event_jListProductosMouseClicked
 
     private void txtProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductoKeyReleased
         ListaProductos();
     }//GEN-LAST:event_txtProductoKeyReleased
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void jButtonAceptarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarInformeActionPerformed
         int contstockneg = 0;
-        if (jTable3.getRowCount() != 0) {
-            for (int i = 0; i < jTable3.getRowCount(); i++) {
-                if (jTable3.getColumnName(2).equals("STOCK CONFIRMANDO VENTA")) {
-                    if (Float.parseFloat(jTable3.getValueAt(i, 2).toString()) < 0) {
+        if (jTableInforme.getRowCount() != 0) {
+            for (int i = 0; i < jTableInforme.getRowCount(); i++) {
+                if (jTableInforme.getColumnName(2).equals("STOCK CONFIRMANDO VENTA")) {
+                    if (Float.parseFloat(jTableInforme.getValueAt(i, 2).toString()) < 0) {
                         contstockneg++;
                     }
-                } else if (jTable3.getColumnName(2).equals("STOCK FINAL")) {
-                    if (Float.parseFloat(jTable3.getValueAt(i, 2).toString()) < 0) {
+                } else if (jTableInforme.getColumnName(2).equals("STOCK FINAL")) {
+                    if (Float.parseFloat(jTableInforme.getValueAt(i, 2).toString()) < 0) {
                         contstockneg++;
                     }
                 }
@@ -2139,18 +2093,18 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
             }
         }
         if (contstockneg > 0) {
-            int i = jTable1.getSelectedRow();
+            int i = jTableDetalle.getSelectedRow();
             switch (btnModificar.getText()) {
                 case "Modificar":
                     vStocksProductos.dispose();
                     Limpiar();
                     break;
                 case "Cancelar":
-                    d.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
-                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(i, 0).toString()));
+                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
+                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(i, 0).toString()));
                     if (detalle.ActualizarStockInsumos(d)) {
                         vStocksProductos.dispose();
-                        total = total + (Float.parseFloat(jTable1.getValueAt(i, 1).toString()) * Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
+                        total = total + (Float.parseFloat(jTableDetalle.getValueAt(i, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
                         txtTotal.setText(Float.toString(total));
                         btnModificar.setText("Modificar");
                         btnBorrar.setEnabled(true);
@@ -2159,11 +2113,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                     }
                     break;
                 default:
-                    d.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
-                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(i, 0).toString()));
+                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
+                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(i, 0).toString()));
                     if (detalle.ActualizarStockInsumos(d)) {
                         vStocksProductos.dispose();
-                        total = total + (Float.parseFloat(jTable1.getValueAt(i, 1).toString()) * Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
+                        total = total + (Float.parseFloat(jTableDetalle.getValueAt(i, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
                         txtTotal.setText(Float.toString(total));
                         btnModificar.setText("Modificar");
                         btnBorrar.setEnabled(true);
@@ -2173,7 +2127,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                     break;
             }
         } else {
-            int i = jTable1.getSelectedRow();
+            int i = jTableDetalle.getSelectedRow();
             if (btnModificar.getText().equals("Modificar")) {
                 int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + txtProducto.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (g == 0) {
@@ -2209,11 +2163,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                         LimpiarSeleccion();
                     }
                 } else {
-                    d.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
-                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(i, 0).toString()));
+                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
+                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(i, 0).toString()));
                     if (detalle.ActualizarStockInsumos(d)) {
                         vStocksProductos.dispose();
-                        total = total + (Float.parseFloat(jTable1.getValueAt(i, 1).toString()) * Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
+                        total = total + (Float.parseFloat(jTableDetalle.getValueAt(i, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
                         txtTotal.setText(Float.toString(total));
                         btnModificar.setText("Modificar");
                         btnBorrar.setEnabled(true);
@@ -2240,11 +2194,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                         LimpiarSeleccion();
                     }
                 } else {
-                    d.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
-                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(i, 0).toString()));
+                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
+                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(i, 0).toString()));
                     if (detalle.ActualizarStockInsumos(d)) {
                         vStocksProductos.dispose();
-                        total = total + (Float.parseFloat(jTable1.getValueAt(i, 1).toString()) * Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
+                        total = total + (Float.parseFloat(jTableDetalle.getValueAt(i, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
                         txtTotal.setText(Float.toString(total));
                         btnModificar.setText("Modificar");
                         btnBorrar.setEnabled(true);
@@ -2254,18 +2208,18 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_jButtonAceptarInformeActionPerformed
 
     private void vStocksProductosWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vStocksProductosWindowClosing
         int contstockneg = 0;
-        if (jTable3.getRowCount() != 0) {
-            for (int i = 0; i < jTable3.getRowCount(); i++) {
-                if (jTable3.getColumnName(2).equals("STOCK CONFIRMANDO VENTA")) {
-                    if (Float.parseFloat(jTable3.getValueAt(i, 2).toString()) < 0) {
+        if (jTableInforme.getRowCount() != 0) {
+            for (int i = 0; i < jTableInforme.getRowCount(); i++) {
+                if (jTableInforme.getColumnName(2).equals("STOCK CONFIRMANDO VENTA")) {
+                    if (Float.parseFloat(jTableInforme.getValueAt(i, 2).toString()) < 0) {
                         contstockneg++;
                     }
-                } else if (jTable3.getColumnName(2).equals("STOCK FINAL")) {
-                    if (Float.parseFloat(jTable3.getValueAt(i, 2).toString()) < 0) {
+                } else if (jTableInforme.getColumnName(2).equals("STOCK FINAL")) {
+                    if (Float.parseFloat(jTableInforme.getValueAt(i, 2).toString()) < 0) {
                         contstockneg++;
                     }
                 }
@@ -2273,18 +2227,18 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
             }
         }
         if (contstockneg > 0) {
-            int i = jTable1.getSelectedRow();
+            int i = jTableDetalle.getSelectedRow();
             switch (btnModificar.getText()) {
                 case "Modificar":
                     vStocksProductos.dispose();
                     Limpiar();
                     break;
                 case "Cancelar":
-                    d.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
-                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(i, 0).toString()));
+                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
+                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(i, 0).toString()));
                     if (detalle.ActualizarStockInsumos(d)) {
                         vStocksProductos.dispose();
-                        total = total + (Float.parseFloat(jTable1.getValueAt(i, 1).toString()) * Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
+                        total = total + (Float.parseFloat(jTableDetalle.getValueAt(i, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
                         txtTotal.setText(Float.toString(total));
                         btnModificar.setText("Modificar");
                         btnBorrar.setEnabled(true);
@@ -2293,11 +2247,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                     }
                     break;
                 default:
-                    d.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
-                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(i, 0).toString()));
+                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
+                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(i, 0).toString()));
                     if (detalle.ActualizarStockInsumos(d)) {
                         vStocksProductos.dispose();
-                        total = total + (Float.parseFloat(jTable1.getValueAt(i, 1).toString()) * Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
+                        total = total + (Float.parseFloat(jTableDetalle.getValueAt(i, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
                         txtTotal.setText(Float.toString(total));
                         btnModificar.setText("Modificar");
                         btnBorrar.setEnabled(true);
@@ -2307,7 +2261,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                     break;
             }
         } else {
-            int i = jTable1.getSelectedRow();
+            int i = jTableDetalle.getSelectedRow();
             if (btnModificar.getText().equals("Modificar")) {
                 int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + txtProducto.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (g == 0) {
@@ -2343,11 +2297,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                         LimpiarSeleccion();
                     }
                 } else {
-                    d.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
-                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(i, 0).toString()));
+                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
+                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(i, 0).toString()));
                     if (detalle.ActualizarStockInsumos(d)) {
                         vStocksProductos.dispose();
-                        total = total + (Float.parseFloat(jTable1.getValueAt(i, 1).toString()) * Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
+                        total = total + (Float.parseFloat(jTableDetalle.getValueAt(i, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
                         txtTotal.setText(Float.toString(total));
                         btnModificar.setText("Modificar");
                         btnBorrar.setEnabled(true);
@@ -2374,11 +2328,11 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                         LimpiarSeleccion();
                     }
                 } else {
-                    d.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
-                    d.setIdproducto(detalle.ObtenerIDProducto(jTable1.getValueAt(i, 0).toString()));
+                    d.setCantidad(Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
+                    d.setIdproducto(detalle.ObtenerIDProducto(jTableDetalle.getValueAt(i, 0).toString()));
                     if (detalle.ActualizarStockInsumos(d)) {
                         vStocksProductos.dispose();
-                        total = total + (Float.parseFloat(jTable1.getValueAt(i, 1).toString()) * Float.parseFloat(jTable1.getValueAt(i, 2).toString()));
+                        total = total + (Float.parseFloat(jTableDetalle.getValueAt(i, 1).toString()) * Float.parseFloat(jTableDetalle.getValueAt(i, 2).toString()));
                         txtTotal.setText(Float.toString(total));
                         btnModificar.setText("Modificar");
                         btnBorrar.setEnabled(true);
@@ -2390,12 +2344,12 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_vStocksProductosWindowClosing
 
-    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+    private void jTableDetalleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDetalleMousePressed
         if (btnModificar.getText().equals("Cancelar")) {
-            jTable1.setFocusable(false);
+            jTableDetalle.setFocusable(false);
         } else {
             //jTextField6.setText(String.valueOf(Float.parseFloat(modelo.getValueAt(jTable1.getSelectedRow(), 2).toString()) * Float.parseFloat(modelo.getValueAt(jTable1.getSelectedRow(), 1).toString())));
-            int i = jTable1.getSelectedRow(), j = filasdetalle;
+            int i = jTableDetalle.getSelectedRow(), j = filasdetalle;
             if (i < j) {
                 btnBorrar.setText("Borrar Detalle");
                 btnModificar.setText("Modificar Detalle");
@@ -2404,7 +2358,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
                 btnModificar.setText("Modificar");
             }
         }
-    }//GEN-LAST:event_jTable1MousePressed
+    }//GEN-LAST:event_jTableDetalleMousePressed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
@@ -2428,35 +2382,35 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
     public static javax.swing.JButton btnModificar;
     public static javax.swing.JButton btnModificarVenta;
     public static javax.swing.JComboBox<String> cbxUsuario;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton9;
-    public static com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JButton jButtonAceptarInforme;
+    private javax.swing.JButton jButtonAgregar;
+    private javax.swing.JButton jButtonBuscarProducto;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonSeleccionarProducto;
+    public static com.toedter.calendar.JDateChooser jDateFecha;
+    private javax.swing.JLabel jLabelCantidad;
+    private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelMensaje;
+    private javax.swing.JLabel jLabelNombreProducto;
+    private javax.swing.JLabel jLabelNombreProductoElegido;
+    private javax.swing.JLabel jLabelPrecio;
+    private javax.swing.JLabel jLabelProducto;
+    private javax.swing.JLabel jLabelSeleccionarProducto;
+    private javax.swing.JLabel jLabelTotal;
+    private javax.swing.JLabel jLabelUsuarioVenta;
+    private javax.swing.JList<String> jListProductos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    public static javax.swing.JRadioButton jRadioButton2;
+    public static javax.swing.JRadioButton jRadioLocal;
+    public static javax.swing.JRadioButton jRadioOnline;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    public static javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField7;
-    public static javax.swing.JRadioButton rbTipoVenta;
+    public static javax.swing.JTable jTableDetalle;
+    private javax.swing.JTable jTableInforme;
+    private javax.swing.JTable jTableProductos;
+    private javax.swing.JTextField jTextFieldProductoBuscar;
     public static javax.swing.JTextField txtCantidad;
     public static javax.swing.JTextField txtPrecio;
     public static javax.swing.JTextField txtProducto;

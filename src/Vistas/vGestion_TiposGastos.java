@@ -27,46 +27,46 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
         initComponents();
         Mostrar();
         
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableTiposGastos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    jButton1.setEnabled(false);
-                    jButton2.setText("Cancelar");
-                    jButton3.setText("Modificar");
+                    jButtonAgregar.setEnabled(false);
+                    jButtonModificar.setText("Cancelar");
+                    jButtonEliminar.setText("Modificar");
                     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                    int fila = jTable1.rowAtPoint(e.getPoint());
-                    id = (jTable1.getValueAt(fila, 0).toString());
-                    jTextField1.setText(jTable1.getValueAt(fila, 1).toString());
+                    int fila = jTableTiposGastos.rowAtPoint(e.getPoint());
+                    id = (jTableTiposGastos.getValueAt(fila, 0).toString());
+                    jTextFieldTiposGastos.setText(jTableTiposGastos.getValueAt(fila, 1).toString());
                 }
             }
         });
     }
     
     public void LimpiarSeleccion() {
-        jTable1.clearSelection();
-        jTable1.getSelectionModel().clearSelection();
+        jTableTiposGastos.clearSelection();
+        jTableTiposGastos.getSelectionModel().clearSelection();
     }
     
     public void Mostrar() {
         String[] columnas = {"ID TIPOGASTO", "DESCRIPCION"};
         Object[][] datostabla = tipogasto.MostrarDatos();
         datos = new DefaultTableModel(datostabla, columnas);
-        jTable1.setModel(datos);
+        jTableTiposGastos.setModel(datos);
         EliminarFilasVacias();
         ocultar_columnas();
     }
     
     public void ocultar_columnas() {
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
+        jTableTiposGastos.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableTiposGastos.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableTiposGastos.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
     
     public void EliminarFilasVacias() {
-        if (jTable1.getRowCount() != 0) {
-            for (int columna = 0; columna < jTable1.getColumnCount(); columna++) {
-                for (int fila = 0; fila < jTable1.getRowCount(); fila++) {
-                    if (jTable1.getValueAt(fila, columna) == null) {
+        if (jTableTiposGastos.getRowCount() != 0) {
+            for (int columna = 0; columna < jTableTiposGastos.getColumnCount(); columna++) {
+                for (int fila = 0; fila < jTableTiposGastos.getRowCount(); fila++) {
+                    if (jTableTiposGastos.getValueAt(fila, columna) == null) {
                         datos.removeRow(fila);
                     }
                 }
@@ -78,17 +78,17 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jLabelTiposGastos = new javax.swing.JLabel();
+        jTextFieldTiposGastos = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable(){
+        jTableTiposGastos = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonAgregar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -119,18 +119,18 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("(*) Nombre:");
+        jLabelTiposGastos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelTiposGastos.setText("(*) Nombre:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldTiposGastos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldTiposGastos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
+                jTextFieldTiposGastosKeyTyped(evt);
             }
         });
 
-        jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTiposGastos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableTiposGastos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -141,32 +141,32 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableTiposGastos);
 
-        jButton1.setBackground(new java.awt.Color(252, 249, 57));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAgregarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(252, 249, 57));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(252, 249, 57));
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
 
@@ -175,89 +175,94 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldTiposGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTiposGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(33, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
+                        .addComponent(jLabelTiposGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldTiposGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (!jTextField1.getText().trim().equals("")) {
-            tg.setDescripcion(jTextField1.getText());
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        if (!jTextFieldTiposGastos.getText().trim().equals("")) {
+            tg.setDescripcion(jTextFieldTiposGastos.getText());
             if (tipogasto.InsertarTiposGastos(tg)) {
                 JOptionPane.showMessageDialog(null, "Nuevo Tipo Gasto agreado");
                 Mostrar();
-                jTextField1.setText("");
+                jTextFieldTiposGastos.setText("");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar el campo obligatorio");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jButton2.getText().equals("Modificar")) {
-            int s = jTable1.getSelectedRow();
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        if (jButtonModificar.getText().equals("Modificar")) {
+            int s = jTableTiposGastos.getSelectedRow();
             if (s == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
-                jButton1.setEnabled(false);
-                jButton2.setText("Cancelar");
-                jButton3.setText("Modificar");
+                jButtonAgregar.setEnabled(false);
+                jButtonModificar.setText("Cancelar");
+                jButtonEliminar.setText("Modificar");
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                id = (jTable1.getValueAt(s, 0).toString());
-                jTextField1.setText(jTable1.getValueAt(s, 1).toString());
+                id = (jTableTiposGastos.getValueAt(s, 0).toString());
+                jTextFieldTiposGastos.setText(jTableTiposGastos.getValueAt(s, 1).toString());
             }
         } else {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                jButton1.setEnabled(true);
-                jButton2.setText("Modificar");
-                jButton3.setText("Eliminar");
-                jTextField1.setText("");
+                jButtonAgregar.setEnabled(true);
+                jButtonModificar.setText("Modificar");
+                jButtonEliminar.setText("Eliminar");
+                jTextFieldTiposGastos.setText("");
                 LimpiarSeleccion();
                 setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jButton3.getText().equals("Eliminar")) {
-            int seleccionado = jTable1.getSelectedRow();
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        if (jButtonEliminar.getText().equals("Eliminar")) {
+            int seleccionado = jTableTiposGastos.getSelectedRow();
             if (seleccionado == -1) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
             } else {
                 int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    tg.setIdtipogasto(Integer.parseInt(jTable1.getValueAt(seleccionado, 0).toString()));
+                    tg.setIdtipogasto(Integer.parseInt(jTableTiposGastos.getValueAt(seleccionado, 0).toString()));
                     if (tipogasto.EliminarTiposGastos(tg)) {
                         JOptionPane.showMessageDialog(null, "Eliminado");
                         Mostrar();
@@ -268,18 +273,18 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
                 }
             }
         } else {
-            if (!jTextField1.getText().trim().equals("")) {
+            if (!jTextFieldTiposGastos.getText().trim().equals("")) {
                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    tg.setDescripcion(jTextField1.getText());
+                    tg.setDescripcion(jTextFieldTiposGastos.getText());
                     tg.setIdtipogasto(Integer.parseInt(id));
                     if (tipogasto.EditarTiposGastos(tg)) {
                         JOptionPane.showMessageDialog(null, "Modificado");
                         Mostrar();
-                        jButton1.setEnabled(true);
-                        jButton2.setText("Modificar");
-                        jButton3.setText("Eliminar");
-                        jTextField1.setText("");
+                        jButtonAgregar.setEnabled(true);
+                        jButtonModificar.setText("Modificar");
+                        jButtonEliminar.setText("Eliminar");
+                        jTextFieldTiposGastos.setText("");
                         LimpiarSeleccion();
                         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                     }
@@ -288,17 +293,17 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Debes completar el campo obligatorio");
             }
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jButton2.getText().equals("Cancelar")) {
+        if (jButtonModificar.getText().equals("Cancelar")) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (!jTextField1.getText().trim().isEmpty()) {
+        } else if (!jTextFieldTiposGastos.getText().trim().isEmpty()) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -310,12 +315,12 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_formInternalFrameClosing
 
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    private void jTextFieldTiposGastosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTiposGastosKeyTyped
         if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_jTextField1KeyTyped
+    }//GEN-LAST:event_jTextFieldTiposGastosKeyTyped
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccion();
@@ -323,12 +328,12 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButtonAgregar;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JLabel jLabelTiposGastos;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTableTiposGastos;
+    private javax.swing.JTextField jTextFieldTiposGastos;
     // End of variables declaration//GEN-END:variables
 }

@@ -165,7 +165,7 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
         jEtiqStock_Insumos1 = new javax.swing.JLabel();
         jTextMonto_Egresos = new javax.swing.JTextField();
         jEtiqStock_Insumos2 = new javax.swing.JLabel();
-        jEtiqStock_Insumos3 = new javax.swing.JLabel();
+        jLabelConcepto = new javax.swing.JLabel();
         jTextDescripcion_Egresos = new javax.swing.JTextField();
         jDateFecha_Egresos = new com.toedter.calendar.JDateChooser();
         jLabelMensaje = new javax.swing.JLabel();
@@ -242,8 +242,8 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
         jEtiqStock_Insumos2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqStock_Insumos2.setText("(*) Fecha:");
 
-        jEtiqStock_Insumos3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqStock_Insumos3.setText("(*) Concepto:");
+        jLabelConcepto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelConcepto.setText("(*) Concepto:");
 
         jTextDescripcion_Egresos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
@@ -268,10 +268,10 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextDescripcion_Egresos, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jEtiqStock_Insumos3)
+                    .addComponent(jLabelConcepto)
                     .addComponent(jLabelMensaje)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,21 +285,25 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jEtiqDesc_Insumos)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))))
+<<<<<<< HEAD
                 .addContainerGap(29, Short.MAX_VALUE))
+=======
+                .addContainerGap(27, Short.MAX_VALUE))
+>>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBotonAgregar_Egresos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBotonAgregar_Egresos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66)
-                .addComponent(jBotonModif_Egresos, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBotonModif_Egresos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
-                .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jEtiqStock_Insumos3)
+                .addComponent(jLabelConcepto)
                 .addGap(12, 12, 12)
                 .addComponent(jTextDescripcion_Egresos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
@@ -322,9 +326,9 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
                 .addComponent(jLabelMensaje)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBotonAgregar_Egresos)
-                    .addComponent(jBotonModif_Egresos)
-                    .addComponent(jBotonCancelar))
+                    .addComponent(jBotonAgregar_Egresos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBotonModif_Egresos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
 
@@ -502,8 +506,8 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jEtiqDesc_Insumos;
     private javax.swing.JLabel jEtiqStock_Insumos1;
     private javax.swing.JLabel jEtiqStock_Insumos2;
-    private javax.swing.JLabel jEtiqStock_Insumos3;
     public static javax.swing.JLabel jEtiqTipo_Insumos;
+    private javax.swing.JLabel jLabelConcepto;
     private javax.swing.JLabel jLabelMensaje;
     private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JTextField jTextDescripcion_Egresos;

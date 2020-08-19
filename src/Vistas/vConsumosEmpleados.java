@@ -8,13 +8,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -30,28 +24,31 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
     control_existencias combo = new control_existencias();
     ConsumosEmpleados ce = new ConsumosEmpleados();
     ColorearFilas color;
-    DefaultTableModel tabla1, tabla2, tabla3, modelstockprod;
+    DefaultTableModel tabla2, tabla3, modelstockprod;
     Object[][] dato1, dato2, dato3, stockprod;
     Timestamp fechaseleccionada;
-    String id, cant, prod;
+    String id;
+    public float cantidad;//cantidad para que se reste correctamente cuando se modifique un consumo
+    public int idproducto;//producto con la misma idea para cantidad
     ArrayList<String> listemp, listprod;
     DefaultListModel list;
+    vLista_ConsumosEmpleados consumos = null;
 
     public vConsumosEmpleados() {
         initComponents();
-        IniciarFechas();
-        MostrarDatos();
+        //IniciarFechas();
+        //MostrarDatos();
         MostrarEmpleados();
         MostrarProductos();
-        jList2.setVisible(false);
-        jList3.setVisible(false);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        listaEmpleado.setVisible(false);
+        listaProducto.setVisible(false);
+        /*jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     int fila = jTable1.rowAtPoint(e.getPoint());
-                    jButton3.setEnabled(false);
-                    jButton4.setText("Cancelar");
-                    jButton5.setText("Modificar");
+                    jButtonAgregar.setEnabled(false);
+                    jButtonModificar.setText("Cancelar");
+                    jButtonCancelar.setText("Modificar");
                     String fecha = jTable1.getValueAt(fila, 5).toString();
                     DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     try {
@@ -68,31 +65,30 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                     jDateChooser1.setDate(fechaseleccionada);
                 }
             }
-        });
+        });*/
     }
 
-    public void IniciarFechas() {
+    /*public void IniciarFechas() {
         Date hoy = new Date();
         jDateChooser2.setDate(hoy);
         jDateChooser3.setDate(hoy);
-    }
+    }*/
 
-    public void LimpiarSeleccionTabla1() {
+ /*public void LimpiarSeleccionTabla1() {
         jTable1.clearSelection();
         jTable1.getSelectionModel().clearSelection();
+    }*/
+    public void LimpiarSeleccionTablaEmp() {
+        jTableEmpleados.clearSelection();
+        jTableEmpleados.getSelectionModel().clearSelection();
     }
 
-    public void LimpiarSeleccionTabla2() {
-        jTable2.clearSelection();
-        jTable2.getSelectionModel().clearSelection();
+    public void LimpiarSeleccionTablaProd() {
+        jTableProductos.clearSelection();
+        jTableProductos.getSelectionModel().clearSelection();
     }
 
-    public void LimpiarSeleccionTabla3() {
-        jTable3.clearSelection();
-        jTable3.getSelectionModel().clearSelection();
-    }
-
-    public void MostrarDatos() {
+    /*public void MostrarDatos() {
         String desde = ((JTextField) jDateChooser2.getDateEditor().getUiComponent()).getText();
         String hasta = ((JTextField) jDateChooser3.getDateEditor().getUiComponent()).getText();
         String columnas[] = {"IDCONSUMO", "IDPRODUCTO", "NOMBRE EMPLEADO", "PRODUCTO", "CANTIDAD", "FECHA"};
@@ -101,9 +97,9 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         jTable1.setModel(tabla1);
         EliminarFilasVaciasTabla1();
         ocultarcolumnastabla1();
-    }
+    }*/
 
-    public void EliminarFilasVaciasTabla1() {
+ /*public void EliminarFilasVaciasTabla1() {
         if (jTable1.getRowCount() != 0) {
             for (int columna = 0; columna < jTable1.getColumnCount(); columna++) {
                 for (int fila = 0; fila < jTable1.getRowCount(); fila++) {
@@ -113,30 +109,36 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }
+    }*/
 
-    public void ocultarcolumnastabla1() {
+ /*public void ocultarcolumnastabla1() {
         jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
         jTable1.getColumnModel().getColumn(0).setMinWidth(0);
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
         jTable1.getColumnModel().getColumn(1).setMaxWidth(0);
         jTable1.getColumnModel().getColumn(1).setMinWidth(0);
         jTable1.getColumnModel().getColumn(1).setPreferredWidth(0);
+    }*/
+    public void VolverListaConsumosEmpleados() {
+        consumos = new vLista_ConsumosEmpleados();
+        vMenuPrincipal.jDesktopPane1.add(consumos);
+        consumos.setVisible(true);
+        dispose();
     }
 
     public void MostrarEmpleados() {
         String[] columnas = {"NOMBRE EMPLEADOS", "ROL DE TRABAJO"};
         dato2 = contr_consumoempleado.MostrarEmpleados();
         tabla2 = new DefaultTableModel(dato2, columnas);
-        jTable2.setModel(tabla2);
+        jTableEmpleados.setModel(tabla2);
         EliminarFilasVaciasTabla2();
     }
 
     public void ListaEmpleados() {
-        listemp = combo.list("empleados", "Nombre", jTextField1.getText());
-        String substr = jTextField1.getText().toLowerCase();
+        listemp = combo.list("empleados", "Nombre", jTextFieldEmp.getText());
+        String substr = jTextFieldEmp.getText().toLowerCase();
         list = new DefaultListModel();
-        jList2.setModel(list);
+        listaEmpleado.setModel(list);
         list.removeAllElements();
         for (int i = 0; i < listemp.size(); i++) {
             if (listemp.get(i) == null) {
@@ -145,9 +147,9 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 String sublist = listemp.get(i).toLowerCase();
                 if (sublist.contains(substr)) {
                     list.addElement(listemp.get(i));
-                    jList2.setVisible(true);
-                    if (jTextField1.getText().isEmpty()) {
-                        jList2.setVisible(false);
+                    listaEmpleado.setVisible(true);
+                    if (jTextFieldEmp.getText().isEmpty()) {
+                        listaEmpleado.setVisible(false);
                     }
                 }
             }
@@ -155,11 +157,11 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
     }
 
     public void EliminarFilasVaciasTabla2() {
-        if (jTable2.getRowCount() != 0) {
-            int filas = jTable2.getRowCount();
+        if (jTableEmpleados.getRowCount() != 0) {
+            int filas = jTableEmpleados.getRowCount();
             filas--;
             for (int fila = filas; fila >= 0; fila--) {
-                if (jTable2.getValueAt(fila, 0) == null) {
+                if (jTableEmpleados.getValueAt(fila, 0) == null) {
                     tabla2.removeRow(fila);
                 }
             }
@@ -168,7 +170,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
 
     public void MostrarProductosStockN_MOD() {
         String[] columnas = new String[3];
-        if (jButton5.getText().equals("Modificar")) {
+        if (jButtonCancelar.getText().equals("Modificar")) {
             columnas[0] = "INSUMOS";
             columnas[1] = "STOCK MODIFICADO";
             columnas[2] = "STOCK FINAL";
@@ -177,37 +179,26 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
             columnas[1] = "STOCK ACTUAL";
             columnas[2] = "STOCK FINAL";
         }
-        stockprod = contr_consumoempleado.MostrarProductoStockN_MOD(jTextField2.getText(), Float.parseFloat(jTextField3.getText()));
+        stockprod = contr_consumoempleado.MostrarProductoStockN_MOD(jTextFieldProd.getText(), Float.parseFloat(jTextFieldCantidad.getText()));
         modelstockprod = new DefaultTableModel(stockprod, columnas);
-        jTable4.setModel(modelstockprod);
+        jTableInforme.setModel(modelstockprod);
         EliminiarFilasVaciasStockProd();
-    }
-
-    public void MostrarProductosStockMOD() {
-        if (jTable1.getRowCount() != 0) {
-            int i = jTable1.getSelectedRow();
-            String[] columnas = {"INSUMOS", "STOCK ACTUAL", "STOCK MODIFICADO", "STOCK FINAL"};
-            stockprod = contr_consumoempleado.MostrarProductosStockMOD(jTextField2.getText(), Float.parseFloat(jTable1.getValueAt(i, 4).toString()), Float.parseFloat(jTextField3.getText()));
-            modelstockprod = new DefaultTableModel(stockprod, columnas);
-            jTable4.setModel(modelstockprod);
-            EliminiarFilasVaciasStockProd();
-        }
     }
 
     public void MostrarProductos() {
         String columnas[] = {"IDPROD", "PRODUCTO"};
         dato3 = contr_consumoempleado.MostrarProductos();
         tabla3 = new DefaultTableModel(dato3, columnas);
-        jTable3.setModel(tabla3);
+        jTableProductos.setModel(tabla3);
         EliminarFilasVaciasTabla3();
         ocultarcolumnastabla3();
     }
 
     public void ListaProductos() {
-        listprod = combo.list("productos", "descripcion", jTextField2.getText());
-        String substr = jTextField2.getText().toLowerCase();
+        listprod = combo.list("productos", "descripcion", jTextFieldProd.getText());
+        String substr = jTextFieldProd.getText().toLowerCase();
         list = new DefaultListModel();
-        jList3.setModel(list);
+        listaProducto.setModel(list);
         list.removeAllElements();
         for (int i = 0; i < listprod.size(); i++) {
             if (listprod.get(i) == null) {
@@ -216,9 +207,9 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 String sublist = listprod.get(i).toLowerCase();
                 if (sublist.contains(substr)) {
                     list.addElement(listprod.get(i));
-                    jList3.setVisible(true);
-                    if (jTextField2.getText().isEmpty()) {
-                        jList3.setVisible(false);
+                    listaProducto.setVisible(true);
+                    if (jTextFieldProd.getText().isEmpty()) {
+                        listaProducto.setVisible(false);
                     }
                 }
             }
@@ -226,11 +217,11 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
     }
 
     public void EliminarFilasVaciasTabla3() {
-        if (jTable3.getRowCount() != 0) {
-            int filas = jTable3.getRowCount();
+        if (jTableProductos.getRowCount() != 0) {
+            int filas = jTableProductos.getRowCount();
             filas--;
             for (int fila = filas; fila >= 0; fila--) {
-                if (jTable3.getValueAt(fila, 0) == null) {
+                if (jTableProductos.getValueAt(fila, 0) == null) {
                     tabla3.removeRow(fila);
                 }
             }
@@ -238,11 +229,11 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
     }
 
     public void EliminiarFilasVaciasStockProd() {
-        if (jTable4.getRowCount() != 0) {
-            int filas = jTable4.getRowCount();
+        if (jTableInforme.getRowCount() != 0) {
+            int filas = jTableInforme.getRowCount();
             filas--;
             for (int fila = filas; fila >= 0; fila--) {
-                if (jTable4.getValueAt(fila, 0) == null) {
+                if (jTableInforme.getValueAt(fila, 0) == null) {
                     modelstockprod.removeRow(fila);
                 }
             }
@@ -250,16 +241,134 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
     }
 
     public void ocultarcolumnastabla3() {
-        jTable3.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable3.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable3.getColumnModel().getColumn(0).setPreferredWidth(0);
+        jTableProductos.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTableProductos.getColumnModel().getColumn(0).setMinWidth(0);
+        jTableProductos.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
 
     public void Limpiar() {
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).setText("");
+        //jTextFieldEmp.setText("");
+        jTextFieldProd.setText("");
+        jTextFieldCantidad.setText("");
+        //((JTextField) jDateFecha.getDateEditor().getUiComponent()).setText("");
+    }
+
+    public void VerificarStockNegativoRegistrando() {
+        String[] opciones = {"Ver Informe", "No ver y seguir"};
+        //Icon iconopreg = new ImageIcon(getClass().getResource("/Imagenes/pregunta.png"));
+        int i = JOptionPane.showOptionDialog(null, "Hemos verificado que dichos stocks de los insumos del producto " + jTextFieldProd.getText() + ", puede tener problemas a futuro. Por lo tanto no se cargara el mismo, por favor revea los insumos de este producto.", "ATENCION!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
+        if (i == 0) {
+            MostrarProductosStockN_MOD();//son aquellos productos que no fueron consumidos por dicho empleados (no fue registrado y no esta en la BD)
+            jLabelProductoInforme.setText(jTextFieldProd.getText());
+            color = new ColorearFilas(2);
+            jTableInforme.getColumnModel().getColumn(2).setCellRenderer(color);
+            vStocksProductos.setSize(727, 560);
+            vStocksProductos.setLocationRelativeTo(this);
+            vStocksProductos.setModal(true);
+            vStocksProductos.setVisible(true);
+        } else {
+            Limpiar();
+        }
+    }
+
+    public void VerificarStockCeroRegistrando() {
+        String[] opc = {"Ver Informe", "No ver y seguir"};
+        int i = JOptionPane.showOptionDialog(null, "Hemos verificado que si aplica dicho informe para este producto " + jTextFieldProd.getText() + ", dichos stocks de los insumos de la misma puede tener un stock 0", "ADVERTENCIA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opc, opc[0]);
+        if (i == 0) {
+            MostrarProductosStockN_MOD();
+            jLabelProductoInforme.setText(jTextFieldProd.getText());
+            color = new ColorearFilas(2);
+            jTableInforme.getColumnModel().getColumn(2).setCellRenderer(color);
+            vStocksProductos.setSize(727, 560);
+            vStocksProductos.setLocationRelativeTo(this);
+            vStocksProductos.setModal(true);
+            vStocksProductos.setVisible(true);
+        } else {
+            int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextFieldProd.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (g == 0) {
+                ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
+                ce.setNomempleado(jTextFieldEmp.getText());
+                ce.setProducto(jTextFieldProd.getText());
+                ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
+                if (contr_consumoempleado.InsertarConsumosEmpleados(ce)) {
+                    ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
+                    ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
+                    if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
+                        JOptionPane.showMessageDialog(null, "Informe agregado");
+                        //MostrarDatos();
+                        //Limpiar();
+                        VolverListaConsumosEmpleados();
+                    }
+                }
+            } else {
+                Limpiar();
+            }
+        }
+    }
+
+    public void VerificarStockNegativoModificando() {
+        String[] opciones = {"Ver Informe", "No ver y seguir"};
+        //Icon iconopreg = new ImageIcon(getClass().getResource("/Imagenes/pregunta.png"));
+        int i = JOptionPane.showOptionDialog(null, "Hemos verificado que dichos stocks de los insumos del producto " + jTextFieldProd.getText() + ", puede tener problemas a futuro. Por lo tanto no se cargara el mismo, por favor revea los insumos de este producto.", "ATENCION!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
+        if (i == 0) {
+            MostrarProductosStockN_MOD();
+            jLabelProductoInforme.setText(jTextFieldProd.getText());
+            color = new ColorearFilas(2);
+            jTableInforme.getColumnModel().getColumn(2).setCellRenderer(color);
+            vStocksProductos.setSize(727, 560);
+            vStocksProductos.setLocationRelativeTo(this);
+            vStocksProductos.setModal(true);
+            vStocksProductos.setVisible(true);
+        } else {
+            ce.setCantidad(cantidad);//ce.setCantidad(Float.parseFloat(jTable1.getValueAt(l, 4).toString()));
+            ce.setIdproducto(idproducto);//ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(l, 1).toString()));
+            if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
+                Limpiar();
+                //LimpiarSeleccionTabla1();
+            }
+        }
+    }
+
+    public void VerificarStockCeroModificando() {
+        String[] opc = {"Ver Informe", "No ver y seguir"};
+        int i = JOptionPane.showOptionDialog(null, "Hemos verificado que si aplica dicho informe para este producto " + jTextFieldProd.getText() + ", dichos stocks de los insumos de la misma puede tener un stock 0", "ADVERTENCIA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opc, opc[0]);
+        if (i == 0) {
+            MostrarProductosStockN_MOD();
+            jLabelProductoInforme.setText(jTextFieldProd.getText());
+            color = new ColorearFilas(2);
+            jTableInforme.getColumnModel().getColumn(2).setCellRenderer(color);
+            vStocksProductos.setSize(727, 560);
+            vStocksProductos.setLocationRelativeTo(this);
+            vStocksProductos.setModal(true);
+            vStocksProductos.setVisible(true);
+        } else {
+            int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextFieldProd.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (g == 0) {
+                ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
+                ce.setNomempleado(jTextFieldEmp.getText());
+                ce.setProducto(jTextFieldProd.getText());
+                ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
+                ce.setIdconsumo(Integer.parseInt(id));
+                if (contr_consumoempleado.EditarConsumosEmpleados(ce)) {
+                    ce.getCantidad();
+                    ce.getIdproducto();
+                    if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
+                        JOptionPane.showMessageDialog(null, "Modificado");
+                        VolverListaConsumosEmpleados();
+                        //MostrarDatos();
+                        //Limpiar();
+                        //LimpiarSeleccionTabla1();
+                    }
+                }
+            } else {
+                ce.setCantidad(cantidad);//ce.setCantidad(Float.parseFloat(jTable1.getValueAt(l, 4).toString()));
+                ce.setIdproducto(idproducto);//ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(l, 1).toString()));
+                if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
+                    Limpiar();
+                    //LimpiarSeleccionTabla1();
+                }
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -268,64 +377,43 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
 
         vSeleccionarEmpleado = new javax.swing.JDialog();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable(){
+        jTableEmpleados = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
         jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        jLabelNombreEmp = new javax.swing.JLabel();
+        jTextFieldEmpleado = new javax.swing.JTextField();
+        jButtonBuscarEmp = new javax.swing.JButton();
+        jButtonAgregarEmp = new javax.swing.JButton();
+        jButtonCancelarEmp = new javax.swing.JButton();
         vSeleccionarProducto = new javax.swing.JDialog();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable(){
+        jTableProductos = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
         };
         jPanel3 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        jLabelNombreProd = new javax.swing.JLabel();
+        jTextFieldProducto = new javax.swing.JTextField();
+        jButtonBuscarProd = new javax.swing.JButton();
+        jButtonAgregarProd = new javax.swing.JButton();
+        jButtonCancelarProd = new javax.swing.JButton();
         vStocksProductos = new javax.swing.JDialog();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabelProd = new javax.swing.JLabel();
+        jLabelProductoInforme = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jButton13 = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jList2 = new javax.swing.JList<>();
-        jList3 = new javax.swing.JList<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable(){
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return false; //Disallow the editing of any cell
-            }
-        };
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jButton6 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jTableInforme = new javax.swing.JTable();
+        jButtonAceptarInforme = new javax.swing.JButton();
+        jDateFecha = new com.toedter.calendar.JDateChooser();
+        jLabelFecha = new javax.swing.JLabel();
+        jLabelCantidad = new javax.swing.JLabel();
+        jTextFieldCantidad = new javax.swing.JTextField();
+        jButtonAgregar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jDateChooser4 = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
@@ -355,9 +443,17 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         jButton19 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        listaEmpleado = new javax.swing.JList<>();
+        jTextFieldEmp = new javax.swing.JTextField();
+        jLabelEmpleado = new javax.swing.JLabel();
+        jButtonSeleccionarEmpleado = new javax.swing.JButton();
+        listaProducto = new javax.swing.JList<>();
+        jButtonSeleccionarProductos = new javax.swing.JButton();
+        jTextFieldProd = new javax.swing.JTextField();
+        jLabelProducto = new javax.swing.JLabel();
 
         vSeleccionarEmpleado.setTitle("Seleccionar Empleado");
-        java.awt.Image iconodeliv = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
+        java.awt.Image iconodeliv = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
         vSeleccionarEmpleado.setIconImage(iconodeliv);
         vSeleccionarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -370,8 +466,8 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableEmpleados.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -382,20 +478,21 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTableEmpleados);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel5.setText("Nombre:");
+        jLabelNombreEmp.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombreEmp.setText("Nombre:");
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jButton7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton7.setText("Buscar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarEmp.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonBuscarEmp.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jButtonBuscarEmp.setText("Buscar");
+        jButtonBuscarEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jButtonBuscarEmpActionPerformed(evt);
             }
         });
 
@@ -407,40 +504,42 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(168, 168, 168)
-                        .addComponent(jLabel5))
+                        .addComponent(jLabelNombreEmp))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(150, 150, 150)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonBuscarEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(58, 58, 58))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(jLabel5)
+                .addComponent(jLabelNombreEmp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonBuscarEmp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(8, 8, 8))
         );
 
-        jButton8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton8.setText("Agregar");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregarEmp.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregarEmp.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregarEmp.setText("Agregar");
+        jButtonAgregarEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jButtonAgregarEmpActionPerformed(evt);
             }
         });
 
-        jButton9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton9.setText("Cancelar");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelarEmp.setBackground(new java.awt.Color(240, 87, 49));
+        jButtonCancelarEmp.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelarEmp.setText("Cancelar");
+        jButtonCancelarEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                jButtonCancelarEmpActionPerformed(evt);
             }
         });
 
@@ -450,9 +549,9 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
             vSeleccionarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vSeleccionarEmpleadoLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAgregarEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonCancelarEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
             .addGroup(vSeleccionarEmpleadoLayout.createSequentialGroup()
                 .addContainerGap()
@@ -470,13 +569,13 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(vSeleccionarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9))
+                    .addComponent(jButtonAgregarEmp)
+                    .addComponent(jButtonCancelarEmp))
                 .addGap(11, 11, 11))
         );
 
         vSeleccionarProducto.setTitle("Seleccionar Producto");
-        java.awt.Image icono = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
+        java.awt.Image icono = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
         vSeleccionarProducto.setIconImage(icono);
         vSeleccionarProducto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -489,8 +588,8 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTableProductos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -501,20 +600,21 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(jTableProductos);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel6.setText("Producto");
+        jLabelNombreProd.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombreProd.setText("Producto");
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldProducto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jButton10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton10.setText("Buscar");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarProd.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonBuscarProd.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jButtonBuscarProd.setText("Buscar");
+        jButtonBuscarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jButtonBuscarProdActionPerformed(evt);
             }
         });
 
@@ -529,38 +629,40 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(100, 100, 100)
-                                .addComponent(jLabel6))
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabelNombreProd))
+                            .addComponent(jTextFieldProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(19, 19, 19))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
+                .addComponent(jLabelNombreProd)
                 .addGap(2, 2, 2)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton10)
+                .addComponent(jButtonBuscarProd)
                 .addContainerGap())
         );
 
-        jButton11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton11.setText("Agregar");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregarProd.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregarProd.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregarProd.setText("Agregar");
+        jButtonAgregarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                jButtonAgregarProdActionPerformed(evt);
             }
         });
 
-        jButton12.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton12.setText("Cancelar");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelarProd.setBackground(new java.awt.Color(240, 87, 49));
+        jButtonCancelarProd.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelarProd.setText("Cancelar");
+        jButtonCancelarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                jButtonCancelarProdActionPerformed(evt);
             }
         });
 
@@ -569,18 +671,16 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         vSeleccionarProductoLayout.setHorizontalGroup(
             vSeleccionarProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vSeleccionarProductoLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jButton11)
+                .addGap(37, 37, 37)
+                .addComponent(jButtonAgregarProd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton12)
-                .addGap(86, 86, 86))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vSeleccionarProductoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jButtonCancelarProd)
+                .addGap(56, 56, 56))
             .addGroup(vSeleccionarProductoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(vSeleccionarProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         vSeleccionarProductoLayout.setVerticalGroup(
@@ -592,12 +692,12 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(vSeleccionarProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton12)
-                    .addComponent(jButton11))
+                    .addComponent(jButtonCancelarProd)
+                    .addComponent(jButtonAgregarProd))
                 .addContainerGap())
         );
 
-        java.awt.Image iconodel = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.jpg")).getImage();
+        java.awt.Image iconodel = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
         vStocksProductos.setIconImage(iconodel);
         vStocksProductos.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -605,13 +705,13 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel10.setText("Producto:");
+        jLabelProd.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelProd.setText("Producto:");
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelProductoInforme.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jTable4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        jTableInforme.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTableInforme.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -622,13 +722,14 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(jTableInforme);
 
-        jButton13.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton13.setText("Aceptar");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAceptarInforme.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAceptarInforme.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAceptarInforme.setText("Aceptar");
+        jButtonAceptarInforme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                jButtonAceptarInformeActionPerformed(evt);
             }
         });
 
@@ -643,12 +744,12 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                         .addGap(0, 286, Short.MAX_VALUE)
                         .addGroup(vStocksProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vStocksProductosLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
+                                .addComponent(jLabelProd)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelProductoInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(174, 174, 174))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vStocksProductosLayout.createSequentialGroup()
-                                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonAceptarInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(303, 303, 303))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vStocksProductosLayout.createSequentialGroup()
                         .addComponent(jScrollPane4)
@@ -659,12 +760,12 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
             .addGroup(vStocksProductosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(vStocksProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelProd, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelProductoInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton13)
+                .addComponent(jButtonAceptarInforme)
                 .addContainerGap())
         );
 
@@ -700,200 +801,55 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDateChooser1.setDateFormatString("dd/MM/yyyy HH:mm");
-        jDateChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, 145, 30));
+        jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm");
+        jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        getContentPane().add(jDateFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 145, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("(*) Fecha:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 128, -1, 30));
+        jLabelFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelFecha.setText("(*) Fecha:");
+        getContentPane().add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, -1, 30));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel2.setText("(*) Cantidad:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 128, -1, 30));
+        jLabelCantidad.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelCantidad.setText("(*) Cantidad:");
+        getContentPane().add(jLabelCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, -1, 30));
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldCantidad.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField3KeyTyped(evt);
+                jTextFieldCantidadKeyTyped(evt);
             }
         });
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 118, 28));
+        getContentPane().add(jTextFieldCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 118, 28));
 
-        jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel7.setText("(*) Empleado:");
-        jLayeredPane1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 170, 30));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel8.setText("(*) Producto:");
-        jLayeredPane1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, -1, 30));
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonAgregarActionPerformed(evt);
             }
         });
-        jLayeredPane1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 42, 30));
+        getContentPane().add(jButtonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 100, 30));
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField2KeyReleased(evt);
-            }
-        });
-        jLayeredPane1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 186, 30));
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
-        jLayeredPane1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 42, 30));
+        getContentPane().add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 100, 30));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField1KeyReleased(evt);
-            }
-        });
-        jLayeredPane1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 196, 30));
-
-        jList2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList2.setValueIsAdjusting(true);
-        jList2.setVisibleRowCount(0);
-        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList2MouseClicked(evt);
-            }
-        });
-        jLayeredPane1.add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 196, -1));
-
-        jList3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList3.setValueIsAdjusting(true);
-        jList3.setVisibleRowCount(0);
-        jList3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList3MouseClicked(evt);
-            }
-        });
-        jLayeredPane1.add(jList3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 186, -1));
-
-        getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
-
-        jScrollPane1.setOpaque(false);
-
-        jTable1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTable1.setOpaque(false);
-        jScrollPane1.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 830, 275));
-
-        jButton3.setBackground(new java.awt.Color(252, 249, 57));
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setText("Agregar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelar.setBackground(new java.awt.Color(240, 87, 49));
+        jButtonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 85, -1));
-
-        jButton4.setBackground(new java.awt.Color(252, 249, 57));
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton4.setText("Modificar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 500, 92, -1));
-
-        jButton5.setBackground(new java.awt.Color(240, 87, 49));
-        jButton5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton5.setText("Eliminar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 500, 89, -1));
-
-        jPanel1.setBackground(new java.awt.Color(255, 248, 177));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
-
-        jDateChooser2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-
-        jDateChooser3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-
-        jButton6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton6.setText("Buscar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel3.setText("Desde");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel4.setText("Hasta");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(172, 172, 172))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jButton6)
-                .addGap(10, 10, 10))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 42, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 11, -1, 110));
+        getContentPane().add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, 100, 30));
 
         jInternalFrame1.setBackground(new java.awt.Color(255, 248, 177));
         jInternalFrame1.setClosable(true);
@@ -1124,72 +1080,93 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
 
         getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        listaEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        listaEmpleado.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listaEmpleado.setValueIsAdjusting(true);
+        listaEmpleado.setVisibleRowCount(0);
+        listaEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaEmpleadoMouseClicked(evt);
+            }
+        });
+        getContentPane().add(listaEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 196, -1));
+
+        jTextFieldEmp.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldEmp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldEmpKeyReleased(evt);
+            }
+        });
+        getContentPane().add(jTextFieldEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 196, 30));
+
+        jLabelEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelEmpleado.setText("(*) Empleado:");
+        getContentPane().add(jLabelEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 170, 30));
+
+        jButtonSeleccionarEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
+        jButtonSeleccionarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSeleccionarEmpleadoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonSeleccionarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 42, 30));
+
+        listaProducto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        listaProducto.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listaProducto.setValueIsAdjusting(true);
+        listaProducto.setVisibleRowCount(0);
+        listaProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaProductoMouseClicked(evt);
+            }
+        });
+        getContentPane().add(listaProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 186, -1));
+
+        jButtonSeleccionarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
+        jButtonSeleccionarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSeleccionarProductosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonSeleccionarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 42, 30));
+
+        jTextFieldProd.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldProd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldProdKeyReleased(evt);
+            }
+        });
+        getContentPane().add(jTextFieldProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 186, 30));
+
+        jLabelProducto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelProducto.setText("(*) Producto:");
+        getContentPane().add(jLabelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (!jTextField1.getText().equals("") && !jTextField2.getText().equals("") && !jTextField3.getText().isEmpty() && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().isEmpty()) {
-            if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                int stockneg = contr_consumoempleado.ConsultarStockNegativosN_MOD(jTextField2.getText(), Float.parseFloat(jTextField3.getText()));
-                int stockcero = contr_consumoempleado.ConsultarStockCeroN_MOD(jTextField2.getText(), Float.parseFloat(jTextField3.getText()));
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        if (!jTextFieldEmp.getText().equals("") && !jTextFieldProd.getText().equals("") && !jTextFieldCantidad.getText().isEmpty() && !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().isEmpty()) {
+            if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+                int stockneg = contr_consumoempleado.ConsultarStockNegativosN_MOD(jTextFieldProd.getText(), Float.parseFloat(jTextFieldCantidad.getText()));
+                int stockcero = contr_consumoempleado.ConsultarStockCeroN_MOD(jTextFieldProd.getText(), Float.parseFloat(jTextFieldCantidad.getText()));
                 if (stockneg > 0) {
-                    String[] opciones = {"Ver Informe", "No ver y seguir"};
-                    //Icon iconopreg = new ImageIcon(getClass().getResource("/Imagenes/pregunta.png"));
-                    int i = JOptionPane.showOptionDialog(null, "Hemos verificado que dichos stocks de los insumos del producto " + jTextField2.getText() + ", puede tener problemas a futuro. Por lo tanto no se cargara el mismo, por favor revea los insumos de este producto.", "ATENCION!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
-                    if (i == 0) {
-                        MostrarProductosStockN_MOD();
-                        jLabel11.setText(jTextField2.getText());
-                        color = new ColorearFilas(2);
-                        jTable4.getColumnModel().getColumn(2).setCellRenderer(color);
-                        vStocksProductos.setSize(727, 560);
-                        vStocksProductos.setLocationRelativeTo(this);
-                        vStocksProductos.setModal(true);
-                        vStocksProductos.setVisible(true);
-                    } else {
-                        Limpiar();
-                    }
+                    VerificarStockNegativoRegistrando();
                 } else if (stockcero > 0) {
-                    String[] opc = {"Ver Informe", "No ver y seguir"};
-                    int i = JOptionPane.showOptionDialog(null, "Hemos verificado que si aplica dicho informe para este producto " + jTextField2.getText() + ", dichos stocks de los insumos de la misma puede tener un stock 0", "ADVERTENCIA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opc, opc[0]);
-                    if (i == 0) {
-                        MostrarProductosStockN_MOD();
-                        jLabel11.setText(jTextField2.getText());
-                        color = new ColorearFilas(2);
-                        jTable4.getColumnModel().getColumn(2).setCellRenderer(color);
-                        vStocksProductos.setSize(727, 560);
-                        vStocksProductos.setLocationRelativeTo(this);
-                        vStocksProductos.setModal(true);
-                        vStocksProductos.setVisible(true);
-                    } else {
-                        int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextField2.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                        if (g == 0) {
-                            ce.setNomempleado(jTextField1.getText());
-                            ce.setProducto(jTextField2.getText());
-                            ce.setCantidad(Float.parseFloat(jTextField3.getText()));
-                            if (contr_consumoempleado.InsertarConsumosEmpleados(ce)) {
-                                ce.setCantidad(Float.parseFloat(jTextField3.getText()));
-                                ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextField2.getText()));
-                                if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                                    JOptionPane.showMessageDialog(null, "Informe agregado.");
-                                    MostrarDatos();
-                                    Limpiar();
-                                }
-                            }
-                        } else {
-                            Limpiar();
-                        }
-                    }
+                    VerificarStockCeroRegistrando();
                 } else {
-                    ce.setNomempleado(jTextField1.getText());
-                    ce.setProducto(jTextField2.getText());
-                    ce.setCantidad(Float.parseFloat(jTextField3.getText()));
+                    ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
+                    ce.setNomempleado(jTextFieldEmp.getText());
+                    ce.setProducto(jTextFieldProd.getText());
+                    ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
                     if (contr_consumoempleado.InsertarConsumosEmpleados(ce)) {
-                        ce.setCantidad(Float.parseFloat(jTextField3.getText()));
-                        ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextField2.getText()));
+                        ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
+                        ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
                         if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                            JOptionPane.showMessageDialog(null, "Informe agregado.");
-                            MostrarDatos();
-                            Limpiar();
+                            JOptionPane.showMessageDialog(null, "Informe agregado");
+                            //MostrarDatos();
+                            //Limpiar();
+                            VolverListaConsumosEmpleados();
                         }
                     }
                 }
@@ -1199,45 +1176,45 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonSeleccionarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarEmpleadoActionPerformed
         vSeleccionarEmpleado.setSize(470, 635);
         vSeleccionarEmpleado.setLocationRelativeTo(this);
         vSeleccionarEmpleado.setModal(true);
         vSeleccionarEmpleado.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonSeleccionarEmpleadoActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if (jTable2.getRowCount() != 0) {
-            int i = jTable2.getSelectedRow();
+    private void jButtonAgregarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarEmpActionPerformed
+        if (jTableEmpleados.getRowCount() != 0) {
+            int i = jTableEmpleados.getSelectedRow();
             if (i == -1) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
             } else {
                 vSeleccionarEmpleado.dispose();
-                jTextField1.setText(jTable2.getValueAt(i, 0).toString());
+                jTextFieldEmp.setText(jTableEmpleados.getValueAt(i, 0).toString());
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se han agregado dichos empleados todavia");
         }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarEmpActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void jButtonCancelarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarEmpActionPerformed
         int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             vSeleccionarEmpleado.dispose();
         } else {
             vSeleccionarEmpleado.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_jButtonCancelarEmpActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if (!jTextField4.getText().isEmpty()) {
-            dato2 = contr_consumoempleado.MostrarEmpleadosBuscado(jTextField4.getText());
+    private void jButtonBuscarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarEmpActionPerformed
+        if (!jTextFieldEmpleado.getText().isEmpty()) {
+            dato2 = contr_consumoempleado.MostrarEmpleadosBuscado(jTextFieldEmpleado.getText());
             if (dato2.length != 0) {
                 String[] columnas = {"NOMBRE EMPLEADOS", "ROL DE TRABAJO"};
                 tabla2 = new DefaultTableModel(dato2, columnas);
-                jTable2.setModel(tabla2);
+                jTableEmpleados.setModel(tabla2);
                 EliminarFilasVaciasTabla2();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");
@@ -1245,7 +1222,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar el campo");
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarEmpActionPerformed
 
     private void vSeleccionarEmpleadoWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vSeleccionarEmpleadoWindowClosing
         int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -1258,47 +1235,48 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
 
     private void vSeleccionarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarEmpleadoMouseClicked
         MostrarEmpleados();
-        LimpiarSeleccionTabla2();
+        LimpiarSeleccionTablaEmp();
+        jTextFieldEmpleado.setText("");
     }//GEN-LAST:event_vSeleccionarEmpleadoMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonSeleccionarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarProductosActionPerformed
         vSeleccionarProducto.setSize(348, 613);
         vSeleccionarProducto.setLocationRelativeTo(this);
         vSeleccionarProducto.setModal(true);
         vSeleccionarProducto.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonSeleccionarProductosActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        if (jTable3.getRowCount() != 0) {
-            int i = jTable3.getSelectedRow();
+    private void jButtonAgregarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarProdActionPerformed
+        if (jTableProductos.getRowCount() != 0) {
+            int i = jTableProductos.getSelectedRow();
             if (i == -1) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
             } else {
                 vSeleccionarProducto.dispose();
-                ce.setIdproducto(Integer.parseInt(jTable3.getValueAt(i, 0).toString()));
-                jTextField2.setText(jTable3.getValueAt(i, 1).toString());
+                ce.setIdproducto(Integer.parseInt(jTableProductos.getValueAt(i, 0).toString()));
+                jTextFieldProd.setText(jTableProductos.getValueAt(i, 1).toString());
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se han agregado dichos empleados todavia");
         }
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_jButtonAgregarProdActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void jButtonCancelarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarProdActionPerformed
         int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             vSeleccionarProducto.dispose();
         } else {
             vSeleccionarProducto.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_jButtonCancelarProdActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        if (!jTextField5.getText().isEmpty()) {
-            dato3 = contr_consumoempleado.MostrarProductosBuscado(jTextField5.getText());
+    private void jButtonBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarProdActionPerformed
+        if (!jTextFieldProducto.getText().isEmpty()) {
+            dato3 = contr_consumoempleado.MostrarProductosBuscado(jTextFieldProducto.getText());
             if (dato3.length != 0) {
                 String columnas[] = {"IDPROD", "PRODUCTO"};
                 tabla3 = new DefaultTableModel(dato3, columnas);
-                jTable3.setModel(tabla3);
+                jTableProductos.setModel(tabla3);
                 EliminarFilasVaciasTabla3();
                 ocultarcolumnastabla3();
             } else {
@@ -1307,7 +1285,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar el campo");
         }
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarProdActionPerformed
 
     private void vSeleccionarProductoWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vSeleccionarProductoWindowClosing
         int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -1320,19 +1298,19 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
 
     private void vSeleccionarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarProductoMouseClicked
         MostrarProductos();
-        LimpiarSeleccionTabla3();
-        jTextField5.setText("");
+        LimpiarSeleccionTablaProd();
+        jTextFieldProducto.setText("");
     }//GEN-LAST:event_vSeleccionarProductoMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (jButton4.getText().equals("Modificar")) {
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        /*if (jButtonModificar.getText().equals("Modificar")) {
             int fila = jTable1.getSelectedRow();
             if (fila == -1) {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
-                jButton3.setEnabled(false);
-                jButton4.setText("Cancelar");
-                jButton5.setText("Modificar");
+                jButtonAgregar.setEnabled(false);
+                jButtonModificar.setText("Cancelar");
+                jButtonCancelar.setText("Modificar");
                 String fecha = jTable1.getValueAt(fila, 5).toString();
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 try {
@@ -1343,172 +1321,107 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 cant = jTable1.getValueAt(fila, 4).toString();
                 prod = jTable1.getValueAt(fila, 1).toString();
                 id = jTable1.getValueAt(fila, 0).toString();
-                jTextField1.setText(jTable1.getValueAt(fila, 2).toString());
-                jTextField2.setText(jTable1.getValueAt(fila, 3).toString());
-                jTextField3.setText(jTable1.getValueAt(fila, 4).toString());
-                jDateChooser1.setDate(fechaseleccionada);
+                jTextFieldEmp.setText(jTable1.getValueAt(fila, 2).toString());
+                jTextFieldProd.setText(jTable1.getValueAt(fila, 3).toString());
+                jTextFieldCantidad.setText(jTable1.getValueAt(fila, 4).toString());
+                jDateFecha.setDate(fechaseleccionada);
             }
         } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                jButton3.setEnabled(true);
-                jButton4.setText("Modificar");
-                jButton5.setText("Eliminar");
-                Limpiar();
+            
+        }*/
+        if (!jTextFieldEmp.getText().equals("") && !jTextFieldProd.getText().equals("") && !jTextFieldCantidad.getText().isEmpty() && !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().isEmpty()) {
+            if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+                int m = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                if (m == 0) {
+                    ce.setCantidad(cantidad);//ce.setCantidad(Float.parseFloat(jTable1.getValueAt(l, 4).toString()));                          
+                    ce.setIdproducto(idproducto);//ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(l, 1).toString()));
+                    contr_consumoempleado.CancelarStockConsumidoLocal(ce);
+                    int stockneg = contr_consumoempleado.ConsultarStockNegativosN_MOD(jTextFieldProd.getText(), Float.parseFloat(jTextFieldCantidad.getText()));
+                    int stockcero = contr_consumoempleado.ConsultarStockCeroN_MOD(jTextFieldProd.getText(), Float.parseFloat(jTextFieldCantidad.getText()));
+                    if (stockneg > 0) {
+                        VerificarStockNegativoModificando();
+                    } else if (stockcero > 0) {
+                        VerificarStockCeroModificando();
+                    } else {
+                        ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
+                        ce.setNomempleado(jTextFieldEmp.getText());
+                        ce.setProducto(jTextFieldProd.getText());
+                        ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
+                        ce.setIdconsumo(Integer.parseInt(id));
+                        if (contr_consumoempleado.EditarConsumosEmpleados(ce)) {
+                            ce.getCantidad();
+                            ce.getIdproducto();
+                            if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
+                                JOptionPane.showMessageDialog(null, "Modificado");
+                                VolverListaConsumosEmpleados();
+                                //MostrarDatos();
+                                //Limpiar();
+                                //LimpiarSeleccionTabla1();
+                            }
+                        }
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
+        }
+    }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        /*int i = jTable1.getSelectedRow();
+        if (i == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
+        } else {
+            int j = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (j == 0) {
+                ce.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 4).toString()));
+                ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(i, 1).toString()));
+                if (contr_consumoempleado.CancelarStockConsumidoLocal(ce)) {
+                    ce.setIdconsumo(Integer.parseInt(jTable1.getValueAt(i, 0).toString()));
+                    if (contr_consumoempleado.EliminarConsumosEmpleados(ce)) {
+                        JOptionPane.showMessageDialog(null, "Eliminado");
+                        MostrarDatos();
+                    }
+                }
+            } else {
                 LimpiarSeleccionTabla1();
             }
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if (jButton5.getText().equals("Modificar")) {
-            if (jTable1.getRowCount() != 0) {
-                int l = jTable1.getSelectedRow();
-                if (l == -1) {
-                    JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-                } else {
-                    if (!jTextField1.getText().equals("") && !jTextField2.getText().equals("") && !jTextField3.getText().isEmpty() && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().isEmpty()) {
-                        if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                            int m = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                            if (m == 0) {
-                                ce.setCantidad(Float.parseFloat(jTable1.getValueAt(l, 4).toString()));
-                                ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(l, 1).toString()));
-                                contr_consumoempleado.CancelarStockConsumidoLocal(ce);
-                                int stockneg = contr_consumoempleado.ConsultarStockNegativosN_MOD(jTextField2.getText(), Float.parseFloat(jTextField3.getText()));
-                                int stockcero = contr_consumoempleado.ConsultarStockCeroN_MOD(jTextField2.getText(), Float.parseFloat(jTextField3.getText()));
-                                if (stockneg > 0) {
-                                    String[] opciones = {"Ver Informe", "No ver y seguir"};
-                                    //Icon iconopreg = new ImageIcon(getClass().getResource("/Imagenes/pregunta.png"));
-                                    int i = JOptionPane.showOptionDialog(null, "Hemos verificado que dichos stocks de los insumos del producto " + jTextField2.getText() + ", puede tener problemas a futuro. Por lo tanto no se cargara el mismo, por favor revea los insumos de este producto.", "ATENCION!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
-                                    if (i == 0) {
-                                        MostrarProductosStockN_MOD();
-                                        jLabel11.setText(jTextField2.getText());
-                                        color = new ColorearFilas(2);
-                                        jTable4.getColumnModel().getColumn(2).setCellRenderer(color);
-                                        vStocksProductos.setSize(727, 560);
-                                        vStocksProductos.setLocationRelativeTo(this);
-                                        vStocksProductos.setModal(true);
-                                        vStocksProductos.setVisible(true);
-                                    } else {
-                                        ce.setCantidad(Float.parseFloat(jTable1.getValueAt(l, 4).toString()));
-                                        ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(l, 1).toString()));
-                                        if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                                            jButton3.setEnabled(true);
-                                            jButton4.setText("Modificar");
-                                            jButton5.setText("Eliminar");
-                                            Limpiar();
-                                            LimpiarSeleccionTabla1();
-                                        }
-                                    }
-                                } else if (stockcero > 0) {
-                                    String[] opc = {"Ver Informe", "No ver y seguir"};
-                                    int i = JOptionPane.showOptionDialog(null, "Hemos verificado que si aplica dicho informe para este producto " + jTextField2.getText() + ", dichos stocks de los insumos de la misma puede tener un stock 0", "ADVERTENCIA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opc, opc[0]);
-                                    if (i == 0) {
-                                        MostrarProductosStockN_MOD();
-                                        jLabel11.setText(jTextField2.getText());
-                                        color = new ColorearFilas(2);
-                                        jTable4.getColumnModel().getColumn(2).setCellRenderer(color);
-                                        vStocksProductos.setSize(727, 560);
-                                        vStocksProductos.setLocationRelativeTo(this);
-                                        vStocksProductos.setModal(true);
-                                        vStocksProductos.setVisible(true);
-                                    } else {
-                                        int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextField2.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                                        if (g == 0) {
-                                            ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextField2.getText()));
-                                            ce.setNomempleado(jTextField1.getText());
-                                            ce.setProducto(jTextField2.getText());
-                                            ce.setCantidad(Float.parseFloat(jTextField3.getText()));
-                                            ce.setIdconsumo(Integer.parseInt(id));
-                                            if (contr_consumoempleado.EditarConsumosEmpleados(ce)) {
-                                                ce.getCantidad();
-                                                ce.getProducto();
-                                                if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                                                    JOptionPane.showMessageDialog(null, "Modificado");
-                                                    jButton3.setEnabled(true);
-                                                    jButton4.setText("Modificar");
-                                                    jButton5.setText("Eliminar");
-                                                    MostrarDatos();
-                                                    Limpiar();
-                                                    LimpiarSeleccionTabla1();
-                                                }
-                                            }
-                                        } else {
-                                            ce.setCantidad(Float.parseFloat(jTable1.getValueAt(l, 4).toString()));
-                                            ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(l, 1).toString()));
-                                            if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                                                jButton3.setEnabled(true);
-                                                jButton4.setText("Modificar");
-                                                jButton5.setText("Eliminar");
-                                                Limpiar();
-                                                LimpiarSeleccionTabla1();
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextField2.getText()));
-                                    ce.setNomempleado(jTextField1.getText());
-                                    ce.setProducto(jTextField2.getText());
-                                    ce.setCantidad(Float.parseFloat(jTextField3.getText()));
-                                    ce.setIdconsumo(Integer.parseInt(id));
-                                    if (contr_consumoempleado.EditarConsumosEmpleados(ce)) {
-                                        ce.getCantidad();
-                                        ce.getProducto();
-                                        if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                                            JOptionPane.showMessageDialog(null, "Modificado");
-                                            jButton3.setEnabled(true);
-                                            jButton4.setText("Modificar");
-                                            jButton5.setText("Eliminar");
-                                            MostrarDatos();
-                                            Limpiar();
-                                            LimpiarSeleccionTabla1();
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
-                    }
-                }
-            }
-        } else {
-            int i = jTable1.getSelectedRow();
-            if (i == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                int j = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (j == 0) {
-                    ce.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 4).toString()));
-                    ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(i, 1).toString()));
-                    if (contr_consumoempleado.CancelarStockConsumidoLocal(ce)) {
-                        ce.setIdconsumo(Integer.parseInt(jTable1.getValueAt(i, 0).toString()));
-                        if (contr_consumoempleado.EliminarConsumosEmpleados(ce)) {
-                            JOptionPane.showMessageDialog(null, "Eliminado");
-                            MostrarDatos();
-                        }
-                    }
-                } else {
-                    LimpiarSeleccionTabla1();
-                }
-            }
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jButton4.getText().equals("Cancelar")) {
+        }*/
+        if (!jButtonAgregar.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
+                VolverListaConsumosEmpleados();
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (!jTextField1.getText().equals("") || !jTextField2.getText().equals("") || !jTextField3.getText().isEmpty() || !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().isEmpty()) {
+        } else if (!jTextFieldEmp.getText().equals("") || !jTextFieldProd.getText().equals("") || !jTextFieldCantidad.getText().isEmpty() || !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().isEmpty()) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
+                VolverListaConsumosEmpleados();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        }
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        if (!jButtonAgregar.isEnabled()) {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                dispose();
+                VolverListaConsumosEmpleados();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else if (!jTextFieldEmp.getText().equals("") || !jTextFieldProd.getText().equals("") || !jTextFieldCantidad.getText().isEmpty() || !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().isEmpty()) {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                dispose();
+                VolverListaConsumosEmpleados();
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
@@ -1516,67 +1429,40 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        if (jButton5.getText().equals("Eliminar")) {
+        /*if (jButtonCancelar.getText().equals("Eliminar")) {
             LimpiarSeleccionTabla1();
             IniciarFechas();
             MostrarDatos();
-        }
+        }*/
     }//GEN-LAST:event_formMouseClicked
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        String desde = ((JTextField) jDateChooser2.getDateEditor().getUiComponent()).getText();
-        String hasta = ((JTextField) jDateChooser3.getDateEditor().getUiComponent()).getText();
-        if (jDateChooser2.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-            if (jDateChooser3.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                if (!desde.isEmpty() && !hasta.isEmpty()) {
-                    String columnas[] = {"IDCONSUMO", "IDPRODUCTO", "NOMBRE EMPLEADO", "PRODUCTO", "CANTIDAD", "FECHA"};
-                    dato1 = contr_consumoempleado.MostrarDatosBusqueda(desde, hasta);
-                    if (dato1.length != 0) {
-                        tabla1 = new DefaultTableModel(dato1, columnas);
-                        jTable1.setModel(tabla1);
-                        EliminarFilasVaciasTabla1();
-                        ocultarcolumnastabla1();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se encontraron datos");
-                    }
-                } else if (desde.isEmpty() || hasta.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Debe ingresar la fecha que falta");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
-        int i = jList2.getSelectedIndex();
+    private void listaEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaEmpleadoMouseClicked
+        int i = listaEmpleado.getSelectedIndex();
         if (i != -1) {
-            jTextField1.setText(jList2.getSelectedValue());
-            jList2.setVisible(false);
+            jTextFieldEmp.setText(listaEmpleado.getSelectedValue());
+            listaEmpleado.setVisible(false);
         }
-    }//GEN-LAST:event_jList2MouseClicked
+    }//GEN-LAST:event_listaEmpleadoMouseClicked
 
-    private void jList3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList3MouseClicked
-        int i = jList3.getSelectedIndex();
+    private void listaProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaProductoMouseClicked
+        int i = listaProducto.getSelectedIndex();
         if (i != -1) {
-            jTextField2.setText(jList3.getSelectedValue());
-            int j = contr_consumoempleado.ObtenerIDProducto(jTextField2.getText());
+            jTextFieldProd.setText(listaProducto.getSelectedValue());
+            int j = contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText());
             ce.setIdproducto(j);
-            jList3.setVisible(false);
+            listaProducto.setVisible(false);
         }
-    }//GEN-LAST:event_jList3MouseClicked
+    }//GEN-LAST:event_listaProductoMouseClicked
 
-    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+    private void jTextFieldEmpKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldEmpKeyReleased
         ListaEmpleados();
-    }//GEN-LAST:event_jTextField1KeyReleased
+    }//GEN-LAST:event_jTextFieldEmpKeyReleased
 
-    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+    private void jTextFieldProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldProdKeyReleased
         ListaProductos();
-    }//GEN-LAST:event_jTextField2KeyReleased
+    }//GEN-LAST:event_jTextFieldProdKeyReleased
 
-    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+    private void jTextFieldCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCantidadKeyTyped
         char[] p = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', KeyEvent.VK_BACK_SPACE};
         int b = 0;
         for (int i = 0; i <= 11; i++) {
@@ -1588,85 +1474,76 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_jTextField3KeyTyped
+    }//GEN-LAST:event_jTextFieldCantidadKeyTyped
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void jButtonAceptarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarInformeActionPerformed
         int contstockneg = 0;
-        if (jTable4.getRowCount() != 0) {
-            for (int i = 0; i < jTable4.getRowCount(); i++) {
-                if (jTable4.getColumnName(2).equals("STOCK FINAL")) {
-                    if (Float.parseFloat(jTable4.getValueAt(i, 2).toString()) < 0) {
+        if (jTableInforme.getRowCount() != 0) {
+            for (int i = 0; i < jTableInforme.getRowCount(); i++) {
+                if (jTableInforme.getColumnName(2).equals("STOCK FINAL")) {
+                    if (Float.parseFloat(jTableInforme.getValueAt(i, 2).toString()) < 0) {
                         contstockneg++;
                     }
                 }
             }
         }
         if (contstockneg > 0) {
-            if (jButton5.getText().equals("Modificar")) {
-                int l = jTable1.getSelectedRow();
-                ce.setCantidad(Float.parseFloat(jTable1.getValueAt(l, 4).toString()));
-                ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(l, 1).toString()));
+            if (!jButtonAgregar.isEnabled()) {
+                ce.setCantidad(cantidad);
+                ce.setIdproducto(idproducto);
                 if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                    jButton3.setEnabled(true);
-                    jButton4.setText("Modificar");
-                    jButton5.setText("Eliminar");
                     Limpiar();
-                    LimpiarSeleccionTabla1();
+                    vStocksProductos.dispose();
                 }
             } else {
                 vStocksProductos.dispose();
                 Limpiar();
             }
         } else {
-            if (jButton5.getText().equals("Modificar")) {
-                int l = jTable1.getSelectedRow();
-                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextField2.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (!jButtonAgregar.isEnabled()) {
+                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextFieldProd.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (g == 0) {
                     vStocksProductos.dispose();
-                    ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextField2.getText()));
-                    ce.setNomempleado(jTextField1.getText());
-                    ce.setProducto(jTextField2.getText());
-                    ce.setCantidad(Float.parseFloat(jTextField3.getText()));
+                    ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
+                    ce.setNomempleado(jTextFieldEmp.getText());
+                    ce.setProducto(jTextFieldProd.getText());
+                    ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
                     ce.setIdconsumo(Integer.parseInt(id));
                     if (contr_consumoempleado.EditarConsumosEmpleados(ce)) {
                         ce.getCantidad();
-                        ce.getProducto();
+                        ce.getIdproducto();
                         if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
                             JOptionPane.showMessageDialog(null, "Modificado");
-                            jButton3.setEnabled(true);
-                            jButton4.setText("Modificar");
-                            jButton5.setText("Eliminar");
-                            MostrarDatos();
-                            Limpiar();
-                            LimpiarSeleccionTabla1();
+                            //MostrarDatos();
+                            //Limpiar();
+                            //LimpiarSeleccionTabla1();
+                            VolverListaConsumosEmpleados();
                         }
                     }
                 } else {
-                    ce.setCantidad(Float.parseFloat(jTable1.getValueAt(l, 4).toString()));
-                    ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(l, 1).toString()));
+                    ce.setCantidad(cantidad);
+                    ce.setIdproducto(idproducto);
                     if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
                         vStocksProductos.dispose();
-                        jButton3.setEnabled(true);
-                        jButton4.setText("Modificar");
-                        jButton5.setText("Eliminar");
                         Limpiar();
-                        LimpiarSeleccionTabla1();
+                        //LimpiarSeleccionTabla1();
                     }
                 }
             } else {
-                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextField2.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextFieldProd.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (g == 0) {
                     vStocksProductos.dispose();
-                    ce.setNomempleado(jTextField1.getText());
-                    ce.setProducto(jTextField2.getText());
-                    ce.setCantidad(Float.parseFloat(jTextField3.getText()));
+                    ce.setNomempleado(jTextFieldEmp.getText());
+                    ce.setProducto(jTextFieldProd.getText());
+                    ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
                     if (contr_consumoempleado.InsertarConsumosEmpleados(ce)) {
-                        ce.setCantidad(Float.parseFloat(jTextField3.getText()));
-                        ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextField2.getText()));
+                        ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
+                        ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
                         if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                            JOptionPane.showMessageDialog(null, "Informe agregado.");
-                            MostrarDatos();
-                            Limpiar();
+                            JOptionPane.showMessageDialog(null, "Informe agregado");
+                            //MostrarDatos();
+                            //Limpiar();
+                            VolverListaConsumosEmpleados();
                         }
                     }
                 } else {
@@ -1675,85 +1552,76 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_jButtonAceptarInformeActionPerformed
 
     private void vStocksProductosWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vStocksProductosWindowClosing
         int contstockneg = 0;
-        if (jTable4.getRowCount() != 0) {
-            for (int i = 0; i < jTable4.getRowCount(); i++) {
-                if (jTable4.getColumnName(2).equals("STOCK FINAL")) {
-                    if (Float.parseFloat(jTable4.getValueAt(i, 2).toString()) < 0) {
+        if (jTableInforme.getRowCount() != 0) {
+            for (int i = 0; i < jTableInforme.getRowCount(); i++) {
+                if (jTableInforme.getColumnName(2).equals("STOCK FINAL")) {
+                    if (Float.parseFloat(jTableInforme.getValueAt(i, 2).toString()) < 0) {
                         contstockneg++;
                     }
                 }
             }
         }
         if (contstockneg > 0) {
-            if (jButton5.getText().equals("Modificar")) {
-                int l = jTable1.getSelectedRow();
-                ce.setCantidad(Float.parseFloat(jTable1.getValueAt(l, 4).toString()));
-                ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(l, 1).toString()));
+            if (!jButtonAgregar.isEnabled()) {
+                ce.setCantidad(cantidad);
+                ce.setIdproducto(idproducto);
                 if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                    jButton3.setEnabled(true);
-                    jButton4.setText("Modificar");
-                    jButton5.setText("Eliminar");
                     Limpiar();
-                    LimpiarSeleccionTabla1();
+                    vStocksProductos.dispose();
                 }
             } else {
                 vStocksProductos.dispose();
                 Limpiar();
             }
         } else {
-            if (jButton5.getText().equals("Modificar")) {
-                int l = jTable1.getSelectedRow();
-                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextField2.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (!jButtonAgregar.isEnabled()) {
+                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextFieldProd.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (g == 0) {
                     vStocksProductos.dispose();
-                    ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextField2.getText()));
-                    ce.setNomempleado(jTextField1.getText());
-                    ce.setProducto(jTextField2.getText());
-                    ce.setCantidad(Float.parseFloat(jTextField3.getText()));
+                    ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
+                    ce.setNomempleado(jTextFieldEmp.getText());
+                    ce.setProducto(jTextFieldProd.getText());
+                    ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
                     ce.setIdconsumo(Integer.parseInt(id));
                     if (contr_consumoempleado.EditarConsumosEmpleados(ce)) {
                         ce.getCantidad();
-                        ce.getProducto();
+                        ce.getIdproducto();
                         if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
                             JOptionPane.showMessageDialog(null, "Modificado");
-                            jButton3.setEnabled(true);
-                            jButton4.setText("Modificar");
-                            jButton5.setText("Eliminar");
-                            MostrarDatos();
-                            Limpiar();
-                            LimpiarSeleccionTabla1();
+                            //MostrarDatos();
+                            //Limpiar();
+                            //LimpiarSeleccionTabla1();
+                            VolverListaConsumosEmpleados();
                         }
                     }
                 } else {
-                    ce.setCantidad(Float.parseFloat(jTable1.getValueAt(l, 4).toString()));
-                    ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(l, 1).toString()));
+                    ce.setCantidad(cantidad);
+                    ce.setIdproducto(idproducto);
                     if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
                         vStocksProductos.dispose();
-                        jButton3.setEnabled(true);
-                        jButton4.setText("Modificar");
-                        jButton5.setText("Eliminar");
                         Limpiar();
-                        LimpiarSeleccionTabla1();
+                        //LimpiarSeleccionTabla1();
                     }
                 }
             } else {
-                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextField2.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextFieldProd.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (g == 0) {
                     vStocksProductos.dispose();
-                    ce.setNomempleado(jTextField1.getText());
-                    ce.setProducto(jTextField2.getText());
-                    ce.setCantidad(Float.parseFloat(jTextField3.getText()));
+                    ce.setNomempleado(jTextFieldEmp.getText());
+                    ce.setProducto(jTextFieldProd.getText());
+                    ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
                     if (contr_consumoempleado.InsertarConsumosEmpleados(ce)) {
-                        ce.setCantidad(Float.parseFloat(jTextField3.getText()));
-                        ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextField2.getText()));
+                        ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
+                        ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
                         if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                            JOptionPane.showMessageDialog(null, "Informe agregado.");
-                            MostrarDatos();
-                            Limpiar();
+                            JOptionPane.showMessageDialog(null, "Informe agregado");
+                            //MostrarDatos();
+                            //Limpiar();
+                            VolverListaConsumosEmpleados();
                         }
                     }
                 } else {
@@ -1818,76 +1686,67 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    public static com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
+    private javax.swing.JButton jButtonAceptarInforme;
+    public static javax.swing.JButton jButtonAgregar;
+    private javax.swing.JButton jButtonAgregarEmp;
+    private javax.swing.JButton jButtonAgregarProd;
+    private javax.swing.JButton jButtonBuscarEmp;
+    private javax.swing.JButton jButtonBuscarProd;
+    public static javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonCancelarEmp;
+    private javax.swing.JButton jButtonCancelarProd;
+    public static javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonSeleccionarEmpleado;
+    private javax.swing.JButton jButtonSeleccionarProductos;
     public static com.toedter.calendar.JDateChooser jDateChooser4;
     private com.toedter.calendar.JDateChooser jDateChooser5;
     private com.toedter.calendar.JDateChooser jDateChooser6;
+    public static com.toedter.calendar.JDateChooser jDateFecha;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLabel jLabelCantidad;
+    private javax.swing.JLabel jLabelEmpleado;
+    private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelNombreEmp;
+    private javax.swing.JLabel jLabelNombreProd;
+    private javax.swing.JLabel jLabelProd;
+    private javax.swing.JLabel jLabelProducto;
+    private javax.swing.JLabel jLabelProductoInforme;
     private javax.swing.JLayeredPane jLayeredPane2;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JList<String> jList3;
     private javax.swing.JList<String> jList4;
     private javax.swing.JList<String> jList5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTable jTableEmpleados;
+    private javax.swing.JTable jTableInforme;
+    private javax.swing.JTable jTableProductos;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    public static javax.swing.JTextField jTextFieldCantidad;
+    public static javax.swing.JTextField jTextFieldEmp;
+    private javax.swing.JTextField jTextFieldEmpleado;
+    public static javax.swing.JTextField jTextFieldProd;
+    private javax.swing.JTextField jTextFieldProducto;
+    private javax.swing.JList<String> listaEmpleado;
+    private javax.swing.JList<String> listaProducto;
     private javax.swing.JDialog vSeleccionarEmpleado;
     private javax.swing.JDialog vSeleccionarProducto;
     private javax.swing.JDialog vStocksProductos;

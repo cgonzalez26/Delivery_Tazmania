@@ -56,6 +56,8 @@ public class vReporte_VentasMes extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel2.setText("Año:");
 
+        jYearChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+
         jBotonCancelar.setBackground(new java.awt.Color(237, 124, 61));
         jBotonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonCancelar.setText("Cancelar");

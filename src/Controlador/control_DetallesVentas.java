@@ -3,6 +3,7 @@ package Controlador;
 import Modelo.DetallesVentas;
 import Vistas.vVentas_Productos;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.swing.JTextField;
 
 /**
@@ -50,18 +51,23 @@ public class control_DetallesVentas {
     }
 
     public Object[][] ObtenerDatosDetalleVentaDesdeListaVenta(String nrofactura) {
-        Object[][] datos = sql.DatosDetallesComprasVentas("select d.idproducto as idproducto, d.Cantidad as cantidad from detallesventas as d INNER JOIN ventas as v on d.idventa = v.idventa where v.NroFactura='" + nrofactura + "' and d.activo=1");
+        Object[][] datos = sql.DatosDetallesComprasVentasParaEliminar("select d.idproducto as idproducto, d.Cantidad as cantidad from detallesventas as d INNER JOIN ventas as v on d.idventa = v.idventa where v.NroFactura='" + nrofactura + "' and d.activo=1");
+        return datos;
+    }
+    
+    public Object[][] DatosDetalleDesdeListaVentasModificar(String nrofactura){
+        Object[][] datos = sql.DatosDetallesComprasVentasParaModificar("select p.descripcion, d.precio, d.cantidad, d.precio*d.cantidad as subtotal from productos as p INNER JOIN detallesventas as d on p.idproducto=d.idproducto INNER JOIN ventas as v on v.idventa = d.idventa where v.NroFactura='" + nrofactura + "' and d.activo=1");
         return datos;
     }
 
     public boolean RegistrarDetalleVenta(DetallesVentas dv) {
-        String idventa = Integer.toString(dv.getIdventa()), idproducto = Integer.toString(dv.getIdproducto()), Precio = Float.toString(dv.getPrecio()), Cantidad = Float.toString(dv.getCantidad()), fecha = ((JTextField) vVentas_Productos.jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String idventa = Integer.toString(dv.getIdventa()), idproducto = Integer.toString(dv.getIdproducto()), Precio = Float.toString(dv.getPrecio()), Cantidad = Float.toString(dv.getCantidad()), fecha = ((JTextField) vVentas_Productos.jDateFecha.getDateEditor().getUiComponent()).getText();
         String datos[] = {idventa, idproducto, Precio, Cantidad};
         return sql.insertar(datos, "insert into detallesventas (idventa,idproducto,Precio,Cantidad,activo,fechaVenta) values (?,?,?,?,1,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'))");
     }
 
     public boolean EditarDetalleVenta(DetallesVentas detalleventa) {
-        String precio = Float.toString(detalleventa.getPrecio()), cantidad = Float.toString(detalleventa.getCantidad()), id = Integer.toString(detalleventa.getIddetalleventa()), idventa = Integer.toString(detalleventa.getIdventa()), idprod = Integer.toString(detalleventa.getIdproducto()), fecha = ((JTextField) vVentas_Productos.jDateChooser1.getDateEditor().getUiComponent()).getText();
+        String precio = Float.toString(detalleventa.getPrecio()), cantidad = Float.toString(detalleventa.getCantidad()), id = Integer.toString(detalleventa.getIddetalleventa()), idventa = Integer.toString(detalleventa.getIdventa()), idprod = Integer.toString(detalleventa.getIdproducto()), fecha = ((JTextField) vVentas_Productos.jDateFecha.getDateEditor().getUiComponent()).getText();
         String datos[] = {idventa, idprod, precio, cantidad, id};
         return sql.editar(datos, "update detallesventas set idventa=?,idproducto=?,Precio=?,Cantidad=?,fechaVenta=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i') where iddetalleventa=?");
     }
@@ -132,6 +138,14 @@ public class control_DetallesVentas {
 
     public int ConsultarStockCeroMOD(String producto, float numtabla, float numtexto) {
         return sql.ConsultarStockCeroMOD(producto, numtabla, numtexto);
+    }
+    
+    public ArrayList<String> ObtenerIDDetalleDesdeListaVenta(String nrofactura){
+        return sql.DatosID("select iddetalleventa from detallesventas as d INNER JOIN ventas as v on d.idventa=v.idventa where v.NroFactura='" + nrofactura + "' and d.activo=1");
+    }
+    
+    public int CantidadTotalIDDetalles(String nrofactura){
+        return sql.CantidadID("select iddetalleventa from detallesventas as d INNER JOIN ventas as v on d.idventa=v.idventa where v.NroFactura='" + nrofactura + "' and d.activo=1");
     }
 
     public int ObtenerIDVenta() {

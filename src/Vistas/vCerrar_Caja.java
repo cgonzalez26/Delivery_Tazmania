@@ -65,8 +65,8 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
     public vCerrar_Caja() {
         initComponents();
         Date objDate = new Date(); // Sistema actual La fecha y la hora se asignan a objDate 
-        jDateChooser1.setDate(objDate);
-        jLabelUsuario.setText(Session.getLogin());
+        jDateFecha.setDate(objDate);
+        jLabelNomUsuario.setText(Session.getLogin());
         if (!jTextTotal.getText().isEmpty()) {
             calcularTotales();
         } else {
@@ -145,7 +145,7 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
         idturno = Session.getIdturno_abierto();
 
         if (!cc.existeCajaAbierta() || idcaja == 0) {
-            jLabelTurno.setVisible(false);
+            jLabeNomlTurno.setVisible(false);
             jLabelMensaje.setVisible(true);
             jLabelMensaje.setText("No hay Caja abierta");
             desabilitarCampos();
@@ -155,8 +155,8 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
             Caja_Turno caja_turno = cct.obtenerCajaTurno(caja.getIdCaja());
             //turno = ct.obtenerTurno(idturno);
             String dato = cct.ObtenerTurno();
-            jLabelTurno.setVisible(true);
-            jLabelTurno.setText(dato);
+            jLabeNomlTurno.setVisible(true);
+            jLabeNomlTurno.setText(dato);
             //jTextCajaChica.setText(Float.toString(caja.getMonto()));
             jLabelMensaje.setVisible(false);
         }
@@ -214,26 +214,26 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jTextCajaChica = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelCajaChica = new javax.swing.JLabel();
+        jLabelTotalVentas = new javax.swing.JLabel();
         jTextVentas = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelGastos = new javax.swing.JLabel();
         jTextGastos = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelEmpleados = new javax.swing.JLabel();
         jTextTotal = new javax.swing.JTextField();
         btnCerrarCaja = new javax.swing.JButton();
         jTextEmpleados = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabelTotal = new javax.swing.JLabel();
+        jLabelFecha = new javax.swing.JLabel();
         jLabelUsuario = new javax.swing.JLabel();
+        jDateFecha = new com.toedter.calendar.JDateChooser();
+        jLabelNomUsuario = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         jLabelMensaje = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabelTurno = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabeNomlTurno = new javax.swing.JLabel();
+        jLabelVentasLocal = new javax.swing.JLabel();
+        jLabelVentasOnline = new javax.swing.JLabel();
         jTextVentasLocal = new javax.swing.JTextField();
         jTextVentasOnline = new javax.swing.JTextField();
 
@@ -248,23 +248,23 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
         jTextCajaChica.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextCajaChica.setEnabled(false);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("Caja chica:");
+        jLabelCajaChica.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelCajaChica.setText("Caja chica:");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel2.setText("Total Ventas");
+        jLabelTotalVentas.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelTotalVentas.setText("Total Ventas");
 
         jTextVentas.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextVentas.setEnabled(false);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel3.setText("Gastos:");
+        jLabelGastos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelGastos.setText("Gastos:");
 
         jTextGastos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextGastos.setEnabled(false);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel4.setText("Empleados:");
+        jLabelEmpleados.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelEmpleados.setText("Empleados:");
 
         jTextTotal.setEditable(false);
         jTextTotal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -286,22 +286,23 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel5.setText("Total:");
+        jLabelTotal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelTotal.setText("Total:");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel6.setText("Fecha:");
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel7.setText("Usuario:");
-
-        jDateChooser1.setDateFormatString("dd/MM/yyyy HH: mm: ss");
-        jDateChooser1.setEnabled(false);
-        jDateChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelFecha.setText("Fecha:");
 
         jLabelUsuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelUsuario.setText("Usuario");
+        jLabelUsuario.setText("Usuario:");
 
+        jDateFecha.setDateFormatString("dd/MM/yyyy HH: mm: ss");
+        jDateFecha.setEnabled(false);
+        jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+
+        jLabelNomUsuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNomUsuario.setText("Usuario");
+
+        btnCancelar.setBackground(new java.awt.Color(240, 87, 49));
         btnCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -317,14 +318,14 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel8.setText("Turno:");
 
-        jLabelTurno.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelTurno.setText("jLabel9");
+        jLabeNomlTurno.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabeNomlTurno.setText("jLabel9");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel9.setText("Ventas Local:");
+        jLabelVentasLocal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelVentasLocal.setText("Ventas Local:");
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel10.setText("Ventas Online:");
+        jLabelVentasOnline.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelVentasOnline.setText("Ventas Online:");
 
         jTextVentasLocal.setEditable(false);
         jTextVentasLocal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -344,37 +345,37 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
+                            .addComponent(jLabelEmpleados)
+                            .addComponent(jLabelGastos)
+                            .addComponent(jLabelTotalVentas)
+                            .addComponent(jLabelCajaChica)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(jLabelTotal)
                                 .addGap(13, 13, 13))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
+                                .addComponent(jLabelFecha)
                                 .addComponent(jLabel8)))
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jDateFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 336, Short.MAX_VALUE)
-                                .addComponent(jLabel7)
+                                .addComponent(jLabelUsuario)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabelNomUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextCajaChica, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelTurno)
+                            .addComponent(jLabeNomlTurno)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel9)
+                                .addComponent(jLabelVentasLocal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextVentasLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel10)
+                                .addComponent(jLabelVentasOnline)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextVentasOnline, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
@@ -392,37 +393,37 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(26, 26, 26)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabelUsuario)))
-                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabelUsuario)
+                                .addComponent(jLabelNomUsuario)))
+                        .addComponent(jLabelFecha, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jDateFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(jLabelTurno, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabeNomlTurno, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCajaChica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextCajaChica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
+                    .addComponent(jLabelTotalVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelVentasLocal)
                     .addComponent(jTextVentasLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
+                    .addComponent(jLabelVentasOnline)
                     .addComponent(jTextVentasOnline, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabelMensaje)
@@ -476,20 +477,20 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     public static javax.swing.JButton btnCerrarCaja;
-    public static com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    public static com.toedter.calendar.JDateChooser jDateFecha;
+    public static javax.swing.JLabel jLabeNomlTurno;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelCajaChica;
+    private javax.swing.JLabel jLabelEmpleados;
+    private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelGastos;
     public static javax.swing.JLabel jLabelMensaje;
-    public static javax.swing.JLabel jLabelTurno;
+    private javax.swing.JLabel jLabelNomUsuario;
+    private javax.swing.JLabel jLabelTotal;
+    private javax.swing.JLabel jLabelTotalVentas;
     private javax.swing.JLabel jLabelUsuario;
+    private javax.swing.JLabel jLabelVentasLocal;
+    private javax.swing.JLabel jLabelVentasOnline;
     public static javax.swing.JTextField jTextCajaChica;
     public static javax.swing.JTextField jTextEmpleados;
     public static javax.swing.JTextField jTextGastos;

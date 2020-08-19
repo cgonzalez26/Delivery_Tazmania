@@ -34,7 +34,7 @@ public class control_Recetas {
     }
     
     public boolean EditarReceta(Recetas receta){
-        int fila = vGestion_Recetas.jTable2.getSelectedRow();
+        
         String id=Integer.toString(receta.getIdreceta()), idinsumo=Integer.toString(receta.getIdinsumo());
         String datos[]={idinsumo,id};
         return sql.editar(datos, "update recetas set idinsumo=? where idreceta=?");

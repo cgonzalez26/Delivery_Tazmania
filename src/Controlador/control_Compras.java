@@ -39,14 +39,14 @@ public class control_Compras {
     }
 
     public boolean EfectuarCompra(Compras compra) {
-        String monto = (Float.toString(compra.getMontototal())), fecha = ((JTextField) vCompras_Insumos.jDateChooser1.getDateEditor().getUiComponent()).getText(), idprov = Integer.toString(compra.getIdproveedor()), iduser = Integer.toString(compra.getIdusuario());
+        String monto = (Float.toString(compra.getMontototal())), fecha = ((JTextField) vCompras_Insumos.jDateFecha.getDateEditor().getUiComponent()).getText(), idprov = Integer.toString(compra.getIdproveedor()), iduser = Integer.toString(compra.getIdusuario());
         String codigo = sql.generaCodigo("compra");
         String datos[] = {idprov, iduser, monto, codigo};
         return sql.insertar(datos, "insert into compras (idproveedor,idusuario,FechaCompra,MontoTotal,NroCompra,activo) values (?,?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'),?,?,1)");
     }
 
     public boolean EditarCompra(Compras compra) {
-        String monto = (Float.toString(compra.getMontototal())), id = (Integer.toString(compra.getIdcompra())), fecha = ((JTextField) vCompras_Insumos.jDateChooser1.getDateEditor().getUiComponent()).getText(), idprov = Integer.toString(compra.getIdproveedor()), iduser = Integer.toString(compra.getIdusuario());
+        String monto = (Float.toString(compra.getMontototal())), id = (Integer.toString(compra.getIdcompra())), fecha = ((JTextField) vCompras_Insumos.jDateFecha.getDateEditor().getUiComponent()).getText(), idprov = Integer.toString(compra.getIdproveedor()), iduser = Integer.toString(compra.getIdusuario());
         String datos[] = {idprov, iduser, monto, id};
         return sql.editar(datos, "update compras set idproveedor=?,idusuario=?,FechaCompra=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'),MontoTotal=? where idcompra=?");
     }

@@ -96,7 +96,7 @@ public class control_Movimientos_Caja {
     public boolean ModificarMovimientoCaja(Movimientos_Caja movimientos_caja) {
         movimientos_caja.setIdcajaturno(Session.getIdcajaturno_abierta());
         movimientos_caja.setIdusuario(Session.getIdusuario());
-        String fecha = ((JTextField) vAbrir_Caja.jDateChooser1.getDateEditor()).getText();
+        String fecha = ((JTextField) vAbrir_Caja.jDateFecha.getDateEditor()).getText();
         String idmovcaja = Integer.toString(movimientos_caja.getIdmovimientocaja()), idusuario = Integer.toString(movimientos_caja.getIdusuario());
         String datos[] = {idusuario, Float.toString(movimientos_caja.getMonto()), idmovcaja};
         return sql.editar(datos, "UPDATE movimientos_caja SET idusuario=?,fecha_movimiento=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),monto=? where idmovimientocaja=?");

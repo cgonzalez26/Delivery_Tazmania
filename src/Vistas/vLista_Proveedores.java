@@ -131,13 +131,13 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
                 return false; //Disallow the editing of any cell
             }
         };
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonNuevo = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        jLabelNombreComercial = new javax.swing.JLabel();
+        jTextFieldProveedorBuscar = new javax.swing.JTextField();
+        jButtonBuscar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -168,51 +168,52 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTabla_Prov);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 118, 1125, 218));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 1090, 218));
 
-        jButton1.setBackground(new java.awt.Color(252, 249, 57));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setText("Nuevo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNuevo.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonNuevo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonNuevo.setText("Nuevo");
+        jButtonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonNuevoActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 100, 30));
+        getContentPane().add(jButtonNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 100, 30));
 
-        jButton2.setBackground(new java.awt.Color(252, 249, 57));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton2.setText("Eliminar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEliminar.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 360, 100, 30));
+        getContentPane().add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 360, 100, 30));
 
-        jButton3.setBackground(new java.awt.Color(252, 249, 57));
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton3.setText("Modificar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, 100, 30));
+        getContentPane().add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, 100, 30));
 
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Buscar Por", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel1.setText("Nombre Comercial");
+        jLabelNombreComercial.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombreComercial.setText("Nombre Comercial");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldProveedorBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton4.setText("Buscar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonBuscarActionPerformed(evt);
             }
         });
 
@@ -222,13 +223,13 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel1)
+                .addComponent(jLabelNombreComercial)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addComponent(jTextFieldProveedorBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(194, 194, 194))
         );
         jPanel1Layout.setVerticalGroup(
@@ -236,10 +237,10 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelNombreComercial)
+                    .addComponent(jTextFieldProveedorBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(jButtonBuscar)
                 .addGap(6, 6, 6))
         );
 
@@ -248,7 +249,7 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoActionPerformed
         proveedor = new vGestion_Proveedores();
         proveedor.jBotonAgre_Prov2.setEnabled(true);
         proveedor.jBotonModificar_Prov.setEnabled(false);
@@ -256,9 +257,9 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
         proveedor.setVisible(true);
         proveedor.toFront();
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonNuevoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         int seleccionado = jTabla_Prov.getSelectedRow();
         if (seleccionado == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
@@ -275,9 +276,9 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
                 LimpiarSeleccion();
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         int seleccionado = jTabla_Prov.getSelectedRow();
         if (seleccionado == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
@@ -301,17 +302,17 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
             proveedor.idprov = id;
             dispose();
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccion();
-        jTextField1.setText("");
+        jTextFieldProveedorBuscar.setText("");
         Mostrar();
     }//GEN-LAST:event_formMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (!jTextField1.getText().isEmpty()) {
-            datostabla = prov.MostrarDatosBusqueda(jTextField1.getText());
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        if (!jTextFieldProveedorBuscar.getText().isEmpty()) {
+            datostabla = prov.MostrarDatosBusqueda(jTextFieldProveedorBuscar.getText());
             if (datostabla.length != 0) {
                 String[] columnas = {"IDPROV", "ID TIPODOC", "TIPO DOC", "NRODOC", "NOMBRE", "APELLIDO", "NOMBRE COMERCIAL", "DIRECCION", "TELEFONO"};
                 datos = new DefaultTableModel(datostabla, columnas);
@@ -325,18 +326,18 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar el campo");
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonNuevo;
+    private javax.swing.JLabel jLabelNombreComercial;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTabla_Prov;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldProveedorBuscar;
     // End of variables declaration//GEN-END:variables
 }

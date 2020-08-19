@@ -39,10 +39,10 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jTextDescripcion_Egresos" alignment="0" min="-2" pref="502" max="-2" attributes="0"/>
-                  <Component id="jEtiqStock_Insumos3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelConcepto" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelMensaje" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -60,15 +60,19 @@
                       </Group>
                   </Group>
               </Group>
+<<<<<<< HEAD
               <EmptySpace pref="29" max="32767" attributes="0"/>
+=======
+              <EmptySpace pref="27" max="32767" attributes="0"/>
+>>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jBotonAgregar_Egresos" min="-2" pref="80" max="-2" attributes="0"/>
+              <Component id="jBotonAgregar_Egresos" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-              <Component id="jBotonModif_Egresos" min="-2" pref="90" max="-2" attributes="0"/>
+              <Component id="jBotonModif_Egresos" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-              <Component id="jBotonCancelar" min="-2" pref="91" max="-2" attributes="0"/>
+              <Component id="jBotonCancelar" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -77,7 +81,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jEtiqStock_Insumos3" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabelConcepto" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
               <Component id="jTextDescripcion_Egresos" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
@@ -103,9 +107,9 @@
               <Component id="jLabelMensaje" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jBotonAgregar_Egresos" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBotonModif_Egresos" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBotonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBotonAgregar_Egresos" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jBotonModif_Egresos" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jBotonCancelar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
           </Group>
@@ -232,7 +236,7 @@
         <Property name="text" type="java.lang.String" value="(*) Fecha:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jEtiqStock_Insumos3">
+    <Component class="javax.swing.JLabel" name="jLabelConcepto">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="13" style="0"/>

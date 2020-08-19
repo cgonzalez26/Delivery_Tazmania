@@ -29,20 +29,20 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
     public void ComboTiposEmpleados() {
         Object[] tipoempleado = con.combox("tiposempleados", "descripcion");
         for (Object dato : tipoempleado) {
-            jComboBox1.addItem((String) dato);
+            jComboBoxTipoEmpleado.addItem((String) dato);
         }
     }
 
     public void EliminarItemsVaciosTipoEmpleado() {
-        for (int i = 0; i < jComboBox1.getItemCount(); i++) {
-            if (jComboBox1.getItemAt(i) == null) {
-                jComboBox1.removeItemAt(i);
+        for (int i = 0; i < jComboBoxTipoEmpleado.getItemCount(); i++) {
+            if (jComboBoxTipoEmpleado.getItemAt(i) == null) {
+                jComboBoxTipoEmpleado.removeItemAt(i);
             }
         }
     }
 
     public void Cerrar() {
-        if (!jComboBox1.getSelectedItem().equals("(*) Seleccionar Tipo Empleado..") || !jTextField1.getText().trim().isEmpty() || !jTextField2.getText().trim().isEmpty() || !jTextField3.getText().trim().isEmpty() || !jTextField4.getText().trim().isEmpty()) {
+        if (!jComboBoxTipoEmpleado.getSelectedItem().equals("(*) Seleccionar Tipo Empleado..") || !jTextFieldNroDocumento.getText().trim().isEmpty() || !jTextFieldNombre.getText().trim().isEmpty() || !jTextFieldApellido.getText().trim().isEmpty() || !jTextFieldDomicilio.getText().trim().isEmpty()) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -58,21 +58,21 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jLabelNroDocumento = new javax.swing.JLabel();
+        jTextFieldNroDocumento = new javax.swing.JTextField();
+        jLabelNombre = new javax.swing.JLabel();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jLabelApellido = new javax.swing.JLabel();
+        jTextFieldApellido = new javax.swing.JTextField();
+        jLabelDomicilio = new javax.swing.JLabel();
+        jTextFieldDomicilio = new javax.swing.JTextField();
+        jLabelTelefono = new javax.swing.JLabel();
+        jTextFieldTelefono = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxTipoEmpleado = new javax.swing.JComboBox<>();
         jBotonCancelar = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        jLabelTipoEmpleado = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -99,45 +99,45 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel3.setText("Nro Documento:");
+        jLabelNroDocumento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNroDocumento.setText("Nro Documento:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldNroDocumento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldNroDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
+                jTextFieldNroDocumentoKeyTyped(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel4.setText("(*) Nombres:");
+        jLabelNombre.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombre.setText("(*) Nombres:");
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldNombre.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField2KeyTyped(evt);
+                jTextFieldNombreKeyTyped(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel5.setText("Apellidos:");
+        jLabelApellido.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelApellido.setText("Apellidos:");
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldApellido.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldApellido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField3KeyTyped(evt);
+                jTextFieldApellidoKeyTyped(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel6.setText("Domicilio:");
+        jLabelDomicilio.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelDomicilio.setText("Domicilio:");
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldDomicilio.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel7.setText("Teléfono:");
+        jLabelTelefono.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelTelefono.setText("Teléfono:");
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldTelefono.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(252, 249, 57));
         jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -160,8 +160,8 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(*) Seleccionar Tipo.." }));
+        jComboBoxTipoEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jComboBoxTipoEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(*) Seleccionar Tipo.." }));
 
         jBotonCancelar.setBackground(new java.awt.Color(237, 124, 61));
         jBotonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -172,8 +172,8 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel8.setText("Tipo Empleado:");
+        jLabelTipoEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelTipoEmpleado.setText("Tipo Empleado:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,34 +183,34 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(111, 111, 111)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(65, 65, 65)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68)
-                        .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabelNroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldNroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(41, 41, 41)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(41, 41, 41)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -218,34 +218,34 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelNroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNroDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jLabelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBotonCancelar))
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -253,30 +253,30 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (jButton1.getText().equals("Agregar")) {
-            if (!jTextField2.getText().trim().equals("") && !jComboBox1.getSelectedItem().equals("(*) Seleccionar Tipo Empleado..")) {
-                if (jTextField1.getText().trim().length() <= 10) {
-                    e.setIdtipoempleado(empleado.ObtenerIDTipoEmpleado((String) jComboBox1.getSelectedItem()));
+            if (!jTextFieldNombre.getText().trim().equals("") && !jComboBoxTipoEmpleado.getSelectedItem().equals("(*) Seleccionar Tipo Empleado..")) {
+                if (jTextFieldNroDocumento.getText().trim().length() <= 10) {
+                    e.setIdtipoempleado(empleado.ObtenerIDTipoEmpleado((String) jComboBoxTipoEmpleado.getSelectedItem()));
                     e.setIdtipodocumento(1);
-                    if (jTextField1.getText().trim().equals("")) {
+                    if (jTextFieldNroDocumento.getText().trim().equals("")) {
                         e.setNroDocumento("-");
                     } else {
-                        e.setNroDocumento(jTextField1.getText());
+                        e.setNroDocumento(jTextFieldNroDocumento.getText());
                     }
-                    e.setNombre(jTextField2.getText());
-                    if (!jTextField3.getText().equals("")) {
-                        e.setApellido(jTextField3.getText());
+                    e.setNombre(jTextFieldNombre.getText());
+                    if (!jTextFieldApellido.getText().equals("")) {
+                        e.setApellido(jTextFieldApellido.getText());
                     } else {
                         e.setApellido("-");
                     }
-                    if (jTextField4.getText().trim().isEmpty()) {
+                    if (jTextFieldDomicilio.getText().trim().isEmpty()) {
                         e.setDireccion("-");
                     } else {
-                        e.setDireccion(jTextField4.getText());
+                        e.setDireccion(jTextFieldDomicilio.getText());
                     }
-                    if (jTextField5.getText().trim().isEmpty()) {
+                    if (jTextFieldTelefono.getText().trim().isEmpty()) {
                         e.setTelefono("-");
                     } else {
-                        e.setTelefono(jTextField5.getText());
+                        e.setTelefono(jTextFieldTelefono.getText());
                     }
                     if (empleado.InsertarEmpledos(e)) {
                         JOptionPane.showMessageDialog(null, "Nuevo empleado agregado");
@@ -304,32 +304,32 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (!jTextField2.getText().trim().equals("") && !jComboBox1.getSelectedItem().equals("(*) Seleccionar Tipo Empleado..")) {
-            if (jTextField1.getText().trim().length() <= 10) {
+        if (!jTextFieldNombre.getText().trim().equals("") && !jComboBoxTipoEmpleado.getSelectedItem().equals("(*) Seleccionar Tipo Empleado..")) {
+            if (jTextFieldNroDocumento.getText().trim().length() <= 10) {
                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    e.setIdtipoempleado(empleado.ObtenerIDTipoEmpleado((String) jComboBox1.getSelectedItem()));
+                    e.setIdtipoempleado(empleado.ObtenerIDTipoEmpleado((String) jComboBoxTipoEmpleado.getSelectedItem()));
                     e.setIdtipodocumento(1);
-                    if (jTextField1.getText().trim().equals("")) {
+                    if (jTextFieldNroDocumento.getText().trim().equals("")) {
                         e.setNroDocumento("-");
                     } else {
-                        e.setNroDocumento(jTextField1.getText());
+                        e.setNroDocumento(jTextFieldNroDocumento.getText());
                     }
-                    e.setNombre(jTextField2.getText());
-                    if (!jTextField3.getText().equals("")) {
-                        e.setApellido(jTextField3.getText());
+                    e.setNombre(jTextFieldNombre.getText());
+                    if (!jTextFieldApellido.getText().equals("")) {
+                        e.setApellido(jTextFieldApellido.getText());
                     } else {
                         e.setApellido("-");
                     }
-                    if (jTextField4.getText().trim().isEmpty()) {
+                    if (jTextFieldDomicilio.getText().trim().isEmpty()) {
                         e.setDireccion("-");
                     } else {
-                        e.setDireccion(jTextField4.getText());
+                        e.setDireccion(jTextFieldDomicilio.getText());
                     }
-                    if (jTextField5.getText().trim().isEmpty()) {
+                    if (jTextFieldTelefono.getText().trim().isEmpty()) {
                         e.setTelefono("-");
                     } else {
-                        e.setTelefono(jTextField5.getText());
+                        e.setTelefono(jTextFieldTelefono.getText());
                     }
                     e.setIdempleados(Integer.parseInt(id));
                     if (empleado.EditarEmpleados(e)) {
@@ -362,7 +362,7 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_formInternalFrameClosing
 
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    private void jTextFieldNroDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNroDocumentoKeyTyped
         char[] p = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', KeyEvent.VK_BACK_SPACE};
         int b = 0;
         for (int i = 0; i <= 11; i++) {
@@ -374,21 +374,21 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_jTextField1KeyTyped
+    }//GEN-LAST:event_jTextFieldNroDocumentoKeyTyped
 
-    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+    private void jTextFieldNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreKeyTyped
         if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_jTextField2KeyTyped
+    }//GEN-LAST:event_jTextFieldNombreKeyTyped
 
-    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+    private void jTextFieldApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldApellidoKeyTyped
         if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-    }//GEN-LAST:event_jTextField3KeyTyped
+    }//GEN-LAST:event_jTextFieldApellidoKeyTyped
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
         // TODO add your handling code here:
@@ -400,17 +400,17 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
     public static javax.swing.JButton jBotonCancelar;
     public static javax.swing.JButton jButton1;
     public static javax.swing.JButton jButton2;
-    public static javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    public static javax.swing.JTextField jTextField1;
-    public static javax.swing.JTextField jTextField2;
-    public static javax.swing.JTextField jTextField3;
-    public static javax.swing.JTextField jTextField4;
-    public static javax.swing.JTextField jTextField5;
+    public static javax.swing.JComboBox<String> jComboBoxTipoEmpleado;
+    private javax.swing.JLabel jLabelApellido;
+    private javax.swing.JLabel jLabelDomicilio;
+    private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelNroDocumento;
+    private javax.swing.JLabel jLabelTelefono;
+    private javax.swing.JLabel jLabelTipoEmpleado;
+    public static javax.swing.JTextField jTextFieldApellido;
+    public static javax.swing.JTextField jTextFieldDomicilio;
+    public static javax.swing.JTextField jTextFieldNombre;
+    public static javax.swing.JTextField jTextFieldNroDocumento;
+    public static javax.swing.JTextField jTextFieldTelefono;
     // End of variables declaration//GEN-END:variables
 }

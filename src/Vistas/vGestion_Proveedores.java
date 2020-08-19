@@ -200,11 +200,11 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
                         .addComponent(jTextNomCom_Prov)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(92, 92, 92)
-                            .addComponent(jBotonAgre_Prov2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBotonAgre_Prov2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(79, 79, 79)
-                            .addComponent(jBotonModificar_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBotonModificar_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(74, 74, 74)
-                            .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -238,13 +238,11 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
                 .addComponent(jTextDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBotonAgre_Prov2)
-                    .addComponent(jBotonModificar_Prov)
-                    .addComponent(jBotonCancelar))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addComponent(jBotonAgre_Prov2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBotonModificar_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
-
-        jEtiqNumDoc_Prov.getAccessibleContext().setAccessibleName("Nro Documento:");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
