@@ -140,7 +140,7 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
         jTableProductos.getSelectionModel().clearSelection();
     }
 
-    public void MostrarRecetasActivas() {
+    /*public void MostrarRecetasActivas() {
         tabla.descripcion = desc;
         recetas = tabla.ConsultarInsumos();
         vGestion_Recetas.jTableInsumosRegistrados.setModel(recetas);
@@ -151,7 +151,7 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
         vGestion_Recetas.jTableInsumosRegistrados.getColumnModel().getColumn(0).setMaxWidth(0);
         vGestion_Recetas.jTableInsumosRegistrados.getColumnModel().getColumn(0).setMinWidth(0);
         vGestion_Recetas.jTableInsumosRegistrados.getColumnModel().getColumn(0).setPreferredWidth(0);
-    }
+    }*/
 
     public void VolverVentanaProductos() {
         ventanaproducto = new vGestion_Productos();
@@ -417,8 +417,8 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
             vGestion_Recetas receta = new vGestion_Recetas();
-            desc = jTableProductos.getValueAt(seleccionado, 3).toString();
-            MostrarRecetasActivas();
+            //desc = jTableProductos.getValueAt(seleccionado, 3).toString();
+            //MostrarRecetasActivas();
             vGestion_Recetas.jLabelNombreProductoElegido.setText(jTableProductos.getValueAt(seleccionado, 3).toString());
             vMenuPrincipal.jDesktopPane1.add(receta);
             receta.setVisible(true);
