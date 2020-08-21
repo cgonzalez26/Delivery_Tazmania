@@ -12,14 +12,6 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/E:/Proyectos/Delivey_Tazmania/src/Vistas/vLista_Insumos.java</file>
-            <file>file:/E:/Proyectos/Delivey_Tazmania/src/Vistas/vCompras_Insumos.java</file>
-            <file>file:/E:/Proyectos/Delivey_Tazmania/src/Vistas/vMenuPrincipal.java</file>
-            <file>file:/E:/Proyectos/Delivey_Tazmania/src/Controlador/control_existencias.java</file>
-            <file>file:/E:/Proyectos/Delivey_Tazmania/src/Vistas/vLista_Asistencias.java</file>
-            <file>file:/E:/Proyectos/Delivey_Tazmania/src/Vistas/vGestion_Asistencias.java</file>
-=======
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vReportes_Anio.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vLista_Recetas.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vVentas_Productos.java</file>
@@ -80,7 +72,6 @@
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vLista_Productos.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Compras.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Cajas.java</file>
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
         </group>
     </open-files>
 </project-private>

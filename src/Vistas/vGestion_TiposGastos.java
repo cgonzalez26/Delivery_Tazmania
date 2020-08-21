@@ -17,22 +17,20 @@ import javax.swing.table.DefaultTableModel;
  * @author Colo-PC
  */
 public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
-    
+
     String id;
     control_TiposGastos tipogasto = new control_TiposGastos();
     TiposGastos tg = new TiposGastos();
     DefaultTableModel datos;
-    
+
     public vGestion_TiposGastos() {
         initComponents();
         Mostrar();
-        
+
         jTableTiposGastos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     jButtonAgregar.setEnabled(false);
-                    jButtonModificar.setText("Cancelar");
-                    jButtonEliminar.setText("Modificar");
                     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                     int fila = jTableTiposGastos.rowAtPoint(e.getPoint());
                     id = (jTableTiposGastos.getValueAt(fila, 0).toString());
@@ -41,12 +39,12 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
             }
         });
     }
-    
+
     public void LimpiarSeleccion() {
         jTableTiposGastos.clearSelection();
         jTableTiposGastos.getSelectionModel().clearSelection();
     }
-    
+
     public void Mostrar() {
         String[] columnas = {"ID TIPOGASTO", "DESCRIPCION"};
         Object[][] datostabla = tipogasto.MostrarDatos();
@@ -55,13 +53,13 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
         EliminarFilasVacias();
         ocultar_columnas();
     }
-    
+
     public void ocultar_columnas() {
         jTableTiposGastos.getColumnModel().getColumn(0).setMaxWidth(0);
         jTableTiposGastos.getColumnModel().getColumn(0).setMinWidth(0);
         jTableTiposGastos.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
-    
+
     public void EliminarFilasVacias() {
         if (jTableTiposGastos.getRowCount() != 0) {
             for (int columna = 0; columna < jTableTiposGastos.getColumnCount(); columna++) {
@@ -73,7 +71,7 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -89,6 +87,7 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
         jButtonAgregar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -161,12 +160,21 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonEliminar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonEliminar.setBackground(new java.awt.Color(240, 87, 49));
         jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEliminarActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelar.setBackground(new java.awt.Color(240, 87, 49));
+        jButtonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
             }
         });
 
@@ -177,18 +185,20 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelTiposGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldTiposGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
                         .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
-                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldTiposGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelTiposGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
@@ -197,7 +207,7 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(33, Short.MAX_VALUE)
+                        .addContainerGap(35, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
@@ -208,8 +218,9 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                            .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -229,50 +240,17 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        if (jButtonModificar.getText().equals("Modificar")) {
-            int s = jTableTiposGastos.getSelectedRow();
-            if (s == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                jButtonAgregar.setEnabled(false);
-                jButtonModificar.setText("Cancelar");
-                jButtonEliminar.setText("Modificar");
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                id = (jTableTiposGastos.getValueAt(s, 0).toString());
-                jTextFieldTiposGastos.setText(jTableTiposGastos.getValueAt(s, 1).toString());
-            }
+        int s = jTableTiposGastos.getSelectedRow();
+        if (s == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                jButtonAgregar.setEnabled(true);
-                jButtonModificar.setText("Modificar");
-                jButtonEliminar.setText("Eliminar");
-                jTextFieldTiposGastos.setText("");
-                LimpiarSeleccion();
-                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            }
+            jButtonAgregar.setEnabled(false);
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            id = (jTableTiposGastos.getValueAt(s, 0).toString());
+            jTextFieldTiposGastos.setText(jTableTiposGastos.getValueAt(s, 1).toString());
         }
-    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-        if (jButtonEliminar.getText().equals("Eliminar")) {
-            int seleccionado = jTableTiposGastos.getSelectedRow();
-            if (seleccionado == -1) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
-            } else {
-                int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    tg.setIdtipogasto(Integer.parseInt(jTableTiposGastos.getValueAt(seleccionado, 0).toString()));
-                    if (tipogasto.EliminarTiposGastos(tg)) {
-                        JOptionPane.showMessageDialog(null, "Eliminado");
-                        Mostrar();
-                        EliminarFilasVacias();
-                    }
-                } else {
-                    LimpiarSeleccion();
-                }
-            }
-        } else {
+        if (!jButtonAgregar.isEnabled()) {
             if (!jTextFieldTiposGastos.getText().trim().equals("")) {
                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
@@ -282,8 +260,6 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(null, "Modificado");
                         Mostrar();
                         jButtonAgregar.setEnabled(true);
-                        jButtonModificar.setText("Modificar");
-                        jButtonEliminar.setText("Eliminar");
                         jTextFieldTiposGastos.setText("");
                         LimpiarSeleccion();
                         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -293,10 +269,29 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Debes completar el campo obligatorio");
             }
         }
+    }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        int seleccionado = jTableTiposGastos.getSelectedRow();
+        if (seleccionado == -1) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+        } else {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                tg.setIdtipogasto(Integer.parseInt(jTableTiposGastos.getValueAt(seleccionado, 0).toString()));
+                if (tipogasto.EliminarTiposGastos(tg)) {
+                    JOptionPane.showMessageDialog(null, "Eliminado");
+                    Mostrar();
+                    EliminarFilasVacias();
+                }
+            } else {
+                LimpiarSeleccion();
+            }
+        }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jButtonModificar.getText().equals("Cancelar")) {
+        if (!jButtonAgregar.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -326,9 +321,20 @@ public final class vGestion_TiposGastos extends javax.swing.JInternalFrame {
         LimpiarSeleccion();
     }//GEN-LAST:event_formMouseClicked
 
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            jButtonAgregar.setEnabled(true);
+            jTextFieldTiposGastos.setText("");
+            LimpiarSeleccion();
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        }
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JLabel jLabelTiposGastos;

@@ -440,7 +440,7 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
                 jButtonCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 490, 100, 30));
+        getContentPane().add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 510, 100, 30));
 
         jButtonRegistrarReceta.setBackground(new java.awt.Color(252, 249, 57));
         jButtonRegistrarReceta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -450,7 +450,7 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
                 jButtonRegistrarRecetaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonRegistrarReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 120, 30));
+        getContentPane().add(jButtonRegistrarReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 120, 30));
 
         jButtonModificarReceta.setBackground(new java.awt.Color(252, 249, 57));
         jButtonModificarReceta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -460,7 +460,7 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
                 jButtonModificarRecetaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonModificarReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 130, 30));
+        getContentPane().add(jButtonModificarReceta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 130, 30));
 
         jButton1.setBackground(new java.awt.Color(252, 249, 57));
         jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -470,7 +470,7 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 490, 100, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 510, 100, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -674,7 +674,7 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonBuscarInsumo;
     public static javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonCancelarBuscarInsumo;
-    private javax.swing.JButton jButtonEliminarInsumoElegido;
+    public static javax.swing.JButton jButtonEliminarInsumoElegido;
     private javax.swing.JButton jButtonModificarInsumosElegido;
     public static javax.swing.JButton jButtonModificarReceta;
     public static javax.swing.JButton jButtonRegistrarReceta;

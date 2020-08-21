@@ -22,6 +22,30 @@ public final class vLista_Recetas extends javax.swing.JInternalFrame {
     public vLista_Recetas() {
         initComponents();
         MostrarRecetas();
+
+        jTableInsumosRegistrados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int j = jTableInsumosRegistrados.rowAtPoint(e.getPoint());
+                    if (ventanareceta == null || ventanareceta.isClosed()) {
+                        ventanareceta = new vGestion_Recetas();
+                        vMenuPrincipal.jDesktopPane1.add(ventanareceta);
+                        ventanareceta.setVisible(true);
+                        ventanareceta.toFront();
+                    }
+                    vGestion_Recetas.jButtonRegistrarReceta.setEnabled(false);
+                    vGestion_Recetas.jButtonEliminarInsumoElegido.setVisible(false);
+                    id = jTableInsumosRegistrados.getValueAt(j, 0).toString();
+                    ventanareceta.id = id;
+                    Object datos[] = new Object[jTableInsumosRegistrados.getRowCount()];
+                    for (int i = 0; i < jTableInsumosRegistrados.getRowCount(); i++) {
+                        datos[i] = jTableInsumosRegistrados.getValueAt(i, 0).toString();
+                        ventanareceta.modelo1.addRow(datos);
+                    }
+                    dispose();
+                }
+            }
+        });
     }
 
     public void MostrarRecetas() {
@@ -191,7 +215,7 @@ public final class vLista_Recetas extends javax.swing.JInternalFrame {
                         .addComponent(jButtonModificarInsumosRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(75, 75, 75)
                         .addComponent(jButtonEliminarInsumoRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(100, Short.MAX_VALUE))
+                        .addContainerGap(113, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -210,17 +234,18 @@ public final class vLista_Recetas extends javax.swing.JInternalFrame {
         if (j == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
-            if(ventanareceta == null || ventanareceta.isClosed()){
+            if (ventanareceta == null || ventanareceta.isClosed()) {
                 ventanareceta = new vGestion_Recetas();
                 vMenuPrincipal.jDesktopPane1.add(ventanareceta);
                 ventanareceta.setVisible(true);
                 ventanareceta.toFront();
             }
             vGestion_Recetas.jButtonRegistrarReceta.setEnabled(false);
+            vGestion_Recetas.jButtonEliminarInsumoElegido.setVisible(false);
             id = jTableInsumosRegistrados.getValueAt(j, 0).toString();
             ventanareceta.id = id;
             Object datos[] = new Object[jTableInsumosRegistrados.getRowCount()];
-            for(int i =0; i < jTableInsumosRegistrados.getRowCount(); i++){
+            for (int i = 0; i < jTableInsumosRegistrados.getRowCount(); i++) {
                 datos[i] = jTableInsumosRegistrados.getValueAt(i, 0).toString();
                 ventanareceta.modelo1.addRow(datos);
             }
@@ -228,7 +253,7 @@ public final class vLista_Recetas extends javax.swing.JInternalFrame {
             //jTextFieldInsumo.setText(jTableInsumosRegistrados.getValueAt(j, 1).toString());
             //jButtonAgregarInsumoRegistrar.setText("Modificar");
             //jButtonModificarInsumosRegistrar.setText("Cancelar");
-            
+
         }
         /*else {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);

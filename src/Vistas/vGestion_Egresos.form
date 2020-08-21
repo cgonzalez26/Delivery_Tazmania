@@ -60,11 +60,7 @@
                       </Group>
                   </Group>
               </Group>
-<<<<<<< HEAD
-              <EmptySpace pref="29" max="32767" attributes="0"/>
-=======
-              <EmptySpace pref="27" max="32767" attributes="0"/>
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
+              <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>

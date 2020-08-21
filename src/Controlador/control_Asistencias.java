@@ -22,15 +22,9 @@ public class control_Asistencias {
     }
 
     public Object[][] MostrarDatos() {
-<<<<<<< HEAD
-        String[] columnas = {"idasistencia", "idempleado", "NroAsistencia", "Nombre", "descripcion", "sueldo", "fecha_asistencia"};
-        String desde = ((JTextField) vLista_Asistencias.jDateChooser2.getDateEditor().getUiComponent()).getText(), hasta = ((JTextField) vLista_Asistencias.jDateChooser3.getDateEditor().getUiComponent()).getText();
-        Object[][] datos = sql.GetTabla(columnas, "asistencias", "select a.idasistencia,e.idempleado,IFNULL(a.NroAsistencia,'') NroAsistencia,e.Nombre,IFNULL(a.descripcion,'') descripcion,IFNULL(a.sueldo,'') sueldo,date_format(a.fecha_asistencia,'%d/%m/%Y %H:%i') as fecha_asistencia from asistencias a INNER JOIN empleados e on a.idempleado=e.idempleado where date(a.fecha_asistencia) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and a.activo=1");
-=======
         String[] columnas = {"idasistencia", "idempleado", "NroAsistencia", "Nombre", "descripcion", "Sueldo", "fecha_asistencia"};
         String desde = ((JTextField) vLista_Asistencias.jDateFechaDesde.getDateEditor().getUiComponent()).getText(), hasta = ((JTextField) vLista_Asistencias.jDateFechaHasta.getDateEditor().getUiComponent()).getText();
         Object[][] datos = sql.GetTabla(columnas, "asistencias", "select a.idasistencia,e.idempleado,a.NroAsistencia,e.Nombre,a.descripcion,a.sueldo,date_format(a.fecha_asistencia,'%d/%m/%Y %H:%i') as fecha_asistencia from asistencias a INNER JOIN empleados e on a.idempleado=e.idempleado where date(a.fecha_asistencia) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and a.activo=1");
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
         return datos;
     }
 

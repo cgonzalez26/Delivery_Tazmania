@@ -26,9 +26,7 @@ public final class vGestion_TiposUsuarios extends javax.swing.JInternalFrame {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     int fila = jTableTiposUsuarios.rowAtPoint(e.getPoint());
-                    jButtonModificar.setText("Cancelar");
                     jButtonAgregar.setEnabled(false);
-                    jButtonEliminar.setText("Modificar");
                     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                     id = (jTableTiposUsuarios.getValueAt(fila, 0).toString());
                     jTextFieldTipoUsuario.setText(jTableTiposUsuarios.getValueAt(fila, 1).toString());
@@ -90,6 +88,7 @@ public final class vGestion_TiposUsuarios extends javax.swing.JInternalFrame {
         jLabelNombreTipoBuscar = new javax.swing.JLabel();
         jTextFieldNombreTipoBuscar = new javax.swing.JTextField();
         jButtonBuscarTipo = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -162,7 +161,7 @@ public final class vGestion_TiposUsuarios extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonEliminar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonEliminar.setBackground(new java.awt.Color(240, 87, 49));
         jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +201,7 @@ public final class vGestion_TiposUsuarios extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addComponent(jTextFieldNombreTipoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,6 +215,15 @@ public final class vGestion_TiposUsuarios extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButtonCancelar.setBackground(new java.awt.Color(240, 87, 49));
+        jButtonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -224,40 +232,47 @@ public final class vGestion_TiposUsuarios extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextFieldTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 18, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                                .addGap(64, 64, 64)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 72, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelTipoUsuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -277,50 +292,17 @@ public final class vGestion_TiposUsuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        if (jButtonModificar.getText().equals("Modificar")) {
-            int s = jTableTiposUsuarios.getSelectedRow();
-            if (s == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                jButtonModificar.setText("Cancelar");
-                jButtonAgregar.setEnabled(false);
-                jButtonEliminar.setText("Modificar");
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                id = (jTableTiposUsuarios.getValueAt(s, 0).toString());
-                jTextFieldTipoUsuario.setText(jTableTiposUsuarios.getValueAt(s, 1).toString());
-            }
+        int s = jTableTiposUsuarios.getSelectedRow();
+        if (s == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                jButtonAgregar.setEnabled(true);
-                jButtonModificar.setText("Modificar");
-                jButtonEliminar.setText("Eliminar");
-                jTextFieldTipoUsuario.setText("");
-                LimpiarSeleccion();
-                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            }
+            jButtonAgregar.setEnabled(false);
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            id = (jTableTiposUsuarios.getValueAt(s, 0).toString());
+            jTextFieldTipoUsuario.setText(jTableTiposUsuarios.getValueAt(s, 1).toString());
         }
-    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-        if (jButtonEliminar.getText().equals("Eliminar")) {
-            int seleccionar = jTableTiposUsuarios.getSelectedRow();
-            if (seleccionar == -1) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
-            } else {
-                int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    ti.setIdtipousuario(Integer.parseInt(jTableTiposUsuarios.getValueAt(seleccionar, 0).toString()));
-                    if (tipousuario.EliminarTiposInsumos(ti)) {
-                        JOptionPane.showMessageDialog(null, "Eliminado");
-                        Mostrar();
-                        EliminarFilasVacias();
-                    }
-                } else {
-                    LimpiarSeleccion();
-                }
-            }
-        } else {
+        if (!jButtonAgregar.isEnabled()) {
             if (!jTextFieldTipoUsuario.getText().trim().equals("")) {
                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
@@ -329,8 +311,6 @@ public final class vGestion_TiposUsuarios extends javax.swing.JInternalFrame {
                     if (tipousuario.EditarTiposUsuaris(ti)) {
                         JOptionPane.showMessageDialog(null, "Modificado");
                         jButtonAgregar.setEnabled(true);
-                        jButtonModificar.setText("Modificar");
-                        jButtonEliminar.setText("Eliminar");
                         jTextFieldTipoUsuario.setText("");
                         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                         LimpiarSeleccion();
@@ -339,10 +319,29 @@ public final class vGestion_TiposUsuarios extends javax.swing.JInternalFrame {
                 }
             }
         }
+    }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        int seleccionar = jTableTiposUsuarios.getSelectedRow();
+        if (seleccionar == -1) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+        } else {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                ti.setIdtipousuario(Integer.parseInt(jTableTiposUsuarios.getValueAt(seleccionar, 0).toString()));
+                if (tipousuario.EliminarTiposInsumos(ti)) {
+                    JOptionPane.showMessageDialog(null, "Eliminado");
+                    Mostrar();
+                    EliminarFilasVacias();
+                }
+            } else {
+                LimpiarSeleccion();
+            }
+        }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jButtonModificar.getText().equals("Cancelar")) {
+        if (!jButtonAgregar.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -391,10 +390,21 @@ public final class vGestion_TiposUsuarios extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonBuscarTipoActionPerformed
 
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            jButtonAgregar.setEnabled(true);
+            jTextFieldTipoUsuario.setText("");
+            LimpiarSeleccion();
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        }
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonBuscarTipo;
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JLabel jLabelNombreTipoBuscar;

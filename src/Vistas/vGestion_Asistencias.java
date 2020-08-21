@@ -38,26 +38,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
     DefaultListModel list;
     ArrayList<String> listemp;
     vLista_Asistencias lista = null;
-<<<<<<< HEAD
-    String idasistencia;
-
-    public vGestion_Asistencias() {
-        initComponents();       
-        MostrarEmpleados();
-        jList2.setVisible(false);
-        //((JTextField) jDateChooser1.getDateEditor().getUiComponent()).setEditable(false);
-
-        
-    }       
-
-    public void limpiar() {
-        txtEmpleado.setText("");
-        txtDescripcion.setText("");
-        ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).setText("");
-        txtSueldo.setText("");
-    }  
-    
-=======
 
     public vGestion_Asistencias() {
         initComponents();
@@ -78,7 +58,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         lista.setVisible(true);
         this.dispose();
     }
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
 
     public void MostrarEmpleados() {
         String[] columnas = {"NOMBRE EMPLEADOS", "ROL DE TRABAJO"};
@@ -86,20 +65,11 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         modelemp = new DefaultTableModel(datostabla, columnas);
         jTableEmpleados.setModel(modelemp);
         EliminarFilasVaciasEmpleados();
-<<<<<<< HEAD
-        AjustarTamañoFilasEmpleados();
-    }
-
-    public void ListasEmpleado() {
-        listemp = con.list("empleados", "Nombre", txtEmpleado.getText());
-        String substr = txtEmpleado.getText().toLowerCase();
-=======
     }
 
     public void ListasEmpleado() {
         listemp = con.list("empleados", "Nombre", jTextFieldEmpleado.getText());
         String substr = jTextFieldEmpleado.getText().toLowerCase();
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
         list = new DefaultListModel();
         listaEmpleados.setModel(list);
         list.removeAllElements();
@@ -110,43 +80,15 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                 String sublist = listemp.get(i).toLowerCase();
                 if (sublist.contains(substr)) {
                     list.addElement(listemp.get(i));
-<<<<<<< HEAD
-                    jList2.setVisible(true);
-                    if (txtEmpleado.getText().isEmpty()) {
-                        jList2.setVisible(false);
-=======
                     listaEmpleados.setVisible(true);
                     if (jTextFieldEmpleado.getText().isEmpty()) {
                         listaEmpleados.setVisible(false);
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
                     }
                 }
             }
         }
     }
 
-<<<<<<< HEAD
-    
-
-=======
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
-    public void AjustarTamañoFilasEmpleados() {
-        if (jTableEmpleados.getRowCount() != 0) {
-            for (int i = 0; i < jTableEmpleados.getRowCount(); i++) {
-                Font font = new Font("Segoe UI Semibold", 0, 13);
-                int emp = (int) font.getStringBounds(jTableEmpleados.getValueAt(i, 0).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                if (emp > jTableEmpleados.getColumnModel().getColumn(0).getPreferredWidth()) {
-                    jTableEmpleados.getColumnModel().getColumn(0).setPreferredWidth(emp);
-                }
-            }
-        }
-    }
-<<<<<<< HEAD
-   
-
-=======
-    
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
     public void EliminarFilasVaciasEmpleados() {
         if (jTableEmpleados.getRowCount() != 0) {
             int filas = jTableEmpleados.getRowCount();
@@ -160,11 +102,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
     }
 
     public void Cerrar() {
-<<<<<<< HEAD
-        if (!txtEmpleado.getText().trim().equals("") || !txtDescripcion.getText().trim().isEmpty() || !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().trim().isEmpty() || !txtSueldo.getText().trim().isEmpty()) {
-=======
         if (!jTextFieldEmpleado.getText().trim().equals("") || !jTextFieldDescripcion.getText().trim().isEmpty() || !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().trim().isEmpty() || !jTextFieldSueldo.getText().trim().isEmpty()) {
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -192,24 +130,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         jButtonAgregarEmpleado = new javax.swing.JButton();
         jButtonCancelarEmpleado = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-<<<<<<< HEAD
-        jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
-        jList2 = new javax.swing.JList<>();
-        jLabel2 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jLabel7 = new javax.swing.JLabel();
-        txtEmpleado = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        txtDescripcion = new javax.swing.JTextField();
-        btnAgregar = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        txtSueldo = new javax.swing.JTextField();
-        btnCancelar = new javax.swing.JButton();
-=======
         jLabelNombreEmpleado = new javax.swing.JLabel();
         jTextFieldBuscarEmpleado = new javax.swing.JTextField();
         jButtonBuscarEmpleado = new javax.swing.JButton();
@@ -226,7 +146,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         jLabelSueldo = new javax.swing.JLabel();
         jTextFieldSueldo = new javax.swing.JTextField();
         jButtonCancelar = new javax.swing.JButton();
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
 
         vSeleccionarEmpleado.setTitle("Seleccionar Nombre Empleado");
         java.awt.Image icono = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
@@ -380,26 +299,9 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-<<<<<<< HEAD
-        jList2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList2.setValueIsAdjusting(true);
-        jList2.setVisibleRowCount(0);
-        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList2MouseClicked(evt);
-            }
-        });
-        getContentPane().add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 250, 50));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabel2.setText("(*) Fecha:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 56, 19));
-=======
         jLabelFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelFecha.setText("(*) Fecha:");
         getContentPane().add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 56, 19));
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
 
         jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm");
         jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -409,18 +311,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         jLabelEmpleado.setText("(*) Empleado:");
         getContentPane().add(jLabelEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 170, 30));
 
-<<<<<<< HEAD
-        txtEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        txtEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtEmpleadoKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtEmpleadoKeyTyped(evt);
-            }
-        });
-        getContentPane().add(txtEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 250, 30));
-=======
         jTextFieldEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextFieldEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -431,7 +321,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jTextFieldEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 250, 30));
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
 
         jButtonSeleccionarEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
         jButtonSeleccionarEmpleados.addActionListener(new java.awt.event.ActionListener() {
@@ -439,9 +328,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                 jButtonSeleccionarEmpleadosActionPerformed(evt);
             }
         });
-<<<<<<< HEAD
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 38, 30));
-=======
         getContentPane().add(jButtonSeleccionarEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 38, 30));
 
         listaEmpleados.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -454,36 +340,11 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(listaEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 250, 0));
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
 
         jLabelDescripcion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelDescripcion.setText("(*) Descripción:");
         getContentPane().add(jLabelDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, 30));
 
-<<<<<<< HEAD
-        txtDescripcion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 300, 35));
-
-        btnAgregar.setBackground(new java.awt.Color(252, 249, 57));
-        btnAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 101, -1));
-
-        btnModificar.setBackground(new java.awt.Color(252, 249, 57));
-        btnModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        btnModificar.setText("Modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 101, -1));
-=======
         jTextFieldDescripcion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         getContentPane().add(jTextFieldDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 300, 35));
 
@@ -506,24 +367,13 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 100, 30));
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
 
         jLabelSueldo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelSueldo.setText("Sueldo:");
         getContentPane().add(jLabelSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, 21));
 
-<<<<<<< HEAD
-        txtSueldo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        txtSueldo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSueldoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 172, 35));
-=======
         jTextFieldSueldo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         getContentPane().add(jTextFieldSueldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 172, 35));
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
 
         jButtonCancelar.setBackground(new java.awt.Color(240, 87, 49));
         jButtonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -537,28 +387,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-<<<<<<< HEAD
-    
-    private void volverPrincipal(){
-        lista = new vLista_Asistencias();
-        vMenuPrincipal.jDesktopPane1.add(lista);
-        lista.setVisible(true);
-        this.dispose();
-    }
-    
-    private void agregarMovimientoCaja(){
-    }
-    
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        if (!txtEmpleado.getText().trim().equals("") && !txtDescripcion.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
-            if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                date = ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText();
-                if (txtSueldo.getText().equals("")) {
-                    int i = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                    if (i == 0) {
-                        a.setIdempleado(asistencia.ObtenerIDEmpleado(txtEmpleado.getText()));
-                        a.setDescripcion(txtDescripcion.getText());
-=======
 
     private void jButtonAgregarAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarAsistenciaActionPerformed
         if (!jTextFieldEmpleado.getText().trim().equals("") && !jTextFieldDescripcion.getText().trim().equals("") && !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().equals("")) {
@@ -569,7 +397,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                     if (i == 0) {
                         a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
                         a.setDescripcion(jTextFieldDescripcion.getText());
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
                         a.setSueldo((float) 0.0);
                         if (asistencia.InsertarAsistencias(a)) {
                             int idmovimiento = sql.obtenerUltimoId("asistencias", "idasistencia");
@@ -589,15 +416,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                             control_mc.InsertarMovimientosCaja(mc);
                             JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
                             //Mostrar();
-<<<<<<< HEAD
-                            //limpiar();
-                            volverPrincipal();
-                        }
-                    }
-                } else {
-                    String sueldo = txtSueldo.getText(), svalor = "", svalordec = "", svalordecdob = "";
-                    int cant = txtSueldo.getText().length();
-=======
                             VolverListaAsistencias();
                             //limpiar();
                         }
@@ -605,7 +423,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                 } else {
                     String sueldo = jTextFieldSueldo.getText(), svalor = "", svalordec = "", svalordecdob = "";
                     int cant = jTextFieldSueldo.getText().length();
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
                     switch (cant) {
                         case 1:
                             svalor = sueldo.substring(0, 1);
@@ -624,13 +441,8 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                     } else if (svalor.equals("0") || svalordec.equals("0.0") || svalordecdob.equals("0.00")) {
                         int j = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
                         if (j == 0) {
-<<<<<<< HEAD
-                            a.setIdempleado(asistencia.ObtenerIDEmpleado(txtEmpleado.getText()));
-                            a.setDescripcion(txtDescripcion.getText());
-=======
                             a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
                             a.setDescripcion(jTextFieldDescripcion.getText());
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
                             a.setSueldo((float) 0.0);
                             if (asistencia.InsertarAsistencias(a)) {
                                 int idmovimiento = sql.obtenerUltimoId("asistencias", "idasistencia");
@@ -649,16 +461,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                                 mc.setActivo(1);
                                 control_mc.InsertarMovimientosCaja(mc);
                                 JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
-<<<<<<< HEAD
-                                //Mostrar();
-                                //limpiar();
-                                volverPrincipal();
-                            }
-                        }
-                    } else {
-                        a.setIdempleado(asistencia.ObtenerIDEmpleado(txtEmpleado.getText()));
-                        a.setDescripcion(txtDescripcion.getText());
-=======
                                 VolverListaAsistencias();
                                 //Mostrar();
                                 //limpiar();
@@ -667,7 +469,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                     } else {
                         a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
                         a.setDescripcion(jTextFieldDescripcion.getText());
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
                         a.setSueldo(Float.parseFloat(sueldo));
                         if (asistencia.InsertarAsistencias(a)) {
                             int idmovimiento = sql.obtenerUltimoId("asistencias", "idasistencia");
@@ -686,15 +487,9 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                             mc.setActivo(1);
                             control_mc.InsertarMovimientosCaja(mc);
                             JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
-<<<<<<< HEAD
-                            //Mostrar();
-                            //impiar();
-                            volverPrincipal();
-=======
                             VolverListaAsistencias();
                             //Mostrar();
                             //limpiar();
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
                         }
                     }
                 }
@@ -704,44 +499,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
         }
-<<<<<<< HEAD
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-                 
-        //fecha = (String) (jTable1.getValueAt(s, 6));
-//        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-//        try {
-//            fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
-//
-//        } catch (ParseException ex) {
-//            Logger.getLogger(vListas_Compras.class
-//                    .getName()).log(Level.SEVERE, null, ex);
-//        }
-       if (!txtEmpleado.getText().trim().equals("(*) Seleccionar Empleado..") && !txtDescripcion.getText().trim().equals("") && !((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText().equals("")) {
-            if (jDateChooser1.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    a.setIdempleado(asistencia.ObtenerIDEmpleado(txtEmpleado.getText()));
-                    a.setDescripcion(txtDescripcion.getText());
-                    a.setIdasistencia(Integer.parseInt(id));
-                    //a.setFecha_asistencia(fechaseleccionada);
-                    if (asistencia.EditarAsistencias(a)) {
-                       volverPrincipal();
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
-        }      
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (btnModificar.isEnabled() && btnModificar.getText().equals("Cancelar")) {
-            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
-=======
     }//GEN-LAST:event_jButtonAgregarAsistenciaActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
@@ -883,7 +640,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         if (!jButtonAgregarAsistencia.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
             if (i == 0) {
                 dispose();
                 VolverListaAsistencias();
@@ -895,20 +651,12 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_formInternalFrameClosing
 
-<<<<<<< HEAD
-    private void txtEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpleadoKeyTyped
-=======
     private void jTextFieldEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldEmpleadoKeyTyped
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
         if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-<<<<<<< HEAD
-    }//GEN-LAST:event_txtEmpleadoKeyTyped
-=======
     }//GEN-LAST:event_jTextFieldEmpleadoKeyTyped
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
 
     private void jButtonAgregarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarEmpleadoActionPerformed
         if (jTableEmpleados.getRowCount() != 0) {
@@ -917,11 +665,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
             } else {
                 vSeleccionarEmpleado.dispose();
-<<<<<<< HEAD
-                txtEmpleado.setText(jTable2.getValueAt(i, 0).toString());
-=======
                 jTextFieldEmpleado.setText(jTableEmpleados.getValueAt(i, 0).toString());
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se han agregado dichos empleados todavia");
@@ -932,11 +676,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         int i = JOptionPane.showConfirmDialog(null, "Esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             vSeleccionarEmpleado.dispose();
-<<<<<<< HEAD
-            txtEmpleado.setText("");
-=======
             jTextFieldEmpleado.setText("");
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
         } else {
             vSeleccionarEmpleado.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
@@ -946,11 +686,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         int i = JOptionPane.showConfirmDialog(null, "Esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             vSeleccionarEmpleado.dispose();
-<<<<<<< HEAD
-            txtEmpleado.setText("");
-=======
             jTextFieldEmpleado.setText("");
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
         } else {
             vSeleccionarEmpleado.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
@@ -961,21 +697,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         vSeleccionarEmpleado.setLocationRelativeTo(this);
         vSeleccionarEmpleado.setModal(true);
         vSeleccionarEmpleado.setVisible(true);
-<<<<<<< HEAD
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        /*desde = ((JTextField) jDateChooser2.getDateEditor().getUiComponent()).getText();
-        hasta = ((JTextField) jDateChooser3.getDateEditor().getUiComponent()).getText();
-        LimpiarSeleccion();
-        desde = "";
-        hasta = "";
-        IniciarFechas();
-        Mostrar();*/
-    }//GEN-LAST:event_formMouseClicked
-=======
     }//GEN-LAST:event_jButtonSeleccionarEmpleadosActionPerformed
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
 
     private void vSeleccionarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarEmpleadoMouseClicked
         jTableEmpleados.clearSelection();
@@ -1003,36 +725,11 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
     private void listaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaEmpleadosMouseClicked
         int i = listaEmpleados.getSelectedIndex();
         if (i != -1) {
-<<<<<<< HEAD
-            txtEmpleado.setText(jList2.getSelectedValue());
-            jList2.setVisible(false);
-=======
             jTextFieldEmpleado.setText(listaEmpleados.getSelectedValue());
             listaEmpleados.setVisible(false);
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
         }
     }//GEN-LAST:event_listaEmpleadosMouseClicked
 
-<<<<<<< HEAD
-    private void txtEmpleadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpleadoKeyReleased
-        ListasEmpleado();
-    }//GEN-LAST:event_txtEmpleadoKeyReleased
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-        int i = JOptionPane.showConfirmDialog(null, "Desea cancelar la Operación?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (i == 0) {
-//            lista = new vLista_Asistencias();
-//            vMenuPrincipal.jDesktopPane1.add(lista);
-//            lista.setVisible(true);
-//            this.dispose();
-            volverPrincipal();
-        } else {
-            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        }
-        
-    }//GEN-LAST:event_btnCancelarActionPerformed
-=======
     private void jTextFieldEmpleadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldEmpleadoKeyReleased
         ListasEmpleado();
     }//GEN-LAST:event_jTextFieldEmpleadoKeyReleased
@@ -1050,36 +747,12 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
             Cerrar();
         }
     }//GEN-LAST:event_jButtonCancelarActionPerformed
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
 
     private void txtSueldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSueldoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSueldoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
-    public static javax.swing.JButton btnAgregar;
-    public static javax.swing.JButton btnCancelar;
-    public static javax.swing.JButton btnModificar;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
-    public static com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField4;
-    public static javax.swing.JTextField txtDescripcion;
-    public static javax.swing.JTextField txtEmpleado;
-    public static javax.swing.JTextField txtSueldo;
-=======
     public static javax.swing.JButton jButtonAgregarAsistencia;
     private javax.swing.JButton jButtonAgregarEmpleado;
     private javax.swing.JButton jButtonBuscarEmpleado;
@@ -1101,7 +774,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField jTextFieldEmpleado;
     public static javax.swing.JTextField jTextFieldSueldo;
     private javax.swing.JList<String> listaEmpleados;
->>>>>>> f25c1ec5655d6016f03093e02d829f2c0b67637a
     private javax.swing.JDialog vSeleccionarEmpleado;
     // End of variables declaration//GEN-END:variables
 }

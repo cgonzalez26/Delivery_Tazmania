@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vistas;
 
 import Controlador.control_TiposMovimientos;
@@ -15,22 +10,20 @@ import javax.swing.table.DefaultTableModel;
  * @author Colo-PC
  */
 public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalFrame {
-    
+
     String id;
     control_TiposMovimientos control_tmc = new control_TiposMovimientos();
     TiposMovimientos tm = new TiposMovimientos();
     DefaultTableModel datos;
-    
+
     public vGestion_TiposMovimientosCajas() {
         initComponents();
         Mostrar();
-        
+
         jTableTiposMovimientosCaja.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     btnAgregar.setEnabled(false);
-                    btnModificar.setText("Cancelar");
-                    btnEliminar.setText("Modificar");
                     int fila = jTableTiposMovimientosCaja.rowAtPoint(e.getPoint());
                     id = (jTableTiposMovimientosCaja.getValueAt(fila, 0).toString());
                     jTextFieldNombreTipoMovimiento.setText(jTableTiposMovimientosCaja.getValueAt(fila, 1).toString());
@@ -45,7 +38,7 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
             }
         });
     }
-    
+
     public void Mostrar() {
         String[] columnas = {"ID TIPOGASTO", "DESCRIPCION", "TIPO"};
         Object[][] datostabla = control_tmc.MostrarDatos();
@@ -54,7 +47,7 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
         EliminarFilasVacias();
         ocultar_columnas();
     }
-    
+
     public void EliminarFilasVacias() {
         if (jTableTiposMovimientosCaja.getRowCount() != 0) {
             for (int i = 0; i < jTableTiposMovimientosCaja.getColumnCount(); i++) {
@@ -66,18 +59,18 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
             }
         }
     }
-    
+
     public void ocultar_columnas() {
         jTableTiposMovimientosCaja.getColumnModel().getColumn(0).setMaxWidth(0);
         jTableTiposMovimientosCaja.getColumnModel().getColumn(0).setMinWidth(0);
         jTableTiposMovimientosCaja.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
-    
+
     public void limpiarseleccion() {
         jTableTiposMovimientosCaja.clearSelection();
         jTableTiposMovimientosCaja.getSelectionModel().clearSelection();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -99,7 +92,8 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
         jPanel1 = new javax.swing.JPanel();
         jLabelTipoMovimiento = new javax.swing.JLabel();
         jTextFieldNombreTipoBuscar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonBuscarMovimiento = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -167,7 +161,7 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
             }
         });
 
-        btnEliminar.setBackground(new java.awt.Color(252, 249, 57));
+        btnEliminar.setBackground(new java.awt.Color(240, 87, 49));
         btnEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -200,12 +194,12 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
 
         jTextFieldNombreTipoBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(252, 249, 57));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscarMovimiento.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonBuscarMovimiento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jButtonBuscarMovimiento.setText("Buscar");
+        jButtonBuscarMovimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonBuscarMovimientoActionPerformed(evt);
             }
         });
 
@@ -219,15 +213,14 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
                         .addContainerGap()
                         .addComponent(jTextFieldNombreTipoBuscar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addComponent(jLabelTipoMovimiento))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(69, 69, 69)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabelTipoMovimiento)
+                        .addGap(0, 156, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(jButtonBuscarMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,18 +230,37 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldNombreTipoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButtonBuscarMovimiento)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
+
+        jButtonCancelar.setBackground(new java.awt.Color(240, 87, 49));
+        jButtonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
+                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
+                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,23 +268,14 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
                                     .addComponent(jLabelElegirTipoMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(rbIngreso)
                                     .addComponent(rbEgreso))
-                                .addGap(0, 181, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(40, 40, 40))
+                        .addGap(56, 56, 56))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jTextFieldNombreTipoMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldNombreTipoMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,11 +296,13 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
                         .addComponent(rbEgreso))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -309,7 +314,7 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
         tipo = (rbIngreso.isSelected()) ? "INGRESO" : "";
         tipo = (rbEgreso.isSelected()) ? "EGRESO" : "";
         tm.setTipo(tipo);
-        
+
         if (!jTextFieldNombreTipoMovimiento.getText().trim().equals("") || !tipo.equals("")) {
             if (control_tmc.InsertarTiposMovimientos(tm)) {
                 JOptionPane.showMessageDialog(null, "Nuevo Tipo Movimiento de Caja agregado");
@@ -323,76 +328,58 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        if (btnModificar.getText().equals("Modificar")) {
-            int i = jTableTiposMovimientosCaja.getSelectedRow();
-            if (i == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                btnAgregar.setEnabled(false);
-                btnModificar.setText("Cancelar");
-                btnEliminar.setText("Modificar");
-                id = (jTableTiposMovimientosCaja.getValueAt(i, 0).toString());
-                jTextFieldNombreTipoMovimiento.setText(jTableTiposMovimientosCaja.getValueAt(i, 1).toString());
-                if (jTableTiposMovimientosCaja.getValueAt(i, 2).toString().equals("INGRESO")) {
-                    rbIngreso.setSelected(true);
-                    rbEgreso.setSelected(false);
-                } else {
-                    rbEgreso.setSelected(true);
-                    rbIngreso.setSelected(false);
-                }
-            }
+        int i = jTableTiposMovimientosCaja.getSelectedRow();
+        if (i == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                btnAgregar.setEnabled(true);
-                btnModificar.setText("Modificar");
-                btnEliminar.setText("Eliminar");
-                jTextFieldNombreTipoMovimiento.setText("");
+            btnAgregar.setEnabled(false);
+            id = (jTableTiposMovimientosCaja.getValueAt(i, 0).toString());
+            jTextFieldNombreTipoMovimiento.setText(jTableTiposMovimientosCaja.getValueAt(i, 1).toString());
+            if (jTableTiposMovimientosCaja.getValueAt(i, 2).toString().equals("INGRESO")) {
+                rbIngreso.setSelected(true);
                 rbEgreso.setSelected(false);
+            } else {
+                rbEgreso.setSelected(true);
                 rbIngreso.setSelected(false);
-                limpiarseleccion();
             }
         }
 
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if (btnEliminar.getText().equals("Eliminar")) {
-            int seleccionado = jTableTiposMovimientosCaja.getSelectedRow();
-            if (seleccionado == -1) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
-            } else {
-                int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    tm.setIdtipomovimiento(Integer.parseInt(jTableTiposMovimientosCaja.getValueAt(seleccionado, 0).toString()));
-                    if (control_tmc.EliminarTiposMovimientos(tm)) {
-                        JOptionPane.showMessageDialog(null, "Eliminado");
-                        Mostrar();
-                        //datos.removeRow(seleccionado + 1);
-                    }
-                } else {
-                    limpiarseleccion();
-                }
-            }
-        } else {
+        if (!btnAgregar.isEnabled()) {
             tm.setDescripcion(jTextFieldNombreTipoMovimiento.getText());
             String tipo = "";
             tipo = (rbIngreso.isSelected()) ? "INGRESO" : "";
             tipo = (rbEgreso.isSelected()) ? "EGRESO" : "";
             tm.setTipo(tipo);
-            
+
             if (!jTextFieldNombreTipoMovimiento.getText().trim().equals("") || !tipo.equals("")) {
                 if (control_tmc.EditarTiposMovimientos(tm)) {
                     JOptionPane.showMessageDialog(null, "Modicacion Completa");
                     btnAgregar.setEnabled(true);
-                    btnModificar.setText("Modificar");
-                    btnEliminar.setText("Eliminar");
                     jTextFieldNombreTipoMovimiento.setText("");
                     rbEgreso.setSelected(false);
                     rbIngreso.setSelected(false);
                     limpiarseleccion();
                     Mostrar();
                 }
+            }
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int seleccionado = jTableTiposMovimientosCaja.getSelectedRow();
+        if (seleccionado == -1) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+        } else {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                tm.setIdtipomovimiento(Integer.parseInt(jTableTiposMovimientosCaja.getValueAt(seleccionado, 0).toString()));
+                if (control_tmc.EliminarTiposMovimientos(tm)) {
+                    JOptionPane.showMessageDialog(null, "Eliminado");
+                    Mostrar();
+                    //datos.removeRow(seleccionado + 1);
+                }
+            } else {
+                limpiarseleccion();
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -402,7 +389,7 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
     }//GEN-LAST:event_rbEgresoActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (btnModificar.getText().equals("Cancelar")) {
+        if (!btnAgregar.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -427,7 +414,7 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
         jTextFieldNombreTipoBuscar.setText("");
     }//GEN-LAST:event_formMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonBuscarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarMovimientoActionPerformed
         if (!jTextFieldNombreTipoBuscar.getText().isEmpty()) {
             String[] columnas = {"ID TIPOGASTO", "DESCRIPCION", "TIPO"};
             Object[][] datostabla = control_tmc.MostrarTipoMovBuscado(jTextFieldNombreTipoBuscar.getText());
@@ -443,14 +430,26 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar el campo");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarMovimientoActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            btnAgregar.setEnabled(true);
+            jTextFieldNombreTipoMovimiento.setText("");
+            rbEgreso.setSelected(false);
+            rbIngreso.setSelected(false);
+            limpiarseleccion();
+        }
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonBuscarMovimiento;
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jLabelElegirTipoMovimiento;
     private javax.swing.JLabel jLabelNombreTipoMovimiento;
     private javax.swing.JLabel jLabelTipoMovimiento;

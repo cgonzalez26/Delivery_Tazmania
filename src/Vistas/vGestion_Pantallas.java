@@ -27,8 +27,6 @@ public final class vGestion_Pantallas extends javax.swing.JInternalFrame {
                 if (e.getClickCount() == 2) {
                     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                     jButtonAgregar.setEnabled(false);
-                    jButtonModificar.setText("Cancelar");
-                    jButtonEliminar.setText("Modificar");
                     int fila = jTablePantallas.rowAtPoint(e.getPoint());
                     id = (jTablePantallas.getValueAt(fila, 0).toString());
                     jTextFieldNombrePantalla.setText(jTablePantallas.getValueAt(fila, 1).toString());
@@ -44,15 +42,15 @@ public final class vGestion_Pantallas extends javax.swing.JInternalFrame {
 
     public void Mostrar() {
         columnas = new String[2];
-        columnas[0]="IDPANTALLA";
-        columnas[1]="NOMBRE";
+        columnas[0] = "IDPANTALLA";
+        columnas[1] = "NOMBRE";
         datostabla = pantalla.MostrarDatos();
         datos = new DefaultTableModel(datostabla, columnas);
         jTablePantallas.setModel(datos);
         EliminarFilasVacias();
         ocultar_columnas();
     }
-    
+
     public void ocultar_columnas() {
         jTablePantallas.getColumnModel().getColumn(0).setMaxWidth(0);
         jTablePantallas.getColumnModel().getColumn(0).setMinWidth(0);
@@ -86,6 +84,7 @@ public final class vGestion_Pantallas extends javax.swing.JInternalFrame {
         jButtonAgregar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -168,12 +167,21 @@ public final class vGestion_Pantallas extends javax.swing.JInternalFrame {
             }
         });
 
+        jButtonCancelar.setBackground(new java.awt.Color(240, 87, 49));
+        jButtonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelNombrePantalla, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -181,13 +189,15 @@ public final class vGestion_Pantallas extends javax.swing.JInternalFrame {
                             .addComponent(jTextFieldNombrePantalla, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(30, 30, 30)
                                 .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,8 +213,9 @@ public final class vGestion_Pantallas extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -224,51 +235,17 @@ public final class vGestion_Pantallas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        if (jButtonModificar.getText().equals("Modificar")) {
-            int s = jTablePantallas.getSelectedRow();
-            if (s == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                jButtonAgregar.setEnabled(false);
-                jButtonModificar.setText("Cancelar");
-                jButtonEliminar.setText("Modificar");
-                id = (jTablePantallas.getValueAt(s, 0).toString());
-                jTextFieldNombrePantalla.setText(jTablePantallas.getValueAt(s, 1).toString());
-            }
-
+        int s = jTablePantallas.getSelectedRow();
+        if (s == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                jButtonAgregar.setEnabled(true);
-                jButtonModificar.setText("Modificar");
-                jButtonEliminar.setText("Eliminar");
-                jTextFieldNombrePantalla.setText("");
-                LimpiarSeleccion();
-            }
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            jButtonAgregar.setEnabled(false);
+            id = (jTablePantallas.getValueAt(s, 0).toString());
+            jTextFieldNombrePantalla.setText(jTablePantallas.getValueAt(s, 1).toString());
         }
-    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-        if (jButtonEliminar.getText().equals("Eliminar")) {
-            int seleccionado = jTablePantallas.getSelectedRow();
-            if (seleccionado == -1) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
-            } else {
-                int i = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    p.setId_pantalla(Integer.parseInt(jTablePantallas.getValueAt(seleccionado, 0).toString()));
-                    if (pantalla.EliminarNombrePantalla(p)) {
-                        JOptionPane.showMessageDialog(null, "Eliminado");
-                        Mostrar();
-                        EliminarFilasVacias();
-                    }
-                } else {
-                    LimpiarSeleccion();
-                }
-            }
-        } else {
+        if (!jButtonAgregar.isEnabled()) {
             if (!jTextFieldNombrePantalla.getText().trim().equals("")) {
                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
@@ -280,8 +257,6 @@ public final class vGestion_Pantallas extends javax.swing.JInternalFrame {
                         Mostrar();
                         jTextFieldNombrePantalla.setText("");
                         jButtonAgregar.setEnabled(true);
-                        jButtonModificar.setText("Modificar");
-                        jButtonEliminar.setText("Eliminar");
                         LimpiarSeleccion();
                     }
                 }
@@ -289,10 +264,30 @@ public final class vGestion_Pantallas extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Debe completar el campo obligatorio");
             }
         }
+
+    }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        int seleccionado = jTablePantallas.getSelectedRow();
+        if (seleccionado == -1) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+        } else {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                p.setId_pantalla(Integer.parseInt(jTablePantallas.getValueAt(seleccionado, 0).toString()));
+                if (pantalla.EliminarNombrePantalla(p)) {
+                    JOptionPane.showMessageDialog(null, "Eliminado");
+                    Mostrar();
+                    EliminarFilasVacias();
+                }
+            } else {
+                LimpiarSeleccion();
+            }
+        }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jButtonModificar.getText().equals("Cancelar")) {
+        if (!jButtonAgregar.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -315,9 +310,20 @@ public final class vGestion_Pantallas extends javax.swing.JInternalFrame {
         LimpiarSeleccion();
     }//GEN-LAST:event_formMouseClicked
 
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jButtonAgregar.setEnabled(true);
+            jTextFieldNombrePantalla.setText("");
+            LimpiarSeleccion();
+        }
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JLabel jLabelNombrePantalla;

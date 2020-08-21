@@ -28,9 +28,7 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
             public void mouseClicked(java.awt.event.MouseEvent e) {
 
                 if (e.getClickCount() == 2) {
-                    jBotonModif_TipoInsumo.setText("Cancelar");
                     jBotonAgregar_TipoInsumo.setEnabled(false);
-                    jBotonEliminar_TipoInsumo.setText("Modificar");
                     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                     int fila = jTabla_TiposInsumos.rowAtPoint(e.getPoint());
                     id = (jTabla_TiposInsumos.getValueAt(fila, 0).toString());
@@ -91,6 +89,7 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
         jLabelTipoInsumo = new javax.swing.JLabel();
         jTextFieldTipoInsumoBuscar = new javax.swing.JTextField();
         jButtonBuscarTipoInsumo = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -141,7 +140,7 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
             }
         });
 
-        jBotonEliminar_TipoInsumo.setBackground(new java.awt.Color(252, 249, 57));
+        jBotonEliminar_TipoInsumo.setBackground(new java.awt.Color(240, 87, 49));
         jBotonEliminar_TipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonEliminar_TipoInsumo.setText("Eliminar");
         jBotonEliminar_TipoInsumo.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +210,7 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jTextFieldTipoInsumoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,23 +224,38 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButtonCancelar.setBackground(new java.awt.Color(240, 87, 49));
+        jButtonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBotonAgregar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBotonAgregar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBotonModif_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(17, 17, 17)
+                                .addComponent(jBotonEliminar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jEtiqNombre_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextDescripcion_TipoInsumo))
                         .addGap(18, 18, 18)
-                        .addComponent(jBotonModif_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
-                        .addComponent(jBotonEliminar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jEtiqNombre_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextDescripcion_TipoInsumo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -262,8 +276,9 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
                             .addComponent(jBotonAgregar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jBotonModif_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jBotonEliminar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                                .addComponent(jBotonEliminar_TipoInsumo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -283,24 +298,36 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBotonAgregar_TipoInsumoActionPerformed
 
     private void jBotonEliminar_TipoInsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonEliminar_TipoInsumoActionPerformed
-        if (jBotonEliminar_TipoInsumo.getText().equals("Eliminar")) {
-            int seleccionado = jTabla_TiposInsumos.getSelectedRow();
-            if (seleccionado == -1) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
-            } else {
-                int i = JOptionPane.showConfirmDialog(null, "Eliminar Tipo de Insumo?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    ti.setIdtipoinsumo(Integer.parseInt(jTabla_TiposInsumos.getValueAt(seleccionado, 0).toString()));
-                    if (tipoinsumo.EliminarTiposInsumos(ti)) {
-                        JOptionPane.showMessageDialog(null, "Eliminado");
-                        MostrarDatos();
-                        EliminarFilasVacias();
-                    }
-                } else {
-                    LimpiarSeleccion();
-                }
-            }
+        int seleccionado = jTabla_TiposInsumos.getSelectedRow();
+        if (seleccionado == -1) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
         } else {
+            int i = JOptionPane.showConfirmDialog(null, "Eliminar Tipo de Insumo?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                ti.setIdtipoinsumo(Integer.parseInt(jTabla_TiposInsumos.getValueAt(seleccionado, 0).toString()));
+                if (tipoinsumo.EliminarTiposInsumos(ti)) {
+                    JOptionPane.showMessageDialog(null, "Eliminado");
+                    MostrarDatos();
+                    EliminarFilasVacias();
+                }
+            } else {
+                LimpiarSeleccion();
+            }
+        }
+    }//GEN-LAST:event_jBotonEliminar_TipoInsumoActionPerformed
+
+    private void jBotonModif_TipoInsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonModif_TipoInsumoActionPerformed
+        int s = jTabla_TiposInsumos.getSelectedRow();
+        if (s == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
+        } else {
+            jBotonAgregar_TipoInsumo.setEnabled(false);
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            id = (jTabla_TiposInsumos.getValueAt(s, 0).toString());
+            jTextDescripcion_TipoInsumo.setText(jTabla_TiposInsumos.getValueAt(s, 1).toString());
+        }
+
+        if (!jBotonAgregar_TipoInsumo.isEnabled()) {
             if (!jTextDescripcion_TipoInsumo.getText().trim().equals("")) {
                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
@@ -309,8 +336,6 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
                     if (tipoinsumo.EditarTiposInsumos(ti)) {
                         JOptionPane.showMessageDialog(null, "Modificado");
                         jBotonAgregar_TipoInsumo.setEnabled(true);
-                        jBotonModif_TipoInsumo.setText("Modificar");
-                        jBotonEliminar_TipoInsumo.setText("Eliminar");
                         jTextDescripcion_TipoInsumo.setText("");
                         LimpiarSeleccion();
                         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -321,37 +346,10 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Debes completar el campo obligatorio");
             }
         }
-
-    }//GEN-LAST:event_jBotonEliminar_TipoInsumoActionPerformed
-
-    private void jBotonModif_TipoInsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonModif_TipoInsumoActionPerformed
-        if (jBotonModif_TipoInsumo.getText().equals("Modificar")) {
-            int s = jTabla_TiposInsumos.getSelectedRow();
-            if (s == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                jBotonModif_TipoInsumo.setText("Cancelar");
-                jBotonAgregar_TipoInsumo.setEnabled(false);
-                jBotonEliminar_TipoInsumo.setText("Modificar");
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                id = (jTabla_TiposInsumos.getValueAt(s, 0).toString());
-                jTextDescripcion_TipoInsumo.setText(jTabla_TiposInsumos.getValueAt(s, 1).toString());
-            }
-        } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                jBotonAgregar_TipoInsumo.setEnabled(true);
-                jBotonModif_TipoInsumo.setText("Modificar");
-                jBotonEliminar_TipoInsumo.setText("Eliminar");
-                jTextDescripcion_TipoInsumo.setText("");
-                LimpiarSeleccion();
-                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            }
-        }
     }//GEN-LAST:event_jBotonModif_TipoInsumoActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jBotonModif_TipoInsumo.getText().equals("Cancelar")) {
+        if (!jBotonAgregar_TipoInsumo.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -412,12 +410,23 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextFieldTipoInsumoBuscarKeyTyped
 
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            jBotonAgregar_TipoInsumo.setEnabled(true);
+            jTextDescripcion_TipoInsumo.setText("");
+            LimpiarSeleccion();
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        }
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBotonAgregar_TipoInsumo;
     private javax.swing.JButton jBotonEliminar_TipoInsumo;
     private javax.swing.JButton jBotonModif_TipoInsumo;
     private javax.swing.JButton jButtonBuscarTipoInsumo;
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jEtiqNombre_TipoInsumo;
     private javax.swing.JLabel jLabelTipoInsumo;
     private javax.swing.JPanel jPanel1;
