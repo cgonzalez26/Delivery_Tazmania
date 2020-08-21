@@ -40,6 +40,7 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
     DefaultListModel list;
     ArrayList<String> listemp;
     vGestion_Asistencias ventanaAsistencia = null;
+    Date fechaactual = new Date();
 
     public vLista_Asistencias() {
         initComponents();
@@ -90,8 +91,17 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
         jDateFechaHasta.setDate(hoy);
     }
 
-    public void VolverVentanaAsistencia() {
+    public void VolverVentanaAsistencia(String accion) {
         ventanaAsistencia = new vGestion_Asistencias();
+        if (accion.equals("agregar")) {
+            ventanaAsistencia.jButtonAgregarAsistencia.setEnabled(true);
+            ventanaAsistencia.jButtonModificar.setEnabled(false);
+            ventanaAsistencia.jDateFecha.setDate(fechaactual);
+        }else{
+             ventanaAsistencia.jButtonAgregarAsistencia.setEnabled(false);
+            ventanaAsistencia.jButtonModificar.setEnabled(true);
+        }
+        
         vMenuPrincipal.jDesktopPane1.add(ventanaAsistencia);
         ventanaAsistencia.setVisible(true);
         dispose();
@@ -203,8 +213,10 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jDateFechaDesde.setDateFormatString("dd/MM/yyyy");
         jDateFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
+        jDateFechaHasta.setDateFormatString("dd/MM/yyyy");
         jDateFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jButtonBuscarAsistencia.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -342,7 +354,7 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonBuscarAsistenciaActionPerformed
 
     private void jButtonNuevaAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevaAsistenciaActionPerformed
-        VolverVentanaAsistencia();
+        VolverVentanaAsistencia("agregar");
     }//GEN-LAST:event_jButtonNuevaAsistenciaActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
@@ -384,8 +396,7 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
         int seleccionado = jTableAsistencias.getSelectedRow();
         if (seleccionado == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-        } else {
-            vGestion_Asistencias.jButtonAgregarAsistencia.setEnabled(false);
+        } else {            
             fecha = (String) (jTableAsistencias.getValueAt(seleccionado, 6));
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             try {
@@ -395,15 +406,13 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
                 Logger.getLogger(vListas_Compras.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (ventanaAsistencia == null || ventanaAsistencia.isClosed()) {
-                ventanaAsistencia = new vGestion_Asistencias();
-                vMenuPrincipal.jDesktopPane1.add(ventanaAsistencia);
-                ventanaAsistencia.setVisible(true);
-                ventanaAsistencia.toFront();
+                VolverVentanaAsistencia("modificar");
             }
             id = (jTableAsistencias.getValueAt(seleccionado, 0).toString());
             vGestion_Asistencias.jTextFieldEmpleado.setText(jTableAsistencias.getValueAt(seleccionado, 3).toString());
             vGestion_Asistencias.jTextFieldDescripcion.setText(jTableAsistencias.getValueAt(seleccionado, 4).toString());
             vGestion_Asistencias.jTextFieldSueldo.setText(jTableAsistencias.getValueAt(seleccionado, 5).toString());
+            vGestion_Asistencias.jDateFecha.setDate(fechaseleccionada);
             ventanaAsistencia.id = id;
             dispose();
         }

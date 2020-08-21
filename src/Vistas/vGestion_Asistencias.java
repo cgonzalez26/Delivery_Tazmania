@@ -388,6 +388,31 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void agregarMovimientoCaja(String codigo, Integer idmovimiento){
+        mc.setDescripcion("PAGO EMPLEADOS");
+        mc.setIdcajaturno(Session.getIdcajaturno_abierta());
+        mc.setIdtipomovimiento(11);
+        mc.setIdusuario(Session.getIdusuario());
+        mc.setNromovimiento(codigo);
+        mc.setFecha_movimiento(date);
+        mc.setMonto(a.getSueldo());
+        mc.setIdmovimiento(idmovimiento);
+        mc.setDetalle(a.getDescripcion());
+        mc.setActivo(1);
+        control_mc.InsertarMovimientosCaja(mc);
+    }
+    
+    private void modificarMovimientoCaja(){
+        mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(id), 11));
+        mc.setIdtipomovimiento(11);
+        mc.setIdusuario(Session.getIdusuario());
+        mc.setFecha_movimiento(date);
+        mc.setMonto(a.getSueldo());
+        mc.setIdmovimiento(Integer.parseInt(id));
+        mc.setDetalle(a.getDescripcion());
+        control_mc.EditarMovimientosCaja(mc);
+    }
+    
     private void jButtonAgregarAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarAsistenciaActionPerformed
         if (!jTextFieldEmpleado.getText().trim().equals("") && !jTextFieldDescripcion.getText().trim().equals("") && !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().equals("")) {
             if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
@@ -403,17 +428,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                             String codigo = sql.generaCodigo("pago_emp");
                             sql.ejecutarSql("UPDATE asistencias SET NroAsistencia ='" + codigo + "' WHERE idasistencia=" + Integer.toString(idmovimiento));
                             a.setNroAsistencia(codigo);
-                            mc.setDescripcion("PAGO EMPLEADOS");
-                            mc.setIdcajaturno(Session.getIdcajaturno_abierta());
-                            mc.setIdtipomovimiento(11);
-                            mc.setIdusuario(Session.getIdusuario());
-                            mc.setNromovimiento(codigo);
-                            mc.setFecha_movimiento(date);
-                            mc.setMonto(a.getSueldo());
-                            mc.setIdmovimiento(idmovimiento);
-                            mc.setDetalle(a.getDescripcion());
-                            mc.setActivo(1);
-                            control_mc.InsertarMovimientosCaja(mc);
+                            agregarMovimientoCaja(codigo,idmovimiento);
                             JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
                             //Mostrar();
                             VolverListaAsistencias();
@@ -449,17 +464,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                                 String codigo = sql.generaCodigo("pago_emp");
                                 sql.ejecutarSql("UPDATE asistencias SET NroAsistencia ='" + codigo + "' WHERE idasistencia=" + Integer.toString(idmovimiento));
                                 a.setNroAsistencia(codigo);
-                                mc.setDescripcion("PAGO EMPLEADOS");
-                                mc.setIdcajaturno(Session.getIdcajaturno_abierta());
-                                mc.setIdtipomovimiento(11);
-                                mc.setIdusuario(Session.getIdusuario());
-                                mc.setNromovimiento(codigo);
-                                mc.setFecha_movimiento(date);
-                                mc.setMonto(a.getSueldo());
-                                mc.setIdmovimiento(idmovimiento);
-                                mc.setDetalle(a.getDescripcion());
-                                mc.setActivo(1);
-                                control_mc.InsertarMovimientosCaja(mc);
+                                agregarMovimientoCaja(codigo,idmovimiento);
                                 JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
                                 VolverListaAsistencias();
                                 //Mostrar();
@@ -475,17 +480,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                             String codigo = sql.generaCodigo("pago_emp");
                             sql.ejecutarSql("UPDATE asistencias SET NroAsistencia ='" + codigo + "' WHERE idasistencia=" + Integer.toString(idmovimiento));
                             a.setNroAsistencia(codigo);
-                            mc.setDescripcion("PAGO EMPLEADOS");
-                            mc.setIdcajaturno(Session.getIdcajaturno_abierta());
-                            mc.setIdtipomovimiento(11);
-                            mc.setIdusuario(Session.getIdusuario());
-                            mc.setNromovimiento(codigo);
-                            mc.setFecha_movimiento(date);
-                            mc.setMonto(a.getSueldo());
-                            mc.setIdmovimiento(idmovimiento);
-                            mc.setDetalle(a.getDescripcion());
-                            mc.setActivo(1);
-                            control_mc.InsertarMovimientosCaja(mc);
+                            agregarMovimientoCaja(codigo,idmovimiento);
                             JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
                             VolverListaAsistencias();
                             //Mostrar();
@@ -502,41 +497,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonAgregarAsistenciaActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        /*if (jButtonModificar.getText().equals("Modificar")) {
-            int s = jTable1.getSelectedRow();
-            if (s == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                jButtonAgregarAsistencia.setEnabled(false);
-                jButton3.setText("Modificar");
-                jButtonModificar.setText("Cancelar");
-                fecha = (String) (jTable1.getValueAt(s, 6));
-                DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                try {
-                    fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
-
-                } catch (ParseException ex) {
-                    Logger.getLogger(vListas_Compras.class
-                            .getName()).log(Level.SEVERE, null, ex);
-                }
-                id = (jTable1.getValueAt(s, 0).toString());
-                jTextFieldEmpleado.setText(jTable1.getValueAt(s, 3).toString());
-                jTextField2.setText(jTable1.getValueAt(s, 4).toString());
-                jTextFieldSueldo.setText(jTable1.getValueAt(s, 5).toString());
-                jDateFecha.setDate(fechaseleccionada);
-            }
-        } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                jButtonAgregarAsistencia.setEnabled(true);
-                limpiar();
-                LimpiarSeleccion();
-                jButtonModificar.setText("Modificar");
-                jButton3.setText("Eliminar");
-                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            }
-        }*/
         if (!jTextFieldEmpleado.getText().trim().equals("") && !jTextFieldDescripcion.getText().trim().equals("") && !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().equals("")) {
             date = ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText();
             if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
@@ -548,19 +508,9 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                         a.setSueldo((float) 0.0);
                         a.setIdasistencia(Integer.parseInt(id));
                         if (asistencia.EditarAsistencias(a)) {
-                            mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(id), 11));
-                            mc.setIdtipomovimiento(11);
-                            mc.setIdusuario(Session.getIdusuario());
-                            mc.setFecha_movimiento(date);
-                            mc.setMonto(a.getSueldo());
-                            mc.setIdmovimiento(Integer.parseInt(id));
-                            mc.setDetalle(a.getDescripcion());
-                            control_mc.EditarMovimientosCaja(mc);
-
+                            modificarMovimientoCaja();
                             JOptionPane.showMessageDialog(null, "Modificado");
                             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                            //Mostrar();
-                            //limpiar();
                             VolverListaAsistencias();
                         }
                     }
@@ -590,19 +540,10 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                             a.setSueldo((float) 0.0);
                             a.setIdasistencia(Integer.parseInt(id));
                             if (asistencia.EditarAsistencias(a)) {
-                                mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(id), 11));
-                                mc.setIdtipomovimiento(11);
-                                mc.setIdusuario(Session.getIdusuario());
-                                mc.setFecha_movimiento(date);
-                                mc.setMonto(a.getSueldo());
-                                mc.setIdmovimiento(Integer.parseInt(id));
-                                mc.setDetalle(a.getDescripcion());
-                                control_mc.EditarMovimientosCaja(mc);
+                                modificarMovimientoCaja();
 
                                 JOptionPane.showMessageDialog(null, "Modificado");
-                                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                                //Mostrar();
-                                //limpiar();
+                                setDefaultCloseOperation(DISPOSE_ON_CLOSE);       
                                 VolverListaAsistencias();
                             }
                         }
@@ -612,19 +553,10 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                         a.setSueldo(Float.parseFloat(sueldo));
                         a.setIdasistencia(Integer.parseInt(id));
                         if (asistencia.EditarAsistencias(a)) {
-                            mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(id), 11));
-                            mc.setIdtipomovimiento(11);
-                            mc.setIdusuario(Session.getIdusuario());
-                            mc.setFecha_movimiento(date);
-                            mc.setMonto(a.getSueldo());
-                            mc.setIdmovimiento(Integer.parseInt(id));
-                            mc.setDetalle(a.getDescripcion());
-                            control_mc.EditarMovimientosCaja(mc);
+                            modificarMovimientoCaja();
 
                             JOptionPane.showMessageDialog(null, "Modificado");
                             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                            //Mostrar();
-                            //limpiar();
                             VolverListaAsistencias();
                         }
                     }

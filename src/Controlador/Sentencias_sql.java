@@ -169,8 +169,8 @@ public class Sentencias_sql {
 
     public Object[][] GetTabla(String colName[], String tabla, String sql) {
         int registros = 0;
-
-        try {
+        registros = obtenercantidadfilas(sql);
+        /*try {
             ps = con.conectado().prepareStatement("select count(*) as total from " + tabla);
             res = ps.executeQuery();
             res.next();
@@ -178,7 +178,7 @@ public class Sentencias_sql {
             res.close();
         } catch (SQLException e) {
             System.out.println(e);
-        }
+        }*/
 
         Object[][] data = new String[registros][colName.length];
         String col[] = new String[colName.length];
