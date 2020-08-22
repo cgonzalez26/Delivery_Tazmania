@@ -8,10 +8,8 @@ import Modelo.Asistencias;
 import Modelo.Movimientos_Caja;
 import Modelo.Session;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.awt.font.FontRenderContext;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -215,16 +213,16 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jTextFieldBuscarEmpleado))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
+                        .addGap(89, 89, 89)
                         .addComponent(jLabelNombreEmpleado)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(75, 75, 75)
+                .addGap(105, 105, 105)
                 .addComponent(jButtonBuscarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -235,7 +233,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                 .addComponent(jLabelNombreEmpleado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldBuscarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonBuscarEmpleado)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -248,9 +246,9 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(vSeleccionarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(vSeleccionarEmpleadoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addGap(26, 26, 26)
                         .addComponent(jButtonAgregarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                         .addComponent(jButtonCancelarEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -339,7 +337,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
                 listaEmpleadosMouseClicked(evt);
             }
         });
-        getContentPane().add(listaEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 250, 0));
+        getContentPane().add(listaEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 250, -1));
 
         jLabelDescripcion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelDescripcion.setText("(*) Descripción:");
@@ -388,7 +386,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void agregarMovimientoCaja(String codigo, Integer idmovimiento){
+    private void agregarMovimientoCaja(String codigo, Integer idmovimiento) {
         mc.setDescripcion("PAGO EMPLEADOS");
         mc.setIdcajaturno(Session.getIdcajaturno_abierta());
         mc.setIdtipomovimiento(11);
@@ -401,8 +399,8 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         mc.setActivo(1);
         control_mc.InsertarMovimientosCaja(mc);
     }
-    
-    private void modificarMovimientoCaja(){
+
+    private void modificarMovimientoCaja() {
         mc.setIdmovimientocaja(control_mc.ObtenerIDMovimientoCaja(Integer.parseInt(id), 11));
         mc.setIdtipomovimiento(11);
         mc.setIdusuario(Session.getIdusuario());
@@ -412,81 +410,153 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         mc.setDetalle(a.getDescripcion());
         control_mc.EditarMovimientosCaja(mc);
     }
-    
+
+    private void nuevaAsistenciaSueldoenCero() {
+        int i = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
+            a.setDescripcion(jTextFieldDescripcion.getText());
+            a.setSueldo((float) 0.0);
+            if (asistencia.InsertarAsistencias(a)) {
+                int idmovimiento = sql.obtenerUltimoId("asistencias", "idasistencia");
+                String codigo = sql.generaCodigo("pago_emp");
+                sql.ejecutarSql("UPDATE asistencias SET NroAsistencia ='" + codigo + "' WHERE idasistencia=" + Integer.toString(idmovimiento));
+                a.setNroAsistencia(codigo);
+                agregarMovimientoCaja(codigo, idmovimiento);
+                JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
+                //Mostrar();
+                VolverListaAsistencias();
+                //limpiar();
+            }
+        }
+    }
+
+    private void modificarAsistenciaSueldoenCero() {
+        int i = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, guardar cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
+            a.setDescripcion(jTextFieldDescripcion.getText());
+            a.setSueldo((float) 0.0);
+            a.setIdasistencia(Integer.parseInt(id));
+            if (asistencia.EditarAsistencias(a)) {
+                modificarMovimientoCaja();
+                JOptionPane.showMessageDialog(null, "Modificado");
+                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                VolverListaAsistencias();
+            }
+        }
+    }
+
+    private void nuevaAsistenciaSueldoValorado() {
+        String sueldo = jTextFieldSueldo.getText(), svalor = "", svalordec = "", svalordecdob = "";
+        int cant = jTextFieldSueldo.getText().length();
+        switch (cant) {
+            case 1:
+                svalor = sueldo.substring(0, 1);
+                break;
+            case 3:
+                svalordec = sueldo.substring(0, 3);
+                break;
+            case 4:
+                svalordecdob = sueldo.substring(0, 4);
+                break;
+            default:
+                break;
+        }
+        if (svalor.equals(",") || svalor.equals(".")) { //svalor.equals(",") || svalor.equals(".")
+            JOptionPane.showMessageDialog(null, "Ingrese correctamente el sueldo");
+        } else if (svalor.equals("0") || svalordec.equals("0.0") || svalordecdob.equals("0.00")) {
+            int j = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (j == 0) {
+                a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
+                a.setDescripcion(jTextFieldDescripcion.getText());
+                a.setSueldo((float) 0.0);
+                if (asistencia.InsertarAsistencias(a)) {
+                    int idmovimiento = sql.obtenerUltimoId("asistencias", "idasistencia");
+                    String codigo = sql.generaCodigo("pago_emp");
+                    sql.ejecutarSql("UPDATE asistencias SET NroAsistencia ='" + codigo + "' WHERE idasistencia=" + Integer.toString(idmovimiento));
+                    a.setNroAsistencia(codigo);
+                    agregarMovimientoCaja(codigo, idmovimiento);
+                    JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
+                    VolverListaAsistencias();
+                    //Mostrar();
+                    //limpiar();
+                }
+            }
+        } else {
+            a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
+            a.setDescripcion(jTextFieldDescripcion.getText());
+            a.setSueldo(Float.parseFloat(sueldo));
+            if (asistencia.InsertarAsistencias(a)) {
+                int idmovimiento = sql.obtenerUltimoId("asistencias", "idasistencia");
+                String codigo = sql.generaCodigo("pago_emp");
+                sql.ejecutarSql("UPDATE asistencias SET NroAsistencia ='" + codigo + "' WHERE idasistencia=" + Integer.toString(idmovimiento));
+                a.setNroAsistencia(codigo);
+                agregarMovimientoCaja(codigo, idmovimiento);
+                JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
+                VolverListaAsistencias();
+                //Mostrar();
+                //limpiar();
+            }
+        }
+    }
+
+    private void modificarAsistenciaSueldoValorado() {
+        String sueldo = jTextFieldSueldo.getText(), svalor = "", svalordec = "", svalordecdob = "";
+        int cant = jTextFieldSueldo.getText().length();
+        switch (cant) {
+            case 1:
+                svalor = sueldo.substring(0, 1);
+                break;
+            case 3:
+                svalordec = sueldo.substring(0, 3);
+                break;
+            case 4:
+                svalordecdob = sueldo.substring(0, 4);
+                break;
+            default:
+                break;
+        }
+        if (svalor.equals(",") || svalor.equals(".")) { //svalor.equals(",") || svalor.equals(".")
+            JOptionPane.showMessageDialog(null, "Ingrese correctamente el sueldo");
+        } else if (svalor.equals("0") || svalordec.equals("0.0") || svalordecdob.equals("0.00")) {
+            int j = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, guardar cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (j == 0) {
+                a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
+                a.setDescripcion(jTextFieldDescripcion.getText());
+                a.setSueldo((float) 0.0);
+                a.setIdasistencia(Integer.parseInt(id));
+                if (asistencia.EditarAsistencias(a)) {
+                    modificarMovimientoCaja();
+
+                    JOptionPane.showMessageDialog(null, "Modificado");
+                    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                    VolverListaAsistencias();
+                }
+            }
+        } else {
+            a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
+            a.setDescripcion(jTextFieldDescripcion.getText());
+            a.setSueldo(Float.parseFloat(sueldo));
+            a.setIdasistencia(Integer.parseInt(id));
+            if (asistencia.EditarAsistencias(a)) {
+                modificarMovimientoCaja();
+
+                JOptionPane.showMessageDialog(null, "Modificado");
+                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                VolverListaAsistencias();
+            }
+        }
+    }
+
     private void jButtonAgregarAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarAsistenciaActionPerformed
         if (!jTextFieldEmpleado.getText().trim().equals("") && !jTextFieldDescripcion.getText().trim().equals("") && !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().equals("")) {
             if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
                 date = ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText();
                 if (jTextFieldSueldo.getText().equals("")) {
-                    int i = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                    if (i == 0) {
-                        a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
-                        a.setDescripcion(jTextFieldDescripcion.getText());
-                        a.setSueldo((float) 0.0);
-                        if (asistencia.InsertarAsistencias(a)) {
-                            int idmovimiento = sql.obtenerUltimoId("asistencias", "idasistencia");
-                            String codigo = sql.generaCodigo("pago_emp");
-                            sql.ejecutarSql("UPDATE asistencias SET NroAsistencia ='" + codigo + "' WHERE idasistencia=" + Integer.toString(idmovimiento));
-                            a.setNroAsistencia(codigo);
-                            agregarMovimientoCaja(codigo,idmovimiento);
-                            JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
-                            //Mostrar();
-                            VolverListaAsistencias();
-                            //limpiar();
-                        }
-                    }
+                    nuevaAsistenciaSueldoenCero();
                 } else {
-                    String sueldo = jTextFieldSueldo.getText(), svalor = "", svalordec = "", svalordecdob = "";
-                    int cant = jTextFieldSueldo.getText().length();
-                    switch (cant) {
-                        case 1:
-                            svalor = sueldo.substring(0, 1);
-                            break;
-                        case 3:
-                            svalordec = sueldo.substring(0, 3);
-                            break;
-                        case 4:
-                            svalordecdob = sueldo.substring(0, 4);
-                            break;
-                        default:
-                            break;
-                    }
-                    if (svalor.equals(",") || svalor.equals(".")) { //svalor.equals(",") || svalor.equals(".")
-                        JOptionPane.showMessageDialog(null, "Ingrese correctamente el sueldo");
-                    } else if (svalor.equals("0") || svalordec.equals("0.0") || svalordecdob.equals("0.00")) {
-                        int j = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, esta seguro?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                        if (j == 0) {
-                            a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
-                            a.setDescripcion(jTextFieldDescripcion.getText());
-                            a.setSueldo((float) 0.0);
-                            if (asistencia.InsertarAsistencias(a)) {
-                                int idmovimiento = sql.obtenerUltimoId("asistencias", "idasistencia");
-                                String codigo = sql.generaCodigo("pago_emp");
-                                sql.ejecutarSql("UPDATE asistencias SET NroAsistencia ='" + codigo + "' WHERE idasistencia=" + Integer.toString(idmovimiento));
-                                a.setNroAsistencia(codigo);
-                                agregarMovimientoCaja(codigo,idmovimiento);
-                                JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
-                                VolverListaAsistencias();
-                                //Mostrar();
-                                //limpiar();
-                            }
-                        }
-                    } else {
-                        a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
-                        a.setDescripcion(jTextFieldDescripcion.getText());
-                        a.setSueldo(Float.parseFloat(sueldo));
-                        if (asistencia.InsertarAsistencias(a)) {
-                            int idmovimiento = sql.obtenerUltimoId("asistencias", "idasistencia");
-                            String codigo = sql.generaCodigo("pago_emp");
-                            sql.ejecutarSql("UPDATE asistencias SET NroAsistencia ='" + codigo + "' WHERE idasistencia=" + Integer.toString(idmovimiento));
-                            a.setNroAsistencia(codigo);
-                            agregarMovimientoCaja(codigo,idmovimiento);
-                            JOptionPane.showMessageDialog(null, "Nueva Asistencia agregado");
-                            VolverListaAsistencias();
-                            //Mostrar();
-                            //limpiar();
-                        }
-                    }
+                    nuevaAsistenciaSueldoValorado();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
@@ -501,65 +571,9 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
             date = ((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText();
             if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
                 if (jTextFieldSueldo.getText().equals("")) {
-                    int i = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, guardar cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                    if (i == 0) {
-                        a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
-                        a.setDescripcion(jTextFieldDescripcion.getText());
-                        a.setSueldo((float) 0.0);
-                        a.setIdasistencia(Integer.parseInt(id));
-                        if (asistencia.EditarAsistencias(a)) {
-                            modificarMovimientoCaja();
-                            JOptionPane.showMessageDialog(null, "Modificado");
-                            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                            VolverListaAsistencias();
-                        }
-                    }
+                    modificarAsistenciaSueldoenCero();
                 } else {
-                    String sueldo = jTextFieldSueldo.getText(), svalor = "", svalordec = "", svalordecdob = "";
-                    int cant = jTextFieldSueldo.getText().length();
-                    switch (cant) {
-                        case 1:
-                            svalor = sueldo.substring(0, 1);
-                            break;
-                        case 3:
-                            svalordec = sueldo.substring(0, 3);
-                            break;
-                        case 4:
-                            svalordecdob = sueldo.substring(0, 4);
-                            break;
-                        default:
-                            break;
-                    }
-                    if (svalor.equals(",") || svalor.equals(".")) { //svalor.equals(",") || svalor.equals(".")
-                        JOptionPane.showMessageDialog(null, "Ingrese correctamente el sueldo");
-                    } else if (svalor.equals("0") || svalordec.equals("0.0") || svalordecdob.equals("0.00")) {
-                        int j = JOptionPane.showConfirmDialog(null, "No cobrará sueldo este empleado, guardar cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                        if (j == 0) {
-                            a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
-                            a.setDescripcion(jTextFieldDescripcion.getText());
-                            a.setSueldo((float) 0.0);
-                            a.setIdasistencia(Integer.parseInt(id));
-                            if (asistencia.EditarAsistencias(a)) {
-                                modificarMovimientoCaja();
-
-                                JOptionPane.showMessageDialog(null, "Modificado");
-                                setDefaultCloseOperation(DISPOSE_ON_CLOSE);       
-                                VolverListaAsistencias();
-                            }
-                        }
-                    } else {
-                        a.setIdempleado(asistencia.ObtenerIDEmpleado(jTextFieldEmpleado.getText()));
-                        a.setDescripcion(jTextFieldDescripcion.getText());
-                        a.setSueldo(Float.parseFloat(sueldo));
-                        a.setIdasistencia(Integer.parseInt(id));
-                        if (asistencia.EditarAsistencias(a)) {
-                            modificarMovimientoCaja();
-
-                            JOptionPane.showMessageDialog(null, "Modificado");
-                            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                            VolverListaAsistencias();
-                        }
-                    }
+                    modificarAsistenciaSueldoValorado();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
@@ -627,7 +641,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
     private void jButtonSeleccionarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarEmpleadosActionPerformed
         vSeleccionarEmpleado.setSize(390, 633);
         vSeleccionarEmpleado.setLocationRelativeTo(this);
-        vSeleccionarEmpleado.setModal(true);
+        vSeleccionarEmpleado.setModal(false);
         vSeleccionarEmpleado.setVisible(true);
     }//GEN-LAST:event_jButtonSeleccionarEmpleadosActionPerformed
 
@@ -662,10 +676,6 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_listaEmpleadosMouseClicked
 
-    private void jTextFieldEmpleadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldEmpleadoKeyReleased
-        ListasEmpleado();
-    }//GEN-LAST:event_jTextFieldEmpleadoKeyReleased
-
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         if (!jButtonAgregarAsistencia.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -683,6 +693,10 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
     private void txtSueldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSueldoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSueldoActionPerformed
+
+    private void jTextFieldEmpleadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldEmpleadoKeyReleased
+        ListasEmpleado();
+    }//GEN-LAST:event_jTextFieldEmpleadoKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton jButtonAgregarAsistencia;

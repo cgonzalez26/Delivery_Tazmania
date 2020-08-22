@@ -5,6 +5,7 @@ import Controlador.control_Asistencias;
 import Controlador.control_Movimientos_Caja;
 import Controlador.control_existencias;
 import Modelo.Asistencias;
+import Modelo.FechasBusquedas;
 import Modelo.Movimientos_Caja;
 import java.awt.Color;
 import java.sql.Timestamp;
@@ -44,8 +45,8 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
 
     public vLista_Asistencias() {
         initComponents();
-        Mostrar();
         IniciarFechas();
+        Mostrar();
 
         jTableAsistencias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -59,10 +60,8 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
                         Logger.getLogger(vListas_Compras.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     if (ventanaAsistencia == null || ventanaAsistencia.isClosed()) {
-                        ventanaAsistencia = new vGestion_Asistencias();
-                        vMenuPrincipal.jDesktopPane1.add(ventanaAsistencia);
-                        ventanaAsistencia.setVisible(true);
-                        ventanaAsistencia.toFront();
+                        VolverVentanaAsistencia("modificar");
+                        SetearFechas();
                     }
                     id = (jTableAsistencias.getValueAt(fila, 0).toString());
                     vGestion_Asistencias.jTextFieldEmpleado.setText(jTableAsistencias.getValueAt(fila, 3).toString());
@@ -86,9 +85,26 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
     }
 
     public void IniciarFechas() {
-        Date hoy = new Date();
-        jDateFechaDesde.setDate(hoy);
-        jDateFechaHasta.setDate(hoy);
+        if (FechasBusquedas.isIniciarFechaAsistencia() == false) {
+            Date hoy = new Date();
+            FechasBusquedas.setDateDesdeAsistencias(hoy);
+            FechasBusquedas.setDateHastaAsistencias(hoy);
+            jDateFechaDesde.setDate(FechasBusquedas.getDateDesdeAsistencias());
+            jDateFechaHasta.setDate(FechasBusquedas.getDateHastaAsistencias());
+            FechasBusquedas.setIniciarFechaAsistencia(true);
+        } else {
+            IniciarFechasSeteadas();
+        }
+    }
+
+    public void SetearFechas() {
+        FechasBusquedas.setDateDesdeAsistencias(jDateFechaDesde.getDate());
+        FechasBusquedas.setDateHastaAsistencias(jDateFechaHasta.getDate());        
+    }
+    
+    public void IniciarFechasSeteadas(){
+        jDateFechaDesde.setDate(FechasBusquedas.getDateDesdeAsistencias());
+        jDateFechaHasta.setDate(FechasBusquedas.getDateHastaAsistencias());
     }
 
     public void VolverVentanaAsistencia(String accion) {
@@ -97,11 +113,11 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
             ventanaAsistencia.jButtonAgregarAsistencia.setEnabled(true);
             ventanaAsistencia.jButtonModificar.setEnabled(false);
             ventanaAsistencia.jDateFecha.setDate(fechaactual);
-        }else{
-             ventanaAsistencia.jButtonAgregarAsistencia.setEnabled(false);
+        } else {
+            ventanaAsistencia.jButtonAgregarAsistencia.setEnabled(false);
             ventanaAsistencia.jButtonModificar.setEnabled(true);
         }
-        
+
         vMenuPrincipal.jDesktopPane1.add(ventanaAsistencia);
         ventanaAsistencia.setVisible(true);
         dispose();
@@ -213,10 +229,8 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jDateFechaDesde.setDateFormatString("dd/MM/yyyy");
         jDateFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jDateFechaHasta.setDateFormatString("dd/MM/yyyy");
         jDateFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jButtonBuscarAsistencia.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -342,6 +356,7 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
             if (jDateFechaHasta.getDateEditor().getUiComponent().getForeground() != Color.RED) {
                 if (!desde.isEmpty() && !hasta.isEmpty()) {
                     MostrarBusquedaFechas();
+                    SetearFechas();
                 } else if (desde.isEmpty() || hasta.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Debe ingresar la fecha que falta");
                 }
@@ -355,6 +370,7 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
 
     private void jButtonNuevaAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevaAsistenciaActionPerformed
         VolverVentanaAsistencia("agregar");
+        SetearFechas();
     }//GEN-LAST:event_jButtonNuevaAsistenciaActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
@@ -396,7 +412,7 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
         int seleccionado = jTableAsistencias.getSelectedRow();
         if (seleccionado == -1) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-        } else {            
+        } else {
             fecha = (String) (jTableAsistencias.getValueAt(seleccionado, 6));
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             try {
@@ -407,6 +423,7 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
             }
             if (ventanaAsistencia == null || ventanaAsistencia.isClosed()) {
                 VolverVentanaAsistencia("modificar");
+                SetearFechas();
             }
             id = (jTableAsistencias.getValueAt(seleccionado, 0).toString());
             vGestion_Asistencias.jTextFieldEmpleado.setText(jTableAsistencias.getValueAt(seleccionado, 3).toString());
@@ -442,17 +459,18 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText();
-        hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
+        //desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText();
+        //hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
         LimpiarSeleccion();
-        desde = "";
-        hasta = "";
-        IniciarFechas();
-        Mostrar();
+        //desde = "";
+        //hasta = "";
+        //IniciarFechas();
+        //Mostrar();
     }//GEN-LAST:event_formMouseClicked
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         dispose();
+        SetearFechas();
     }//GEN-LAST:event_formInternalFrameClosing
 
 
