@@ -21,13 +21,13 @@ public class control_ConsumosEmpleados {
 
     public Object[][] MostrarDatos(String desde, String hasta) {
         String columnas[] = {"idconsumo", "idproducto", "nombreEmp", "producto", "cantidad", "fecha"};
-        Object[][] datos = sql.GetTabla(columnas, "consumosempleados", "select idconsumo,idproducto,nombreEmp,producto,cantidad,date_format(fecha, '%d/%m/%Y %H:%i') as fecha from consumosempleados where date(fecha) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and activo=1");
+        Object[][] datos = sql.GetTabla(columnas, "consumosempleados", "select idconsumo,idproducto,nombreEmp,producto,cantidad,date_format(fecha, '%d-%m-%Y %H:%i') as fecha from consumosempleados where date(fecha) between str_to_date((str_to_date('" + desde + "','%d-%m-%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d-%m-%Y')),'%Y-%m-%d') and activo=1");
         return datos;
     }
 
     public Object[][] MostrarDatosBusqueda(String desde, String hasta) {
         String columnas[] = {"idconsumo", "idproducto", "nombreEmp", "producto", "cantidad", "fecha"};
-        Object[][] datos = sql.GetTabla(columnas, "consumosempleados", "select idconsumo,idproducto,nombreEmp,producto,cantidad,date_format(fecha, '%d/%m/%Y %H:%i') as fecha from consumosempleados where date(fecha) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and activo=1");
+        Object[][] datos = sql.GetTabla(columnas, "consumosempleados", "select idconsumo,idproducto,nombreEmp,producto,cantidad,date_format(fecha, '%d-%m-%Y %H:%i') as fecha from consumosempleados where date(fecha) between str_to_date((str_to_date('" + desde + "','%d-%m-%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d-%m-%Y')),'%Y-%m-%d') and activo=1");
         return datos;
     }
 
@@ -71,14 +71,14 @@ public class control_ConsumosEmpleados {
         String fecha = ((JTextField) vConsumosEmpleados.jDateFecha.getDateEditor().getUiComponent()).getText();
         String idprod = Integer.toString(consemp.getIdproducto()), cant = Float.toString(consemp.getCantidad());
         String datos[] = {idprod, consemp.getNomempleado(), consemp.getProducto(), cant};
-        return sql.insertar(datos, "insert into consumosempleados (idproducto,nombreEmp,producto,cantidad,fecha,activo) values (?,?,?,?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'),1)");
+        return sql.insertar(datos, "insert into consumosempleados (idproducto,nombreEmp,producto,cantidad,fecha,activo) values (?,?,?,?,STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i'),1)");
     }
 
     public boolean EditarConsumosEmpleados(ConsumosEmpleados consemp) {
         String fecha = ((JTextField) vConsumosEmpleados.jDateFecha.getDateEditor().getUiComponent()).getText();
         String idprod = Integer.toString(consemp.getIdproducto()), cant = Float.toString(consemp.getCantidad()), id = Integer.toString(consemp.getIdconsumo());
         String datos[] = {idprod, consemp.getNomempleado(), consemp.getProducto(), cant, id};
-        return sql.editar(datos, "update consumosempleados set idproducto=?,nombreEmp=?,producto=?,cantidad=?,fecha=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i') where idconsumo=?");
+        return sql.editar(datos, "update consumosempleados set idproducto=?,nombreEmp=?,producto=?,cantidad=?,fecha=STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i') where idconsumo=?");
     }
 
     public boolean EliminarConsumosEmpleados(ConsumosEmpleados consemp) {

@@ -229,8 +229,10 @@ public final class vLista_Asistencias extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jDateFechaDesde.setDateFormatString("dd-MM-yyyy");
         jDateFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
+        jDateFechaHasta.setDateFormatString("dd-MM-yyyy");
         jDateFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jButtonBuscarAsistencia.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N

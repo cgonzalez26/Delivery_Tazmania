@@ -16,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -247,7 +248,7 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
 
         jTextDescripcion_Egresos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jDateFecha_Egresos.setDateFormatString("dd/MM/yyyy HH:mm");
+        jDateFecha_Egresos.setDateFormatString("dd-MM-yyyy HH:mm");
         jDateFecha_Egresos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jLabelMensaje.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
@@ -285,7 +286,7 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jEtiqDesc_Insumos)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBotonAgregar_Egresos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,65 +333,45 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBotonAgregar_EgresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAgregar_EgresosActionPerformed
-        if (jBotonAgregar_Egresos.getText().equals("Agregar")) {
-            if (!jTextDescripcion_Egresos.getText().trim().equals("")
-                    && !jDateFecha_Egresos.getDateFormatString().trim().equals("")
-                    && !jTextMonto_Egresos.getText().trim().equals("")
-                    && !jTextMonto_Egresos.getText().trim().equals("0")
-                    && !jCBTipoEgreso_Egresos.getSelectedItem().toString().equals("Seleccionar una opción")) {
-                if (jDateFecha_Egresos.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                    //String fecha = getFecha();
-                    //Timestamp fecha = new Timestamp(jDateFecha_Egresos.getDateEditor().getDate().getTime());
-                    //e.setFecha(fecha);
-                    e.setDescripcion(jTextDescripcion_Egresos.getText());
-                    // obtenemos el tipo de egreso seleccionado
-                    TiposGastos tg = control_tg.getTipoGastoByDescripcion(tipos, jCBTipoEgreso_Egresos.getSelectedItem().toString());
-                    e.setIdtipoegreso(tg.getIdtipogasto());
-                    e.setMonto(Float.parseFloat(jTextMonto_Egresos.getText()));
-                    e.setDetalle(jTextDetalle_Egresos.getText());
-                    if (egreso.AgregarEgresos(e)) {
-                        //insetar movimiento de caja                               
-                        JOptionPane.showMessageDialog(null, "Nuevo Egreso agregado");
-                        if (!vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
-                            listaeg = new vLista_Egresos();
-                            vMenuPrincipal.jDesktopPane1.add(listaeg);
-                            listaeg.setVisible(true);
-                            this.dispose();
-                        } else {
-                            movcaja = new vMovimientos_Caja();
-                            vMenuPrincipal.jDesktopPane1.add(movcaja);
-                            movcaja.setVisible(true);
-                            this.dispose();
-                        }
-
+        if (!jTextDescripcion_Egresos.getText().trim().equals("")
+                && !((JTextField) jDateFecha_Egresos.getDateEditor().getUiComponent()).getText().equals("")
+                && !jTextMonto_Egresos.getText().trim().equals("")
+                && !jTextMonto_Egresos.getText().trim().equals("0")
+                && !jCBTipoEgreso_Egresos.getSelectedItem().toString().equals("Seleccionar una opción")) {
+            if (jDateFecha_Egresos.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+                //String fecha = getFecha();
+                //Timestamp fecha = new Timestamp(jDateFecha_Egresos.getDateEditor().getDate().getTime());
+                //e.setFecha(fecha);
+                e.setDescripcion(jTextDescripcion_Egresos.getText());
+                // obtenemos el tipo de egreso seleccionado
+                TiposGastos tg = control_tg.getTipoGastoByDescripcion(tipos, jCBTipoEgreso_Egresos.getSelectedItem().toString());
+                e.setIdtipoegreso(tg.getIdtipogasto());
+                e.setMonto(Float.parseFloat(jTextMonto_Egresos.getText()));
+                e.setDetalle(jTextDetalle_Egresos.getText());
+                if (egreso.AgregarEgresos(e)) {
+                    //insetar movimiento de caja                               
+                    JOptionPane.showMessageDialog(null, "Nuevo Egreso agregado");
+                    if (!vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
+                        listaeg = new vLista_Egresos();
+                        vMenuPrincipal.jDesktopPane1.add(listaeg);
+                        listaeg.setVisible(true);
+                        this.dispose();
                     } else {
-                        JOptionPane.showMessageDialog(null, "No se ingreso nuevo Egreso");
+                        movcaja = new vMovimientos_Caja();
+                        vMenuPrincipal.jDesktopPane1.add(movcaja);
+                        movcaja.setVisible(true);
+                        this.dispose();
                     }
+
                 } else {
-                    JOptionPane.showMessageDialog(null, "Formato de Fecha incorrecto!");
+                    JOptionPane.showMessageDialog(null, "No se ingreso nuevo Egreso");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
+                JOptionPane.showMessageDialog(null, "Formato de Fecha incorrecto!");
             }
         } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                if (!vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
-                    listaeg = new vLista_Egresos();
-                    vMenuPrincipal.jDesktopPane1.add(listaeg);
-                    listaeg.setVisible(true);
-                    this.dispose();
-                } else {
-                    movcaja = new vMovimientos_Caja();
-                    vMenuPrincipal.jDesktopPane1.add(movcaja);
-                    movcaja.setVisible(true);
-                    this.dispose();
-                }
-            } else {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
+            JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
         }
-
     }//GEN-LAST:event_jBotonAgregar_EgresosActionPerformed
 
     private void jBotonModif_EgresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonModif_EgresosActionPerformed
@@ -408,7 +389,7 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
         e.setIdmovimientocaja(control_mc.getIdMovimientocaja(NroMovimiento));
 
         if (!jTextDescripcion_Egresos.getText().trim().equals("")
-                && !jDateFecha_Egresos.getDateFormatString().trim().equals("")
+                && !((JTextField) jDateFecha_Egresos.getDateEditor().getUiComponent()).getText().equals("")
                 && !jTextMonto_Egresos.getText().trim().equals("")
                 && !jTextMonto_Egresos.getText().trim().equals("0")) {
             if (jDateFecha_Egresos.getDateEditor().getUiComponent().getForeground() != Color.RED) {
@@ -444,7 +425,7 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCBTipoEgreso_EgresosActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jBotonAgregar_Egresos.getText().equals("Cancelar")) {
+        if (!jBotonAgregar_Egresos.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 if (!vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
@@ -488,8 +469,47 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        if (!jBotonAgregar_Egresos.isEnabled()) {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                if (!vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
+                    listaeg = new vLista_Egresos();
+                    vMenuPrincipal.jDesktopPane1.add(listaeg);
+                    listaeg.setVisible(true);
+                    this.dispose();
+                } else {
+                    movcaja = new vMovimientos_Caja();
+                    vMenuPrincipal.jDesktopPane1.add(movcaja);
+                    movcaja.setVisible(true);
+                    this.dispose();
+                }
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else if (!jTextDescripcion_Egresos.getText().isEmpty() || !jCBTipoEgreso_Egresos.getSelectedItem().equals("Seleccionar una opción") || !jTextMonto_Egresos.getText().isEmpty()) {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                if (vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
+                    movcaja = new vMovimientos_Caja();
+                    vMenuPrincipal.jDesktopPane1.add(movcaja);
+                    movcaja.setVisible(true);
+                    this.dispose();
+                } else {
+                    dispose();
+                }
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else {
+            if (vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
+                movcaja = new vMovimientos_Caja();
+                vMenuPrincipal.jDesktopPane1.add(movcaja);
+                movcaja.setVisible(true);
+                this.dispose();
+            } else {
+                dispose();
+            }
+        }
     }//GEN-LAST:event_jBotonCancelarActionPerformed
 
 

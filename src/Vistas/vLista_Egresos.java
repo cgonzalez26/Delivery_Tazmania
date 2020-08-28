@@ -48,7 +48,7 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
                             JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                         } else {
                             fecha = (jTabla_Egresos.getValueAt(fila, 4).toString());
-                            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                            DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                             try {
                                 fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                             } catch (ParseException ex) {
@@ -57,8 +57,7 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
                             ge = new vGestion_Egresos();
                             vMenuPrincipal.jDesktopPane1.add(ge);
                             ge.setVisible(true);
-                            vGestion_Egresos.jBotonModif_Egresos.setEnabled(true);
-                            vGestion_Egresos.jBotonAgregar_Egresos.setText("Cancelar");
+                            vGestion_Egresos.jBotonAgregar_Egresos.setEnabled(false);
                             idegreso = (jTabla_Egresos.getValueAt(fila, 0).toString());
                             ge.jTextDescripcion_Egresos.setText(jTabla_Egresos.getValueAt(fila, 2).toString());
                             ge.jCBTipoEgreso_Egresos.setSelectedItem(jTabla_Egresos.getValueAt(fila, 3).toString());
@@ -349,7 +348,7 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
                         //String subfecha=fecha.substring(0, 10);
                         //DateFormat df= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         fecha = (String) (jTabla_Egresos.getValueAt(fila, 4));
-                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                         try {
                             fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                         } catch (ParseException ex) {
@@ -358,8 +357,7 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
                         ge = new vGestion_Egresos();
                         vMenuPrincipal.jDesktopPane1.add(ge);
                         ge.setVisible(true);
-                        ge.jBotonModif_Egresos.setEnabled(true);
-                        ge.jBotonAgregar_Egresos.setText("Cancelar");
+                        vGestion_Egresos.jBotonAgregar_Egresos.setEnabled(false);
                         ge.jTextDescripcion_Egresos.setText(jTabla_Egresos.getValueAt(fila, 2).toString());
                         ge.jCBTipoEgreso_Egresos.setSelectedItem(jTabla_Egresos.getValueAt(fila, 3).toString());
                         //System.out.println(jTabla_Egresos.getValueAt(fila, 4).toString());

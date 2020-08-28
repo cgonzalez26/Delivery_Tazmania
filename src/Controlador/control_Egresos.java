@@ -34,7 +34,7 @@ public class control_Egresos {
 
     public Object[][] MostrarDatos() {
         String[] columnas = {"idegreso", "NroEgreso", "egreso", "tipoegreso", "fecha_egreso", "monto", "idtipoegreso", "detalle"};
-        Object[][] datos = sql.GetTabla2(columnas, "egresos", "select e.idegreso,e.NroEgreso as NroEgreso,e.descripcion as egreso,tm.descripcion as tipoegreso,DATE_FORMAT(e.fecha_egreso, '%d/%m/%Y %H:%i') as fecha_egreso,e.monto,e.idtipoegreso,e.detalle "
+        Object[][] datos = sql.GetTabla2(columnas, "egresos", "select e.idegreso,e.NroEgreso as NroEgreso,e.descripcion as egreso,tm.descripcion as tipoegreso,DATE_FORMAT(e.fecha_egreso, '%d-%m-%Y %H:%i') as fecha_egreso,e.monto,e.idtipoegreso,e.detalle "
                 + " from egresos as e"
                 + " left join tiposmovimientos as tm on tm.idtipomovimiento = e.idtipoegreso where e.activo=1");
         return datos;
@@ -42,7 +42,7 @@ public class control_Egresos {
 
     public Object[][] buscarEgreso(String descripcion) {
         String[] columnas = {"idegreso", "NroEgreso", "egreso", "tipoegreso", "fecha_egreso", "monto", "idtipoegreso", "detalle"};
-        Object[][] datos = sql.GetTabla2(columnas, "egresos", "select e.idegreso,e.NroEgreso as NroEgreso,e.descripcion as egreso,tm.descripcion as tipoegreso,DATE_FORMAT(e.fecha_egreso, '%d/%m/%Y %H:%i') as fecha_egreso,e.monto,e.idtipoegreso,e.detalle "
+        Object[][] datos = sql.GetTabla2(columnas, "egresos", "select e.idegreso,e.NroEgreso as NroEgreso,e.descripcion as egreso,tm.descripcion as tipoegreso,DATE_FORMAT(e.fecha_egreso, '%d-%m-%Y %H:%i') as fecha_egreso,e.monto,e.idtipoegreso,e.detalle "
                 + " from egresos as e"
                 + " left join tiposmovimientos as tm on tm.idtipomovimiento = e.idtipoegreso where e.activo=1 and e.descripcion like '%" + descripcion + "%'");
         return datos;
@@ -53,7 +53,7 @@ public class control_Egresos {
         //Date fecha = egreso.getFecha();
         String fecha = ((JTextField) vGestion_Egresos.jDateFecha_Egresos.getDateEditor().getUiComponent()).getText();
         String datos[] = {Integer.toString(egreso.getIdtipoegreso()), egreso.getDescripcion(), egreso.getDetalle(), Float.toString(egreso.getMonto())};
-        return sql.insertar(datos, "insert into egresos (idtipoegreso,fecha_egreso,descripcion,detalle,monto,fecha_registro,activo) values (?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'),?,?,?,NOW(),1)");
+        return sql.insertar(datos, "insert into egresos (idtipoegreso,fecha_egreso,descripcion,detalle,monto,fecha_registro,activo) values (?,STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i'),?,?,?,NOW(),1)");
     }
 
     public boolean EditarEgresos(Egresos egreso) {
@@ -63,7 +63,7 @@ public class control_Egresos {
             egreso.getDetalle(),
             Float.toString(egreso.getMonto()),
             Integer.toString(egreso.getIdegreso())};
-        return sql.editar(datos, "update egresos set idtipoegreso=?,fecha_egreso=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'),descripcion=?,detalle=?,monto=? where idegreso=?");
+        return sql.editar(datos, "update egresos set idtipoegreso=?,fecha_egreso=STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i'),descripcion=?,detalle=?,monto=? where idegreso=?");
     }
 
     public boolean EliminarEgresos(Egresos egreso) {

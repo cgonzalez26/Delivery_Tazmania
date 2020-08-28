@@ -21,20 +21,20 @@ public class control_Productos {
     
     public Object[][] MostrarDatos(){
         String[]columnas={"idproducto","idcategoriaproducto","c.descripcion","p.descripcion","precioventa","fecharegistro"};
-        Object[][]datos=sql.GetTabla(columnas,"productos","select p.idproducto,c.idcategoriaproducto,c.descripcion,p.descripcion,p.precioventa,date_format(p.fecharegistro,'%d/%m/%Y %H:%i') as fecharegistro from productos as p INNER JOIN categoriasproductos as c on p.idcategoriaproducto=c.idcategoriaproducto where p.activo=1");
+        Object[][]datos=sql.GetTabla(columnas,"productos","select p.idproducto,c.idcategoriaproducto,c.descripcion,p.descripcion,p.precioventa,date_format(p.fecharegistro,'%d-%m-%Y %H:%i') as fecharegistro from productos as p INNER JOIN categoriasproductos as c on p.idcategoriaproducto=c.idcategoriaproducto where p.activo=1");
         return datos;
     }
     
     public Object[][] MostrarDatosBusqueda(String texto){
         String[]columnas={"idproducto","idcategoriaproducto","c.descripcion","p.descripcion","precioventa","fecharegistro"};
-        Object[][]datos=sql.GetTabla(columnas,"productos","select p.idproducto,c.idcategoriaproducto,c.descripcion,p.descripcion,p.precioventa,date_format(p.fecharegistro,'%d/%m/%Y %H:%i') as fecharegistro from productos as p INNER JOIN categoriasproductos as c on p.idcategoriaproducto=c.idcategoriaproducto where p.activo=1 and p.descripcion like '%"+texto+"%'");
+        Object[][]datos=sql.GetTabla(columnas,"productos","select p.idproducto,c.idcategoriaproducto,c.descripcion,p.descripcion,p.precioventa,date_format(p.fecharegistro,'%d-%m-%Y %H:%i') as fecharegistro from productos as p INNER JOIN categoriasproductos as c on p.idcategoriaproducto=c.idcategoriaproducto where p.activo=1 and p.descripcion like '%"+texto+"%'");
         return datos;
     }
         
     public boolean InsertarProductos(Productos producto){
         String precio= Float.toString(producto.getPrecioventa()), fecha=((JTextField)vGestion_Productos.jDateFecha.getDateEditor().getUiComponent()).getText(),idcatprod=Integer.toString(producto.getIdcategoriaproducto());
         String datos[]={idcatprod,producto.getDescripcion(),precio};
-        return sql.insertar(datos, "insert into productos (idcategoriaproducto,descripcion,precioventa,fecharegistro,activo) values (?,?,?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),1)");
+        return sql.insertar(datos, "insert into productos (idcategoriaproducto,descripcion,precioventa,fecharegistro,activo) values (?,?,?,STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i:%s'),1)");
     }
     
     public String ObtenerProducto(String descripcion){
@@ -44,7 +44,7 @@ public class control_Productos {
     public boolean EditarProductos(Productos producto){
         String precio= Float.toString(producto.getPrecioventa()), fecha=((JTextField)vGestion_Productos.jDateFecha.getDateEditor().getUiComponent()).getText(), id=Integer.toString(producto.getIdproducto()),idcatprod=Integer.toString(producto.getIdcategoriaproducto());
         String datos[]={idcatprod,producto.getDescripcion(),precio,id};
-        return sql.editar(datos, "update productos set idcategoriaproducto=?,descripcion=?,precioventa=?,fecharegistro=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s') where idproducto=?");
+        return sql.editar(datos, "update productos set idcategoriaproducto=?,descripcion=?,precioventa=?,fecharegistro=STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i:%s') where idproducto=?");
     }
     
     public boolean EliminarProductos(Productos producto){

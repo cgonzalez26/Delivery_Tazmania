@@ -74,7 +74,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         Mostrar();
         ComboTurnos();
         EliminarItemsVacios();
-        jList2.setVisible(false);
+        jListaMovimientos.setVisible(false);
     }
 
     public void verificarCajaAbierta() {
@@ -128,7 +128,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         listmov = ce.list("tiposmovimientos", "descripcion", txtbuscar.getText());
         String substr = txtbuscar.getText().toLowerCase();
         list = new DefaultListModel();
-        jList2.setModel(list);
+        jListaMovimientos.setModel(list);
         list.removeAllElements();
         for(int i=0; i < listmov.size(); i++){
             if(listmov.get(i) == null){
@@ -137,9 +137,9 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
                 String sublist = listmov.get(i).toLowerCase();
                 if(sublist.contains(substr)){
                     list.addElement(listmov.get(i));
-                    jList2.setVisible(true);
+                    jListaMovimientos.setVisible(true);
                     if(txtbuscar.getText().isEmpty()){
-                        jList2.setVisible(false);
+                        jListaMovimientos.setVisible(false);
                     }
                 }
             }
@@ -395,7 +395,6 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabla_MovCaja = jTabla_MovCaja= new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -421,7 +420,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         jFechaHasta = new com.toedter.calendar.JDateChooser();
         btnBuscar = new javax.swing.JButton();
         txtbuscar = new javax.swing.JTextField();
-        jList2 = new javax.swing.JList<>();
+        jListaMovimientos = new javax.swing.JList<>();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -455,19 +454,6 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 256, Short.MAX_VALUE)
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 134, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 59, 256, -1));
 
         jScrollPane1.setOpaque(false);
 
@@ -577,6 +563,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel6.setText("Fecha Desde:");
 
+        jFechaDesde.setDateFormatString("dd-MM-yyyy");
         jFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -588,6 +575,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel7.setText("Fecha Hasta:");
 
+        jFechaHasta.setDateFormatString("dd-MM-yyyy");
         jFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -671,13 +659,13 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 850, 130));
 
-        jList2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jListaMovimientos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jListaMovimientos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList2MouseClicked(evt);
+                jListaMovimientosMouseClicked(evt);
             }
         });
-        getContentPane().add(jList2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 256, 53));
+        getContentPane().add(jListaMovimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 238, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -732,7 +720,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
                                     //String subfecha=fecha.substring(0, 10);
                                     //DateFormat df= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-                                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                                     try {
                                         fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                                     } catch (ParseException ex) {
@@ -740,8 +728,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
                                     }
                                     egresos = new vGestion_Egresos();
                                     vMenuPrincipal.jDesktopPane1.add(egresos);
-                                    vGestion_Egresos.jBotonModif_Egresos.setEnabled(true);
-                                    vGestion_Egresos.jBotonAgregar_Egresos.setText("Cancelar");
+                                    vGestion_Egresos.jBotonAgregar_Egresos.setEnabled(false);
                                     vGestion_Egresos.jTextDescripcion_Egresos.setText(jTabla_MovCaja.getValueAt(fila, 3).toString());
                                     vGestion_Egresos.jCBTipoEgreso_Egresos.setSelectedItem(jTabla_MovCaja.getValueAt(fila, 4).toString());
                                     vGestion_Egresos.jDateFecha_Egresos.setDate(fechaseleccionada);
@@ -903,13 +890,13 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         txtbuscar.setText("");
     }//GEN-LAST:event_formMouseClicked
 
-    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
-       int i = jList2.getSelectedIndex();
+    private void jListaMovimientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListaMovimientosMouseClicked
+       int i = jListaMovimientos.getSelectedIndex();
         if(i != -1){
-            txtbuscar.setText(jList2.getSelectedValue());
-            jList2.setVisible(false);
+            txtbuscar.setText(jListaMovimientos.getSelectedValue());
+            jListaMovimientos.setVisible(false);
         }
-    }//GEN-LAST:event_jList2MouseClicked
+    }//GEN-LAST:event_jListaMovimientosMouseClicked
 
     public void LimpiarSeleccion() {
         jTabla_MovCaja.clearSelection();
@@ -931,8 +918,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JList<String> jListaMovimientos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTabla_MovCaja;

@@ -295,7 +295,7 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
         jLabelUsuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelUsuario.setText("Usuario:");
 
-        jDateFecha.setDateFormatString("dd/MM/yyyy HH: mm: ss");
+        jDateFecha.setDateFormatString("dd-MM-yyyy HH:mm:ss");
         jDateFecha.setEnabled(false);
         jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 

@@ -42,7 +42,7 @@ public class control_Caja_Turno {
                 cajaturno.getEstado()                
                 };                
         return sql.insertar(datos,"INSERT INTO caja_turno(idcaja,idturno,idusuario,fecha_apertura,fecha_cierre,monto,estado,activo,fecha_registro) "
-                + "values (?,?,?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),?,?,1,NOW())");
+                + "values (?,?,?,STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i:%s'),STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i:%s'),?,?,1,NOW())");
     }
     
     public boolean EditarCajaTurno(Caja_Turno cajaturno){
@@ -52,7 +52,7 @@ public class control_Caja_Turno {
                 Float.toString(cajaturno.getMonto()),
                 cajaturno.getEstado()
                 };  
-        return sql.insertar(datos,"UPDATE caja_turno SET idusuario=?,fecha_cierre=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),monto=?,estado=? where idcajaturno=" +idcajaturno);
+        return sql.insertar(datos,"UPDATE caja_turno SET idusuario=?,fecha_cierre=STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i:%s'),monto=?,estado=? where idcajaturno=" +idcajaturno);
     }
     
     public boolean ModificarCajaTurno(Caja_Turno cajaturno){
@@ -60,7 +60,7 @@ public class control_Caja_Turno {
         String idcajaturno = Integer.toString(cajaturno.getIdcajaturno()), idusuario=Integer.toString(cajaturno.getIdusuario()),
         idturno = Integer.toString(cajaturno.getIdTurno()),monto=Float.toString(cajaturno.getMonto());
         String datos[]={idusuario,idturno,monto,idcajaturno};
-        return sql.editar(datos,"UPDATE caja_turno SET idusuario=?,idturno=?,fecha_apertura=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),monto=? where idcajaturno=?");
+        return sql.editar(datos,"UPDATE caja_turno SET idusuario=?,idturno=?,fecha_apertura=STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i:%s'),monto=? where idcajaturno=?");
     }
     
     public boolean EliminarCajaTurno(Caja_Turno cajaturno){
