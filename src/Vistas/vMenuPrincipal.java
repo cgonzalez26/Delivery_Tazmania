@@ -61,7 +61,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     private vGestion_TiposMovimientosCajas tipomovcaja = null;
     private vGestion_Clientes cliente = null;
     private vLista_Clientes listaclie = null;
-    private vConsumosEmpleados consumos = null;
+    private vLista_ConsumosEmpleados consumos = null;
 
     public vMenuPrincipal() {
         initComponents();
@@ -789,7 +789,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenuEmpleados.add(jMenuItem14);
 
         jMenuItem16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem16.setText("Asistencias");
+        jMenuItem16.setText("Administrar Asistencias");
         jMenuItem16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1319,7 +1319,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         if (consumos == null || consumos.isClosed()) {
-            consumos = new vConsumosEmpleados();
+            consumos = new vLista_ConsumosEmpleados();
             jDesktopPane1.add(consumos);
             consumos.setVisible(true);
         }

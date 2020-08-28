@@ -776,7 +776,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Consumos de Empleados");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
-        setPreferredSize(new java.awt.Dimension(866, 561));
+        setPreferredSize(new java.awt.Dimension(600, 400));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -819,7 +819,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 jTextFieldCantidadKeyTyped(evt);
             }
         });
-        getContentPane().add(jTextFieldCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 118, 28));
+        getContentPane().add(jTextFieldCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 140, 28));
 
         jButtonAgregar.setBackground(new java.awt.Color(252, 249, 57));
         jButtonAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -1097,7 +1097,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 jTextFieldEmpKeyReleased(evt);
             }
         });
-        getContentPane().add(jTextFieldEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 196, 30));
+        getContentPane().add(jTextFieldEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 200, 30));
 
         jLabelEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelEmpleado.setText("(*) Empleado:");
@@ -1136,7 +1136,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 jTextFieldProdKeyReleased(evt);
             }
         });
-        getContentPane().add(jTextFieldProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 186, 30));
+        getContentPane().add(jTextFieldProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 200, 30));
 
         jLabelProducto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelProducto.setText("(*) Producto:");
@@ -1389,22 +1389,12 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 LimpiarSeleccionTabla1();
             }
         }*/
-        if (!jButtonAgregar.isEnabled()) {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                dispose();
-                VolverListaConsumosEmpleados();
-            } else {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
-        } else if (!jTextFieldEmp.getText().equals("") || !jTextFieldProd.getText().equals("") || !jTextFieldCantidad.getText().isEmpty() || !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().isEmpty()) {
-            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                dispose();
-                VolverListaConsumosEmpleados();
-            } else {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
+        int i = JOptionPane.showConfirmDialog(null, "Desea cancelar la Operación?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            dispose();
+            VolverListaConsumosEmpleados();
+        } else {
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         }
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
