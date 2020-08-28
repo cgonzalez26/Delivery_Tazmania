@@ -24,7 +24,9 @@
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_Egresos.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vLista_Empleados.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vLista_Proveedores.java</file>
+            <file>file:/F:/Github/Delivery_Tazmania/src/Modelo/Session.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_Pantallas.java</file>
+            <file>file:/F:/Github/Delivery_Tazmania/src/Modelo/FechasBusquedas.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_FormasPagos.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Usuario.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_ConsumosEmpleados.java</file>
@@ -34,6 +36,7 @@
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_Recetas.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vPagos_Empleados.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_PermisosPantallasPerfiles.java</file>
+            <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_existencias.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vReporte_VentasSemanal.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vAbrir_Caja.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Caja_Turno.java</file>
