@@ -28,7 +28,7 @@ public class control_Movimientos_Caja {
     private Conexion mysql = new Conexion();
     private Connection cn = mysql.obtener();
     Movimientos_Caja mc = new Movimientos_Caja();
-    String todate = "STR_TO_DATE(", parse = ",'%d/%m/%Y %H:%i:%s')";
+    String todate = "STR_TO_DATE(", parse = ",'%d-%m-%Y %H:%i:%s')";
 
     public control_Movimientos_Caja() {
         sql = new Sentencias_sql();
@@ -42,7 +42,7 @@ public class control_Movimientos_Caja {
         String[] columnas = {"idmovimientocaja", "idcajaturno", "NroMovimiento", "Concepto", "TipoMovimiento", "Turno", "FechaMovimiento", "Ingreso", "Egreso", "detalle", "idmovimiento", "tipoVenta"};
         int idcajaturno = Session.getIdcajaturno_abierta();
         //Object[][] datos=sql.GetTabla(columnas, "movimientos_caja", "SELECT mc.idmovimientocaja,IFNULL(tm.descripcion,'') as Movimiento,DATE_FORMAT(mc.fecha_movimiento, '%d/%m/%Y %h:%i') FechaMovimiento,mc.monto AS Monto,tm.tipo AS TipoMovimiento,t.descripcion AS Turno,mc.NroMovimiento,IFNULL(mc.detalle,'') as detalle,mc.idmovimiento FROM  movimientos_caja as mc "
-        Object[][] datos = sql.GetTabla3(columnas, "movimientos_caja", "SELECT mc.idmovimientocaja,ct.idcajaturno,mc.NroMovimiento,IFNULL(mc.descripcion,'') as Concepto,IFNULL(tm.descripcion,'') as TipoMovimiento,t.descripcion AS Turno,DATE_FORMAT(mc.fecha_movimiento, '%d/%m/%Y %H:%i') FechaMovimiento,"
+        Object[][] datos = sql.GetTabla3(columnas, "movimientos_caja", "SELECT mc.idmovimientocaja,ct.idcajaturno,mc.NroMovimiento,IFNULL(mc.descripcion,'') as Concepto,IFNULL(tm.descripcion,'') as TipoMovimiento,t.descripcion AS Turno,DATE_FORMAT(mc.fecha_movimiento, '%d-%m-%Y %H:%i') FechaMovimiento,"
                 + "CASE WHEN tm.tipo='INGRESO' THEN mc.monto ELSE '-' END AS Ingreso,"
                 + "CASE WHEN tm.tipo='EGRESO' THEN mc.monto ELSE '-' END AS Egreso,"
                 + "IFNULL(mc.detalle,'') as detalle,mc.idmovimiento, mc.tipoVenta FROM  movimientos_caja as mc "
@@ -99,7 +99,7 @@ public class control_Movimientos_Caja {
         String fecha = ((JTextField) vAbrir_Caja.jDateFecha.getDateEditor()).getText();
         String idmovcaja = Integer.toString(movimientos_caja.getIdmovimientocaja()), idusuario = Integer.toString(movimientos_caja.getIdusuario());
         String datos[] = {idusuario, Float.toString(movimientos_caja.getMonto()), idmovcaja};
-        return sql.editar(datos, "UPDATE movimientos_caja SET idusuario=?,fecha_movimiento=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),monto=? where idmovimientocaja=?");
+        return sql.editar(datos, "UPDATE movimientos_caja SET idusuario=?,fecha_movimiento=STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i:%s'),monto=? where idmovimientocaja=?");
     }
 
     public boolean EliminarMovCajaCompraVenta(Movimientos_Caja movimientos_caja) {
@@ -205,7 +205,7 @@ public class control_Movimientos_Caja {
         String desdeComoCadena = sdf.format(desde);
         String hastaComoCadena = sdf.format(hasta);
         //Object[][]datos=sql.GetTabla(columnas, "movimientos_caja", "SELECT mc.idmovimientocaja,IFNULL(tm.descripcion,'') as Movimiento,DATE_FORMAT(mc.fecha_movimiento, '%d/%m/%Y %h:%i') as FechaMovimiento,mc.monto AS Monto,tm.tipo AS TipoMovimiento,t.descripcion AS Turno,mc.NroMovimiento,IFNULL(mc.detalle,'') as detalle,mc.idmovimiento "
-        Object[][] datos = sql.GetTabla2(columnas, "movimientos_caja", "SELECT mc.idmovimientocaja,mc.NroMovimiento,IFNULL(mc.descripcion,'') as Concepto,IFNULL(tm.descripcion,'') as TipoMovimiento,t.descripcion AS Turno,DATE_FORMAT(mc.fecha_movimiento, '%d/%m/%Y %H:%i') FechaMovimiento,"
+        Object[][] datos = sql.GetTabla2(columnas, "movimientos_caja", "SELECT mc.idmovimientocaja,mc.NroMovimiento,IFNULL(mc.descripcion,'') as Concepto,IFNULL(tm.descripcion,'') as TipoMovimiento,t.descripcion AS Turno,DATE_FORMAT(mc.fecha_movimiento, '%d-%m-%Y %H:%i') FechaMovimiento,"
                 + "CASE WHEN tm.tipo='INGRESO' THEN mc.monto ELSE '-' END AS Ingreso,"
                 + "CASE WHEN tm.tipo='EGRESO' THEN mc.monto ELSE '-' END AS Egreso,"
                 + "IFNULL(mc.detalle,'') as detalle,mc.idmovimiento "

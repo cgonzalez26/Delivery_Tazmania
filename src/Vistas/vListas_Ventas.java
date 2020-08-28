@@ -76,7 +76,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                                 JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                             } else {
                                 fecha = jTableVentas.getValueAt(seleccionado, 5).toString();
-                                DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                                 try {
                                     fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                                 } catch (ParseException ex) {
@@ -975,9 +975,11 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
             }
         });
 
+        jDateFechaDesde.setDateFormatString("dd-MM-yyyy");
         jDateFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jDateFechaDesde.setMinimumSize(new java.awt.Dimension(32, 20));
 
+        jDateFechaHasta.setDateFormatString("dd-MM-yyyy");
         jDateFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -1194,7 +1196,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                 } else {
                     fecha = jTableVentas.getValueAt(seleccionado, 5).toString();
-                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                     try {
                         fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                     } catch (ParseException ex) {
@@ -1584,7 +1586,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                 } else {
                     fecha = jTableVentas.getValueAt(seleccionado, 5).toString();
-                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                     try {
                         fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                     } catch (ParseException ex) {

@@ -37,7 +37,7 @@ public class control_Cajas {
             caja.getEstado()
         };
         return sql.insertar(datos, "INSERT INTO caja (idusuario,fecha_apertura,fecha_cierre,monto,estado,activo,fecha_registro) "
-                + "values (?,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),NOW(),?,?,1,NOW())");
+                + "values (?,STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i:%s'),NOW(),?,?,1,NOW())");
     }
 
     public boolean EditarCaja(Caja caja) {
@@ -47,7 +47,7 @@ public class control_Cajas {
             Float.toString(caja.getMonto()),
             caja.getEstado()
         };
-        return sql.insertar(datos, "UPDATE caja SET idusuario=?,fecha_cierre=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),monto=?,estado=? where idcaja=" + idcaja);
+        return sql.insertar(datos, "UPDATE caja SET idusuario=?,fecha_cierre=STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i:%s'),monto=?,estado=? where idcaja=" + idcaja);
     }
     
     public boolean ModificarCaja(Caja caja){
@@ -55,7 +55,7 @@ public class control_Cajas {
         String idcaja = (Integer.toString(caja.getIdCaja())), idusuario = (Integer.toString(caja.getIdusuario())),
         monto =Float.toString(caja.getMonto());        
         String datos[] = {idusuario,monto,idcaja};
-        return sql.editar(datos, "UPDATE caja SET idusuario=?,fecha_apertura=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i:%s'),monto=? where idcaja=?");
+        return sql.editar(datos, "UPDATE caja SET idusuario=?,fecha_apertura=STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i:%s'),monto=? where idcaja=?");
     }
 
     public boolean AnularCaja(Caja caja) {

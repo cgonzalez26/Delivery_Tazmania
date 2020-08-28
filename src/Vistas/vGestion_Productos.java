@@ -244,7 +244,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
         jLabelFecha.setText("Fecha:");
         jLayeredPane1.add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 104, 22));
 
-        jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm");
+        jDateFecha.setDateFormatString("dd-MM-yyyy HH:mm");
         jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jDateFecha.setOpaque(false);
         jLayeredPane1.add(jDateFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 170, 30));

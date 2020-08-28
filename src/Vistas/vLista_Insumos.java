@@ -132,41 +132,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
         //EliminarFilasVacias();
         //ReemplazarNulos();
         PintarPocoStock();
-        //AjustarTamañoFilas();
         ocultar_columnas();
-    }
-
-    public void AjustarTamañoFilas() {
-        if (jTabla_Insumos.getRowCount() != 0) {
-            for (int i = 0; i < jTabla_Insumos.getRowCount(); i++) {
-                Font font = new Font("Segoe UI Semibold", 0, 13);
-                int desc = (int) font.getStringBounds(jTabla_Insumos.getValueAt(i, 3).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int tipoinsu = (int) font.getStringBounds(jTabla_Insumos.getValueAt(i, 4).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int prov = (int) font.getStringBounds(jTabla_Insumos.getValueAt(i, 5).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int unidadmedida = (int) font.getStringBounds(jTabla_Insumos.getValueAt(i, 6).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int precio = (int) font.getStringBounds(jTabla_Insumos.getValueAt(i, 7).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int stock = (int) font.getStringBounds(jTabla_Insumos.getValueAt(i, 8).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                //int date = (int) font.getStringBounds(jTabla_Insumos.getValueAt(i, 8).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                if (tipoinsu > jTabla_Insumos.getColumnModel().getColumn(3).getPreferredWidth()) {
-                    jTabla_Insumos.getColumnModel().getColumn(3).setPreferredWidth(tipoinsu);
-                }
-                if (prov > jTabla_Insumos.getColumnModel().getColumn(4).getPreferredWidth()) {
-                    jTabla_Insumos.getColumnModel().getColumn(4).setPreferredWidth(prov);
-                }
-                if (desc > jTabla_Insumos.getColumnModel().getColumn(5).getPreferredWidth()) {
-                    jTabla_Insumos.getColumnModel().getColumn(5).setPreferredWidth(desc);
-                }
-                if (precio > jTabla_Insumos.getColumnModel().getColumn(6).getPreferredWidth()) {
-                    jTabla_Insumos.getColumnModel().getColumn(6).setPreferredWidth(precio);
-                }
-                if (stock > jTabla_Insumos.getColumnModel().getColumn(7).getPreferredWidth()) {
-                    jTabla_Insumos.getColumnModel().getColumn(7).setPreferredWidth(stock);
-                }
-                /*if (date > jTabla_Insumos.getColumnModel().getColumn(8).getPreferredWidth()) {
-                    jTabla_Insumos.getColumnModel().getColumn(8).setPreferredWidth(date);
-                }*/
-            }
-        }
     }
 
     public void ocultar_columnas() {

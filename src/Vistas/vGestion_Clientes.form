@@ -39,41 +39,38 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jLabelDomicilio" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldEmail" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
-                      <Component id="jButtonAgregar" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                      <Component id="jButtonModificar" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-                      <Component id="jBotonCancelar" min="-2" pref="100" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabelDomicilio" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldEmail" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelNombre" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldNombre" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                                  <Component id="jLabelNroDocumento" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldNroDocumento" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextFieldApellido" min="-2" pref="270" max="-2" attributes="0"/>
-                                  <Component id="jLabelApellido" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldTelefono" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="jTextFieldDomicilio" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelNombre" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                          <Component id="jTextFieldNombre" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
+                          <Component id="jLabelNroDocumento" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldNroDocumento" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jTextFieldApellido" min="-2" pref="270" max="-2" attributes="0"/>
+                          <Component id="jLabelApellido" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldTelefono" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="jTextFieldDomicilio" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="47" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButtonAgregar" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+              <Component id="jButtonModificar" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+              <Component id="jBotonCancelar" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -113,13 +110,13 @@
               <Component id="jLabelEmail" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jTextFieldEmail" min="-2" pref="30" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonAgregar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jButtonModificar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jBotonCancelar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

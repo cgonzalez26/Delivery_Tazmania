@@ -33,7 +33,7 @@ public class control_Reportes {
     }
 
     public void ReporteVentasDiarias() {
-        String convfecha = "%d/%m/%Y %h:%i";
+        String convfecha = "%d-%m-%Y %h:%i";
         if (sql.ConsultaReportes("select v.NroFactura,date_format(v.FechaVenta, '" + convfecha + "') Fecha,p.descripcion,d.Precio,d.Cantidad,(d.Precio*d.Cantidad) SubTotal from ventas v INNER JOIN detallesventas d on v.idventa=d.idventa INNER JOIN productos p on p.idproducto=d.idproducto where d.activo=1 and p.activo=1 and v.activo=1 order by date_format(v.FechaVenta, '" + convfecha + "')desc,v.NroFactura") == true) {
             try {
                 JasperReport ventasdiarias;
@@ -70,7 +70,7 @@ public class control_Reportes {
 
     public void ReporteVentasSemanal(String fechainicio, String fechafinal) {
         try {
-            if (sql.ConsultaReportes("select v.NroFactura,date_format(v.FechaVenta, '%d/%m/%Y %h:%i') as Fecha,p.descripcion,d.Precio,d.Cantidad,(d.Precio*d.Cantidad) SubTotal from ventas v INNER JOIN detallesventas d on v.idventa=d.idventa INNER JOIN productos p on p.idproducto=d.idproducto where date(v.FechaVenta) between str_to_date((str_to_date('" + fechainicio + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + fechafinal + "','%d/%m/%Y')),'%Y-%m-%d') and d.activo=1 and p.activo=1 and v.activo=1 order by date_format(v.FechaVenta, '%d/%m/%Y %h:%i')desc,v.NroFactura") == true) {
+            if (sql.ConsultaReportes("select v.NroFactura,date_format(v.FechaVenta, '%d-%m-%Y %h:%i') as Fecha,p.descripcion,d.Precio,d.Cantidad,(d.Precio*d.Cantidad) SubTotal from ventas v INNER JOIN detallesventas d on v.idventa=d.idventa INNER JOIN productos p on p.idproducto=d.idproducto where date(v.FechaVenta) between str_to_date((str_to_date('" + fechainicio + "','%d-%m-%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + fechafinal + "','%d-%m-%Y')),'%Y-%m-%d') and d.activo=1 and p.activo=1 and v.activo=1 order by date_format(v.FechaVenta, '%d-%m-%Y %h:%i')desc,v.NroFactura") == true) {
                 JasperReport ventassemanal;
 
                 String ruta = "/Reportes/Ventas_Semanal.jasper";
@@ -106,7 +106,7 @@ public class control_Reportes {
 
     public void ReporteVentasMes(String mes, String año) {
 
-        if (sql.ConsultaReportes("select v.NroFactura,date_format(v.FechaVenta, '%d/%m/%Y %h:%i') as Fecha,p.descripcion,d.Precio,d.Cantidad,(d.Precio*d.Cantidad) as SubTotal from ventas as v INNER JOIN detallesventas as d on v.idventa=d.idventa INNER JOIN productos as p on p.idproducto=d.idproducto where Month(v.FechaVenta)='" + mes + "' and year(v.FechaVenta)='" + año + "' and d.activo=1 and p.activo=1 and v.activo=1 order by date_format(v.FechaVenta, '%d/%m/%Y %h:%i')desc,v.NroFactura")) {
+        if (sql.ConsultaReportes("select v.NroFactura,date_format(v.FechaVenta, '%d-%m-%Y %h:%i') as Fecha,p.descripcion,d.Precio,d.Cantidad,(d.Precio*d.Cantidad) as SubTotal from ventas as v INNER JOIN detallesventas as d on v.idventa=d.idventa INNER JOIN productos as p on p.idproducto=d.idproducto where Month(v.FechaVenta)='" + mes + "' and year(v.FechaVenta)='" + año + "' and d.activo=1 and p.activo=1 and v.activo=1 order by date_format(v.FechaVenta, '%d-%m-%Y %h:%i')desc,v.NroFactura")) {
             try {
                 JasperReport ventasmes;
 
@@ -141,7 +141,7 @@ public class control_Reportes {
     }
 
     public void ReporteVentasAño(String año) {
-        if (sql.ConsultaReportes("select v.NroFactura,date_format(v.FechaVenta, '%d/%m/%Y %h:%i') as Fecha,p.descripcion,d.Precio,d.Cantidad,(d.Precio*d.Cantidad) as SubTotal from ventas as v INNER JOIN detallesventas as d on v.idventa=d.idventa INNER JOIN productos as p on p.idproducto=d.idproducto where YEAR(v.FechaVenta)='" + año + "' and d.activo=1 and p.activo=1 and v.activo=1 order by date_format(v.FechaVenta, '%d/%m/%Y %h:%i') desc,v.NroFactura")) {
+        if (sql.ConsultaReportes("select v.NroFactura,date_format(v.FechaVenta, '%d-%m-%Y %h:%i') as Fecha,p.descripcion,d.Precio,d.Cantidad,(d.Precio*d.Cantidad) as SubTotal from ventas as v INNER JOIN detallesventas as d on v.idventa=d.idventa INNER JOIN productos as p on p.idproducto=d.idproducto where YEAR(v.FechaVenta)='" + año + "' and d.activo=1 and p.activo=1 and v.activo=1 order by date_format(v.FechaVenta, '%d-%m-%Y %h:%i') desc,v.NroFactura")) {
 
             try {
                 JasperReport ventasaño;
