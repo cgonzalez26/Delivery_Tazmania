@@ -54,7 +54,7 @@ public class vReporte_VentasSemanal extends javax.swing.JInternalFrame {
         jLabel1.setText("(*) Inicio Fecha Semana:");
 
         jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jTextField1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButton2.setText("Calcular Semana Completa");

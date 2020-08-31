@@ -4,22 +4,9 @@ import Controlador.ColorearFilas;
 import Controlador.control_Insumos;
 import Controlador.control_existencias;
 import Modelo.Insumos;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.font.FontRenderContext;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
 
 /**
  *
