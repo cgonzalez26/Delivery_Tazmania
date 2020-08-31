@@ -50,6 +50,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     private vLista_Usuarios listauser = null;
     private vListas_Compras listacompras = null;
     private vListas_Ventas listaventas = null;
+    private vLista_Productos listaproductos = null;
     private vReporte_VentasSemanal ventassemanal = null;
     private vReporte_VentasMes ventasmes = null;
     private vReportes_Anio ventasanio = null;
@@ -61,7 +62,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     private vGestion_TiposMovimientosCajas tipomovcaja = null;
     private vGestion_Clientes cliente = null;
     private vLista_Clientes listaclie = null;
-    private vConsumosEmpleados consumos = null;
+    private vLista_ConsumosEmpleados consumos = null;
 
     public vMenuPrincipal() {
         initComponents();
@@ -310,7 +311,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
                 if (jMenuConfiguracion.getText().equals(nombres.get(i))) {
                     i++;
                     jMenuConfiguracion.setVisible(true);
-                    jMenuItem31.setVisible(false);
+                    //jMenuItem31.setVisible(false);
                     jMenuItem34.setVisible(false);
                     jMenuItem35.setVisible(false);
                     if (i == nombres.size()) {
@@ -331,12 +332,12 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
                     i++;
                     if (!jMenuConfiguracion.isVisible()) {
                         jMenuConfiguracion.setVisible(true);
-                        jMenuItem31.setVisible(true);
+                        //jMenuItem31.setVisible(true);
                         jMenuItem34.setVisible(true);
                         jMenuItem35.setVisible(true);
                         jMenuItem27.setVisible(false);
                     } else {
-                        jMenuItem31.setVisible(true);
+                        //jMenuItem31.setVisible(true);
                         jMenuItem34.setVisible(true);
                         jMenuItem35.setVisible(true);
                         jMenuItem27.setVisible(true);
@@ -352,7 +353,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
                         break;
                     }
                 } else {
-                    jMenuItem31.setVisible(false);
+                    //jMenuItem31.setVisible(false);
                     jMenuItem34.setVisible(false);
                     jMenuItem35.setVisible(false);
                 }
@@ -504,7 +505,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenuItem30 = new javax.swing.JMenuItem();
         jMenuConfiguracion = new javax.swing.JMenu();
         jMenuItem27 = new javax.swing.JMenuItem();
-        jMenuItem31 = new javax.swing.JMenuItem();
         jMenuItem34 = new javax.swing.JMenuItem();
         jMenuItem35 = new javax.swing.JMenuItem();
         jMenuAdministrar = new javax.swing.JMenu();
@@ -789,7 +789,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenuEmpleados.add(jMenuItem14);
 
         jMenuItem16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem16.setText("Asistencias");
+        jMenuItem16.setText("Administrar Asistencias");
         jMenuItem16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -930,19 +930,8 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         });
         jMenuConfiguracion.add(jMenuItem27);
 
-        jMenuItem31.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem31.setText("Registrar Usuarios");
-        jMenuItem31.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jMenuItem31.setPreferredSize(new java.awt.Dimension(290, 27));
-        jMenuItem31.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem31ActionPerformed(evt);
-            }
-        });
-        jMenuConfiguracion.add(jMenuItem31);
-
         jMenuItem34.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jMenuItem34.setText("Listado de Usuarios");
+        jMenuItem34.setText("Administrar Usuarios");
         jMenuItem34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jMenuItem34.setPreferredSize(new java.awt.Dimension(290, 27));
         jMenuItem34.addActionListener(new java.awt.event.ActionListener() {
@@ -1196,11 +1185,11 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
-        if (productos == null || productos.isClosed()) {
-            productos = new vGestion_Productos();
-            jDesktopPane1.add(productos);
-            productos.toFront();
-            productos.setVisible(true);
+        if (listaproductos == null || listaproductos.isClosed()) {
+            listaproductos = new vLista_Productos();
+            jDesktopPane1.add(listaproductos);
+            listaproductos.toFront();
+            listaproductos.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem28ActionPerformed
 
@@ -1285,14 +1274,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonComprasActionPerformed
 
-    private void jMenuItem31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem31ActionPerformed
-        if (usuarios == null || usuarios.isClosed()) {
-            usuarios = new vGestion_Usuarios();
-            jDesktopPane1.add(usuarios);
-            usuarios.setVisible(true);
-        }
-    }//GEN-LAST:event_jMenuItem31ActionPerformed
-
     private void jMenuItem34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem34ActionPerformed
         if (listauser == null || listauser.isClosed()) {
             listauser = new vLista_Usuarios();
@@ -1319,7 +1300,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         if (consumos == null || consumos.isClosed()) {
-            consumos = new vConsumosEmpleados();
+            consumos = new vLista_ConsumosEmpleados();
             jDesktopPane1.add(consumos);
             consumos.setVisible(true);
         }
@@ -1422,7 +1403,6 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem28;
     public static javax.swing.JMenuItem jMenuItem29;
     public static javax.swing.JMenuItem jMenuItem30;
-    private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem33;
     private javax.swing.JMenuItem jMenuItem34;
     private javax.swing.JMenuItem jMenuItem35;

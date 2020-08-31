@@ -122,20 +122,8 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
     public void LimpiarSeleccion() {
         jTableProductos.clearSelection();
         jTableProductos.getSelectionModel().clearSelection();
-    }
+    }   
 
-    /*public void MostrarRecetasActivas() {
-        tabla.descripcion = desc;
-        recetas = tabla.ConsultarInsumos();
-        vGestion_Recetas.jTableInsumosRegistrados.setModel(recetas);
-        ocultar_columnasreceta();
-    }
-
-    public void ocultar_columnasreceta() {
-        vGestion_Recetas.jTableInsumosRegistrados.getColumnModel().getColumn(0).setMaxWidth(0);
-        vGestion_Recetas.jTableInsumosRegistrados.getColumnModel().getColumn(0).setMinWidth(0);
-        vGestion_Recetas.jTableInsumosRegistrados.getColumnModel().getColumn(0).setPreferredWidth(0);
-    }*/
     public void VolverVentanaProductos() {
         ventanaproducto = new vGestion_Productos();
         vMenuPrincipal.jDesktopPane1.add(ventanaproducto);
@@ -162,6 +150,7 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
         jButtonEliminar = new javax.swing.JButton();
         jButtonAbrirReceta = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -353,17 +342,7 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
             ventanaproducto.nombreproducto = nombreproducto;
             ventanaproducto.precioventa = precioventa;
             dispose();
-        }
-        /*int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                jButton1.setEnabled(true);
-                jButton4.setEnabled(true);
-                jButton2.setText("Modificar");
-                jButton3.setText("Eliminar");
-                Limpiar();
-                LimpiarSeleccion();
-            }*/
+        }       
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
