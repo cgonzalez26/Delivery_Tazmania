@@ -41,16 +41,14 @@
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelNombreTipo" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jButtonAgregar" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                  <Component id="jButtonModificar" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                  <Component id="jButtonEliminar" min="-2" pref="100" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jTextFieldNombreTipo" min="-2" pref="344" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jButtonAgregar" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="jButtonModificar" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="jButtonEliminar" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jTextFieldNombreTipo" min="-2" pref="344" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="28" max="32767" attributes="0"/>
                       <Component id="jButtonCancelar" min="-2" pref="100" max="-2" attributes="0"/>
@@ -173,7 +171,7 @@
     <Component class="javax.swing.JButton" name="jButtonEliminar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="31" green="57" red="f0" type="rgb"/>
+          <Color blue="39" green="f9" red="fc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="12" style="0"/>

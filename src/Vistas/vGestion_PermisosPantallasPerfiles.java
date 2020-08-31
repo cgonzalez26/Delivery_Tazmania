@@ -267,7 +267,7 @@ public final class vGestion_PermisosPantallasPerfiles extends javax.swing.JInter
             }
         });
 
-        jButtonEliminar.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonEliminar.setBackground(new java.awt.Color(252, 249, 57));
         jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButtonEliminar.setText("Eliminar Permisos");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {

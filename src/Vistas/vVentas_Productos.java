@@ -443,6 +443,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         ));
         jScrollPane3.setViewportView(jTableInforme);
 
+        jButtonAceptarInforme.setBackground(new java.awt.Color(252, 249, 57));
         jButtonAceptarInforme.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButtonAceptarInforme.setText("Aceptar");
         jButtonAceptarInforme.addActionListener(new java.awt.event.ActionListener() {
@@ -526,7 +527,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         jLabelFecha.setText("(*) Fecha.");
         getContentPane().add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 161, 29));
 
-        jDateFecha.setDateFormatString("dd-MM-yyyy HH:mm");
+        jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm");
         jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         getContentPane().add(jDateFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 196, 33));
 
@@ -2036,8 +2037,8 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
     private void vSeleccionarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarProductoMouseClicked
         jTableProductos.clearSelection();
         jTableProductos.getSelectionModel().clearSelection();
-        MostrarProductos();
-        jTextFieldProductoBuscar.setText("");
+        //MostrarProductos();
+        //jTextFieldProductoBuscar.setText("");
     }//GEN-LAST:event_vSeleccionarProductoMouseClicked
 
     private void jButtonBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarProductoActionPerformed

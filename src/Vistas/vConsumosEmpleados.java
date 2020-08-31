@@ -801,7 +801,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDateFecha.setDateFormatString("dd-MM-yyyy HH:mm");
+        jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm");
         jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         getContentPane().add(jDateFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 145, 30));
 
@@ -1234,9 +1234,9 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_vSeleccionarEmpleadoWindowClosing
 
     private void vSeleccionarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarEmpleadoMouseClicked
-        MostrarEmpleados();
+        //MostrarEmpleados();
         LimpiarSeleccionTablaEmp();
-        jTextFieldEmpleado.setText("");
+        //jTextFieldEmpleado.setText("");
     }//GEN-LAST:event_vSeleccionarEmpleadoMouseClicked
 
     private void jButtonSeleccionarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarProductosActionPerformed
@@ -1297,9 +1297,9 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_vSeleccionarProductoWindowClosing
 
     private void vSeleccionarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarProductoMouseClicked
-        MostrarProductos();
+        //MostrarProductos();
         LimpiarSeleccionTablaProd();
-        jTextFieldProducto.setText("");
+        //jTextFieldProducto.setText("");
     }//GEN-LAST:event_vSeleccionarProductoMouseClicked
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed

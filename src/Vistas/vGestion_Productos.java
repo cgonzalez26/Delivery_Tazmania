@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  * @author Colo-PC
  */
 public final class vGestion_Productos extends javax.swing.JInternalFrame {
-    
+
     control_existencias conexis = new control_existencias();
     control_Productos producto = new control_Productos();
     Productos p = new Productos();
@@ -175,8 +175,6 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
         jComboBoxCategorias = new javax.swing.JComboBox<>();
         jLabelNombre = new javax.swing.JLabel();
         jTextFieldNombreProducto = new javax.swing.JTextField();
-        jLabelFecha = new javax.swing.JLabel();
-        jDateFecha = new com.toedter.calendar.JDateChooser();
         jButtonCancelar = new javax.swing.JButton();
         jButtonAgregar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
@@ -230,7 +228,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
 
         jLabelNombre.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelNombre.setText("(*) Nombre");
-        jLayeredPane1.add(jLabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 108, 22));
+        jLayeredPane1.add(jLabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 108, 22));
 
         jTextFieldNombreProducto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextFieldNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -238,16 +236,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
                 jTextFieldNombreProductoKeyTyped(evt);
             }
         });
-        jLayeredPane1.add(jTextFieldNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 170, 30));
-
-        jLabelFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelFecha.setText("Fecha:");
-        jLayeredPane1.add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 104, 22));
-
-        jDateFecha.setDateFormatString("dd-MM-yyyy HH:mm");
-        jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jDateFecha.setOpaque(false);
-        jLayeredPane1.add(jDateFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 170, 30));
+        jLayeredPane1.add(jTextFieldNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 170, 30));
 
         jButtonCancelar.setBackground(new java.awt.Color(237, 124, 61));
         jButtonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -314,22 +303,18 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         if (!jComboBoxCategorias.getSelectedItem().equals("Seleccionar Categoría...") && !jTextFieldNombreProducto.getText().trim().equals("")) {
             if (VerificarProductosRepetidos() == false) {
-                if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                    p.setIdcategoriaproducto(producto.ObtenerIDCategoriaProducto((String) jComboBoxCategorias.getSelectedItem()));
-                    p.setDescripcion(jTextFieldNombreProducto.getText());
-                    if (jTextFieldPrecioVenta.getText().trim().length() == 0) {
-                        p.setPrecioventa((float) 0.0);
-                    } else {
-                        p.setPrecioventa(Float.parseFloat(jTextFieldPrecioVenta.getText()));
-                    }
-                    if (producto.InsertarProductos(p)) {
-                        JOptionPane.showMessageDialog(null, "Nuevo Producto agregado");
-                        //Mostrar();
-                        //Limpiar();
-                        VolverListaProductos();
-                    }
+                p.setIdcategoriaproducto(producto.ObtenerIDCategoriaProducto((String) jComboBoxCategorias.getSelectedItem()));
+                p.setDescripcion(jTextFieldNombreProducto.getText());
+                if (jTextFieldPrecioVenta.getText().trim().length() == 0) {
+                    p.setPrecioventa((float) 0.0);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Formato de Fecha incorrecto!");
+                    p.setPrecioventa(Float.parseFloat(jTextFieldPrecioVenta.getText()));
+                }
+                if (producto.InsertarProductos(p)) {
+                    JOptionPane.showMessageDialog(null, "Nuevo Producto agregado");
+                    //Mostrar();
+                    //Limpiar();
+                    VolverListaProductos();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Producto ya Agregado!");
@@ -379,24 +364,20 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
         }*/
         if (!jComboBoxCategorias.getSelectedItem().equals("Seleccionar Categoría...") && !jTextFieldNombreProducto.getText().trim().equals("")) {
             if (VerificarProductosRepetidosModificar() == false) {
-                if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                    int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                    if (i == 0) {
-                        p.setIdcategoriaproducto(producto.ObtenerIDCategoriaProducto((String) jComboBoxCategorias.getSelectedItem()));
-                        p.setDescripcion(jTextFieldNombreProducto.getText());
-                        if (jTextFieldPrecioVenta.getText().trim().length() == 0) {
-                            p.setPrecioventa((float) 0.0);
-                        } else {
-                            p.setPrecioventa(Float.parseFloat(jTextFieldPrecioVenta.getText()));
-                        }
-                        p.setIdproducto(Integer.parseInt(id));
-                        if (producto.EditarProductos(p)) {
-                            JOptionPane.showMessageDialog(null, "Modificado");
-                            VolverListaProductos();
-                        }
+                int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    p.setIdcategoriaproducto(producto.ObtenerIDCategoriaProducto((String) jComboBoxCategorias.getSelectedItem()));
+                    p.setDescripcion(jTextFieldNombreProducto.getText());
+                    if (jTextFieldPrecioVenta.getText().trim().length() == 0) {
+                        p.setPrecioventa((float) 0.0);
+                    } else {
+                        p.setPrecioventa(Float.parseFloat(jTextFieldPrecioVenta.getText()));
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Formato de Fecha incorrecto!");
+                    p.setIdproducto(Integer.parseInt(id));
+                    if (producto.EditarProductos(p)) {
+                        JOptionPane.showMessageDialog(null, "Modificado");
+                        VolverListaProductos();
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Este producto ya fue agregado!");
@@ -433,7 +414,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (!jTextFieldNombreProducto.getText().trim().isEmpty() || !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().isEmpty() || !jComboBoxCategorias.getSelectedItem().equals("Seleccionar Categoría...")) {
+        } else if (!jTextFieldNombreProducto.getText().trim().isEmpty() || !jComboBoxCategorias.getSelectedItem().equals("Seleccionar Categoría...")) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -455,7 +436,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
             } else {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
-        } else if (!jTextFieldNombreProducto.getText().trim().isEmpty() || !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().isEmpty() || !jComboBoxCategorias.getSelectedItem().equals("Seleccionar Categoría...")) {
+        } else if (!jTextFieldNombreProducto.getText().trim().isEmpty() || !jComboBoxCategorias.getSelectedItem().equals("Seleccionar Categoría...")) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -503,9 +484,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
     public static javax.swing.JButton jButtonCancelar;
     public static javax.swing.JButton jButtonModificar;
     public static javax.swing.JComboBox<String> jComboBoxCategorias;
-    public static com.toedter.calendar.JDateChooser jDateFecha;
     private javax.swing.JLabel jLabelCategoria;
-    private javax.swing.JLabel jLabelFecha;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelPrecioVenta;
     private javax.swing.JLayeredPane jLayeredPane1;

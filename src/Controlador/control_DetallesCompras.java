@@ -25,7 +25,7 @@ public class control_DetallesCompras {
 
     public Object[][] MostrarDatos(String desde, String hasta, String nrocompra) {
         String[] columnas = {"iddetallecompra", "idcompra", "idinsumo", "NroCompra", "descripcion", "Precio", "Cantidad", "FechaCompra"};
-        Object[][] datos = sql.GetTabla(columnas, "detallescompras", "select d.iddetallecompra,c.idcompra,i.idinsumo,c.NroCompra,i.descripcion,d.Precio,d.Cantidad,date_format(d.fechaCompra,'%d-%m-%Y %H:%i') as FechaCompra from compras c INNER JOIN detallescompras d on c.idcompra=d.idcompra INNER JOIN insumos i on i.idinsumo=d.idinsumo where c.NroCompra='" + nrocompra + "' and date(d.fechaCompra) between str_to_date((str_to_date('" + desde + "','%d-%m-%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d-%m-%Y')),'%Y-%m-%d') and d.activo=1 order by c.NroCompra desc");
+        Object[][] datos = sql.GetTabla(columnas, "detallescompras", "select d.iddetallecompra,c.idcompra,i.idinsumo,c.NroCompra,i.descripcion,d.Precio,d.Cantidad,date_format(d.fechaCompra,'%d/%m/%Y %H:%i') as FechaCompra from compras c INNER JOIN detallescompras d on c.idcompra=d.idcompra INNER JOIN insumos i on i.idinsumo=d.idinsumo where c.NroCompra='" + nrocompra + "' and date(d.fechaCompra) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and d.activo=1 order by c.NroCompra desc");
         return datos;
     }
 
@@ -70,13 +70,13 @@ public class control_DetallesCompras {
         String idcompra = Integer.toString(dc.getIdcompra()), idinsumo = Integer.toString(dc.getIdinsumo()), precio = Float.toString(dc.getPrecio()), cantidad = Float.toString(dc.getCantidad()), fecha = ((JTextField) vCompras_Insumos.jDateFecha.getDateEditor().getUiComponent()).getText();
         String datos[] = {idcompra, idinsumo, precio, cantidad};
         //ActualizarStockInsumo(dc);
-        return sql.insertar(datos, "insert into detallescompras (idcompra,idinsumo,Precio,Cantidad,activo,fechaCompra) values (?,?,?,?,1,STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i'))");
+        return sql.insertar(datos, "insert into detallescompras (idcompra,idinsumo,Precio,Cantidad,activo,fechaCompra) values (?,?,?,?,1,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'))");
     }
 
     public boolean EditarDetalleCompraLotes(DetallesCompras dc) {
         String idcompra = Integer.toString(dc.getIdcompra()), idinsumo = Integer.toString(dc.getIdinsumo()), precio = Float.toString(dc.getPrecio()), cantidad = Float.toString(dc.getCantidad()), iddetalle = Integer.toString(dc.getIddetallecompra()), fecha = ((JTextField) vCompras_Insumos.jDateFecha.getDateEditor().getUiComponent()).getText();
         String datos[] = {idcompra, idinsumo, precio, cantidad, iddetalle};
-        return sql.editar(datos, "update detallescompras set idcompra=?,idinsumo=?,Precio=?,Cantidad=?, fechaCompra=STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i') where iddetallecompra=?");
+        return sql.editar(datos, "update detallescompras set idcompra=?,idinsumo=?,Precio=?,Cantidad=?, fechaCompra=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i') where iddetallecompra=?");
     }
 
     public boolean EliminarDetalleCompra(DetallesCompras dc) {

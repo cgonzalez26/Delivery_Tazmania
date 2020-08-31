@@ -5,13 +5,16 @@ import Controlador.control_Movimientos_Caja;
 import Modelo.Egresos;
 import Modelo.Movimientos_Caja;
 import Modelo.Session;
+import java.awt.Color;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +24,8 @@ import javax.swing.table.DefaultTableModel;
 public final class vLista_Egresos extends javax.swing.JInternalFrame {
 
     String idegreso, fecha;
+    String desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText(),
+            hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
     Timestamp fechaseleccionada;
     Object[][] datostabla;
     vGestion_Egresos ge = null;
@@ -32,6 +37,7 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
 
     public vLista_Egresos() {
         initComponents();
+        IniciarFechas();
         Mostrar();
 
         jTabla_Egresos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -48,7 +54,7 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
                             JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                         } else {
                             fecha = (jTabla_Egresos.getValueAt(fila, 4).toString());
-                            DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                             try {
                                 fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                             } catch (ParseException ex) {
@@ -76,6 +82,12 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
         });
     }
 
+    public void IniciarFechas() {
+        Date date = new Date();
+        jDateFechaDesde.setDate(date);
+        jDateFechaHasta.setDate(date);
+    }
+
     public boolean VerificarCajaAbierta() {
         int idcaja = Session.getIdcaja_abierta();
         boolean est = false;
@@ -92,11 +104,24 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
 
     public void Mostrar() {
         String[] columnas = {"IDEGRESO", "NRO EGRESO", "CONCEPTO", "TIPO EGRESO", "FECHA", "MONTO", "IDTIPOEGRESO", "DETALLE"};
-        datostabla = egreso.MostrarDatos();
+        datostabla = egreso.MostrarDatos(desde, hasta);
         datos = new DefaultTableModel(datostabla, columnas);
         jTabla_Egresos.setModel(datos);
         ocultar_columnas();
         EliminarFilasVacias();
+    }
+
+    public void MostrarGastoBuscado() {
+        datostabla = egreso.buscarEgreso(desde, hasta);
+        if (datostabla.length != 0) {
+            String[] columnas = {"IDEGRESO", "NRO EGRESO", "CONCEPTO", "TIPO EGRESO", "FECHA EGRESO", "MONTO", "IDTIPOEGRESO", "DETALLE"};
+            datos = new DefaultTableModel(datostabla, columnas);
+            jTabla_Egresos.setModel(datos);
+            ocultar_columnas();
+            EliminarFilasVacias();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontraron datos");
+        }
     }
 
     public void EliminarFilasVacias() {
@@ -138,8 +163,10 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
         btnEditar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabelGasto = new javax.swing.JLabel();
-        txtbuscarGasto = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jDateFechaDesde = new com.toedter.calendar.JDateChooser();
+        jDateFechaHasta = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -177,7 +204,7 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEliminar.setBackground(new java.awt.Color(237, 124, 61));
+        btnEliminar.setBackground(new java.awt.Color(252, 249, 57));
         btnEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -196,22 +223,10 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Buscar Por", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
         jLabelGasto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelGasto.setText("Gasto:");
-
-        txtbuscarGasto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        txtbuscarGasto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtbuscarGastoActionPerformed(evt);
-            }
-        });
-        txtbuscarGasto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtbuscarGastoKeyReleased(evt);
-            }
-        });
+        jLabelGasto.setText("Desde");
 
         btnBuscar.setBackground(new java.awt.Color(252, 249, 57));
         btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -222,72 +237,78 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabel1.setText("Hasta");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(txtbuscarGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabelGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102))))
+                    .addComponent(jLabelGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jDateFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(165, 165, 165))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtbuscarGasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabelGasto)))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelGasto)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBuscar)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 337, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(241, 241, 241))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addGap(10, 10, 10))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(204, 204, 204)
                 .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(98, 98, 98)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(100, 100, 100)
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(205, 205, 205))
+                .addGap(0, 218, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(207, 207, 207))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -348,7 +369,7 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
                         //String subfecha=fecha.substring(0, 10);
                         //DateFormat df= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         fecha = (String) (jTabla_Egresos.getValueAt(fila, 4));
-                        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                         try {
                             fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                         } catch (ParseException ex) {
@@ -376,35 +397,24 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if (!txtbuscarGasto.getText().isEmpty()) {
-            //LimpiarSeleccion();           
-            datostabla = egreso.buscarEgreso(txtbuscarGasto.getText());
-            if (datostabla.length != 0) {
-                String[] columnas = {"IDEGRESO", "NRO EGRESO", "CONCEPTO", "TIPO EGRESO", "FECHA EGRESO", "MONTO", "IDTIPOEGRESO", "DETALLE"};
-                datos = new DefaultTableModel(datostabla, columnas);
-                jTabla_Egresos.setModel(datos);
-                ocultar_columnas();
-                EliminarFilasVacias();
+        if (jDateFechaDesde.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+            if (jDateFechaHasta.getDateEditor().getUiComponent().getForeground() != Color.RED) {
+                if (!desde.isEmpty() && !hasta.isEmpty()) {
+                    MostrarGastoBuscado();
+                } else if (desde.isEmpty() || hasta.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar la fecha que falta");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos");
+                JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Debes completar el campo");
+            JOptionPane.showMessageDialog(null, "Formato de fecha incorrecto!");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void txtbuscarGastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarGastoActionPerformed
-
-    }//GEN-LAST:event_txtbuscarGastoActionPerformed
-
-    private void txtbuscarGastoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarGastoKeyReleased
-
-    }//GEN-LAST:event_txtbuscarGastoKeyReleased
-
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccion();
-        Mostrar();
-        txtbuscarGasto.setText("");
+        //Mostrar();
     }//GEN-LAST:event_formMouseClicked
 
 
@@ -413,10 +423,12 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnNuevo;
+    public static com.toedter.calendar.JDateChooser jDateFechaDesde;
+    public static com.toedter.calendar.JDateChooser jDateFechaHasta;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelGasto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTabla_Egresos;
-    private javax.swing.JTextField txtbuscarGasto;
     // End of variables declaration//GEN-END:variables
 }

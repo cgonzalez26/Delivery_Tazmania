@@ -5,12 +5,7 @@ import Controlador.control_Productos;
 import Controlador.control_existencias;
 import Modelo.Productos;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +14,7 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
 
     Sentencias_sql tabla = new Sentencias_sql();
     control_existencias conexis = new control_existencias();
-    String categoria, nombreproducto, desc, fecha, precioventa, idproducto;
+    String categoria, nombreproducto, desc, precioventa, idproducto;
     control_Productos producto = new control_Productos();
     Productos p = new Productos();
     Timestamp fechaseleccionada;
@@ -37,21 +32,11 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
                 if (e.getClickCount() == 2) {
                     vGestion_Productos.jButtonAgregar.setEnabled(false);
                     int fila = jTableProductos.rowAtPoint(e.getPoint());
-                    fecha = jTableProductos.getValueAt(fila, 5).toString();
                     if (ventanaproducto == null || ventanaproducto.isClosed()) {
                         ventanaproducto = new vGestion_Productos();
                         vMenuPrincipal.jDesktopPane1.add(ventanaproducto);
                         ventanaproducto.setVisible(true);
                         ventanaproducto.toFront();
-                    }
-                    if (!fecha.equals("-")) {
-                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                        try {
-                            fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
-                        } catch (ParseException ex) {
-                            Logger.getLogger(vListas_Compras.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        vGestion_Productos.jDateFecha.setDate(fechaseleccionada);
                     }
                     idproducto = jTableProductos.getValueAt(fila, 0).toString();
                     vGestion_Productos.jComboBoxCategorias.setSelectedItem(jTableProductos.getValueAt(fila, 2).toString());
@@ -69,7 +54,7 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
         });
     }
 
-    public void ReemplazarNulos() {
+    /*public void ReemplazarNulos() {
         if (jTableProductos.getRowCount() != 0) {
             for (int i = 0; i < jTableProductos.getRowCount(); i++) {
                 if (jTableProductos.getValueAt(i, 5).equals("00/00/0000 12:00")) {
@@ -77,15 +62,14 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }
-
+    }*/
     public void Mostrar() {
-        String[] columnas = {"IDPROD", "IDCATEGORIAPRODUCTO", "CATEGORIA", "DESCRIPCION", "PRECIO VENTA", "FECHA REGISTRO"};
+        String[] columnas = {"IDPROD", "IDCATEGORIAPRODUCTO", "CATEGORIA", "DESCRIPCION", "PRECIO VENTA"};
         Object[][] dato = producto.MostrarDatos();
         datos = new DefaultTableModel(dato, columnas);
         jTableProductos.setModel(datos);
         EliminarFilasVacias();
-        ReemplazarNulos();
+        //ReemplazarNulos();
         //AjustarTamañoFilas();
         ocultar_columnas();
     }
@@ -152,7 +136,6 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
         vGestion_Recetas.jTableInsumosRegistrados.getColumnModel().getColumn(0).setMinWidth(0);
         vGestion_Recetas.jTableInsumosRegistrados.getColumnModel().getColumn(0).setPreferredWidth(0);
     }*/
-
     public void VolverVentanaProductos() {
         ventanaproducto = new vGestion_Productos();
         vMenuPrincipal.jDesktopPane1.add(ventanaproducto);
@@ -206,6 +189,7 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
             }
         });
 
+        jButtonBuscarProducto.setBackground(new java.awt.Color(252, 249, 57));
         jButtonBuscarProducto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jButtonBuscarProducto.setText("Buscar");
         jButtonBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -287,7 +271,7 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 100, 30));
 
-        jButtonEliminar.setBackground(new java.awt.Color(240, 87, 49));
+        jButtonEliminar.setBackground(new java.awt.Color(252, 249, 57));
         jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -325,13 +309,13 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
 
     private void jButtonBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarProductoActionPerformed
         if (!jTextFieldProductoBuscado.getText().isEmpty()) {
-            String[] columnas = {"IDPROD", "IDCATEGORIAPRODUCTO", "CATEGORIA", "DESCRIPCION", "PRECIO VENTA", "FECHA REGISTRO"};
+            String[] columnas = {"IDPROD", "IDCATEGORIAPRODUCTO", "CATEGORIA", "DESCRIPCION", "PRECIO VENTA"};
             Object[][] dato = producto.MostrarDatosBusqueda(jTextFieldProductoBuscado.getText());
             if (dato.length != 0) {
                 datos = new DefaultTableModel(dato, columnas);
                 jTableProductos.setModel(datos);
                 EliminarFilasVacias();
-                ReemplazarNulos();
+                //ReemplazarNulos();
                 //AjustarTamañoFilas();
                 ocultar_columnas();
             } else {
@@ -352,23 +336,12 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
             vGestion_Productos.jButtonAgregar.setEnabled(false);
-            fecha = jTableProductos.getValueAt(fila, 5).toString();
             if (ventanaproducto == null || ventanaproducto.isClosed()) {
                 ventanaproducto = new vGestion_Productos();
                 vMenuPrincipal.jDesktopPane1.add(ventanaproducto);
                 ventanaproducto.setVisible(true);
                 ventanaproducto.toFront();
             }
-            if (!fecha.equals("-")) {
-                DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                try {
-                    fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
-                } catch (ParseException ex) {
-                    Logger.getLogger(vListas_Compras.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                vGestion_Productos.jDateFecha.setDate(fechaseleccionada);
-            }
-
             idproducto = jTableProductos.getValueAt(fila, 0).toString();
             vGestion_Productos.jComboBoxCategorias.setSelectedItem(jTableProductos.getValueAt(fila, 2).toString());
             vGestion_Productos.jTextFieldNombreProducto.setText(jTableProductos.getValueAt(fila, 3).toString());
@@ -428,8 +401,8 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccion();
-        Mostrar();
-        jTextFieldProductoBuscado.setText("");
+        //Mostrar();
+        //jTextFieldProductoBuscado.setText("");
     }//GEN-LAST:event_formMouseClicked
 
 

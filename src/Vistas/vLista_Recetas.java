@@ -163,7 +163,7 @@ public final class vLista_Recetas extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonEliminarInsumoRegistrar.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonEliminarInsumoRegistrar.setBackground(new java.awt.Color(252, 249, 57));
         jButtonEliminarInsumoRegistrar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButtonEliminarInsumoRegistrar.setText("Eliminar");
         jButtonEliminarInsumoRegistrar.addActionListener(new java.awt.event.ActionListener() {

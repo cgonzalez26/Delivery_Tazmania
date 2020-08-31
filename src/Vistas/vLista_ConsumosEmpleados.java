@@ -169,6 +169,7 @@ public final class vLista_ConsumosEmpleados extends javax.swing.JInternalFrame {
 
         jDateFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
+        jButtonBuscar.setBackground(new java.awt.Color(252, 249, 57));
         jButtonBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jButtonBuscar.setText("Buscar");
         jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -255,7 +256,7 @@ public final class vLista_ConsumosEmpleados extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonEliminar.setBackground(new java.awt.Color(240, 87, 49));
+        jButtonEliminar.setBackground(new java.awt.Color(252, 249, 57));
         jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -392,8 +393,8 @@ public final class vLista_ConsumosEmpleados extends javax.swing.JInternalFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccionTabla1();
-        IniciarFechas();
-        MostrarDatos();
+        //IniciarFechas();
+        //MostrarDatos();
     }//GEN-LAST:event_formMouseClicked
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing

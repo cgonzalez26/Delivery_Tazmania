@@ -132,7 +132,7 @@
     <Component class="javax.swing.JButton" name="jBotonEliminar_TipoInsumo">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="31" green="57" red="f0" type="rgb"/>
+          <Color blue="39" green="f9" red="fc" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="12" style="0"/>

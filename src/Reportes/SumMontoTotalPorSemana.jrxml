@@ -10,7 +10,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select sum(MontoTotal) from ventas where date(FechaVenta) between str_to_date((str_to_date('$P!{FechaInicio}','%d-%m-%Y')),'%Y-%m-%d') and str_to_date((str_to_date('$P!{FechaFinal}','%d-%m-%Y')),'%Y-%m-%d') and activo=1;]]>
+		<![CDATA[select sum(MontoTotal) from ventas where date(FechaVenta) between str_to_date((str_to_date('$P!{FechaInicio}','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('$P!{FechaFinal}','%d/%m/%Y')),'%Y-%m-%d') and activo=1;]]>
 	</queryString>
 	<field name="sum(MontoTotal)" class="java.lang.Double"/>
 	<background>

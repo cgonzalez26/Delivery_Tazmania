@@ -161,7 +161,7 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
             }
         });
 
-        btnEliminar.setBackground(new java.awt.Color(240, 87, 49));
+        btnEliminar.setBackground(new java.awt.Color(252, 249, 57));
         btnEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -410,8 +410,8 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         limpiarseleccion();
-        Mostrar();
-        jTextFieldNombreTipoBuscar.setText("");
+        //Mostrar();
+        //jTextFieldNombreTipoBuscar.setText("");
     }//GEN-LAST:event_formMouseClicked
 
     private void jButtonBuscarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarMovimientoActionPerformed

@@ -563,7 +563,6 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel6.setText("Fecha Desde:");
 
-        jFechaDesde.setDateFormatString("dd-MM-yyyy");
         jFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -575,9 +574,9 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel7.setText("Fecha Hasta:");
 
-        jFechaHasta.setDateFormatString("dd-MM-yyyy");
         jFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
 
+        btnBuscar.setBackground(new java.awt.Color(252, 249, 57));
         btnBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -720,7 +719,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
                                     //String subfecha=fecha.substring(0, 10);
                                     //DateFormat df= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-                                    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                                     try {
                                         fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                                     } catch (ParseException ex) {
@@ -884,10 +883,10 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccion();
-        inicializarComponentes();
-        Mostrar();
-        cbxTurnos.setSelectedItem("Seleccionar una opción");
-        txtbuscar.setText("");
+        //inicializarComponentes();
+        //Mostrar();
+        //cbxTurnos.setSelectedItem("Seleccionar una opción");
+        //txtbuscar.setText("");
     }//GEN-LAST:event_formMouseClicked
 
     private void jListaMovimientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListaMovimientosMouseClicked

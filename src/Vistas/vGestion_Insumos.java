@@ -601,8 +601,8 @@ public final class vGestion_Insumos extends javax.swing.JInternalFrame {
     private void vSeleccionarNombreComercialProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarNombreComercialProvMouseClicked
         jTableProveedores.clearSelection();
         jTableProveedores.getSelectionModel().clearSelection();
-        MostrarProveedores();
-        jTextFieldNomProvedor.setText("");
+        //MostrarProveedores();
+        //jTextFieldNomProvedor.setText("");
     }//GEN-LAST:event_vSeleccionarNombreComercialProvMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

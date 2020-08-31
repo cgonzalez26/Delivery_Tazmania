@@ -10,9 +10,6 @@ import Modelo.DetallesCompras;
 import Modelo.Movimientos_Caja;
 import Modelo.Session;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Rectangle;
-import java.awt.font.FontRenderContext;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -62,7 +59,7 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                                 JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                             } else {
                                 fecha = (String) (jTableCompras.getValueAt(seleccionado, 7));
-                                DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                                DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                                 try {
                                     fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                                 } catch (ParseException ex) {
@@ -394,7 +391,7 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonEliminarDesdeDetalle.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonEliminarDesdeDetalle.setBackground(new java.awt.Color(252, 249, 57));
         jButtonEliminarDesdeDetalle.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButtonEliminarDesdeDetalle.setText("Eliminar");
         jButtonEliminarDesdeDetalle.addActionListener(new java.awt.event.ActionListener() {
@@ -484,11 +481,9 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
             }
         });
 
-        jDateFechaDesde.setDateFormatString("dd-MM-yyyy");
         jDateFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jDateFechaDesde.setMinimumSize(new java.awt.Dimension(32, 20));
 
-        jDateFechaHasta.setDateFormatString("dd-MM-yyyy");
         jDateFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -541,7 +536,7 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonEliminar.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonEliminar.setBackground(new java.awt.Color(252, 249, 57));
         jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -730,7 +725,7 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                 } else {
                     fecha = (String) (jTableCompras.getValueAt(seleccionado, 7));
-                    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     try {
                         fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                     } catch (ParseException ex) {
@@ -770,14 +765,14 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonModificarDesdeDetalleActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText();
-        hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
+        //desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText();
+        //hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
         LimpiarSeleccionCompra();
         //LimpiarSeleccionDetalle();
-        desde = "";
-        hasta = "";
-        IniciarFechas();
-        MostrarCompras();
+        //desde = "";
+        //hasta = "";
+        //IniciarFechas();
+        //MostrarCompras();
         //MostrarDetalleCompra();
     }//GEN-LAST:event_formMouseClicked
 
@@ -902,7 +897,7 @@ public final class vListas_Compras extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                 } else {
                     fecha = (String) (jTableCompras.getValueAt(seleccionado, 7));
-                    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     try {
                         fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                     } catch (ParseException ex) {

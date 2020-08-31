@@ -76,7 +76,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                                 JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                             } else {
                                 fecha = jTableVentas.getValueAt(seleccionado, 5).toString();
-                                DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                                DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                                 try {
                                     fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                                 } catch (ParseException ex) {
@@ -805,17 +805,18 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         vSeleccionarClienteLayout.setHorizontalGroup(
             vSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vSeleccionarClienteLayout.createSequentialGroup()
-                .addGap(198, 198, 198)
-                .addComponent(jButtonAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(256, 256, 256)
-                .addComponent(jButtonCancelarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(238, Short.MAX_VALUE))
-            .addGroup(vSeleccionarClienteLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(vSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane5)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(25, 25, 25))
+                .addGroup(vSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(vSeleccionarClienteLayout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addComponent(jButtonAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(256, 256, 256)
+                        .addComponent(jButtonCancelarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(vSeleccionarClienteLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(vSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane5)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         vSeleccionarClienteLayout.setVerticalGroup(
             vSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -858,7 +859,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonEliminarDetalleVenta.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonEliminarDetalleVenta.setBackground(new java.awt.Color(252, 249, 57));
         jButtonEliminarDetalleVenta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButtonEliminarDetalleVenta.setText("Eliminar");
         jButtonEliminarDetalleVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -975,11 +976,9 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
             }
         });
 
-        jDateFechaDesde.setDateFormatString("dd-MM-yyyy");
         jDateFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jDateFechaDesde.setMinimumSize(new java.awt.Dimension(32, 20));
 
-        jDateFechaHasta.setDateFormatString("dd-MM-yyyy");
         jDateFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -1032,7 +1031,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonEliminar.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonEliminar.setBackground(new java.awt.Color(252, 249, 57));
         jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -1196,7 +1195,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                 } else {
                     fecha = jTableVentas.getValueAt(seleccionado, 5).toString();
-                    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     try {
                         fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                     } catch (ParseException ex) {
@@ -1238,14 +1237,14 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonModificarDetalleVentaActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText();
-        hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
+        //desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText();
+        //hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
         LimpiarSeleccionVenta();
         //LimpiarSeleccionDetalleVenta();
-        desde = "";
-        hasta = "";
-        IniciarFechas();
-        MostrarVentas();
+        //desde = "";
+        //hasta = "";
+        //IniciarFechas();
+        //MostrarVentas();
         //MostrarDetallesVentas();
     }//GEN-LAST:event_formMouseClicked
 
@@ -1586,7 +1585,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "La Caja del Movimiento está CERRADA!");
                 } else {
                     fecha = jTableVentas.getValueAt(seleccionado, 5).toString();
-                    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     try {
                         fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
                     } catch (ParseException ex) {

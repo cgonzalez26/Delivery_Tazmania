@@ -13,7 +13,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select v.NroFactura,date_format(v.FechaVenta, '%d-%m-%Y %h:%i') as Fecha,p.descripcion,d.Precio,d.Cantidad,(d.Precio*d.Cantidad) as SubTotal from ventas as v INNER JOIN detallesventas as d on v.idventa=d.idventa INNER JOIN productos as p on p.idproducto=d.idproducto where Month(v.FechaVenta)='$P!{Mes}' and year(v.FechaVenta)='$P!{Año}' and d.activo=1 and p.activo=1 and v.activo=1 order by date_format(v.FechaVenta, '%d-%m-%Y %h:%i')desc,v.NroFactura;]]>
+		<![CDATA[select v.NroFactura,date_format(v.FechaVenta, '%d/%m/%Y %H:%i') as Fecha,p.descripcion,d.Precio,d.Cantidad,(d.Precio*d.Cantidad) as SubTotal from ventas as v INNER JOIN detallesventas as d on v.idventa=d.idventa INNER JOIN productos as p on p.idproducto=d.idproducto where Month(v.FechaVenta)='$P!{Mes}' and year(v.FechaVenta)='$P!{Año}' and d.activo=1 and p.activo=1 and v.activo=1 order by date_format(v.FechaVenta, '%d/%m/%Y %H:%i')desc,v.NroFactura;]]>
 	</queryString>
 	<field name="NroFactura" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

@@ -384,7 +384,7 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jButtonSeleccionarInsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 36, 31));
 
-        jButtonEliminarInsumoElegido.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonEliminarInsumoElegido.setBackground(new java.awt.Color(252, 249, 57));
         jButtonEliminarInsumoElegido.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jButtonEliminarInsumoElegido.setText("Eliminar");
         jButtonEliminarInsumoElegido.addActionListener(new java.awt.event.ActionListener() {
@@ -556,8 +556,8 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
     private void vSeleccionarInsumoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarInsumoMouseClicked
         jTableInsumos.clearSelection();
         jTableInsumos.getSelectionModel().clearSelection();
-        MostrarInsumos();
-        jTextFieldInsumoBuscar.setText("");
+        //MostrarInsumos();
+        //jTextFieldInsumoBuscar.setText("");
     }//GEN-LAST:event_vSeleccionarInsumoMouseClicked
 
     private void jButtonBuscarInsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarInsumoActionPerformed

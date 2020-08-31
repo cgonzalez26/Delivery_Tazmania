@@ -140,7 +140,7 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
             }
         });
 
-        jBotonEliminar_TipoInsumo.setBackground(new java.awt.Color(240, 87, 49));
+        jBotonEliminar_TipoInsumo.setBackground(new java.awt.Color(252, 249, 57));
         jBotonEliminar_TipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBotonEliminar_TipoInsumo.setText("Eliminar");
         jBotonEliminar_TipoInsumo.addActionListener(new java.awt.event.ActionListener() {
@@ -371,8 +371,8 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         jTabla_TiposInsumos.clearSelection();
         jTabla_TiposInsumos.getSelectionModel().clearSelection();
-        MostrarDatos();
-        jTextFieldTipoInsumoBuscar.setText("");
+        //MostrarDatos();
+        //jTextFieldTipoInsumoBuscar.setText("");
     }//GEN-LAST:event_formMouseClicked
 
     private void jButtonBuscarTipoInsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarTipoInsumoActionPerformed

@@ -22,7 +22,7 @@ public class control_DetallesVentas {
 
     public Object[][] MostrarDatos(String desde, String hasta, String nrofactura) {
         String[] columnas = {"iddetalleventa", "idventa", "idproducto", "NroFactura", "descripcion", "Precio", "Cantidad", "fechaVenta"};
-        Object[][] datos = sql.GetTabla(columnas, "detallesventas", "select d.iddetalleventa,v.idventa,p.idproducto,v.NroFactura,p.descripcion,d.Precio,d.Cantidad,date_format(d.fechaVenta, '%d-%m-%Y %H:%i') as FechaVenta from detallesventas d INNER JOIN ventas v on d.idventa=v.idventa INNER JOIN productos p on d.idproducto=p.idproducto where v.NroFactura='" + nrofactura + "' and date(d.fechaVenta) between str_to_date((str_to_date('" + desde + "','%d-%m-%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d-%m-%Y')),'%Y-%m-%d') and d.activo=1 order by v.NroFactura desc");
+        Object[][] datos = sql.GetTabla(columnas, "detallesventas", "select d.iddetalleventa,v.idventa,p.idproducto,v.NroFactura,p.descripcion,d.Precio,d.Cantidad,date_format(d.fechaVenta, '%d/%m/%Y %H:%i') as FechaVenta from detallesventas d INNER JOIN ventas v on d.idventa=v.idventa INNER JOIN productos p on d.idproducto=p.idproducto where v.NroFactura='" + nrofactura + "' and date(d.fechaVenta) between str_to_date((str_to_date('" + desde + "','%d/%m/%Y')),'%Y-%m-%d') and str_to_date((str_to_date('" + hasta + "','%d/%m/%Y')),'%Y-%m-%d') and d.activo=1 order by v.NroFactura desc");
         return datos;
     }
 
@@ -63,13 +63,13 @@ public class control_DetallesVentas {
     public boolean RegistrarDetalleVenta(DetallesVentas dv) {
         String idventa = Integer.toString(dv.getIdventa()), idproducto = Integer.toString(dv.getIdproducto()), Precio = Float.toString(dv.getPrecio()), Cantidad = Float.toString(dv.getCantidad()), fecha = ((JTextField) vVentas_Productos.jDateFecha.getDateEditor().getUiComponent()).getText();
         String datos[] = {idventa, idproducto, Precio, Cantidad};
-        return sql.insertar(datos, "insert into detallesventas (idventa,idproducto,Precio,Cantidad,activo,fechaVenta) values (?,?,?,?,1,STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i'))");
+        return sql.insertar(datos, "insert into detallesventas (idventa,idproducto,Precio,Cantidad,activo,fechaVenta) values (?,?,?,?,1,STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i'))");
     }
 
     public boolean EditarDetalleVenta(DetallesVentas detalleventa) {
         String precio = Float.toString(detalleventa.getPrecio()), cantidad = Float.toString(detalleventa.getCantidad()), id = Integer.toString(detalleventa.getIddetalleventa()), idventa = Integer.toString(detalleventa.getIdventa()), idprod = Integer.toString(detalleventa.getIdproducto()), fecha = ((JTextField) vVentas_Productos.jDateFecha.getDateEditor().getUiComponent()).getText();
         String datos[] = {idventa, idprod, precio, cantidad, id};
-        return sql.editar(datos, "update detallesventas set idventa=?,idproducto=?,Precio=?,Cantidad=?,fechaVenta=STR_TO_DATE('" + fecha + "','%d-%m-%Y %H:%i') where iddetalleventa=?");
+        return sql.editar(datos, "update detallesventas set idventa=?,idproducto=?,Precio=?,Cantidad=?,fechaVenta=STR_TO_DATE('" + fecha + "','%d/%m/%Y %H:%i') where iddetalleventa=?");
     }
 
     public boolean EliminarDetalleVenta(DetallesVentas detalleventa) {
