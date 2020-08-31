@@ -1101,7 +1101,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
 
         jLabelEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelEmpleado.setText("(*) Empleado:");
-        getContentPane().add(jLabelEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 170, 30));
+        getContentPane().add(jLabelEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, 30));
 
         jButtonSeleccionarEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
         jButtonSeleccionarEmpleado.addActionListener(new java.awt.event.ActionListener() {

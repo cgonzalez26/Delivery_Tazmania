@@ -319,7 +319,7 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
         jLabel8.setText("Turno:");
 
         jLabeNomlTurno.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabeNomlTurno.setText("jLabel9");
+        jLabeNomlTurno.setText("turno elegido");
 
         jLabelVentasLocal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelVentasLocal.setText("Ventas Local:");

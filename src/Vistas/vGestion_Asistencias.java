@@ -307,7 +307,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
 
         jLabelEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelEmpleado.setText("(*) Empleado:");
-        getContentPane().add(jLabelEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 170, 30));
+        getContentPane().add(jLabelEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 90, 30));
 
         jTextFieldEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jTextFieldEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {

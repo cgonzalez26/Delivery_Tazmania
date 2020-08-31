@@ -42,16 +42,15 @@
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jTextDescripcion_Egresos" alignment="0" min="-2" pref="502" max="-2" attributes="0"/>
-                  <Component id="jLabelConcepto" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelMensaje" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jEtiqTipo_Insumos" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jEtiqStock_Insumos2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jDateFecha_Egresos" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
                           <Component id="jEtiqStock_Insumos1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextMonto_Egresos" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
                           <Component id="jCBTipoEgreso_Egresos" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
+                          <Component id="jEtiqStock_Insumos2" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -59,6 +58,7 @@
                           <Component id="jScrollPane3" min="-2" pref="288" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="jLabelConcepto" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>

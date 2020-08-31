@@ -48,7 +48,7 @@ public class vReporte_VentasSemanal extends javax.swing.JInternalFrame {
             }
         });
 
-        jDateChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jDateChooser1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel1.setText("(*) Inicio Fecha Semana:");

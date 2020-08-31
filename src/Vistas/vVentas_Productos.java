@@ -524,7 +524,7 @@ public final class vVentas_Productos extends javax.swing.JInternalFrame {
         getContentPane().add(cbxUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 202, 33));
 
         jLabelFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelFecha.setText("(*) Fecha.");
+        jLabelFecha.setText("(*) Fecha");
         getContentPane().add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 161, 29));
 
         jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm");

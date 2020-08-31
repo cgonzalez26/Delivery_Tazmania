@@ -836,7 +836,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
 
         jLabelFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelFecha.setText("(*) Fecha:");
-        jLayeredPane3.add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 11, 80, 20));
+        jLayeredPane3.add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 11, 60, 20));
 
         jButtonModificarCompra.setBackground(new java.awt.Color(252, 249, 57));
         jButtonModificarCompra.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
