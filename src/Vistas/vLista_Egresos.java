@@ -240,9 +240,11 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel1.setText("Hasta");
 
-        jDateFechaDesde.setDateFormatString("dd-MM-yyyy");
+        jDateFechaDesde.setDateFormatString("dd/MM/yyyy");
+        jDateFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jDateFechaHasta.setDateFormatString("dd-MM-yyyy");
+        jDateFechaHasta.setDateFormatString("dd/MM/yyyy");
+        jDateFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
