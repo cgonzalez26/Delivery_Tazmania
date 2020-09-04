@@ -976,9 +976,11 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
             }
         });
 
+        jDateFechaDesde.setDateFormatString("dd/MM/yyyy");
         jDateFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jDateFechaDesde.setMinimumSize(new java.awt.Dimension(32, 20));
 
+        jDateFechaHasta.setDateFormatString("dd/MM/yyyy");
         jDateFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
