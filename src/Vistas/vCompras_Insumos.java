@@ -830,7 +830,7 @@ public final class vCompras_Insumos extends javax.swing.JInternalFrame {
         jLayeredPane3.add(jCBUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(514, 35, 250, 32));
         jCBUsuario.getAccessibleContext().setAccessibleParent(this);
 
-        jDateFecha.setDateFormatString("dd-MM-yyyy HH:mm");
+        jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm");
         jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLayeredPane3.add(jDateFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 37, 175, 30));
 
