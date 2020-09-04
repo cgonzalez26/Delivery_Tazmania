@@ -301,7 +301,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         jLabelFecha.setText("(*) Fecha:");
         getContentPane().add(jLabelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 56, 19));
 
-        jDateFecha.setDateFormatString("dd-MM-yyyy HH:mm");
+        jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm");
         jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         getContentPane().add(jDateFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 172, 30));
 

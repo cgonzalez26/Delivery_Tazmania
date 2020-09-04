@@ -208,7 +208,7 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
         jLabelFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelFecha.setText("Fecha:");
 
-        jDateFecha.setDateFormatString("dd-MM-yyyy HH:mm:ss");
+        jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm:ss");
         jDateFecha.setEnabled(false);
         jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 

@@ -801,7 +801,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDateFecha.setDateFormatString("dd-MM-yyyy HH:mm");
+        jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm");
         jDateFecha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         getContentPane().add(jDateFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 145, 30));
 

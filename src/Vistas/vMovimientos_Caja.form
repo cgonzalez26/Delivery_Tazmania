@@ -341,7 +341,6 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jFechaDesde">
           <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="13" style="1"/>
             </Property>
@@ -386,7 +385,6 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jFechaHasta">
           <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Semibold" size="13" style="1"/>
             </Property>

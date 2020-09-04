@@ -248,7 +248,7 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
 
         jTextDescripcion_Egresos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jDateFecha_Egresos.setDateFormatString("dd-MM-yyyy HH:mm");
+        jDateFecha_Egresos.setDateFormatString("dd/MM/yyyy HH:mm");
         jDateFecha_Egresos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jLabelMensaje.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
