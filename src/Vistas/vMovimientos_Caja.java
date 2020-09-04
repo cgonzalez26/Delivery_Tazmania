@@ -563,6 +563,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel6.setText("Fecha Desde:");
 
+        jFechaDesde.setDateFormatString("dd-MM-yyyy");
         jFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -574,6 +575,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel7.setText("Fecha Hasta:");
 
+        jFechaHasta.setDateFormatString("dd-MM-yyyy");
         jFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
 
         btnBuscar.setBackground(new java.awt.Color(252, 249, 57));
