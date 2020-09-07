@@ -411,12 +411,22 @@ public final class vGestion_TiposInsumos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldTipoInsumoBuscarKeyTyped
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (i == 0) {
-            jBotonAgregar_TipoInsumo.setEnabled(true);
-            jTextDescripcion_TipoInsumo.setText("");
-            LimpiarSeleccion();
-            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        if (!jBotonAgregar_TipoInsumo.isEnabled()) {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else if (!jTextDescripcion_TipoInsumo.getText().trim().isEmpty()) {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else {
+            dispose();
         }
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 

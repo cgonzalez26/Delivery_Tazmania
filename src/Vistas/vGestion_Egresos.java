@@ -179,7 +179,7 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Administrar Gastos");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
-        setPreferredSize(new java.awt.Dimension(526, 391));
+        setPreferredSize(new java.awt.Dimension(622, 417));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }

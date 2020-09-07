@@ -14,7 +14,7 @@
       <Image iconType="3" name="/Imagenes/LogoDelivery.png"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[526, 391]"/>
+      <Dimension value="[622, 417]"/>
     </Property>
   </Properties>
   <SyntheticProperties>

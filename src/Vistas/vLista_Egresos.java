@@ -24,8 +24,6 @@ import javax.swing.table.DefaultTableModel;
 public final class vLista_Egresos extends javax.swing.JInternalFrame {
 
     String idegreso, fecha;
-    String desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText(),
-            hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
     Timestamp fechaseleccionada;
     Object[][] datostabla;
     vGestion_Egresos ge = null;
@@ -103,6 +101,8 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
     }
 
     public void Mostrar() {
+        String desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText(),
+                hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
         String[] columnas = {"IDEGRESO", "NRO EGRESO", "CONCEPTO", "TIPO EGRESO", "FECHA", "MONTO", "IDTIPOEGRESO", "DETALLE"};
         datostabla = egreso.MostrarDatos(desde, hasta);
         datos = new DefaultTableModel(datostabla, columnas);
@@ -112,6 +112,8 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
     }
 
     public void MostrarGastoBuscado() {
+        String desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText(),
+                hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
         datostabla = egreso.buscarEgreso(desde, hasta);
         if (datostabla.length != 0) {
             String[] columnas = {"IDEGRESO", "NRO EGRESO", "CONCEPTO", "TIPO EGRESO", "FECHA EGRESO", "MONTO", "IDTIPOEGRESO", "DETALLE"};
@@ -403,6 +405,8 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText(),
+                hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
         if (jDateFechaDesde.getDateEditor().getUiComponent().getForeground() != Color.RED) {
             if (jDateFechaHasta.getDateEditor().getUiComponent().getForeground() != Color.RED) {
                 if (!desde.isEmpty() && !hasta.isEmpty()) {

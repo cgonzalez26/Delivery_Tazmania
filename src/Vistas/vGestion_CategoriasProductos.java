@@ -404,13 +404,23 @@ public final class vGestion_CategoriasProductos extends javax.swing.JInternalFra
     }//GEN-LAST:event_jTextFieldBuscarCategoriaKeyTyped
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (!jButtonAgregar.isEnabled()) {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                jButtonAgregar.setEnabled(true);
-                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                jTextCategoria.setText("");
-                LimpiarSeleccion();
+                dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
+        } else if (!jTextCategoria.getText().trim().isEmpty() && jButtonAgregar.isEnabled()) {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else {
+            dispose();
+        }
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
 

@@ -4,17 +4,11 @@ import Controlador.control_PermisosPantallasPerfiles;
 import Controlador.control_Reportes;
 import Modelo.Fondo;
 import Modelo.Session;
-import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *

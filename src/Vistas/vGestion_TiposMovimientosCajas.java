@@ -433,13 +433,22 @@ public final class vGestion_TiposMovimientosCajas extends javax.swing.JInternalF
     }//GEN-LAST:event_jButtonBuscarMovimientoActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (i == 0) {
-            btnAgregar.setEnabled(true);
-            jTextFieldNombreTipoMovimiento.setText("");
-            rbEgreso.setSelected(false);
-            rbIngreso.setSelected(false);
-            limpiarseleccion();
+        if (!btnAgregar.isEnabled()) {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else if (!jTextFieldNombreTipoMovimiento.getText().isEmpty() || rbEgreso.isSelected() == true || rbIngreso.isSelected() == true) {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else {
+            dispose();
         }
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 

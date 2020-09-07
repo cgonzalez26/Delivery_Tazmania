@@ -392,12 +392,22 @@ public final class vGestion_TiposEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonBuscarTipoActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (i == 0) {
-            jButtonAgregar.setEnabled(true);
-            jTextFieldNombreTipo.setText("");
-            LimpiarSeleccion();
-            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        if (!jButtonAgregar.isEnabled()) {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else if (!jTextFieldNombreTipo.getText().trim().isEmpty()) {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else {
+            dispose();
         }
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
