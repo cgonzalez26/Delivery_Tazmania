@@ -123,22 +123,22 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         EliminarFilasVacias();
         modificar_columnas();
     }
-    
-    public void ListaMovimientos(){
+
+    public void ListaMovimientos() {
         listmov = ce.list("tiposmovimientos", "descripcion", txtbuscar.getText());
         String substr = txtbuscar.getText().toLowerCase();
         list = new DefaultListModel();
         jListaMovimientos.setModel(list);
         list.removeAllElements();
-        for(int i=0; i < listmov.size(); i++){
-            if(listmov.get(i) == null){
+        for (int i = 0; i < listmov.size(); i++) {
+            if (listmov.get(i) == null) {
                 listmov.remove(i);
             } else {
                 String sublist = listmov.get(i).toLowerCase();
-                if(sublist.contains(substr)){
+                if (sublist.contains(substr)) {
                     list.addElement(listmov.get(i));
                     jListaMovimientos.setVisible(true);
-                    if(txtbuscar.getText().isEmpty()){
+                    if (txtbuscar.getText().isEmpty()) {
                         jListaMovimientos.setVisible(false);
                     }
                 }
@@ -421,6 +421,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
         btnBuscar = new javax.swing.JButton();
         txtbuscar = new javax.swing.JTextField();
         jListaMovimientos = new javax.swing.JList<>();
+        jButtonCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
         setClosable(true);
@@ -481,7 +482,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, 100, 30));
+        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 100, 30));
 
         btnEditar.setBackground(new java.awt.Color(252, 249, 57));
         btnEditar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -491,7 +492,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 420, 100, 30));
+        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 420, 100, 30));
 
         btnEliminar.setBackground(new java.awt.Color(252, 249, 57));
         btnEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -501,7 +502,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 420, 100, 30));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, 100, 30));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabel9.setText("Ingreso:");
@@ -667,6 +668,16 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jListaMovimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 238, -1));
+
+        jButtonCancelar.setBackground(new java.awt.Color(237, 124, 61));
+        jButtonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 420, 100, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -871,7 +882,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTotalCajaKeyReleased
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (!txtbuscar.getText().isEmpty() || !cbxTurnos.getSelectedItem().equals("Seleccionar una opción")) {
+        if (!txtbuscar.getText().isEmpty() /*|| !cbxTurnos.getSelectedItem().equals("Seleccionar una opción")*/) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -892,12 +903,25 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void jListaMovimientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListaMovimientosMouseClicked
-       int i = jListaMovimientos.getSelectedIndex();
-        if(i != -1){
+        int i = jListaMovimientos.getSelectedIndex();
+        if (i != -1) {
             txtbuscar.setText(jListaMovimientos.getSelectedValue());
             jListaMovimientos.setVisible(false);
         }
     }//GEN-LAST:event_jListaMovimientosMouseClicked
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        if (!txtbuscar.getText().isEmpty() /*|| !cbxTurnos.getSelectedItem().equals("Seleccionar una opción")*/) {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else {
+            dispose();
+        }
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     public void LimpiarSeleccion() {
         jTabla_MovCaja.clearSelection();
@@ -910,6 +934,7 @@ public final class vMovimientos_Caja extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JComboBox<String> cbxTurnos;
+    private javax.swing.JButton jButtonCancelar;
     public static com.toedter.calendar.JDateChooser jFechaDesde;
     public static com.toedter.calendar.JDateChooser jFechaHasta;
     private javax.swing.JLabel jLabel1;

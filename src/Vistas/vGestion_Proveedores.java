@@ -24,20 +24,11 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
     public vGestion_Proveedores() {
         initComponents();
         jTextNom_Prov.requestFocus();
-        jBotonModificar_Prov.setEnabled(false);
-    }
-
-    public void Limpiar() {
-        jTextNom_Prov.setText("");
-        jTextApe_Prov.setText("");
-        jTextNomCom_Prov.setText("");
-        jTextDirec_Prov.setText("");
-        jTextTel_Prov.setText("");
-        jTextNroDoc_Prov.setText("");
+        jButtonModificar.setEnabled(false);
     }
 
     public void Cerrar() {
-        if (!jTextNom_Prov.getText().trim().isEmpty() || !jTextApe_Prov.getText().trim().isEmpty() || !jTextNomCom_Prov.getText().trim().isEmpty() || !jTextNroDoc_Prov.getText().trim().isEmpty()) {
+        if (!jTextNom_Prov.getText().trim().isEmpty() || !jTextApe_Prov.getText().trim().isEmpty() || !jTextNomCom_Prov.getText().trim().isEmpty() || !jTextDirec_Prov.getText().isEmpty() || !jTextNroDoc_Prov.getText().isEmpty() || !jTextTel_Prov.getText().isEmpty()) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -45,7 +36,7 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
         } else {
-            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            dispose();
         }
     }
 
@@ -65,8 +56,8 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         jTextTel_Prov = new javax.swing.JTextField();
         jTextNroDoc_Prov = new javax.swing.JTextField();
         jEtiqNumDoc_Prov = new javax.swing.JLabel();
-        jBotonAgre_Prov2 = new javax.swing.JButton();
-        jBotonModificar_Prov = new javax.swing.JButton();
+        jButtonAgregar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
         jBotonCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
@@ -146,21 +137,21 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         jEtiqNumDoc_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqNumDoc_Prov.setText("Nro Documento:");
 
-        jBotonAgre_Prov2.setBackground(new java.awt.Color(252, 249, 57));
-        jBotonAgre_Prov2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jBotonAgre_Prov2.setText("Agregar");
-        jBotonAgre_Prov2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonAgre_Prov2ActionPerformed(evt);
+                jButtonAgregarActionPerformed(evt);
             }
         });
 
-        jBotonModificar_Prov.setBackground(new java.awt.Color(252, 249, 57));
-        jBotonModificar_Prov.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jBotonModificar_Prov.setText("Modificar");
-        jBotonModificar_Prov.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotonModificar_ProvActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
@@ -200,9 +191,9 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
                         .addComponent(jTextNomCom_Prov)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(92, 92, 92)
-                            .addComponent(jBotonAgre_Prov2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(79, 79, 79)
-                            .addComponent(jBotonModificar_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(74, 74, 74)
                             .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(46, Short.MAX_VALUE))
@@ -238,8 +229,8 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
                 .addComponent(jTextDirec_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBotonAgre_Prov2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBotonModificar_Prov, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -247,59 +238,48 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBotonAgre_Prov2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAgre_Prov2ActionPerformed
-        //if (jBotonAgre_Prov2.getText().equals("Agregar")) {
-            if (!jTextNom_Prov.getText().trim().equals("") && !jTextNomCom_Prov.getText().trim().equals("")) {
-                if (jTextNroDoc_Prov.getText().length() <= 10) {
-                    p.setIdTipoDocumento(1);
-                    p.setNombre(jTextNom_Prov.getText());
-                    if (jTextNroDoc_Prov.getText().equals("")) {
-                        p.setNroDocumento("-");
-                    } else {
-                        p.setNroDocumento(jTextNroDoc_Prov.getText());
-                    }
-                    if (!jTextApe_Prov.getText().equals("")) {
-                        p.setApellido(jTextApe_Prov.getText());
-                    } else {
-                        p.setApellido("-");
-                    }
-                    p.setNombre_comercial(jTextNomCom_Prov.getText());
-                    if (jTextDirec_Prov.getText().equals("")) {
-                        p.setDireccion("-");
-                    } else {
-                        p.setDireccion(jTextDirec_Prov.getText());
-                    }
-                    if (jTextTel_Prov.getText().equals("")) {
-                        p.setTelefono("-");
-                    } else {
-                        p.setTelefono(jTextTel_Prov.getText());
-                    }
-                    if (control_prov.InsertarProveedores(p)) {
-                        JOptionPane.showMessageDialog(null, "Nuevo Proveedor agregado");
-                        lista = new vLista_Proveedores();
-                        vMenuPrincipal.jDesktopPane1.add(lista);
-                        lista.setVisible(true);
-                        this.dispose();
-                    }
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        if (!jTextNom_Prov.getText().trim().equals("") && !jTextNomCom_Prov.getText().trim().equals("")) {
+            if (jTextNroDoc_Prov.getText().length() <= 10) {
+                p.setIdTipoDocumento(1);
+                p.setNombre(jTextNom_Prov.getText());
+                if (jTextNroDoc_Prov.getText().equals("")) {
+                    p.setNroDocumento("-");
                 } else {
-                    JOptionPane.showMessageDialog(null, "El formato del documento es incorrecto");
+                    p.setNroDocumento(jTextNroDoc_Prov.getText());
+                }
+                if (!jTextApe_Prov.getText().equals("")) {
+                    p.setApellido(jTextApe_Prov.getText());
+                } else {
+                    p.setApellido("-");
+                }
+                p.setNombre_comercial(jTextNomCom_Prov.getText());
+                if (jTextDirec_Prov.getText().equals("")) {
+                    p.setDireccion("-");
+                } else {
+                    p.setDireccion(jTextDirec_Prov.getText());
+                }
+                if (jTextTel_Prov.getText().equals("")) {
+                    p.setTelefono("-");
+                } else {
+                    p.setTelefono(jTextTel_Prov.getText());
+                }
+                if (control_prov.InsertarProveedores(p)) {
+                    JOptionPane.showMessageDialog(null, "Nuevo Proveedor agregado");
+                    lista = new vLista_Proveedores();
+                    vMenuPrincipal.jDesktopPane1.add(lista);
+                    lista.setVisible(true);
+                    this.dispose();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
+                JOptionPane.showMessageDialog(null, "El formato del documento es incorrecto");
             }
-//        } else {
-//            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-//            if (i == 0) {
-//                lista = new vLista_Proveedores();
-//                vMenuPrincipal.jDesktopPane1.add(lista);
-//                lista.setVisible(true);
-//                this.dispose();
-//            }
-//        }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
+        }
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
-    }//GEN-LAST:event_jBotonAgre_Prov2ActionPerformed
-
-    private void jBotonModificar_ProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonModificar_ProvActionPerformed
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         if (!jTextNom_Prov.getText().trim().equals("") && !jTextNomCom_Prov.getText().trim().equals("")) {
             if (jTextNroDoc_Prov.getText().length() <= 10) {
                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "confirmar", JOptionPane.YES_NO_OPTION);
@@ -331,8 +311,8 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
 
                     if (control_prov.EditarProveedores(p)) {
                         JOptionPane.showMessageDialog(null, "Modificacion Completa");
-                        jBotonModificar_Prov.setEnabled(false);
-                        jBotonAgre_Prov2.setEnabled(true);
+                        jButtonModificar.setEnabled(false);
+                        jButtonAgregar.setEnabled(true);
                         lista = new vLista_Proveedores();
                         vMenuPrincipal.jDesktopPane1.add(lista);
                         lista.setVisible(true);
@@ -345,10 +325,10 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
         }
-    }//GEN-LAST:event_jBotonModificar_ProvActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jBotonAgre_Prov2.getText().equals("Cancelar")) {
+        if (!jButtonAgregar.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 lista = new vLista_Proveedores();
@@ -392,21 +372,26 @@ public final class vGestion_Proveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextNroDoc_ProvKeyTyped
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
-        // TODO add your handling code here:
-        int i = JOptionPane.showConfirmDialog(null, "Desea cancelar la Operación?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (i == 0) {
-            lista = new vLista_Proveedores();
-            vMenuPrincipal.jDesktopPane1.add(lista);
-            lista.setVisible(true);
-            this.dispose();
+        if (!jButtonAgregar.isEnabled()) {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                lista = new vLista_Proveedores();
+                vMenuPrincipal.jDesktopPane1.add(lista);
+                lista.setVisible(true);
+                this.dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else {
+            Cerrar();
         }
     }//GEN-LAST:event_jBotonCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton jBotonAgre_Prov2;
     public static javax.swing.JButton jBotonCancelar;
-    public static javax.swing.JButton jBotonModificar_Prov;
+    public static javax.swing.JButton jButtonAgregar;
+    public static javax.swing.JButton jButtonModificar;
     private javax.swing.JLabel jEtiqApe_Prov;
     private javax.swing.JLabel jEtiqDirec_Prov;
     private javax.swing.JLabel jEtiqNomCom_Prov;

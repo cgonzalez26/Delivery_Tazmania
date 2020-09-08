@@ -36,27 +36,27 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
         jTextMail_Usuario.setText("");
         jTextLogin_Usuario.setText("");
         jTextPass_Usuario.setText("");
-        jComboBox1.setSelectedItem("(*) Seleccione Tipo Usuario");
+        jComboTipoUsuario.setSelectedItem("Seleccionar Tipo...");
         jComboEstado_Usuario.setSelectedItem("Seleccione Estado");
     }
 
     public void ComboTipoUsuario() {
         tipouser = combo.combox("tiposusuarios", "descripcion");
         for (Object tipousuario : tipouser) {
-            jComboBox1.addItem((String) tipousuario);
+            jComboTipoUsuario.addItem((String) tipousuario);
         }
     }
 
     public void EliminarItemsVacios() {
-        for (int i = 0; i < jComboBox1.getItemCount(); i++) {
-            if (jComboBox1.getItemAt(i) == null) {
-                jComboBox1.removeItemAt(i);
+        for (int i = 0; i < jComboTipoUsuario.getItemCount(); i++) {
+            if (jComboTipoUsuario.getItemAt(i) == null) {
+                jComboTipoUsuario.removeItemAt(i);
             }
         }
     }
 
     public void Cerrar() {
-        if (!jComboBox1.getSelectedItem().equals("(*) Seleccione Tipo Usuario") || !jTextApe_Usuario.getText().isEmpty() || !jTextNom_Usuario.getText().trim().isEmpty() || !jTextApe_Usuario.getText().trim().isEmpty() || !jTextLogin_Usuario.getText().trim().isEmpty() || !jTextPass_Usuario.getText().trim().isEmpty() || !jTextDireccion_Usuario.getText().isEmpty() || !jTextTel_Usuario.getText().isEmpty() || !jTextMail_Usuario.getText().isEmpty()) {
+        if (!jComboTipoUsuario.getSelectedItem().equals("Seleccionar Tipo...") || !jTextApe_Usuario.getText().isEmpty() || !jTextNom_Usuario.getText().trim().isEmpty() || !jTextApe_Usuario.getText().trim().isEmpty() || !jTextLogin_Usuario.getText().trim().isEmpty() || !jTextPass_Usuario.getText().trim().isEmpty() || !jTextDireccion_Usuario.getText().isEmpty() || !jTextTel_Usuario.getText().isEmpty() || !jTextMail_Usuario.getText().isEmpty()) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -64,7 +64,7 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
         } else {
-            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            dispose();
         }
     }
 
@@ -90,7 +90,7 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
         jBotonModif_Usuario = new javax.swing.JButton();
         jTextPass_Usuario = new javax.swing.JPasswordField();
         jCheckBoxVerContraseña = new javax.swing.JCheckBox();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboTipoUsuario = new javax.swing.JComboBox<>();
         jBotonCancelar = new javax.swing.JButton();
         jEtiqtMail_Usuario1 = new javax.swing.JLabel();
         jEtiqtMail_Usuario2 = new javax.swing.JLabel();
@@ -196,8 +196,8 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(*) Seleccione Tipo..." }));
+        jComboTipoUsuario.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jComboTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo...." }));
 
         jBotonCancelar.setBackground(new java.awt.Color(237, 124, 61));
         jBotonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -209,7 +209,7 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
         });
 
         jEtiqtMail_Usuario1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jEtiqtMail_Usuario1.setText("Tipo de Usuario:");
+        jEtiqtMail_Usuario1.setText("(*) Tipo de Usuario:");
 
         jEtiqtMail_Usuario2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jEtiqtMail_Usuario2.setText("Estado:");
@@ -223,18 +223,21 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jEtiqDireccion_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jEtiqNom_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jEtiqLogin_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextLogin_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jTextNom_Usuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jEtiqTel_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextTel_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jEtiqtMail_Usuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextDireccion_Usuario))
+                            .addComponent(jTextDireccion_Usuario)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jEtiqDireccion_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jEtiqNom_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jEtiqLogin_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextLogin_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextNom_Usuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jEtiqTel_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextTel_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jEtiqtMail_Usuario1))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(68, 68, 68))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -308,7 +311,7 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
                     .addComponent(jEtiqtMail_Usuario2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboEstado_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -322,69 +325,58 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBotonAgre_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAgre_UsuarioActionPerformed
-        if (jBotonAgre_Usuario.getText().equals("Agregar")) {
-            if (!jTextLogin_Usuario.getText().trim().equals("") && !jTextPass_Usuario.getText().trim().equals("") && !jTextNom_Usuario.getText().trim().equals("") && !jComboBox1.getSelectedItem().equals("(*) Seleccione Tipo Usuario")) {
-                usuario.setIdtipousuario(user.ObtenerIDTipoUsuario(jComboBox1.getSelectedItem().toString()));
-                usuario.setLogin(jTextLogin_Usuario.getText());
-                usuario.setPassword(jTextPass_Usuario.getText());
-                usuario.setNombre(jTextNom_Usuario.getText());
-                if(!jTextApe_Usuario.getText().equals("")){
-                    usuario.setApellido(jTextApe_Usuario.getText());
-                } else {
-                    usuario.setApellido("-");
-                }
-                if (jTextDireccion_Usuario.getText().equals("")) {
-                    usuario.setDireccion("-");
-                } else {
-                    usuario.setDireccion(jTextDireccion_Usuario.getText());
-                }
-                if (jTextMail_Usuario.getText().equals("")) {
-                    usuario.setEmail("-");
-                } else {
-                    usuario.setEmail(jTextMail_Usuario.getText());
-                }
-                if (jTextTel_Usuario.getText().equals("")) {
-                    usuario.setTelefono("-");
-                } else {
-                    usuario.setTelefono(jTextTel_Usuario.getText());
-                }
-                if (jComboEstado_Usuario.getSelectedItem().equals("Seleccione Estado")) {
-                    usuario.setEstado(jComboEstado_Usuario.getItemAt(1));
-                } else {
-                    usuario.setEstado(jComboEstado_Usuario.getSelectedItem().toString());
-                }
-                if (user.InsertarUsuarios(usuario)) {
-                    JOptionPane.showMessageDialog(null, "Nuevo Usuario agregado");
-                    lista = new vLista_Usuarios();
-                    vMenuPrincipal.jDesktopPane1.add(lista);
-                    lista.setVisible(true);
-                    lista.Mostrar();
-                    this.dispose();
-                }
+        if (!jTextLogin_Usuario.getText().trim().equals("") && !jTextPass_Usuario.getText().trim().equals("") && !jTextNom_Usuario.getText().trim().equals("") && !jComboTipoUsuario.getSelectedItem().equals("Seleccionar Tipo...")) {
+            usuario.setIdtipousuario(user.ObtenerIDTipoUsuario(jComboTipoUsuario.getSelectedItem().toString()));
+            usuario.setLogin(jTextLogin_Usuario.getText());
+            usuario.setPassword(jTextPass_Usuario.getText());
+            usuario.setNombre(jTextNom_Usuario.getText());
+            if (!jTextApe_Usuario.getText().equals("")) {
+                usuario.setApellido(jTextApe_Usuario.getText());
             } else {
-                JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
+                usuario.setApellido("-");
             }
-        } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
+            if (jTextDireccion_Usuario.getText().equals("")) {
+                usuario.setDireccion("-");
+            } else {
+                usuario.setDireccion(jTextDireccion_Usuario.getText());
+            }
+            if (jTextMail_Usuario.getText().equals("")) {
+                usuario.setEmail("-");
+            } else {
+                usuario.setEmail(jTextMail_Usuario.getText());
+            }
+            if (jTextTel_Usuario.getText().equals("")) {
+                usuario.setTelefono("-");
+            } else {
+                usuario.setTelefono(jTextTel_Usuario.getText());
+            }
+            if (jComboEstado_Usuario.getSelectedItem().equals("Seleccione Estado")) {
+                usuario.setEstado(jComboEstado_Usuario.getItemAt(1));
+            } else {
+                usuario.setEstado(jComboEstado_Usuario.getSelectedItem().toString());
+            }
+            if (user.InsertarUsuarios(usuario)) {
+                JOptionPane.showMessageDialog(null, "Nuevo Usuario agregado");
                 lista = new vLista_Usuarios();
                 vMenuPrincipal.jDesktopPane1.add(lista);
                 lista.setVisible(true);
+                lista.Mostrar();
                 this.dispose();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
         }
-
     }//GEN-LAST:event_jBotonAgre_UsuarioActionPerformed
 
     private void jBotonModif_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonModif_UsuarioActionPerformed
-        if (!jTextLogin_Usuario.getText().trim().equals("") && !jTextPass_Usuario.getText().trim().equals("") && !jTextNom_Usuario.getText().trim().equals("") && !jComboBox1.getSelectedItem().equals("(*) Seleccione Tipo Usuario")) {
+        if (!jTextLogin_Usuario.getText().trim().equals("") && !jTextPass_Usuario.getText().trim().equals("") && !jTextNom_Usuario.getText().trim().equals("") && !jComboTipoUsuario.getSelectedItem().equals("Seleccionar Tipo...")) {
             int i = JOptionPane.showConfirmDialog(null, "Guardar Datos?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                usuario.setIdtipousuario(user.ObtenerIDTipoUsuario(jComboBox1.getSelectedItem().toString()));
+                usuario.setIdtipousuario(user.ObtenerIDTipoUsuario(jComboTipoUsuario.getSelectedItem().toString()));
                 usuario.setLogin(jTextLogin_Usuario.getText());
                 usuario.setPassword(jTextPass_Usuario.getText());
                 usuario.setNombre(jTextNom_Usuario.getText());
-                if(!jTextApe_Usuario.getText().equals("")){
+                if (!jTextApe_Usuario.getText().equals("")) {
                     usuario.setApellido(jTextApe_Usuario.getText());
                 } else {
                     usuario.setApellido("-");
@@ -426,7 +418,7 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBotonModif_UsuarioActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jBotonAgre_Usuario.getText().trim().equals("Cancelar")) {
+        if (!jBotonAgre_Usuario.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 lista = new vLista_Usuarios();
@@ -464,8 +456,19 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCheckBoxVerContraseñaActionPerformed
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        if (!jBotonAgre_Usuario.isEnabled()) {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                lista = new vLista_Usuarios();
+                vMenuPrincipal.jDesktopPane1.add(lista);
+                lista.setVisible(true);
+                this.dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else {
+            Cerrar();
+        }
     }//GEN-LAST:event_jBotonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -473,8 +476,8 @@ public final class vGestion_Usuarios extends javax.swing.JInternalFrame {
     public static javax.swing.JButton jBotonCancelar;
     public static javax.swing.JButton jBotonModif_Usuario;
     private javax.swing.JCheckBox jCheckBoxVerContraseña;
-    public static javax.swing.JComboBox<String> jComboBox1;
     public static javax.swing.JComboBox<String> jComboEstado_Usuario;
+    public static javax.swing.JComboBox<String> jComboTipoUsuario;
     private javax.swing.JLabel jEtiqApe_Usuario;
     private javax.swing.JLabel jEtiqDireccion_Usuario;
     private javax.swing.JLabel jEtiqLogin_Usuario;

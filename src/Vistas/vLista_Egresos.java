@@ -62,6 +62,7 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
                             vMenuPrincipal.jDesktopPane1.add(ge);
                             ge.setVisible(true);
                             vGestion_Egresos.jBotonAgregar_Egresos.setEnabled(false);
+                            vGestion_Egresos.jBotonModif_Egresos.setEnabled(true);
                             idegreso = (jTabla_Egresos.getValueAt(fila, 0).toString());
                             ge.jTextDescripcion_Egresos.setText(jTabla_Egresos.getValueAt(fila, 2).toString());
                             ge.jCBTipoEgreso_Egresos.setSelectedItem(jTabla_Egresos.getValueAt(fila, 3).toString());
@@ -103,7 +104,7 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
     public void Mostrar() {
         String desde = ((JTextField) jDateFechaDesde.getDateEditor().getUiComponent()).getText(),
                 hasta = ((JTextField) jDateFechaHasta.getDateEditor().getUiComponent()).getText();
-        String[] columnas = {"IDEGRESO", "NRO EGRESO", "CONCEPTO", "TIPO EGRESO", "FECHA", "MONTO", "IDTIPOEGRESO", "DETALLE"};
+        String[] columnas = {"IDEGRESO", "NRO EGRESO", "CONCEPTO", "TIPO EGRESO", "FECHA EGRESO", "MONTO", "IDTIPOEGRESO", "DETALLE"};
         datostabla = egreso.MostrarDatos(desde, hasta);
         datos = new DefaultTableModel(datostabla, columnas);
         jTabla_Egresos.setModel(datos);
@@ -387,6 +388,7 @@ public final class vLista_Egresos extends javax.swing.JInternalFrame {
                         vMenuPrincipal.jDesktopPane1.add(ge);
                         ge.setVisible(true);
                         vGestion_Egresos.jBotonAgregar_Egresos.setEnabled(false);
+                        vGestion_Egresos.jBotonModif_Egresos.setEnabled(true);
                         ge.jTextDescripcion_Egresos.setText(jTabla_Egresos.getValueAt(fila, 2).toString());
                         ge.jCBTipoEgreso_Egresos.setSelectedItem(jTabla_Egresos.getValueAt(fila, 3).toString());
                         //System.out.println(jTabla_Egresos.getValueAt(fila, 4).toString());

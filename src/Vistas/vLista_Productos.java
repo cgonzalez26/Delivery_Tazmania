@@ -31,6 +31,7 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     vGestion_Productos.jButtonAgregar.setEnabled(false);
+                    vGestion_Productos.jButtonModificar.setEnabled(true);
                     int fila = jTableProductos.rowAtPoint(e.getPoint());
                     if (ventanaproducto == null || ventanaproducto.isClosed()) {
                         ventanaproducto = new vGestion_Productos();
@@ -53,16 +54,7 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
             }
         });
     }
-
-    /*public void ReemplazarNulos() {
-        if (jTableProductos.getRowCount() != 0) {
-            for (int i = 0; i < jTableProductos.getRowCount(); i++) {
-                if (jTableProductos.getValueAt(i, 5).equals("00/00/0000 12:00")) {
-                    jTableProductos.setValueAt("-", i, 5);
-                }
-            }
-        }
-    }*/
+    
     public void Mostrar() {
         String[] columnas = {"IDPROD", "IDCATEGORIAPRODUCTO", "CATEGORIA", "DESCRIPCION", "PRECIO VENTA"};
         Object[][] dato = producto.MostrarDatos();
@@ -196,33 +188,37 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
         jLayeredPane3.setLayout(jLayeredPane3Layout);
         jLayeredPane3Layout.setHorizontalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelNombreProducto)
-                .addGap(18, 18, 18)
-                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jListProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldProductoBuscado, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jListProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jButtonBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabelNombreProducto)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldProductoBuscado, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(138, 138, 138))
         );
         jLayeredPane3Layout.setVerticalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
+                .addComponent(jListProductos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldProductoBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addComponent(jListProductos)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonBuscarProducto)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jLayeredPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 390, 120));
+        getContentPane().add(jLayeredPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 440, 120));
 
         jScrollPane1.setOpaque(false);
 
@@ -325,6 +321,7 @@ public final class vLista_Productos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
             vGestion_Productos.jButtonAgregar.setEnabled(false);
+            vGestion_Productos.jButtonModificar.setEnabled(true);
             if (ventanaproducto == null || ventanaproducto.isClosed()) {
                 ventanaproducto = new vGestion_Productos();
                 vMenuPrincipal.jDesktopPane1.add(ventanaproducto);

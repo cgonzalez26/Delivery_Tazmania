@@ -2,8 +2,6 @@ package Vistas;
 
 import Controlador.control_Empleados;
 import Modelo.Empleados;
-import java.awt.Font;
-import java.awt.font.FontRenderContext;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,8 +29,8 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
                     vMenuPrincipal.jDesktopPane1.add(empleado);
                     empleado.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                     empleado.setVisible(true);
-                    vGestion_Empleados.jButton2.setEnabled(true);
-                    vGestion_Empleados.jButton1.setText("Cancelar");
+                    vGestion_Empleados.jButtonAgregar.setEnabled(false);
+                    vGestion_Empleados.jButtonModificar.setEnabled(true);
                     idemp = (jTableEmpleados.getValueAt(fila, 0).toString());
                     vGestion_Empleados.jComboBoxTipoEmpleado.setSelectedItem(jTableEmpleados.getValueAt(fila, 3).toString());
                     vGestion_Empleados.jTextFieldNroDocumento.setText(jTableEmpleados.getValueAt(fila, 5).toString());
@@ -59,40 +57,7 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
         datos = new DefaultTableModel(datostabla, columnas);
         jTableEmpleados.setModel(datos);
         EliminarFilasVacias();
-        AjustarTamañoFilas();
         ocultar_columnas();
-    }
-
-    public void AjustarTamañoFilas() {
-        if (jTableEmpleados.getRowCount() != 0) {
-            for (int i = 0; i < jTableEmpleados.getRowCount(); i++) {
-                Font font = new Font("Segoe UI Semibold", 0, 13);
-                int tipoemp = (int) font.getStringBounds(jTableEmpleados.getValueAt(i, 3).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int nrodoc = (int) font.getStringBounds(jTableEmpleados.getValueAt(i, 5).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int nombre = (int) font.getStringBounds(jTableEmpleados.getValueAt(i, 6).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int apellido = (int) font.getStringBounds(jTableEmpleados.getValueAt(i, 7).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int direc = (int) font.getStringBounds(jTableEmpleados.getValueAt(i, 8).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int tel = (int) font.getStringBounds(jTableEmpleados.getValueAt(i, 9).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                if (tipoemp > jTableEmpleados.getColumnModel().getColumn(3).getPreferredWidth()) {
-                    jTableEmpleados.getColumnModel().getColumn(3).setPreferredWidth(tipoemp);
-                }
-                if (nrodoc > jTableEmpleados.getColumnModel().getColumn(5).getPreferredWidth()) {
-                    jTableEmpleados.getColumnModel().getColumn(5).setPreferredWidth(nrodoc);
-                }
-                if (nombre > jTableEmpleados.getColumnModel().getColumn(6).getPreferredWidth()) {
-                    jTableEmpleados.getColumnModel().getColumn(6).setPreferredWidth(nombre);
-                }
-                if (apellido > jTableEmpleados.getColumnModel().getColumn(7).getPreferredWidth()) {
-                    jTableEmpleados.getColumnModel().getColumn(7).setPreferredWidth(apellido);
-                }
-                if (direc > jTableEmpleados.getColumnModel().getColumn(8).getPreferredWidth()) {
-                    jTableEmpleados.getColumnModel().getColumn(8).setPreferredWidth(direc);
-                }
-                if (tel > jTableEmpleados.getColumnModel().getColumn(9).getPreferredWidth()) {
-                    jTableEmpleados.getColumnModel().getColumn(9).setPreferredWidth(tel);
-                }
-            }
-        }
     }
 
     public void ocultar_columnas() {
@@ -313,8 +278,8 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
             vMenuPrincipal.jDesktopPane1.add(empleado);
             empleado.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             empleado.setVisible(true);
-            vGestion_Empleados.jButton2.setEnabled(true);
-            vGestion_Empleados.jButton1.setText("Cancelar");
+            vGestion_Empleados.jButtonAgregar.setEnabled(false);
+            vGestion_Empleados.jButtonModificar.setEnabled(true);
             idemp = (jTableEmpleados.getValueAt(seleccionado, 0).toString());
             vGestion_Empleados.jComboBoxTipoEmpleado.setSelectedItem(jTableEmpleados.getValueAt(seleccionado, 3).toString());
             vGestion_Empleados.jTextFieldNroDocumento.setText(jTableEmpleados.getValueAt(seleccionado, 5).toString());
@@ -338,11 +303,10 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
         if (!jTextFieldBuscarRolTrabajo.getText().isEmpty()) {
             Object[][] datostabla = emp.MostrarDatosBusqueda(jTextFieldBuscarRolTrabajo.getText());
             if (datostabla.length != 0) {
-                String[] columnas = {"IDEMPLEADO", "IDTIPOEMP", "IDTIPODOC", "TIPO EMP", "TIPO DOC", "NRO DOC", "NOMBRE", "APELLIDO", "DOMICILIO", "TELEFONO"};
+                String[] columnas = {"IDEMPLEADO", "IDTIPOEMP", "IDTIPODOC", "TIPO EMP", "TIPO DOC", "NRO DOC", "NOMBRES", "APELLIDOS", "DOMICILIO", "TELEFONO"};
                 datos = new DefaultTableModel(datostabla, columnas);
                 jTableEmpleados.setModel(datos);
                 EliminarFilasVacias();
-                AjustarTamañoFilas();
                 ocultar_columnas();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");

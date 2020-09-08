@@ -30,10 +30,10 @@ public final class vLista_Usuarios extends javax.swing.JInternalFrame {
                     user = new vGestion_Usuarios();
                     vMenuPrincipal.jDesktopPane1.add(user);
                     user.setVisible(true);
+                    vGestion_Usuarios.jBotonAgre_Usuario.setEnabled(false);
                     vGestion_Usuarios.jBotonModif_Usuario.setEnabled(true);
-                    vGestion_Usuarios.jBotonAgre_Usuario.setText("Cancelar");
                     id = (jTabla_Usuario.getValueAt(fila, 0).toString());
-                    vGestion_Usuarios.jComboBox1.setSelectedItem(jTabla_Usuario.getValueAt(fila, 2).toString());
+                    vGestion_Usuarios.jComboTipoUsuario.setSelectedItem(jTabla_Usuario.getValueAt(fila, 2).toString());
                     vGestion_Usuarios.jTextLogin_Usuario.setText(jTabla_Usuario.getValueAt(fila, 3).toString());
                     vGestion_Usuarios.jTextPass_Usuario.setText(jTabla_Usuario.getValueAt(fila, 4).toString());
                     vGestion_Usuarios.jTextNom_Usuario.setText(jTabla_Usuario.getValueAt(fila, 5).toString());
@@ -67,64 +67,12 @@ public final class vLista_Usuarios extends javax.swing.JInternalFrame {
         jTabla_Usuario.getColumnModel().getColumn(4).setPreferredWidth(0);
     }
 
-    public void AjustarTamañoFilas() {
-        if (jTabla_Usuario.getRowCount() != 0) {
-            for (int i = 0; i < jTabla_Usuario.getRowCount(); i++) {
-                String nom = jTabla_Usuario.getValueAt(i, 5).toString(), ape = jTabla_Usuario.getValueAt(i, 6).toString(), dir = jTabla_Usuario.getValueAt(i, 7).toString(), log = jTabla_Usuario.getValueAt(i, 3).toString(), correo = jTabla_Usuario.getValueAt(i, 8).toString(), telef = jTabla_Usuario.getValueAt(i, 9).toString(), tiuser = jTabla_Usuario.getValueAt(i, 2).toString(), est = jTabla_Usuario.getValueAt(i, 10).toString();
-                if (nom != null && ape != null && dir != null && log != null && correo != null && telef != null && tiuser != null && est != null) {
-                    Font font = new Font("Segoe UI Semibold", 0, 13);
-                    int nombre = (int) font.getStringBounds(nom, new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                    int apellido = (int) font.getStringBounds(ape, new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                    int direc = (int) font.getStringBounds(dir, new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                    int tel = (int) font.getStringBounds(telef, new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                    int mail = (int) font.getStringBounds(correo, new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                    int login = (int) font.getStringBounds(log, new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                    int tipousuarios = (int) font.getStringBounds(tiuser, new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                    int estado = (int) font.getStringBounds(est, new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-
-                    if (tipousuarios > vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(2).getPreferredWidth()) {
-                        vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(2).setPreferredWidth(tipousuarios);
-                    }
-
-                    if (login > vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(3).getPreferredWidth()) {
-                        vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(3).setPreferredWidth(login);
-                    }
-
-                    if (nombre > vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(5).getPreferredWidth()) {
-                        vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(5).setPreferredWidth(nombre);
-                    }
-
-                    if (apellido > vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(6).getPreferredWidth()) {
-                        vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(6).setPreferredWidth(apellido);
-                    }
-
-                    if (direc > vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(7).getPreferredWidth()) {
-                        vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(7).setPreferredWidth(direc);
-                    }
-
-                    if (mail > vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(8).getPreferredWidth()) {
-                        vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(8).setPreferredWidth(mail);
-                    }
-
-                    if (tel > vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(9).getPreferredWidth()) {
-                        vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(9).setPreferredWidth(tel);
-                    }
-
-                    if (estado > vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(10).getPreferredWidth()) {
-                        vLista_Usuarios.jTabla_Usuario.getColumnModel().getColumn(10).setPreferredWidth(estado);
-                    }
-                }
-            }
-        }
-    }
-
     public void Mostrar() {
-        String[] columnas = {"IDUSER", "IDTIPOUSER", "TIPO USUARIO", "USUARIO", "CONTRASEÑA", "NOMBRE", "APELLIDO", "DIRECCION", "MAIL", "TELEFONO", "ESTADO"};
+        String[] columnas = {"IDUSER", "IDTIPOUSER", "TIPO USUARIO", "USUARIO", "CONTRASEÑA", "NOMBRES", "APELLIDOS", "DIRECCION", "MAIL", "TELEFONO", "ESTADO"};
         datostabla = usuario.MostrarDatos();
         datos = new DefaultTableModel(datostabla, columnas);
         jTabla_Usuario.setModel(datos);
         EliminarFilasVacias();
-        AjustarTamañoFilas();
         ocultar_columnas();
     }
 
@@ -334,10 +282,10 @@ public final class vLista_Usuarios extends javax.swing.JInternalFrame {
             user = new vGestion_Usuarios();
             vMenuPrincipal.jDesktopPane1.add(user);
             user.setVisible(true);
+            vGestion_Usuarios.jBotonAgre_Usuario.setEnabled(false);
             vGestion_Usuarios.jBotonModif_Usuario.setEnabled(true);
-            vGestion_Usuarios.jBotonAgre_Usuario.setText("Cancelar");
             id = (jTabla_Usuario.getValueAt(seleccionado, 0).toString());
-            vGestion_Usuarios.jComboBox1.setSelectedItem(jTabla_Usuario.getValueAt(seleccionado, 2).toString());
+            vGestion_Usuarios.jComboTipoUsuario.setSelectedItem(jTabla_Usuario.getValueAt(seleccionado, 2).toString());
             vGestion_Usuarios.jTextLogin_Usuario.setText(jTabla_Usuario.getValueAt(seleccionado, 3).toString());
             vGestion_Usuarios.jTextPass_Usuario.setText(jTabla_Usuario.getValueAt(seleccionado, 4).toString());
             vGestion_Usuarios.jTextNom_Usuario.setText(jTabla_Usuario.getValueAt(seleccionado, 5).toString());
@@ -362,11 +310,10 @@ public final class vLista_Usuarios extends javax.swing.JInternalFrame {
         if (!jTextFieldNombreUsuarioBuscar.getText().isEmpty()) {           
             datostabla = usuario.MostrarDatosBusqueda(jTextFieldNombreUsuarioBuscar.getText());
             if (datostabla.length != 0) {
-                String[] columnas = {"IDUSER", "IDTIPOUSER", "TIPO USUARIO", "USUARIO", "CONTRASEÑA", "NOMBRE", "APELLIDO", "DIRECCION", "MAIL", "TELEFONO", "ESTADO"};
+                String[] columnas = {"IDUSER", "IDTIPOUSER", "TIPO USUARIO", "USUARIO", "CONTRASEÑA", "NOMBRES", "APELLIDOS", "DIRECCION", "MAIL", "TELEFONO", "ESTADO"};
                 datos = new DefaultTableModel(datostabla, columnas);
                 jTabla_Usuario.setModel(datos);
                 EliminarFilasVacias();
-                AjustarTamañoFilas();
                 ocultar_columnas();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");

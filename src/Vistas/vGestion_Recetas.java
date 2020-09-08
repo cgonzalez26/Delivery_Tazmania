@@ -341,6 +341,7 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelNombreProducto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -556,8 +557,6 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
     private void vSeleccionarInsumoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarInsumoMouseClicked
         jTableInsumos.clearSelection();
         jTableInsumos.getSelectionModel().clearSelection();
-        //MostrarInsumos();
-        //jTextFieldInsumoBuscar.setText("");
     }//GEN-LAST:event_vSeleccionarInsumoMouseClicked
 
     private void jButtonBuscarInsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarInsumoActionPerformed
@@ -652,8 +651,6 @@ public final class vGestion_Recetas extends javax.swing.JInternalFrame {
         if (jTableInsumosAElegir.getRowCount() != 0) {
             if (receta.InsertarRecetas()) {
                 JOptionPane.showMessageDialog(null, "Receta Registrada");
-                //modelo1.setRowCount(0);
-                //MostrarRecetas();
                 VolverListadoRecetas();
             } else {
                 JOptionPane.showMessageDialog(null, "No agregado");

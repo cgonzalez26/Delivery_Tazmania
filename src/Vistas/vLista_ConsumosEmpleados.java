@@ -35,6 +35,7 @@ public final class vLista_ConsumosEmpleados extends javax.swing.JInternalFrame {
                 if (e.getClickCount() == 2) {
                     int fila = jTableConsumosEmpleados.rowAtPoint(e.getPoint());
                     vConsumosEmpleados.jButtonAgregar.setEnabled(false);
+                    vConsumosEmpleados.jButtonModificar.setEnabled(true);
                     String fecha = jTableConsumosEmpleados.getValueAt(fila, 5).toString();
                     DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     try {
@@ -344,6 +345,7 @@ public final class vLista_ConsumosEmpleados extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         } else {
             vConsumosEmpleados.jButtonAgregar.setEnabled(false);
+            vConsumosEmpleados.jButtonModificar.setEnabled(true);
             String fecha = jTableConsumosEmpleados.getValueAt(fila, 5).toString();
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             try {

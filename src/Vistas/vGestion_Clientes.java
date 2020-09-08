@@ -9,18 +9,18 @@ import javax.swing.JOptionPane;
  * @author Colo-PC
  */
 public final class vGestion_Clientes extends javax.swing.JInternalFrame {
-    
+
     vLista_Clientes lista = null;
     control_Clientes cont_cliente = new control_Clientes();
     Clientes clientes = new Clientes();
     String idcliente;
-    
+
     public vGestion_Clientes() {
         initComponents();
         jButtonModificar.setEnabled(false);
         Limpiar();
     }
-    
+
     public void Limpiar() {
         jTextFieldNombre.setText("");
         jTextFieldApellido.setText("");
@@ -29,7 +29,7 @@ public final class vGestion_Clientes extends javax.swing.JInternalFrame {
         jTextFieldEmail.setText("");
         jTextFieldNroDocumento.setText("");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -203,7 +203,7 @@ public final class vGestion_Clientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jButtonAgregar.getText().equals("Cancelar")) {
+        if (!jButtonAgregar.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 lista = new vLista_Clientes();
@@ -228,37 +228,27 @@ public final class vGestion_Clientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-//        if (jButton3.getText().equals("Agregar")) {
-            if (!jTextFieldNroDocumento.getText().isEmpty() && !jTextFieldNombre.getText().isEmpty() && !jTextFieldApellido.getText().isEmpty() && !jTextFieldDomicilio.getText().isEmpty() && !jTextFieldTelefono.getText().isEmpty()) {
-                clientes.setDni(jTextFieldNroDocumento.getText());
-                clientes.setNombre(jTextFieldNombre.getText());
-                clientes.setApellido(jTextFieldApellido.getText());
-                clientes.setDireccion(jTextFieldDomicilio.getText());
-                clientes.setTelefono(jTextFieldTelefono.getText());
-                if (jTextFieldEmail.getText().isEmpty()) {
-                    clientes.setEmail("-");
-                } else {
-                    clientes.setEmail(jTextFieldEmail.getText());
-                }
-                if (cont_cliente.InsertarClientes(clientes)) {
-                    JOptionPane.showMessageDialog(null, "Nuevo Cliente agregado");
-                    lista = new vLista_Clientes();
-                    vMenuPrincipal.jDesktopPane1.add(lista);
-                    lista.setVisible(true);
-                    this.dispose();
-                }
+        if (!jTextFieldNroDocumento.getText().isEmpty() && !jTextFieldNombre.getText().isEmpty() && !jTextFieldApellido.getText().isEmpty() && !jTextFieldDomicilio.getText().isEmpty() && !jTextFieldTelefono.getText().isEmpty()) {
+            clientes.setDni(jTextFieldNroDocumento.getText());
+            clientes.setNombre(jTextFieldNombre.getText());
+            clientes.setApellido(jTextFieldApellido.getText());
+            clientes.setDireccion(jTextFieldDomicilio.getText());
+            clientes.setTelefono(jTextFieldTelefono.getText());
+            if (jTextFieldEmail.getText().isEmpty()) {
+                clientes.setEmail("-");
             } else {
-                JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
+                clientes.setEmail(jTextFieldEmail.getText());
             }
-//        } else {
-//            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-//            if (i == 0) {
-//                lista = new vLista_Clientes();
-//                vMenuPrincipal.jDesktopPane1.add(lista);
-//                lista.setVisible(true);
-//                this.dispose();
-//            }
-//        }
+            if (cont_cliente.InsertarClientes(clientes)) {
+                JOptionPane.showMessageDialog(null, "Nuevo Cliente agregado");
+                lista = new vLista_Clientes();
+                vMenuPrincipal.jDesktopPane1.add(lista);
+                lista.setVisible(true);
+                this.dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
+        }
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
@@ -290,13 +280,27 @@ public final class vGestion_Clientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
-        // TODO add your handling code here:
-        int i = JOptionPane.showConfirmDialog(null, "Desea cancelar la Operación?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (i == 0) {
-            lista = new vLista_Clientes();
-            vMenuPrincipal.jDesktopPane1.add(lista);
-            lista.setVisible(true);
-            this.dispose();
+        if (!jButtonAgregar.isEnabled()) {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                lista = new vLista_Clientes();
+                vMenuPrincipal.jDesktopPane1.add(lista);
+                lista.setVisible(true);
+                this.dispose();
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else {
+            if (!jTextFieldNroDocumento.getText().isEmpty() || !jTextFieldNombre.getText().isEmpty() || !jTextFieldApellido.getText().isEmpty() || !jTextFieldDomicilio.getText().isEmpty() || !jTextFieldTelefono.getText().isEmpty() || !jTextFieldEmail.getText().isEmpty()) {
+                int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    dispose();
+                } else {
+                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                }
+            } else {
+                dispose();
+            }
         }
     }//GEN-LAST:event_jBotonCancelarActionPerformed
 

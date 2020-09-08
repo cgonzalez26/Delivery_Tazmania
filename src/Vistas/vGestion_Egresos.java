@@ -5,7 +5,6 @@ import Controlador.control_Cajas;
 import Controlador.control_Egresos;
 import Controlador.control_Movimientos_Caja;
 import Controlador.control_TiposGastos;
-
 import Controlador.control_existencias;
 import Modelo.Egresos;
 import Modelo.Session;
@@ -47,9 +46,10 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
     public vGestion_Egresos() {
         initComponents();
         ComboTipoEgreso();
-        //EliminarEgresosIngresos();
         EliminarItemsVacios();
         verificarCajaAbierta();
+        jTextMonto_Egresos.setText(Float.toString((float) 0.0));
+        jBotonModif_Egresos.setEnabled(false);
     }
 
     public void limpiarFormulario() {
@@ -122,8 +122,6 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
     }
 
     public void EliminarEgresosIngresos() {
-        /*int filas = jCBTipoEgreso_Egresos.getItemCount();
-        filas--;*/
         for (int fila = 0; fila < jCBTipoEgreso_Egresos.getItemCount(); fila++) {
             if (jCBTipoEgreso_Egresos.getItemAt(fila).equals("CIERRE DE CAJA DIARIO") || jCBTipoEgreso_Egresos.getItemAt(fila).equals("COMPRA DE INSUMOS") || jCBTipoEgreso_Egresos.getItemAt(fila).equals("PAGO A EMPLEADOS")) {
                 jCBTipoEgreso_Egresos.remove(fila);
@@ -149,7 +147,50 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
             tg = new TiposGastos(idtipo, nomtipo, 1);
             tipos.add(tg);
         }
+    }
 
+    public void CancelarCerrarVentanaEgresos() {
+        if (!jBotonAgregar_Egresos.isEnabled()) {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                if (!vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
+                    listaeg = new vLista_Egresos();
+                    vMenuPrincipal.jDesktopPane1.add(listaeg);
+                    listaeg.setVisible(true);
+                    this.dispose();
+                } else {
+                    movcaja = new vMovimientos_Caja();
+                    vMenuPrincipal.jDesktopPane1.add(movcaja);
+                    movcaja.setVisible(true);
+                    this.dispose();
+                }
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else if (!jTextDescripcion_Egresos.getText().isEmpty() || !jCBTipoEgreso_Egresos.getSelectedItem().equals("Seleccionar Tipo...") || !jTextMonto_Egresos.getText().isEmpty()) {
+            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                if (vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
+                    movcaja = new vMovimientos_Caja();
+                    vMenuPrincipal.jDesktopPane1.add(movcaja);
+                    movcaja.setVisible(true);
+                    this.dispose();
+                } else {
+                    dispose();
+                }
+            } else {
+                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            }
+        } else {
+            if (vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
+                movcaja = new vMovimientos_Caja();
+                vMenuPrincipal.jDesktopPane1.add(movcaja);
+                movcaja.setVisible(true);
+                this.dispose();
+            } else {
+                dispose();
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -336,12 +377,9 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
         if (!jTextDescripcion_Egresos.getText().trim().equals("")
                 && !((JTextField) jDateFecha_Egresos.getDateEditor().getUiComponent()).getText().equals("")
                 && !jTextMonto_Egresos.getText().trim().equals("")
-                && !jTextMonto_Egresos.getText().trim().equals("0")
-                && !jCBTipoEgreso_Egresos.getSelectedItem().toString().equals("Seleccionar una opción")) {
+                && !jTextMonto_Egresos.getText().trim().equals("0.0")
+                && !jCBTipoEgreso_Egresos.getSelectedItem().toString().equals("Seleccionar Tipo...")) {
             if (jDateFecha_Egresos.getDateEditor().getUiComponent().getForeground() != Color.RED) {
-                //String fecha = getFecha();
-                //Timestamp fecha = new Timestamp(jDateFecha_Egresos.getDateEditor().getDate().getTime());
-                //e.setFecha(fecha);
                 e.setDescripcion(jTextDescripcion_Egresos.getText());
                 // obtenemos el tipo de egreso seleccionado
                 TiposGastos tg = control_tg.getTipoGastoByDescripcion(tipos, jCBTipoEgreso_Egresos.getSelectedItem().toString());
@@ -375,12 +413,7 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBotonAgregar_EgresosActionPerformed
 
     private void jBotonModif_EgresosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonModif_EgresosActionPerformed
-        //String fecha = getFecha();
-        //Timestamp fecha = new Timestamp(jDateFecha_Egresos.getDateEditor().getDate().getTime());
-        //e.setFecha(fecha);
-
         e.setDescripcion(jTextDescripcion_Egresos.getText());
-        // obtenemos el tipo de egreso seleccionado
         TiposGastos tg = control_tg.getTipoGastoByDescripcion(tipos, jCBTipoEgreso_Egresos.getSelectedItem().toString());
         e.setIdtipoegreso(tg.getIdtipogasto());
         e.setMonto(Float.parseFloat(jTextMonto_Egresos.getText()));
@@ -391,7 +424,8 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
         if (!jTextDescripcion_Egresos.getText().trim().equals("")
                 && !((JTextField) jDateFecha_Egresos.getDateEditor().getUiComponent()).getText().equals("")
                 && !jTextMonto_Egresos.getText().trim().equals("")
-                && !jTextMonto_Egresos.getText().trim().equals("0")) {
+                && !jTextMonto_Egresos.getText().trim().equals("0.0") 
+                && !jCBTipoEgreso_Egresos.getSelectedItem().toString().equals("Seleccionar Tipo...")){
             if (jDateFecha_Egresos.getDateEditor().getUiComponent().getForeground() != Color.RED) {
                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
@@ -425,91 +459,11 @@ public final class vGestion_Egresos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCBTipoEgreso_EgresosActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (!jBotonAgregar_Egresos.isEnabled()) {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                if (!vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
-                    listaeg = new vLista_Egresos();
-                    vMenuPrincipal.jDesktopPane1.add(listaeg);
-                    listaeg.setVisible(true);
-                    this.dispose();
-                } else {
-                    movcaja = new vMovimientos_Caja();
-                    vMenuPrincipal.jDesktopPane1.add(movcaja);
-                    movcaja.setVisible(true);
-                    this.dispose();
-                }
-            } else {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
-        } else if (!jTextDescripcion_Egresos.getText().isEmpty() || !jCBTipoEgreso_Egresos.getSelectedItem().equals("Seleccionar una opción") || !jTextMonto_Egresos.getText().isEmpty()) {
-            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                if (vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
-                    movcaja = new vMovimientos_Caja();
-                    vMenuPrincipal.jDesktopPane1.add(movcaja);
-                    movcaja.setVisible(true);
-                    this.dispose();
-                } else {
-                    dispose();
-                }
-            } else {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
-        } else {
-            if (vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
-                movcaja = new vMovimientos_Caja();
-                vMenuPrincipal.jDesktopPane1.add(movcaja);
-                movcaja.setVisible(true);
-                this.dispose();
-            } else {
-                dispose();
-            }
-        }
+        CancelarCerrarVentanaEgresos();
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
-        if (!jBotonAgregar_Egresos.isEnabled()) {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                if (!vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
-                    listaeg = new vLista_Egresos();
-                    vMenuPrincipal.jDesktopPane1.add(listaeg);
-                    listaeg.setVisible(true);
-                    this.dispose();
-                } else {
-                    movcaja = new vMovimientos_Caja();
-                    vMenuPrincipal.jDesktopPane1.add(movcaja);
-                    movcaja.setVisible(true);
-                    this.dispose();
-                }
-            } else {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
-        } else if (!jTextDescripcion_Egresos.getText().isEmpty() || !jCBTipoEgreso_Egresos.getSelectedItem().equals("Seleccionar una opción") || !jTextMonto_Egresos.getText().isEmpty()) {
-            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                if (vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
-                    movcaja = new vMovimientos_Caja();
-                    vMenuPrincipal.jDesktopPane1.add(movcaja);
-                    movcaja.setVisible(true);
-                    this.dispose();
-                } else {
-                    dispose();
-                }
-            } else {
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
-        } else {
-            if (vGestion_Egresos.this.getTitle().equals("Administrar Movimientos Cajas")) {
-                movcaja = new vMovimientos_Caja();
-                vMenuPrincipal.jDesktopPane1.add(movcaja);
-                movcaja.setVisible(true);
-                this.dispose();
-            } else {
-                dispose();
-            }
-        }
+        CancelarCerrarVentanaEgresos();
     }//GEN-LAST:event_jBotonCancelarActionPerformed
 
 

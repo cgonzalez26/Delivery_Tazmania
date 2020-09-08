@@ -29,8 +29,6 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
         initComponents();
         Mostrar();
         ComboTipoInsumo();
-        //EliminarItemsVacios();
-        
 
         jTabla_Insumos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -40,27 +38,15 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
                     vMenuPrincipal.jDesktopPane1.add(tipo);
                     tipo.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                     tipo.setVisible(true);
-                    vGestion_Insumos.jBotonModif_Insumos.setEnabled(true);
                     vGestion_Insumos.jBotonAgregar_Insumos.setEnabled(false);
-                    //vGestion_Insumos.jBotonAgregar_Insumos.setText("Cancelar");
+                    vGestion_Insumos.jBotonModif_Insumos.setEnabled(true);
                     idinsumo = (jTabla_Insumos.getValueAt(seleccionado, 0).toString());
-                    
                     vGestion_Insumos.jTextDesc_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 3).toString());
                     vGestion_Insumos.jCBTipo_Insumos.setSelectedItem(jTabla_Insumos.getValueAt(seleccionado, 4).toString());
                     vGestion_Insumos.jTextFieldProveedor.setText(jTabla_Insumos.getValueAt(seleccionado, 5).toString());///prov
                     vGestion_Insumos.jCBUnidad_Medida.setSelectedItem(jTabla_Insumos.getValueAt(seleccionado, 6).toString());
                     vGestion_Insumos.jTextPrecio_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 7).toString());
                     vGestion_Insumos.jTextStock_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 8).toString());
-                    //fecha = jTabla_Insumos.getValueAt(fila, 8).toString();
-                    /*if (!fecha.equals("-")) {
-                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                        try {
-                            fecha_insumo = new java.sql.Timestamp(df.parse(fecha).getTime());
-                        } catch (ParseException ex) {
-                            Logger.getLogger(vLista_Insumos.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        //vGestion_Insumos.jDateChooser1.setDate(fecha_insumo);
-                    }*/
                     tipo.id = idinsumo;
                     dispose();
                     LimpiarSeleccion();
@@ -116,7 +102,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
         datostabla = insumo.MostrarDatos();
         datos = new DefaultTableModel(datostabla, columnas);
         jTabla_Insumos.setModel(datos);
-        //EliminarFilasVacias();
+        EliminarFilasVacias();
         //ReemplazarNulos();
         PintarPocoStock();
         ocultar_columnas();
@@ -145,8 +131,8 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    public void PintarPocoStock(){
+
+    public void PintarPocoStock() {
         /*if(jTabla_Insumos.getRowCount() != 0){
             for(int fila =0; fila < jTabla_Insumos.getRowCount(); fila++){
                 float row = Float.parseFloat(jTabla_Insumos.getValueAt(fila, 7).toString());
@@ -375,9 +361,8 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
             vMenuPrincipal.jDesktopPane1.add(tipo);
             tipo.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             tipo.setVisible(true);
-            vGestion_Insumos.jBotonModif_Insumos.setEnabled(true);
             vGestion_Insumos.jBotonAgregar_Insumos.setEnabled(false);
-            //vGestion_Insumos.jBotonAgregar_Insumos.setText("Cancelar");
+            vGestion_Insumos.jBotonModif_Insumos.setEnabled(true);
             idinsumo = (jTabla_Insumos.getValueAt(seleccionado, 0).toString());
             vGestion_Insumos.jTextDesc_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 3).toString());
             vGestion_Insumos.jCBTipo_Insumos.setSelectedItem(jTabla_Insumos.getValueAt(seleccionado, 4).toString());
@@ -385,18 +370,6 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
             vGestion_Insumos.jCBUnidad_Medida.setSelectedItem(jTabla_Insumos.getValueAt(seleccionado, 6).toString());
             vGestion_Insumos.jTextPrecio_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 7).toString());
             vGestion_Insumos.jTextStock_Insumos.setText(jTabla_Insumos.getValueAt(seleccionado, 8).toString());
-            //fecha = jTabla_Insumos.getValueAt(seleccionado, 8).toString();
-            /*if (!fecha.equals("-")) {
-                DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                try {
-                    fecha_insumo = new java.sql.Timestamp(df.parse(fecha).getTime());
-                } catch (ParseException ex) {
-                    Logger.getLogger(vLista_Insumos.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                vGestion_Insumos.jDateChooser1.setDate(fecha_insumo);
-            } else {
-                ((JTextField) vGestion_Insumos.jDateChooser1.getDateEditor().getUiComponent()).setText("");
-            }*/
             tipo.id = idinsumo;
             dispose();
             LimpiarSeleccion();
@@ -411,23 +384,19 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-//        if (!jTextField1.getText().isEmpty() || jComboBox1.getSelectedIndex() != 0) {
-            datostabla = insumo.MostrarDatosBusquedaInsumos(jTextFieldInsumoBuscar.getText(),Integer.toString(jComboBox_TipoInsumo.getSelectedIndex()));
-            if (datostabla.length != 0) {
-                String[] columnas = {"IDINSUMO", "IDTIPOINSUMO", "IDPROVEEDOR", "DESCRIPCION", "TIPO INSUMO", "PROVEEDOR", "UNIDAD MEDIDA", "PRECIO", "STOCK"};
-                datos = new DefaultTableModel(datostabla, columnas);
-                jTabla_Insumos.setModel(datos);
-                EliminarFilasVacias();
-                //ReemplazarNulos();
-                PintarPocoStock();
-                //AjustarTamañoFilas();
-                ocultar_columnas();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos");
-            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Debes completar algún Filtro de Búsqueda");
-//        }
+        datostabla = insumo.MostrarDatosBusquedaInsumos(jTextFieldInsumoBuscar.getText(), Integer.toString(jComboBox_TipoInsumo.getSelectedIndex()));
+        if (datostabla.length != 0) {
+            String[] columnas = {"IDINSUMO", "IDTIPOINSUMO", "IDPROVEEDOR", "DESCRIPCION", "TIPO INSUMO", "PROVEEDOR", "UNIDAD MEDIDA", "PRECIO", "STOCK"};
+            datos = new DefaultTableModel(datostabla, columnas);
+            jTabla_Insumos.setModel(datos);
+            EliminarFilasVacias();
+            //ReemplazarNulos();
+            PintarPocoStock();
+            //AjustarTamañoFilas();
+            ocultar_columnas();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontraron datos");
+        }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jTextFieldInsumoBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldInsumoBuscarKeyTyped

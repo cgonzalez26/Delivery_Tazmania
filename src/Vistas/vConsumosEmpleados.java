@@ -36,48 +36,13 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
 
     public vConsumosEmpleados() {
         initComponents();
-        //IniciarFechas();
-        //MostrarDatos();
         MostrarEmpleados();
         MostrarProductos();
         listaEmpleado.setVisible(false);
         listaProducto.setVisible(false);
-        /*jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    int fila = jTable1.rowAtPoint(e.getPoint());
-                    jButtonAgregar.setEnabled(false);
-                    jButtonModificar.setText("Cancelar");
-                    jButtonCancelar.setText("Modificar");
-                    String fecha = jTable1.getValueAt(fila, 5).toString();
-                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                    try {
-                        fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
-                    } catch (ParseException ex) {
-                        Logger.getLogger(vConsumosEmpleados.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    id = jTable1.getValueAt(fila, 0).toString();
-                    cant = jTable1.getValueAt(fila, 4).toString();
-                    prod = jTable1.getValueAt(fila, 1).toString();
-                    jTextField1.setText(jTable1.getValueAt(fila, 2).toString());
-                    jTextField2.setText(jTable1.getValueAt(fila, 3).toString());
-                    jTextField3.setText(jTable1.getValueAt(fila, 4).toString());
-                    jDateChooser1.setDate(fechaseleccionada);
-                }
-            }
-        });*/
+        jButtonModificar.setEnabled(false);
     }
 
-    /*public void IniciarFechas() {
-        Date hoy = new Date();
-        jDateChooser2.setDate(hoy);
-        jDateChooser3.setDate(hoy);
-    }*/
-
- /*public void LimpiarSeleccionTabla1() {
-        jTable1.clearSelection();
-        jTable1.getSelectionModel().clearSelection();
-    }*/
     public void LimpiarSeleccionTablaEmp() {
         jTableEmpleados.clearSelection();
         jTableEmpleados.getSelectionModel().clearSelection();
@@ -88,37 +53,6 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
         jTableProductos.getSelectionModel().clearSelection();
     }
 
-    /*public void MostrarDatos() {
-        String desde = ((JTextField) jDateChooser2.getDateEditor().getUiComponent()).getText();
-        String hasta = ((JTextField) jDateChooser3.getDateEditor().getUiComponent()).getText();
-        String columnas[] = {"IDCONSUMO", "IDPRODUCTO", "NOMBRE EMPLEADO", "PRODUCTO", "CANTIDAD", "FECHA"};
-        dato1 = contr_consumoempleado.MostrarDatos(desde, hasta);
-        tabla1 = new DefaultTableModel(dato1, columnas);
-        jTable1.setModel(tabla1);
-        EliminarFilasVaciasTabla1();
-        ocultarcolumnastabla1();
-    }*/
-
- /*public void EliminarFilasVaciasTabla1() {
-        if (jTable1.getRowCount() != 0) {
-            for (int columna = 0; columna < jTable1.getColumnCount(); columna++) {
-                for (int fila = 0; fila < jTable1.getRowCount(); fila++) {
-                    if (jTable1.getValueAt(fila, columna) == null) {
-                        tabla1.removeRow(fila);
-                    }
-                }
-            }
-        }
-    }*/
-
- /*public void ocultarcolumnastabla1() {
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
-        jTable1.getColumnModel().getColumn(1).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(1).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(0);
-    }*/
     public void VolverListaConsumosEmpleados() {
         consumos = new vLista_ConsumosEmpleados();
         vMenuPrincipal.jDesktopPane1.add(consumos);
@@ -366,6 +300,78 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                 if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
                     Limpiar();
                     //LimpiarSeleccionTabla1();
+                }
+            }
+        }
+    }
+    
+    public void RegistrarDesdeTablaInforme(){
+        int contstockneg = 0;
+        if (jTableInforme.getRowCount() != 0) {
+            for (int i = 0; i < jTableInforme.getRowCount(); i++) {
+                if (jTableInforme.getColumnName(2).equals("STOCK FINAL")) {
+                    if (Float.parseFloat(jTableInforme.getValueAt(i, 2).toString()) < 0) {
+                        contstockneg++;
+                    }
+                }
+            }
+        }
+        if (contstockneg > 0) {
+            if (!jButtonAgregar.isEnabled()) {
+                ce.setCantidad(cantidad);
+                ce.setIdproducto(idproducto);
+                if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
+                    Limpiar();
+                    vStocksProductos.dispose();
+                }
+            } else {
+                vStocksProductos.dispose();
+                Limpiar();
+            }
+        } else {
+            if (!jButtonAgregar.isEnabled()) {
+                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextFieldProd.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (g == 0) {
+                    vStocksProductos.dispose();
+                    ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
+                    ce.setNomempleado(jTextFieldEmp.getText());
+                    ce.setProducto(jTextFieldProd.getText());
+                    ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
+                    ce.setIdconsumo(Integer.parseInt(id));
+                    if (contr_consumoempleado.EditarConsumosEmpleados(ce)) {
+                        ce.getCantidad();
+                        ce.getIdproducto();
+                        if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
+                            JOptionPane.showMessageDialog(null, "Modificado");
+                            VolverListaConsumosEmpleados();
+                        }
+                    }
+                } else {
+                    ce.setCantidad(cantidad);
+                    ce.setIdproducto(idproducto);
+                    if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
+                        vStocksProductos.dispose();
+                        Limpiar();
+                    }
+                }
+            } else {
+                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextFieldProd.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (g == 0) {
+                    vStocksProductos.dispose();
+                    ce.setNomempleado(jTextFieldEmp.getText());
+                    ce.setProducto(jTextFieldProd.getText());
+                    ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
+                    if (contr_consumoempleado.InsertarConsumosEmpleados(ce)) {
+                        ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
+                        ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
+                        if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
+                            JOptionPane.showMessageDialog(null, "Informe agregado");
+                            VolverListaConsumosEmpleados();
+                        }
+                    }
+                } else {
+                    vStocksProductos.dispose();
+                    Limpiar();
                 }
             }
         }
@@ -794,11 +800,6 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
-        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jDateFecha.setDateFormatString("dd/MM/yyyy HH:mm");
@@ -1164,8 +1165,6 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                         ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
                         if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
                             JOptionPane.showMessageDialog(null, "Informe agregado");
-                            //MostrarDatos();
-                            //Limpiar();
                             VolverListaConsumosEmpleados();
                         }
                     }
@@ -1234,9 +1233,7 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_vSeleccionarEmpleadoWindowClosing
 
     private void vSeleccionarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarEmpleadoMouseClicked
-        //MostrarEmpleados();
         LimpiarSeleccionTablaEmp();
-        //jTextFieldEmpleado.setText("");
     }//GEN-LAST:event_vSeleccionarEmpleadoMouseClicked
 
     private void jButtonSeleccionarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarProductosActionPerformed
@@ -1297,38 +1294,10 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_vSeleccionarProductoWindowClosing
 
     private void vSeleccionarProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarProductoMouseClicked
-        //MostrarProductos();
         LimpiarSeleccionTablaProd();
-        //jTextFieldProducto.setText("");
     }//GEN-LAST:event_vSeleccionarProductoMouseClicked
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        /*if (jButtonModificar.getText().equals("Modificar")) {
-            int fila = jTable1.getSelectedRow();
-            if (fila == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                jButtonAgregar.setEnabled(false);
-                jButtonModificar.setText("Cancelar");
-                jButtonCancelar.setText("Modificar");
-                String fecha = jTable1.getValueAt(fila, 5).toString();
-                DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                try {
-                    fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
-                } catch (ParseException ex) {
-                    Logger.getLogger(vConsumosEmpleados.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                cant = jTable1.getValueAt(fila, 4).toString();
-                prod = jTable1.getValueAt(fila, 1).toString();
-                id = jTable1.getValueAt(fila, 0).toString();
-                jTextFieldEmp.setText(jTable1.getValueAt(fila, 2).toString());
-                jTextFieldProd.setText(jTable1.getValueAt(fila, 3).toString());
-                jTextFieldCantidad.setText(jTable1.getValueAt(fila, 4).toString());
-                jDateFecha.setDate(fechaseleccionada);
-            }
-        } else {
-            
-        }*/
         if (!jTextFieldEmp.getText().equals("") && !jTextFieldProd.getText().equals("") && !jTextFieldCantidad.getText().isEmpty() && !((JTextField) jDateFecha.getDateEditor().getUiComponent()).getText().isEmpty()) {
             if (jDateFecha.getDateEditor().getUiComponent().getForeground() != Color.RED) {
                 int m = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -1354,9 +1323,6 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
                             if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
                                 JOptionPane.showMessageDialog(null, "Modificado");
                                 VolverListaConsumosEmpleados();
-                                //MostrarDatos();
-                                //Limpiar();
-                                //LimpiarSeleccionTabla1();
                             }
                         }
                     }
@@ -1370,25 +1336,6 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        /*int i = jTable1.getSelectedRow();
-        if (i == -1) {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-        } else {
-            int j = JOptionPane.showConfirmDialog(null, "Esta seguro que desea Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (j == 0) {
-                ce.setCantidad(Float.parseFloat(jTable1.getValueAt(i, 4).toString()));
-                ce.setIdproducto(Integer.parseInt(jTable1.getValueAt(i, 1).toString()));
-                if (contr_consumoempleado.CancelarStockConsumidoLocal(ce)) {
-                    ce.setIdconsumo(Integer.parseInt(jTable1.getValueAt(i, 0).toString()));
-                    if (contr_consumoempleado.EliminarConsumosEmpleados(ce)) {
-                        JOptionPane.showMessageDialog(null, "Eliminado");
-                        MostrarDatos();
-                    }
-                }
-            } else {
-                LimpiarSeleccionTabla1();
-            }
-        }*/
         int i = JOptionPane.showConfirmDialog(null, "Desea cancelar la Operación?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             dispose();
@@ -1417,14 +1364,6 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_formInternalFrameClosing
-
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        /*if (jButtonCancelar.getText().equals("Eliminar")) {
-            LimpiarSeleccionTabla1();
-            IniciarFechas();
-            MostrarDatos();
-        }*/
-    }//GEN-LAST:event_formMouseClicked
 
     private void listaEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaEmpleadoMouseClicked
         int i = listaEmpleado.getSelectedIndex();
@@ -1467,159 +1406,11 @@ public final class vConsumosEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldCantidadKeyTyped
 
     private void jButtonAceptarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarInformeActionPerformed
-        int contstockneg = 0;
-        if (jTableInforme.getRowCount() != 0) {
-            for (int i = 0; i < jTableInforme.getRowCount(); i++) {
-                if (jTableInforme.getColumnName(2).equals("STOCK FINAL")) {
-                    if (Float.parseFloat(jTableInforme.getValueAt(i, 2).toString()) < 0) {
-                        contstockneg++;
-                    }
-                }
-            }
-        }
-        if (contstockneg > 0) {
-            if (!jButtonAgregar.isEnabled()) {
-                ce.setCantidad(cantidad);
-                ce.setIdproducto(idproducto);
-                if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                    Limpiar();
-                    vStocksProductos.dispose();
-                }
-            } else {
-                vStocksProductos.dispose();
-                Limpiar();
-            }
-        } else {
-            if (!jButtonAgregar.isEnabled()) {
-                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextFieldProd.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (g == 0) {
-                    vStocksProductos.dispose();
-                    ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
-                    ce.setNomempleado(jTextFieldEmp.getText());
-                    ce.setProducto(jTextFieldProd.getText());
-                    ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
-                    ce.setIdconsumo(Integer.parseInt(id));
-                    if (contr_consumoempleado.EditarConsumosEmpleados(ce)) {
-                        ce.getCantidad();
-                        ce.getIdproducto();
-                        if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                            JOptionPane.showMessageDialog(null, "Modificado");
-                            //MostrarDatos();
-                            //Limpiar();
-                            //LimpiarSeleccionTabla1();
-                            VolverListaConsumosEmpleados();
-                        }
-                    }
-                } else {
-                    ce.setCantidad(cantidad);
-                    ce.setIdproducto(idproducto);
-                    if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                        vStocksProductos.dispose();
-                        Limpiar();
-                        //LimpiarSeleccionTabla1();
-                    }
-                }
-            } else {
-                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextFieldProd.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (g == 0) {
-                    vStocksProductos.dispose();
-                    ce.setNomempleado(jTextFieldEmp.getText());
-                    ce.setProducto(jTextFieldProd.getText());
-                    ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
-                    if (contr_consumoempleado.InsertarConsumosEmpleados(ce)) {
-                        ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
-                        ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
-                        if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                            JOptionPane.showMessageDialog(null, "Informe agregado");
-                            //MostrarDatos();
-                            //Limpiar();
-                            VolverListaConsumosEmpleados();
-                        }
-                    }
-                } else {
-                    vStocksProductos.dispose();
-                    Limpiar();
-                }
-            }
-        }
+        RegistrarDesdeTablaInforme();
     }//GEN-LAST:event_jButtonAceptarInformeActionPerformed
 
     private void vStocksProductosWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vStocksProductosWindowClosing
-        int contstockneg = 0;
-        if (jTableInforme.getRowCount() != 0) {
-            for (int i = 0; i < jTableInforme.getRowCount(); i++) {
-                if (jTableInforme.getColumnName(2).equals("STOCK FINAL")) {
-                    if (Float.parseFloat(jTableInforme.getValueAt(i, 2).toString()) < 0) {
-                        contstockneg++;
-                    }
-                }
-            }
-        }
-        if (contstockneg > 0) {
-            if (!jButtonAgregar.isEnabled()) {
-                ce.setCantidad(cantidad);
-                ce.setIdproducto(idproducto);
-                if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                    Limpiar();
-                    vStocksProductos.dispose();
-                }
-            } else {
-                vStocksProductos.dispose();
-                Limpiar();
-            }
-        } else {
-            if (!jButtonAgregar.isEnabled()) {
-                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextFieldProd.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (g == 0) {
-                    vStocksProductos.dispose();
-                    ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
-                    ce.setNomempleado(jTextFieldEmp.getText());
-                    ce.setProducto(jTextFieldProd.getText());
-                    ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
-                    ce.setIdconsumo(Integer.parseInt(id));
-                    if (contr_consumoempleado.EditarConsumosEmpleados(ce)) {
-                        ce.getCantidad();
-                        ce.getIdproducto();
-                        if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                            JOptionPane.showMessageDialog(null, "Modificado");
-                            //MostrarDatos();
-                            //Limpiar();
-                            //LimpiarSeleccionTabla1();
-                            VolverListaConsumosEmpleados();
-                        }
-                    }
-                } else {
-                    ce.setCantidad(cantidad);
-                    ce.setIdproducto(idproducto);
-                    if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                        vStocksProductos.dispose();
-                        Limpiar();
-                        //LimpiarSeleccionTabla1();
-                    }
-                }
-            } else {
-                int g = JOptionPane.showConfirmDialog(null, "Agregar el producto " + jTextFieldProd.getText() + " o elegir otro?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (g == 0) {
-                    vStocksProductos.dispose();
-                    ce.setNomempleado(jTextFieldEmp.getText());
-                    ce.setProducto(jTextFieldProd.getText());
-                    ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
-                    if (contr_consumoempleado.InsertarConsumosEmpleados(ce)) {
-                        ce.setCantidad(Float.parseFloat(jTextFieldCantidad.getText()));
-                        ce.setIdproducto(contr_consumoempleado.ObtenerIDProducto(jTextFieldProd.getText()));
-                        if (contr_consumoempleado.RestarStockConsumidoLocal(ce)) {
-                            JOptionPane.showMessageDialog(null, "Informe agregado");
-                            //MostrarDatos();
-                            //Limpiar();
-                            VolverListaConsumosEmpleados();
-                        }
-                    }
-                } else {
-                    vStocksProductos.dispose();
-                    Limpiar();
-                }
-            }
-        }
+        RegistrarDesdeTablaInforme();
     }//GEN-LAST:event_vStocksProductosWindowClosing
 
     private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped

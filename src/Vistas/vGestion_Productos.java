@@ -3,11 +3,9 @@ package Vistas;
 import Controlador.control_Productos;
 import Controlador.control_existencias;
 import Modelo.Productos;
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -24,44 +22,10 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
     public vGestion_Productos() {
         initComponents();
         AutoCompletarCategoriaProducto();
-        //Mostrar();
         EliminarItemsVacios();
-        //jList2.setVisible(false);
-        /*jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    jButtonAgregar.setEnabled(false);
-                    jButtonModificar.setText("Cancelar");
-                    jButtonCancelar.setText("Modificar");
-                    jButton4.setEnabled(false);
-                    int fila = jTable1.rowAtPoint(e.getPoint());
-
-                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                    id = jTable1.getValueAt(fila, 0).toString();
-                    jComboBoxCategorias.setSelectedItem(jTable1.getValueAt(fila, 2).toString());
-                    jTextFieldNombreProducto.setText(jTable1.getValueAt(fila, 3).toString());
-                    jTextFieldPrecioVenta.setText(jTable1.getValueAt(fila, 4).toString());
-                    fecha = jTable1.getValueAt(fila, 5).toString();
-                    if (!fecha.equals("-")) {
-                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                        try {
-                            fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
-                        } catch (ParseException ex) {
-                            Logger.getLogger(vListas_Compras.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        jDateFecha.setDate(fechaseleccionada);
-                    }
-                }
-            }
-        });*/
+        jButtonModificar.setVisible(false);
     }
-
-    /*public void Limpiar() {
-        jComboBoxCategorias.setSelectedItem("Seleccionar Categoría...");
-        jTextFieldNombreProducto.setText("");
-        jTextFieldPrecioVenta.setText("");
-        ((JTextField) jDateFecha.getDateEditor().getUiComponent()).setText("");
-    }*/
+    
     public void AutoCompletarCategoriaProducto() {
         Object[] categoriaproducto = conexis.combox("categoriasproductos", "descripcion");
         for (Object row : categoriaproducto) {
@@ -76,76 +40,7 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
             }
         }
     }
-
-    /*public void ReemplazarNulos() {
-        if (jTable1.getRowCount() != 0) {
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                if (jTable1.getValueAt(i, 5).equals("00/00/0000 12:00")) {
-                    jTable1.setValueAt("-", i, 5);
-                }
-            }
-        }
-    }*/
-
- /*public void Mostrar() {
-        String[] columnas = {"IDPROD", "IDCATEGORIAPRODUCTO", "CATEGORIA", "DESCRIPCION", "PRECIO VENTA", "FECHA REGISTRO"};
-        Object[][] dato = producto.MostrarDatos();
-        datos = new DefaultTableModel(dato, columnas);
-        jTable1.setModel(datos);
-        EliminarFilasVacias();
-        ReemplazarNulos();
-        //AjustarTamañoFilas();
-        ocultar_columnas();
-    }*/
- /*public void ListaProductos(){
-        listprod = conexis.list("productos", "descripcion", jTextField1.getText());
-        String substr = jTextField1.getText().toLowerCase();
-        list = new DefaultListModel();
-        jList2.setModel(list);
-        list.removeAllElements();
-        if(listprod.size() > 0){
-            for(int i=0; i < listprod.size(); i++){
-                if(listprod.get(i) == null){
-                    listprod.remove(i);
-                } else {
-                    String sublist = listprod.get(i).toLowerCase();
-                    if(sublist.contains(substr)){
-                        list.addElement(listprod.get(i));
-                        jList2.setVisible(true);
-                        if(jTextField1.getText().isEmpty()){
-                            jList2.setVisible(false);
-                        }
-                    }
-                }
-            }
-        }
-    }*/
-
- /*public void ocultar_columnas() {
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
-        jTable1.getColumnModel().getColumn(1).setMaxWidth(0);
-        jTable1.getColumnModel().getColumn(1).setMinWidth(0);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(0);
-    }*/
-
- /*public void EliminarFilasVacias() {
-        if (jTable1.getRowCount() != 0) {
-            for (int columna = 0; columna < jTable1.getColumnCount(); columna++) {
-                for (int fila = 0; fila < jTable1.getRowCount(); fila++) {
-                    if (jTable1.getValueAt(fila, columna) == null) {
-                        datos.removeRow(fila);
-                    }
-                }
-            }
-        }
-    }*/
-
- /*public void LimpiarSeleccion() {
-        jTable1.clearSelection();
-        jTable1.getSelectionModel().clearSelection();
-    }*/
+    
     public void VolverListaProductos() {
         listaproductos = new vLista_Productos();
         vMenuPrincipal.jDesktopPane1.add(listaproductos);
@@ -211,11 +106,6 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
             public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-        });
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
             }
         });
 
@@ -312,8 +202,6 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
                 }
                 if (producto.InsertarProductos(p)) {
                     JOptionPane.showMessageDialog(null, "Nuevo Producto agregado");
-                    //Mostrar();
-                    //Limpiar();
                     VolverListaProductos();
                 }
             } else {
@@ -325,43 +213,6 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        /*if (jButtonModificar.getText().equals("Modificar")) {
-            int s = jTable1.getSelectedRow();
-            if (s == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                jButtonAgregar.setEnabled(false);
-                jButtonModificar.setText("Cancelar");
-                jButtonCancelar.setText("Modificar");
-                jButton4.setEnabled(false);
-                fecha = jTable1.getValueAt(s, 5).toString();
-                if (!fecha.equals("-")) {
-                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                    try {
-                        fechaseleccionada = new java.sql.Timestamp(df.parse(fecha).getTime());
-                    } catch (ParseException ex) {
-                        Logger.getLogger(vListas_Compras.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    jDateFecha.setDate(fechaseleccionada);
-                }
-                setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                id = jTable1.getValueAt(s, 0).toString();
-                jComboBoxCategorias.setSelectedItem(jTable1.getValueAt(s, 2).toString());
-                jTextFieldNombreProducto.setText(jTable1.getValueAt(s, 3).toString());
-                jTextFieldPrecioVenta.setText(jTable1.getValueAt(s, 4).toString());
-            }
-        } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                jButtonAgregar.setEnabled(true);
-                jButton4.setEnabled(true);
-                jButtonModificar.setText("Modificar");
-                jButtonCancelar.setText("Eliminar");
-                Limpiar();
-                LimpiarSeleccion();
-            }
-        }*/
         if (!jComboBoxCategorias.getSelectedItem().equals("Seleccionar Categoría...") && !jTextFieldNombreProducto.getText().trim().equals("")) {
             if (VerificarProductosRepetidosModificar() == false) {
                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -389,23 +240,6 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        /*if (jButtonCancelar.getText().equals("Eliminar")) {
-            int seleccionado = jTable1.getSelectedRow();
-            if (seleccionado == -1) {
-                JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
-            } else {
-                int i = JOptionPane.showConfirmDialog(null, "Esta seguro de Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    p.setIdproducto(Integer.parseInt((String) jTable1.getValueAt(seleccionado, 0)));
-                    if (producto.EliminarProductos(p)) {
-                        JOptionPane.showMessageDialog(null, "Eliminado");
-                        Mostrar();
-                    }
-                } else {
-                    LimpiarSeleccion();
-                }
-            }
-        }*/
         if (!jButtonAgregar.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
@@ -426,6 +260,29 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
             dispose();
         }
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jTextFieldPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPrecioVentaKeyTyped
+        char[] ñ = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', KeyEvent.VK_BACK_SPACE};
+        int b = 0;
+        for (int i = 0; i <= 11; i++) {
+            if (ñ[i] == evt.getKeyChar()) {
+                b = 1;
+            }
+        }
+        if (b == 0) {
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_jTextFieldPrecioVentaKeyTyped
+
+    private void jTextFieldNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreProductoKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cadena = ("" + c).toUpperCase();
+            c = cadena.charAt(0);
+            evt.setKeyChar(c);
+        }
+    }//GEN-LAST:event_jTextFieldNombreProductoKeyTyped
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         if (!jButtonAgregar.isEnabled()) {
@@ -448,35 +305,6 @@ public final class vGestion_Productos extends javax.swing.JInternalFrame {
             dispose();
         }
     }//GEN-LAST:event_formInternalFrameClosing
-
-    private void jTextFieldPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPrecioVentaKeyTyped
-        char[] ñ = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', KeyEvent.VK_BACK_SPACE};
-        int b = 0;
-        for (int i = 0; i <= 11; i++) {
-            if (ñ[i] == evt.getKeyChar()) {
-                b = 1;
-            }
-        }
-        if (b == 0) {
-            evt.consume();
-            Toolkit.getDefaultToolkit().beep();
-        }
-    }//GEN-LAST:event_jTextFieldPrecioVentaKeyTyped
-
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        /*LimpiarSeleccion();
-        Mostrar();
-        jTextField1.setText("");*/
-    }//GEN-LAST:event_formMouseClicked
-
-    private void jTextFieldNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreProductoKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            String cadena = ("" + c).toUpperCase();
-            c = cadena.charAt(0);
-            evt.setKeyChar(c);
-        }
-    }//GEN-LAST:event_jTextFieldNombreProductoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

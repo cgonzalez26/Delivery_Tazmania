@@ -41,6 +41,7 @@ public final class vGestion_Asistencias extends javax.swing.JInternalFrame {
         initComponents();
         MostrarEmpleados();
         listaEmpleados.setVisible(false);
+        jButtonModificar.setEnabled(false);
     }
 
     public void limpiar() {

@@ -65,9 +65,9 @@
                       <Component id="jTextNomCom_Prov" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                          <Component id="jBotonAgre_Prov2" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="jButtonAgregar" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                          <Component id="jBotonModificar_Prov" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="jButtonModificar" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                           <Component id="jBotonCancelar" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
@@ -111,8 +111,8 @@
               <Component id="jTextDirec_Prov" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jBotonAgre_Prov2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jBotonModificar_Prov" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jButtonAgregar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jButtonModificar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jBotonCancelar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="21" max="32767" attributes="0"/>
@@ -238,7 +238,7 @@
         <Property name="text" type="java.lang.String" value="Nro Documento:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jBotonAgre_Prov2">
+    <Component class="javax.swing.JButton" name="jButtonAgregar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="39" green="f9" red="fc" type="rgb"/>
@@ -249,13 +249,13 @@
         <Property name="text" type="java.lang.String" value="Agregar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBotonAgre_Prov2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAgregarActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jBotonModificar_Prov">
+    <Component class="javax.swing.JButton" name="jButtonModificar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="39" green="f9" red="fc" type="rgb"/>
@@ -266,7 +266,7 @@
         <Property name="text" type="java.lang.String" value="Modificar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBotonModificar_ProvActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonModificarActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>

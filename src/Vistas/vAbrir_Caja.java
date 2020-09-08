@@ -10,15 +10,11 @@ import Modelo.Caja_Turno;
 import Modelo.Movimientos_Caja;
 import Modelo.Session;
 import Modelo.Turnos;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static Vistas.vMenuPrincipal.jMenuCompras;
 import static Vistas.vMenuPrincipal.jMenuVentas;
@@ -143,6 +139,47 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
             //cargo el list de tipo de gastos
 //            turno = new Turnos(idtipo, nomtipo, 1);
 //            turnos.add(turno);
+        }
+    }
+
+    public void EditarCajaDesdeMovimientoCaja() {
+        int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            Float cajachica = Float.parseFloat(jTextCajaChica.getText());
+            Caja caja = new Caja();
+            //caja.setActivo(1);           
+            //caja.setEstado("ABIERTA");
+            caja.setIdusuario(Session.getIdusuario());
+            caja.setMonto(cajachica);
+            sql = new Sentencias_sql();
+            int idcaja = sql.obtenerUltimoId("caja", "idcaja");
+            caja.setIdCaja(idcaja);
+            control_Cajas control_caja = new control_Cajas();
+            if (control_caja.ModificarCaja(caja)) {
+                //int idturno =cbxTurnos.getSelectedIndex(); //corregir para que tome id de un list paralelo
+                int idturno = lista_turnos.get(cbxTurnos.getSelectedItem());
+                Caja_Turno cajaturno = new Caja_Turno();
+                cajaturno.setIdusuario(caja.getIdusuario());
+                cajaturno.setIdTurno(idturno);
+                cajaturno.setMonto(caja.getMonto());
+                int idcajaturno = sql.obtenerUltimoId("caja_turno", "idcajaturno");
+                cajaturno.setIdcajaturno(idcajaturno);
+                control_Caja_Turno control_cajaturno = new control_Caja_Turno();
+                if (control_cajaturno.ModificarCajaTurno(cajaturno)) {
+                    Movimientos_Caja movcaja = new Movimientos_Caja();
+                    movcaja.setIdusuario(cajaturno.getIdusuario());
+                    movcaja.setMonto(caja.getMonto());
+                    movcaja.setIdmovimientocaja(Integer.parseInt(id));
+                    control_Movimientos_Caja control_movcaja = new control_Movimientos_Caja();
+                    if (control_movcaja.ModificarMovimientoCaja(movcaja)) {
+                        JOptionPane.showMessageDialog(null, "Modificado");
+                        movimientoscajas = new vMovimientos_Caja();
+                        vMenuPrincipal.jDesktopPane1.add(movimientoscajas);
+                        movimientoscajas.setVisible(true);
+                        this.dispose();
+                    }
+                }
+            }
         }
     }
 
@@ -326,44 +363,7 @@ public final class vAbrir_Caja extends javax.swing.JInternalFrame {
                 verificarCajaAbierta();
             }
         } else {
-            int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                Float cajachica = Float.parseFloat(jTextCajaChica.getText());
-                Caja caja = new Caja();
-                //caja.setActivo(1);           
-                //caja.setEstado("ABIERTA");
-                caja.setIdusuario(Session.getIdusuario());
-                caja.setMonto(cajachica);
-                sql = new Sentencias_sql();
-                int idcaja = sql.obtenerUltimoId("caja", "idcaja");
-                caja.setIdCaja(idcaja);
-                control_Cajas control_caja = new control_Cajas();
-                if (control_caja.ModificarCaja(caja)) {
-                    //int idturno =cbxTurnos.getSelectedIndex(); //corregir para que tome id de un list paralelo
-                    int idturno = lista_turnos.get(cbxTurnos.getSelectedItem());
-                    Caja_Turno cajaturno = new Caja_Turno();
-                    cajaturno.setIdusuario(caja.getIdusuario());
-                    cajaturno.setIdTurno(idturno);
-                    cajaturno.setMonto(caja.getMonto());
-                    int idcajaturno = sql.obtenerUltimoId("caja_turno", "idcajaturno");
-                    cajaturno.setIdcajaturno(idcajaturno);
-                    control_Caja_Turno control_cajaturno = new control_Caja_Turno();
-                    if (control_cajaturno.ModificarCajaTurno(cajaturno)) {
-                        Movimientos_Caja movcaja = new Movimientos_Caja();
-                        movcaja.setIdusuario(cajaturno.getIdusuario());
-                        movcaja.setMonto(caja.getMonto());
-                        movcaja.setIdmovimientocaja(Integer.parseInt(id));
-                        control_Movimientos_Caja control_movcaja = new control_Movimientos_Caja();
-                        if (control_movcaja.ModificarMovimientoCaja(movcaja)) {
-                            JOptionPane.showMessageDialog(null, "Modificado");
-                            movimientoscajas = new vMovimientos_Caja();
-                            vMenuPrincipal.jDesktopPane1.add(movimientoscajas);
-                            movimientoscajas.setVisible(true);                            
-                            this.dispose();
-                        }
-                    }
-                }
-            }
+            EditarCajaDesdeMovimientoCaja();
         }
     }//GEN-LAST:event_btnAbrirCajaActionPerformed
 

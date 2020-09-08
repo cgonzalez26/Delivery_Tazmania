@@ -2,8 +2,6 @@ package Vistas;
 
 import Controlador.control_Proveedores;
 import Modelo.Proveedores;
-import java.awt.Font;
-import java.awt.font.FontRenderContext;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,8 +31,8 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
                     proveedor.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
                     proveedor.toFront();
                     proveedor.setVisible(true);
-                    vGestion_Proveedores.jBotonAgre_Prov2.setText("Cancelar");
-                    vGestion_Proveedores.jBotonModificar_Prov.setEnabled(true);
+                    vGestion_Proveedores.jButtonAgregar.setEnabled(false);
+                    vGestion_Proveedores.jButtonModificar.setEnabled(true);
                     id = (jTabla_Prov.getValueAt(fila, 0).toString());
                     vGestion_Proveedores.jTextNroDoc_Prov.setText(jTabla_Prov.getValueAt(fila, 3).toString());
                     vGestion_Proveedores.jTextNom_Prov.setText(jTabla_Prov.getValueAt(fila, 4).toString());
@@ -60,42 +58,10 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
         datos = new DefaultTableModel(datostabla, columnas);
         jTabla_Prov.setModel(datos);
         EliminarFilasVacias();
-        AjustarTamañoFilas();
+        //AjustarTamañoFilas();
         ocultar_columnas();
     }
-
-    public void AjustarTamañoFilas() {
-        if (jTabla_Prov.getRowCount() != 0) {
-            for (int i = 0; i < jTabla_Prov.getRowCount(); i++) {
-                Font font = new Font("Segoe UI Semibold", 0, 13);
-                int nrodoc = (int) font.getStringBounds(jTabla_Prov.getValueAt(i, 3).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int nombre = (int) font.getStringBounds(jTabla_Prov.getValueAt(i, 4).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int apellido = (int) font.getStringBounds(jTabla_Prov.getValueAt(i, 5).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int nomcom = (int) font.getStringBounds(jTabla_Prov.getValueAt(i, 6).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int direc = (int) font.getStringBounds(jTabla_Prov.getValueAt(i, 7).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                int tel = (int) font.getStringBounds(jTabla_Prov.getValueAt(i, 8).toString(), new FontRenderContext(font.getTransform(), false, false)).getBounds().getWidth();
-                if (nrodoc > jTabla_Prov.getColumnModel().getColumn(3).getPreferredWidth()) {
-                    jTabla_Prov.getColumnModel().getColumn(3).setPreferredWidth(nrodoc);
-                }
-                if (nombre > jTabla_Prov.getColumnModel().getColumn(4).getPreferredWidth()) {
-                    jTabla_Prov.getColumnModel().getColumn(4).setPreferredWidth(nombre);
-                }
-                if (apellido > jTabla_Prov.getColumnModel().getColumn(5).getPreferredWidth()) {
-                    jTabla_Prov.getColumnModel().getColumn(5).setPreferredWidth(apellido);
-                }
-                if (nomcom > jTabla_Prov.getColumnModel().getColumn(6).getPreferredWidth()) {
-                    jTabla_Prov.getColumnModel().getColumn(6).setPreferredWidth(nomcom);
-                }
-                if (direc > jTabla_Prov.getColumnModel().getColumn(7).getPreferredWidth()) {
-                    jTabla_Prov.getColumnModel().getColumn(7).setPreferredWidth(direc);
-                }
-                if (tel > jTabla_Prov.getColumnModel().getColumn(8).getPreferredWidth()) {
-                    jTabla_Prov.getColumnModel().getColumn(8).setPreferredWidth(tel);
-                }
-            }
-        }
-    }
-
+    
     public void ocultar_columnas() {
         jTabla_Prov.getColumnModel().getColumn(0).setMaxWidth(0);
         jTabla_Prov.getColumnModel().getColumn(0).setMinWidth(0);
@@ -251,8 +217,8 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
 
     private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoActionPerformed
         proveedor = new vGestion_Proveedores();
-        proveedor.jBotonAgre_Prov2.setEnabled(true);
-        proveedor.jBotonModificar_Prov.setEnabled(false);
+        proveedor.jButtonAgregar.setEnabled(true);
+        proveedor.jButtonModificar.setEnabled(false);
         vMenuPrincipal.jDesktopPane1.add(proveedor);
         proveedor.setVisible(true);
         proveedor.toFront();
@@ -290,8 +256,8 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
             proveedor.toFront();
             proveedor.setVisible(true);
 //            vGestion_Proveedores.jBotonAgre_Prov2.setText("Cancelar");
-            vGestion_Proveedores.jBotonAgre_Prov2.setEnabled(false);
-            vGestion_Proveedores.jBotonModificar_Prov.setEnabled(true);
+            vGestion_Proveedores.jButtonAgregar.setEnabled(false);
+            vGestion_Proveedores.jButtonModificar.setEnabled(true);
             id = (jTabla_Prov.getValueAt(seleccionado, 0).toString());
             vGestion_Proveedores.jTextNroDoc_Prov.setText(jTabla_Prov.getValueAt(seleccionado, 3).toString());
             vGestion_Proveedores.jTextNom_Prov.setText(jTabla_Prov.getValueAt(seleccionado, 4).toString());
@@ -314,11 +280,10 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
         if (!jTextFieldProveedorBuscar.getText().isEmpty()) {
             datostabla = prov.MostrarDatosBusqueda(jTextFieldProveedorBuscar.getText());
             if (datostabla.length != 0) {
-                String[] columnas = {"IDPROV", "ID TIPODOC", "TIPO DOC", "NRODOC", "NOMBRE", "APELLIDO", "NOMBRE COMERCIAL", "DIRECCION", "TELEFONO"};
+                String[] columnas = {"IDPROV", "ID TIPODOC", "TIPO DOC", "NRODOC", "NOMBRES", "APELLIDOS", "NOMBRE COMERCIAL", "DIRECCION", "TELEFONO"};
                 datos = new DefaultTableModel(datostabla, columnas);
                 jTabla_Prov.setModel(datos);
                 EliminarFilasVacias();
-                AjustarTamañoFilas();
                 ocultar_columnas();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron datos");

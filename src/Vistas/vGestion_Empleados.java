@@ -23,7 +23,7 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
         initComponents();
         ComboTiposEmpleados();
         EliminarItemsVaciosTipoEmpleado();
-        jButton2.setEnabled(false);
+        jButtonModificar.setEnabled(false);
     }
 
     public void ComboTiposEmpleados() {
@@ -42,7 +42,7 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
     }
 
     public void Cerrar() {
-        if (!jComboBoxTipoEmpleado.getSelectedItem().equals("(*) Seleccionar Tipo Empleado..") || !jTextFieldNroDocumento.getText().trim().isEmpty() || !jTextFieldNombre.getText().trim().isEmpty() || !jTextFieldApellido.getText().trim().isEmpty() || !jTextFieldDomicilio.getText().trim().isEmpty()) {
+        if (!jComboBoxTipoEmpleado.getSelectedItem().equals("Seleccionar Tipo...") || !jTextFieldNroDocumento.getText().trim().isEmpty() || !jTextFieldNombre.getText().trim().isEmpty() || !jTextFieldApellido.getText().trim().isEmpty() || !jTextFieldDomicilio.getText().trim().isEmpty()) {
             int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 dispose();
@@ -50,7 +50,7 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
                 setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             }
         } else {
-            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            dispose();
         }
     }
 
@@ -68,8 +68,8 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
         jTextFieldDomicilio = new javax.swing.JTextField();
         jLabelTelefono = new javax.swing.JLabel();
         jTextFieldTelefono = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonAgregar = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
         jComboBoxTipoEmpleado = new javax.swing.JComboBox<>();
         jBotonCancelar = new javax.swing.JButton();
         jLabelTipoEmpleado = new javax.swing.JLabel();
@@ -139,29 +139,29 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
 
         jTextFieldTelefono.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(252, 249, 57));
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAgregar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonAgregar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAgregarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(252, 249, 57));
-        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton2.setText("Modificar");
-        jButton2.setMaximumSize(new java.awt.Dimension(75, 25));
-        jButton2.setMinimumSize(new java.awt.Dimension(75, 25));
-        jButton2.setPreferredSize(new java.awt.Dimension(75, 25));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonModificar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.setMaximumSize(new java.awt.Dimension(75, 25));
+        jButtonModificar.setMinimumSize(new java.awt.Dimension(75, 25));
+        jButtonModificar.setPreferredSize(new java.awt.Dimension(75, 25));
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
 
         jComboBoxTipoEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jComboBoxTipoEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(*) Seleccionar Tipo.." }));
+        jComboBoxTipoEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Tipo..." }));
 
         jBotonCancelar.setBackground(new java.awt.Color(237, 124, 61));
         jBotonCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -173,7 +173,7 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
         });
 
         jLabelTipoEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelTipoEmpleado.setText("Tipo Empleado:");
+        jLabelTipoEmpleado.setText("(*)Tipo Empleado:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,9 +183,9 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(111, 111, 111)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(65, 65, 65)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68)
                         .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -242,8 +242,8 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
                 .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -251,60 +251,49 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jButton1.getText().equals("Agregar")) {
-            if (!jTextFieldNombre.getText().trim().equals("") && !jComboBoxTipoEmpleado.getSelectedItem().equals("(*) Seleccionar Tipo Empleado..")) {
-                if (jTextFieldNroDocumento.getText().trim().length() <= 10) {
-                    e.setIdtipoempleado(empleado.ObtenerIDTipoEmpleado((String) jComboBoxTipoEmpleado.getSelectedItem()));
-                    e.setIdtipodocumento(1);
-                    if (jTextFieldNroDocumento.getText().trim().equals("")) {
-                        e.setNroDocumento("-");
-                    } else {
-                        e.setNroDocumento(jTextFieldNroDocumento.getText());
-                    }
-                    e.setNombre(jTextFieldNombre.getText());
-                    if (!jTextFieldApellido.getText().equals("")) {
-                        e.setApellido(jTextFieldApellido.getText());
-                    } else {
-                        e.setApellido("-");
-                    }
-                    if (jTextFieldDomicilio.getText().trim().isEmpty()) {
-                        e.setDireccion("-");
-                    } else {
-                        e.setDireccion(jTextFieldDomicilio.getText());
-                    }
-                    if (jTextFieldTelefono.getText().trim().isEmpty()) {
-                        e.setTelefono("-");
-                    } else {
-                        e.setTelefono(jTextFieldTelefono.getText());
-                    }
-                    if (empleado.InsertarEmpledos(e)) {
-                        JOptionPane.showMessageDialog(null, "Nuevo empleado agregado");
-                        lista = new vLista_Empleados();
-                        vMenuPrincipal.jDesktopPane1.add(lista);
-                        lista.setVisible(true);
-                        this.dispose();
-                    }
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        if (!jTextFieldNombre.getText().trim().equals("") && !jComboBoxTipoEmpleado.getSelectedItem().equals("Seleccionar Tipo...")) {
+            if (jTextFieldNroDocumento.getText().trim().length() <= 10) {
+                e.setIdtipoempleado(empleado.ObtenerIDTipoEmpleado((String) jComboBoxTipoEmpleado.getSelectedItem()));
+                e.setIdtipodocumento(1);
+                if (jTextFieldNroDocumento.getText().trim().equals("")) {
+                    e.setNroDocumento("-");
                 } else {
-                    JOptionPane.showMessageDialog(null, "El formato del documento es incorrecto");
+                    e.setNroDocumento(jTextFieldNroDocumento.getText());
+                }
+                e.setNombre(jTextFieldNombre.getText());
+                if (!jTextFieldApellido.getText().equals("")) {
+                    e.setApellido(jTextFieldApellido.getText());
+                } else {
+                    e.setApellido("-");
+                }
+                if (jTextFieldDomicilio.getText().trim().isEmpty()) {
+                    e.setDireccion("-");
+                } else {
+                    e.setDireccion(jTextFieldDomicilio.getText());
+                }
+                if (jTextFieldTelefono.getText().trim().isEmpty()) {
+                    e.setTelefono("-");
+                } else {
+                    e.setTelefono(jTextFieldTelefono.getText());
+                }
+                if (empleado.InsertarEmpledos(e)) {
+                    JOptionPane.showMessageDialog(null, "Nuevo empleado agregado");
+                    lista = new vLista_Empleados();
+                    vMenuPrincipal.jDesktopPane1.add(lista);
+                    lista.setVisible(true);
+                    this.dispose();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
+                JOptionPane.showMessageDialog(null, "El formato del documento es incorrecto");
             }
         } else {
-            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                lista = new vLista_Empleados();
-                vMenuPrincipal.jDesktopPane1.add(lista);
-                lista.setVisible(true);
-                this.dispose();
-            }
+            JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
         }
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (!jTextFieldNombre.getText().trim().equals("") && !jComboBoxTipoEmpleado.getSelectedItem().equals("(*) Seleccionar Tipo Empleado..")) {
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        if (!jTextFieldNombre.getText().trim().equals("") && !jComboBoxTipoEmpleado.getSelectedItem().equals("Seleccionar Tipo...")) {
             if (jTextFieldNroDocumento.getText().trim().length() <= 10) {
                 int i = JOptionPane.showConfirmDialog(null, "Guardar Cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
@@ -346,10 +335,10 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        if (jButton1.getText().equals("Cancelar")) {
+        if (!jButtonAgregar.isEnabled()) {
             int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 lista = new vLista_Empleados();
@@ -391,15 +380,24 @@ public final class vGestion_Empleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldApellidoKeyTyped
 
     private void jBotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCancelarActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        if (!jButtonAgregar.isEnabled()) {
+            int i = JOptionPane.showConfirmDialog(null, "Cancelar Modificacion?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                lista = new vLista_Empleados();
+                vMenuPrincipal.jDesktopPane1.add(lista);
+                lista.setVisible(true);
+                dispose();
+            }
+        } else {
+            Cerrar();
+        }
     }//GEN-LAST:event_jBotonCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton jBotonCancelar;
-    public static javax.swing.JButton jButton1;
-    public static javax.swing.JButton jButton2;
+    public static javax.swing.JButton jButtonAgregar;
+    public static javax.swing.JButton jButtonModificar;
     public static javax.swing.JComboBox<String> jComboBoxTipoEmpleado;
     private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelDomicilio;

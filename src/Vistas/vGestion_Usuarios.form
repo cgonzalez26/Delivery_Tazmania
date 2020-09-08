@@ -43,20 +43,25 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jEtiqDireccion_Usuario" min="-2" pref="80" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                              <Component id="jEtiqNom_Usuario" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="jEtiqLogin_Usuario" min="-2" pref="70" max="-2" attributes="0"/>
-                                  <Component id="jTextLogin_Usuario" min="-2" pref="170" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jTextNom_Usuario" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jEtiqTel_Usuario" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
-                          <Component id="jTextTel_Usuario" min="-2" pref="170" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                          <Component id="jEtiqtMail_Usuario1" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                           <Component id="jTextDireccion_Usuario" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jEtiqDireccion_Usuario" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                      <Component id="jEtiqNom_Usuario" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                          <Component id="jEtiqLogin_Usuario" min="-2" pref="70" max="-2" attributes="0"/>
+                                          <Component id="jTextLogin_Usuario" min="-2" pref="170" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jTextNom_Usuario" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jEtiqTel_Usuario" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                                  <Component id="jTextTel_Usuario" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="jComboTipoUsuario" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="jEtiqtMail_Usuario1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                   </Group>
@@ -154,7 +159,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jComboBox1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jComboTipoUsuario" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jComboEstado_Usuario" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
@@ -367,14 +372,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxVerContrase&#xf1;aActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="jComboTipoUsuario">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="13" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
-            <StringItem index="0" value="(*) Seleccione Tipo..."/>
+            <StringItem index="0" value="Seleccionar Tipo...."/>
           </StringArray>
         </Property>
       </Properties>
@@ -405,7 +410,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Tipo de Usuario:"/>
+        <Property name="text" type="java.lang.String" value="(*) Tipo de Usuario:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jEtiqtMail_Usuario2">

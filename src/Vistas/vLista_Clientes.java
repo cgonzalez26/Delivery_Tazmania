@@ -29,8 +29,8 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
                     vcliente = new vGestion_Clientes();
                     vMenuPrincipal.jDesktopPane1.add(vcliente);
                     vcliente.setVisible(true);
-                    vGestion_Clientes.jButtonAgregar.setText("Cancelar");
-                    vGestion_Clientes.jButtonModificar.setEnabled(true);
+                    vGestion_Clientes.jButtonAgregar.setEnabled(false);
+                    vGestion_Usuarios.jBotonModif_Usuario.setEnabled(true);
                     id = jTableClientes.getValueAt(fila, 0).toString();
                     vGestion_Clientes.jTextFieldNroDocumento.setText(jTableClientes.getValueAt(fila, 1).toString());
                     vGestion_Clientes.jTextFieldNombre.setText(jTableClientes.getValueAt(fila, 2).toString());
@@ -271,8 +271,8 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
             vcliente = new vGestion_Clientes();
             vMenuPrincipal.jDesktopPane1.add(vcliente);
             vcliente.setVisible(true);
-            vGestion_Clientes.jButtonAgregar.setText("Cancelar");
-            vGestion_Clientes.jButtonModificar.setEnabled(true);
+            vGestion_Clientes.jButtonAgregar.setEnabled(false);
+            vGestion_Usuarios.jBotonModif_Usuario.setEnabled(true);
             id = jTableClientes.getValueAt(fila, 0).toString();
             vGestion_Clientes.jTextFieldNroDocumento.setText(jTableClientes.getValueAt(fila, 1).toString());
             vGestion_Clientes.jTextFieldNombre.setText(jTableClientes.getValueAt(fila, 2).toString());
@@ -307,7 +307,7 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
         if (!jTextFieldNombre.getText().isEmpty()) {
             datostabla = contr_clientes.MostrarDatosBusquedaCliente(jTextFieldNombre.getText());
             if (datostabla.length != 0) {
-                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
+                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRES", "APELLIDOS", "DIRECCION", "TELEFONO", "E-MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
                 jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
@@ -318,7 +318,7 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
         } else if (!jTextFieldDNI.getText().isEmpty()) {
             datostabla = contr_clientes.MostrarDatosBusquedaDNI(jTextFieldDNI.getText());
             if (datostabla.length != 0) {
-                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
+                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRES", "APELLIDOS", "DIRECCION", "TELEFONO", "E-MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
                 jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
@@ -329,7 +329,7 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
         } else if (!jTextFieldTelefono.getText().isEmpty()) {
             datostabla = contr_clientes.MostrarDatosBusquedaTelefono(jTextFieldTelefono.getText());
             if (datostabla.length != 0) {
-                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
+                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRES", "APELLIDOS", "DIRECCION", "TELEFONO", "E-MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
                 jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
@@ -340,7 +340,7 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
         } else if (!jTextFieldDNI.getText().isEmpty() && !jTextFieldNombre.getText().isEmpty()) {
             datostabla = contr_clientes.MostrarDatosBusquedaDNICliente(jTextFieldDNI.getText(), jTextFieldNombre.getText());
             if (datostabla.length != 0) {
-                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
+                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRES", "APELLIDOS", "DIRECCION", "TELEFONO", "E-MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
                 jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
@@ -351,7 +351,7 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
         } else if (!jTextFieldTelefono.getText().isEmpty() && jTextFieldNombre.getText().isEmpty()) {
             datostabla = contr_clientes.MostrarDatosBusquedaClienteTelefono(jTextFieldNombre.getText(), jTextFieldTelefono.getText());
             if (datostabla.length != 0) {
-                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
+                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRES", "APELLIDOS", "DIRECCION", "TELEFONO", "E-MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
                 jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
@@ -362,7 +362,7 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
         } else if (!jTextFieldDNI.getText().isEmpty() && !jTextFieldTelefono.getText().isEmpty()) {
             datostabla = contr_clientes.MostrarDatosBusquedaDNITelefono(jTextFieldDNI.getText(), jTextFieldTelefono.getText());
             if (datostabla.length != 0) {
-                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
+                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRES", "APELLIDOS", "DIRECCION", "TELEFONO", "E-MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
                 jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
@@ -373,7 +373,7 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
         } else if (!jTextFieldNombre.getText().isEmpty() && !jTextFieldDNI.getText().isEmpty() && !jTextFieldTelefono.getText().isEmpty()) {
             datostabla = contr_clientes.MostrarDatosBusquedaDNIClienteTelefono(jTextFieldDNI.getText(), jTextFieldNombre.getText(), jTextFieldTelefono.getText());
             if (datostabla.length != 0) {
-                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "MAIL"};
+                String[] columnas = {"IDCLIENTE", "DNI", "NOMBRES", "APELLIDOS", "DIRECCION", "TELEFONO", "E-MAIL"};
                 tabla = new DefaultTableModel(datostabla, columnas);
                 jTableClientes.setModel(tabla);
                 EliminarFilasVacias();
@@ -388,10 +388,6 @@ public final class vLista_Clientes extends javax.swing.JInternalFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         LimpiarSeleccion();
-        /*Mostrar();
-        jTextFieldNombre.setText("");
-        jTextFieldDNI.setText("");
-        jTextFieldTelefono.setText("");*/
     }//GEN-LAST:event_formMouseClicked
 
 
