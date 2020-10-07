@@ -1,0 +1,11 @@
+PEDIDOS YA (ONLINE)
+el dato necesario para pedidos ya es el N° PED? no hay mas datos importantes a cargar? necesitas que se genere una factura? necesitas que dichos datos del cliente se guarden en la base de datos?
+
+MERCADO PAGO(ONLINE)
+esos son los datos necesarios de mercado pago? necesitas que se genere una factura? necesitas que dichos datos del cliente se guarden en la base de datos?
+
+PAGO EFECTIVO (LOCAL)
+si un cliente paga en efectivo en el local o paga efectivo ya sea se lo manda el cadete, se debe guardar los datos del cliente? si se debe guardar los datos que datos serian a guardar? los mismos es necesario guardarlos en la base de datos? se debe generar una factura?
+
+NOTA: HAY OTRA TIPO DE PAGO QUE ACEPTAS ONLINE FER O SOLO SON PEDIDOS Y MERCADO PAG?
+

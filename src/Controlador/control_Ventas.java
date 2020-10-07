@@ -113,12 +113,12 @@ public class control_Ventas {
     public String VerificarNroFactura(String dato) {
         return sql.VerificarDuplicadosNrosFacturas("NroFactura", "select NroFactura from ventas where NroFactura='" + dato + "' where activo=1");
     }
-    
-    public ArrayList<String> ObtenerDatosProd(String texto){
-        return sql.ObtenerDatosInsProd("precioventa","","select precioventa from productos where descripcion='" + texto + "' and activo=1");
+
+    public ArrayList<String> ObtenerDatosProd(String texto) {
+        return sql.ObtenerDatosInsProd("precioventa", "", "", "", "select precioventa from productos where descripcion='" + texto + "' and activo=1");
     }
-    
-    public ArrayList<String> ObtenerDatosCliente(String texto){
-        return sql.ObtenerDatosInsProd("domicilio", "telefono", "select domicilio,telefono from clientes where nombre= '" + texto + "' and activo=1");
+
+    public ArrayList<String> ObtenerDatosCliente(String texto) {
+        return sql.ObtenerDatosInsProd("nombre", "apellido", "domicilio", "telefono", "select nombre,apellido,domicilio,telefono from clientes where dni= '" + texto + "' and activo=1");
     }
 }

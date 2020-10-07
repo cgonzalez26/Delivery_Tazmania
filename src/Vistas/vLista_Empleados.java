@@ -1,6 +1,7 @@
 package Vistas;
 
 import Controlador.control_Empleados;
+import Controlador.control_existencias;
 import Modelo.Empleados;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,13 +15,16 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
     String idemp;
     vGestion_Empleados empleado = null;
     control_Empleados emp = new control_Empleados();
+    control_existencias combo = new control_existencias();
     Empleados e = new Empleados();
     DefaultTableModel datos;
+    Object[] tipoempleado;
 
     public vLista_Empleados() {
         initComponents();
         Mostrar();
-
+        ComboTipoInsumo();
+        EliminarItemsVacios();
         jTableEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -46,13 +50,28 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
         });
     }
 
+    public void ComboTipoInsumo() {
+        tipoempleado = combo.combox("tiposempleados", "descripcion");
+        for (Object tiposempleados : tipoempleado) {
+            jComboTipoEmpleado.addItem((String) tiposempleados);
+        }
+    }
+
+    public void EliminarItemsVacios() {
+        for (int i = 0; i < jComboTipoEmpleado.getItemCount(); i++) {
+            if (jComboTipoEmpleado.getItemAt(i) == null) {
+                jComboTipoEmpleado.removeItemAt(i);
+            }
+        }
+    }
+
     public void LimpiarSeleccion() {
         jTableEmpleados.clearSelection();
         jTableEmpleados.getSelectionModel().clearSelection();
     }
 
     public void Mostrar() {
-        String[] columnas = {"IDEMPLEADO", "IDTIPOEMP", "IDTIPODOC", "TIPO EMP", "TIPO DOC", "NRO DOCUMENTO", "NOMBRES", "APELLIDOS", "DOMICILIO", "TELEFONO"};
+        String[] columnas = {"IDEMPLEADO", "IDTIPOEMP", "IDTIPODOC", "TIPO EMPLEADO", "TIPO DOC", "NRO DOCUMENTO", "NOMBRES", "APELLIDOS", "DOMICILIO", "TELEFONO"};
         Object[][] datostabla = emp.MostrarDatos();
         datos = new DefaultTableModel(datostabla, columnas);
         jTableEmpleados.setModel(datos);
@@ -101,8 +120,10 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
         };
         jButtonModificar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabelRolTrabajo = new javax.swing.JLabel();
-        jTextFieldBuscarRolTrabajo = new javax.swing.JTextField();
+        jLabelNombreEmpleado = new javax.swing.JLabel();
+        jTextFieldBuscarNombreEmpleado = new javax.swing.JTextField();
+        jComboTipoEmpleado = new javax.swing.JComboBox<>();
+        jLabelTipoEmpleado = new javax.swing.JLabel();
         jButtonBuscar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 248, 177));
@@ -162,10 +183,21 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 248, 177));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Buscar Por", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
 
-        jLabelRolTrabajo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelRolTrabajo.setText("Rol de Trabajo");
+        jLabelNombreEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelNombreEmpleado.setText("Nombre");
 
-        jTextFieldBuscarRolTrabajo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jTextFieldBuscarNombreEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+
+        jComboTipoEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jComboTipoEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno" }));
+        jComboTipoEmpleado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboTipoEmpleadoItemStateChanged(evt);
+            }
+        });
+
+        jLabelTipoEmpleado.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
+        jLabelTipoEmpleado.setText("Tipo Empleado");
 
         jButtonBuscar.setBackground(new java.awt.Color(252, 249, 57));
         jButtonBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -181,25 +213,34 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabelRolTrabajo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldBuscarRolTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(113, 113, 113))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(216, 216, 216))))
+                    .addComponent(jLabelNombreEmpleado)
+                    .addComponent(jTextFieldBuscarNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelTipoEmpleado)
+                    .addComponent(jComboTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(249, 249, 249)
+                .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelRolTrabajo)
-                    .addComponent(jTextFieldBuscarRolTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                    .addComponent(jLabelNombreEmpleado)
+                    .addComponent(jLabelTipoEmpleado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextFieldBuscarNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 1, Short.MAX_VALUE))
+                    .addComponent(jComboTipoEmpleado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonBuscar)
                 .addContainerGap())
         );
@@ -209,14 +250,9 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1056, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1056, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,20 +261,23 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
                 .addGap(144, 144, 144)
                 .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(226, 226, 226))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(196, 196, 196))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -300,10 +339,10 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        if (!jTextFieldBuscarRolTrabajo.getText().isEmpty()) {
-            Object[][] datostabla = emp.MostrarDatosBusqueda(jTextFieldBuscarRolTrabajo.getText());
+        if (!jTextFieldBuscarNombreEmpleado.getText().isEmpty()) {
+            Object[][] datostabla = emp.MostrarDatosBusqueda(jTextFieldBuscarNombreEmpleado.getText());
             if (datostabla.length != 0) {
-                String[] columnas = {"IDEMPLEADO", "IDTIPOEMP", "IDTIPODOC", "TIPO EMP", "TIPO DOC", "NRO DOC", "NOMBRES", "APELLIDOS", "DOMICILIO", "TELEFONO"};
+                String[] columnas = {"IDEMPLEADO", "IDTIPOEMP", "IDTIPODOC", "TIPO EMPLEADO", "TIPO DOC", "NRO DOC", "NOMBRES", "APELLIDOS", "DOMICILIO", "TELEFONO"};
                 datos = new DefaultTableModel(datostabla, columnas);
                 jTableEmpleados.setModel(datos);
                 EliminarFilasVacias();
@@ -316,16 +355,31 @@ public final class vLista_Empleados extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
+    private void jComboTipoEmpleadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboTipoEmpleadoItemStateChanged
+        if (!jComboTipoEmpleado.getSelectedItem().equals("Ninguno")) {
+            String[] columnas = {"IDEMPLEADO", "IDTIPOEMP", "IDTIPODOC", "TIPO EMPLEADO", "TIPO DOC", "NRO DOC", "NOMBRES", "APELLIDOS", "DOMICILIO", "TELEFONO"};
+            Object[][] datoste = emp.OrdenarTipoEmpleado(jComboTipoEmpleado.getSelectedItem().toString());
+            datos = new DefaultTableModel(datoste, columnas);
+            jTableEmpleados.setModel(datos);
+            EliminarFilasVacias();
+            ocultar_columnas();
+        } else {
+            Mostrar();
+        }
+    }//GEN-LAST:event_jComboTipoEmpleadoItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonNuevo;
-    private javax.swing.JLabel jLabelRolTrabajo;
+    private javax.swing.JComboBox<String> jComboTipoEmpleado;
+    private javax.swing.JLabel jLabelNombreEmpleado;
+    private javax.swing.JLabel jLabelTipoEmpleado;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTableEmpleados;
-    private javax.swing.JTextField jTextFieldBuscarRolTrabajo;
+    private javax.swing.JTextField jTextFieldBuscarNombreEmpleado;
     // End of variables declaration//GEN-END:variables
 }

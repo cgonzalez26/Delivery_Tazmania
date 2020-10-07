@@ -2,7 +2,6 @@ package Vistas;
 
 import Controlador.Sentencias_sql;
 import Controlador.control_BusquedasVentas;
-import Controlador.control_Clientes;
 import Controlador.control_DetallesVentas;
 import Controlador.control_Movimientos_Caja;
 import Controlador.control_Reportes;
@@ -13,11 +12,7 @@ import Modelo.Movimientos_Caja;
 import Modelo.Session;
 import Modelo.Ventas;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.awt.font.FontRenderContext;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -51,6 +46,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
     Sentencias_sql sql = new Sentencias_sql();
     vVentas_Productos venta = null;
     vListas_Ventas lista = null;
+    vGestion_ImprimirTickets tickets;
     DefaultTableModel datosventa, datosdetalle, tabla;
     DefaultListModel list;
     ArrayList<String> listcliente;
@@ -59,8 +55,8 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         initComponents();
         IniciarFechas();
         MostrarVentas();
-        MostrarCliente();
-        jListClientes.setVisible(false);
+        //MostrarCliente();
+        //jListClientes.setVisible(false);
         jTableDetallesVentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -172,16 +168,16 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         ocultar_columnasDetalleVenta();
     }
 
-    public void MostrarCliente() {
+    /*public void MostrarCliente() {
         String[] columnas = {"DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO"};
         datostabla = ventas.MostrarClientes();
         tabla = new DefaultTableModel(datostabla, columnas);
         jTableClientes.setModel(tabla);
         EliminarFilasVaciasClientes();
         ocultar_columnasClientes();
-    }
+    }*/
 
-    public void ListaClientes() {
+    /*public void ListaClientes() {
         listcliente = combo.list("clientes", "nombre", jTextFieldCliente.getText());
         String substr = jTextFieldCliente.getText().toLowerCase();
         list = new DefaultListModel();
@@ -201,7 +197,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }
+    }*/
 
     public void IniciarFechas() {
         Date date = new Date();
@@ -233,11 +229,11 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         jTableDetallesVentas.getColumnModel().getColumn(7).setPreferredWidth(0);
     }
 
-    public void ocultar_columnasClientes() {
+    /*public void ocultar_columnasClientes() {
         jTableClientes.getColumnModel().getColumn(3).setMaxWidth(0);
         jTableClientes.getColumnModel().getColumn(3).setMinWidth(0);
         jTableClientes.getColumnModel().getColumn(3).setPreferredWidth(0);
-    }
+    }*/
 
     public void LimpiarSeleccionVenta() {
         jTableVentas.clearSelection();
@@ -249,10 +245,10 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         jTableDetallesVentas.getSelectionModel().clearSelection();
     }
 
-    public void LimpiarSeleccionProd() {
+    /*public void LimpiarSeleccionProd() {
         jTableClientes.clearSelection();
         jTableClientes.getSelectionModel().clearSelection();
-    }
+    }*/
 
     public void EliminarFilasVaciasVentas() {
         if (jTableVentas.getRowCount() != 0) {
@@ -279,7 +275,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         }
     }
 
-    public void EliminarFilasVaciasClientes() {
+    /*public void EliminarFilasVaciasClientes() {
         if (jTableClientes.getRowCount() != 0) {
             for (int columna = 0; columna < jTableClientes.getColumnCount(); columna++) {
                 for (int fila = 0; fila < jTableClientes.getRowCount(); fila++) {
@@ -289,7 +285,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }
+    }*/
 
     /*public void nombresProductos() {
         int[] nombresprod = jTable2.getSelectedRows();
@@ -377,7 +373,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         }
     }
 
-    public void IngresarDetalle() {
+    /*public void IngresarDetalle() {
         int[] detalles = jTableDetallesVentas.getSelectedRows();
         ArrayList<Object> objetos = new ArrayList<>();
         for (int i = 0; i < detalles.length; i++) {
@@ -389,22 +385,22 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         while (iterador.hasNext()) {
             jTextAreaDetalleFactura.append(iterador.next() + " ");
         }
-    }
+    }*/
 
     public void IngresarDetalle2() {
         ArrayList<Object> objetos = new ArrayList<>();
         for (int i = 0; i < jTableDetallesVentas.getRowCount(); i++) {
             objetos.add(jTableDetallesVentas.getValueAt(i, 4));
             objetos.add(jTableDetallesVentas.getValueAt(i, 6));
-            objetos.add(jTableDetallesVentas.getValueAt(i, 5));
+            //objetos.add(jTableDetallesVentas.getValueAt(i, 5));
         }
         Iterator iterador = objetos.listIterator();
         while (iterador.hasNext()) {
-            jTextAreaDetalleFactura.append(iterador.next() + " ");
+            vGestion_ImprimirTickets.jTextAreaDetalleTicket.append(iterador.next() + " ");
         }
     }
 
-    public void IngresarSubTotal() {
+    /*public void IngresarSubTotal() {
         int[] subtotales = jTableDetallesVentas.getSelectedRows();
         ArrayList<Object> objetos = new ArrayList<>();
         for (int i = 0; i < subtotales.length; i++) {
@@ -414,9 +410,9 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         while (iterador.hasNext()) {
             jTextAreaSubTotal.append(iterador.next() + "\n");
         }
-    }
+    }*/
 
-    public void IngresarSubTotal2() {
+ /*public void IngresarSubTotal2() {
         ArrayList<Object> objetos = new ArrayList<>();
         for (int i = 0; i < jTableDetallesVentas.getRowCount(); i++) {
             objetos.add(Double.parseDouble(jTableDetallesVentas.getValueAt(i, 5).toString().trim()) * Double.parseDouble(jTableDetallesVentas.getValueAt(i, 6).toString().trim()));
@@ -425,12 +421,11 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         while (iterador.hasNext()) {
             jTextAreaSubTotal.append(iterador.next() + "\n");
         }
-    }
-
+    }*/
     public void IngresarTotal() {
         int total = jTableVentas.getSelectedRow();
         if (total != -1) {
-            jTextFieldTotalFactura.setText(jTableVentas.getValueAt(total, 4).toString());
+            vGestion_ImprimirTickets.jTextFieldTotalTicket.setText(jTableVentas.getValueAt(total, 4).toString());
         } else {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una fila");
         }
@@ -467,43 +462,6 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        vImprimirFactura = new javax.swing.JDialog();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        jButtonSeleccionarCliente = new javax.swing.JButton();
-        jTextFieldCliente = new javax.swing.JTextField();
-        jListClientes = new javax.swing.JList<>();
-        jLabelSeleccionarCliente = new javax.swing.JLabel();
-        jLabelDomicilio = new javax.swing.JLabel();
-        jTextFieldDomicilio = new javax.swing.JTextField();
-        jLabelTelefonoFactura = new javax.swing.JLabel();
-        jTextFieldTelefonoFactura = new javax.swing.JTextField();
-        jLabelDetalle = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextAreaDetalleFactura = new javax.swing.JTextArea();
-        jLabelSubTotal = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextAreaSubTotal = new javax.swing.JTextArea();
-        jLabelTotal = new javax.swing.JLabel();
-        jTextFieldTotalFactura = new javax.swing.JTextField();
-        jLabelAbonaFactura = new javax.swing.JLabel();
-        jTextFieldAbonaCliente = new javax.swing.JTextField();
-        jButtonImprimirFactura = new javax.swing.JButton();
-        jButtonCancelarFactura = new javax.swing.JButton();
-        jLabelEnvioDinero = new javax.swing.JLabel();
-        jTextFieldEnvioDinero = new javax.swing.JTextField();
-        vSeleccionarCliente = new javax.swing.JDialog();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTableClientes = new javax.swing.JTable();
-        jButtonAgregarCliente = new javax.swing.JButton();
-        jButtonCancelarCliente = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabelNombre = new javax.swing.JLabel();
-        jTextFieldNombre = new javax.swing.JTextField();
-        jButtonBuscarClientes = new javax.swing.JButton();
-        jLabelDNI = new javax.swing.JLabel();
-        jTextFieldDNI = new javax.swing.JTextField();
-        jLabelTelefono = new javax.swing.JLabel();
-        jTextFieldTelefono = new javax.swing.JTextField();
         vDetallesVentas = new javax.swing.JDialog();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableDetallesVentas = new javax.swing.JTable(){
@@ -513,7 +471,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         };
         jButtonModificarDetalleVenta = new javax.swing.JButton();
         jButtonEliminarDetalleVenta = new javax.swing.JButton();
-        jButtonImprimir = new javax.swing.JButton();
+        jButtonImprimirTicket = new javax.swing.JButton();
         jButtonNuevoDetalleVenta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableVentas =  new javax.swing.JTable(){
@@ -531,306 +489,6 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         jButtonVerDetalle = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
-
-        vImprimirFactura.setTitle("Cargar Factura Venta");
-        java.awt.Image iconodeliv = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
-        vImprimirFactura.setIconImage(iconodeliv);
-        vImprimirFactura.setBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        vImprimirFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        vImprimirFactura.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                vImprimirFacturaWindowClosing(evt);
-            }
-        });
-        vImprimirFactura.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButtonSeleccionarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-        jButtonSeleccionarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSeleccionarClienteActionPerformed(evt);
-            }
-        });
-
-        jTextFieldCliente.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextFieldCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldClienteKeyReleased(evt);
-            }
-        });
-
-        jListClientes.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jListClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jListClientes.setValueIsAdjusting(true);
-        jListClientes.setVisibleRowCount(0);
-        jListClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jListClientesMouseClicked(evt);
-            }
-        });
-
-        jLabelSeleccionarCliente.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelSeleccionarCliente.setText("(*) Seleccionar Cliente");
-
-        jLayeredPane1.setLayer(jButtonSeleccionarCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jTextFieldCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jListClientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabelSeleccionarCliente, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(jButtonSeleccionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelSeleccionarCliente)
-                    .addComponent(jListClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jLabelSeleccionarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonSeleccionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addComponent(jListClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        vImprimirFactura.getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
-
-        jLabelDomicilio.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelDomicilio.setText("(*) Domicilio:");
-        vImprimirFactura.getContentPane().add(jLabelDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 123, -1, 22));
-
-        jTextFieldDomicilio.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        vImprimirFactura.getContentPane().add(jTextFieldDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 151, 531, 28));
-
-        jLabelTelefonoFactura.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelTelefonoFactura.setText("(*) Telefono:");
-        vImprimirFactura.getContentPane().add(jLabelTelefonoFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 185, -1, 19));
-
-        jTextFieldTelefonoFactura.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        vImprimirFactura.getContentPane().add(jTextFieldTelefonoFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 209, 266, 29));
-
-        jLabelDetalle.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelDetalle.setText("(*) DETALLE:");
-        vImprimirFactura.getContentPane().add(jLabelDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 256, -1, -1));
-
-        jTextAreaDetalleFactura.setColumns(20);
-        jTextAreaDetalleFactura.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jTextAreaDetalleFactura.setRows(5);
-        jScrollPane3.setViewportView(jTextAreaDetalleFactura);
-
-        vImprimirFactura.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 285, 588, 223));
-
-        jLabelSubTotal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelSubTotal.setText("(*) Sub Total");
-        vImprimirFactura.getContentPane().add(jLabelSubTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 519, -1, -1));
-
-        jTextAreaSubTotal.setEditable(false);
-        jTextAreaSubTotal.setColumns(20);
-        jTextAreaSubTotal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jTextAreaSubTotal.setRows(5);
-        jScrollPane4.setViewportView(jTextAreaSubTotal);
-
-        vImprimirFactura.getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 543, 294, -1));
-
-        jLabelTotal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelTotal.setText("(*) TOTAL");
-        vImprimirFactura.getContentPane().add(jLabelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 519, -1, -1));
-
-        jTextFieldTotalFactura.setEditable(false);
-        jTextFieldTotalFactura.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        vImprimirFactura.getContentPane().add(jTextFieldTotalFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 543, 160, 31));
-
-        jLabelAbonaFactura.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelAbonaFactura.setText("(*) El Cliente Abona CON:");
-        vImprimirFactura.getContentPane().add(jLabelAbonaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 580, -1, 13));
-
-        jTextFieldAbonaCliente.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        vImprimirFactura.getContentPane().add(jTextFieldAbonaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(337, 599, 160, 30));
-
-        jButtonImprimirFactura.setBackground(new java.awt.Color(252, 249, 57));
-        jButtonImprimirFactura.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButtonImprimirFactura.setText("Imprimir");
-        jButtonImprimirFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonImprimirFacturaActionPerformed(evt);
-            }
-        });
-        vImprimirFactura.getContentPane().add(jButtonImprimirFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 640, 100, 30));
-
-        jButtonCancelarFactura.setBackground(new java.awt.Color(237, 124, 61));
-        jButtonCancelarFactura.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButtonCancelarFactura.setText("Cancelar");
-        jButtonCancelarFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarFacturaActionPerformed(evt);
-            }
-        });
-        vImprimirFactura.getContentPane().add(jButtonCancelarFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(337, 640, 100, 30));
-
-        jLabelEnvioDinero.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelEnvioDinero.setText("(*) ENVIO DE DINERO N°:");
-        vImprimirFactura.getContentPane().add(jLabelEnvioDinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 63, -1, -1));
-
-        jTextFieldEnvioDinero.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTextFieldEnvioDinero.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFieldEnvioDineroKeyTyped(evt);
-            }
-        });
-        vImprimirFactura.getContentPane().add(jTextFieldEnvioDinero, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 87, 408, 30));
-
-        vSeleccionarCliente.setTitle("Seleccionar Cliente");
-        java.awt.Image icondeliv = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
-        vSeleccionarCliente.setIconImage(icondeliv);
-        vSeleccionarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                vSeleccionarClienteMouseClicked(evt);
-            }
-        });
-        vSeleccionarCliente.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                vSeleccionarClienteWindowClosing(evt);
-            }
-        });
-
-        jTableClientes.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane5.setViewportView(jTableClientes);
-
-        jButtonAgregarCliente.setBackground(new java.awt.Color(252, 249, 57));
-        jButtonAgregarCliente.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButtonAgregarCliente.setText("Agregar");
-        jButtonAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAgregarClienteActionPerformed(evt);
-            }
-        });
-
-        jButtonCancelarCliente.setBackground(new java.awt.Color(237, 124, 61));
-        jButtonCancelarCliente.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButtonCancelarCliente.setText("Cancelar");
-        jButtonCancelarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarClienteActionPerformed(evt);
-            }
-        });
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Buscar Por", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 13))); // NOI18N
-
-        jLabelNombre.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelNombre.setText("Nombre");
-
-        jTextFieldNombre.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-
-        jButtonBuscarClientes.setBackground(new java.awt.Color(252, 249, 57));
-        jButtonBuscarClientes.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jButtonBuscarClientes.setText("Buscar");
-        jButtonBuscarClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBuscarClientesActionPerformed(evt);
-            }
-        });
-
-        jLabelDNI.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelDNI.setText("DNI");
-
-        jTextFieldDNI.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-
-        jLabelTelefono.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelTelefono.setText("Telefono");
-
-        jTextFieldTelefono.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelDNI)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jLabelNombre)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jLabelTelefono)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonBuscarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(383, 383, 383))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombre)
-                    .addComponent(jLabelDNI)
-                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelTelefono)
-                    .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonBuscarClientes)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout vSeleccionarClienteLayout = new javax.swing.GroupLayout(vSeleccionarCliente.getContentPane());
-        vSeleccionarCliente.getContentPane().setLayout(vSeleccionarClienteLayout);
-        vSeleccionarClienteLayout.setHorizontalGroup(
-            vSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vSeleccionarClienteLayout.createSequentialGroup()
-                .addGroup(vSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(vSeleccionarClienteLayout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(jButtonAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(256, 256, 256)
-                        .addComponent(jButtonCancelarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(vSeleccionarClienteLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(vSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane5)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        vSeleccionarClienteLayout.setVerticalGroup(
-            vSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vSeleccionarClienteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(vSeleccionarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCancelarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         vDetallesVentas.setTitle("Detalle Venta");
         java.awt.Image icon = new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png")).getImage();
@@ -868,12 +526,12 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonImprimir.setBackground(new java.awt.Color(252, 249, 57));
-        jButtonImprimir.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButtonImprimir.setText("Imprimir");
-        jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+        jButtonImprimirTicket.setBackground(new java.awt.Color(252, 249, 57));
+        jButtonImprimirTicket.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        jButtonImprimirTicket.setText("Imprimir Ticket");
+        jButtonImprimirTicket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonImprimirActionPerformed(evt);
+                jButtonImprimirTicketActionPerformed(evt);
             }
         });
 
@@ -897,8 +555,8 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                 .addComponent(jButtonModificarDetalleVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonEliminarDetalleVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108)
-                .addComponent(jButtonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93)
+                .addComponent(jButtonImprimirTicket)
                 .addGap(29, 29, 29))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vDetallesVentasLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -914,7 +572,7 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
                 .addGroup(vDetallesVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonModificarDetalleVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEliminarDetalleVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonImprimirTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonNuevoDetalleVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
@@ -976,11 +634,9 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
             }
         });
 
-        jDateFechaDesde.setDateFormatString("dd/MM/yyyy");
         jDateFechaDesde.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jDateFechaDesde.setMinimumSize(new java.awt.Dimension(32, 20));
 
-        jDateFechaHasta.setDateFormatString("dd/MM/yyyy");
         jDateFechaHasta.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -1283,223 +939,27 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
-    private void jButtonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirActionPerformed
+    private void jButtonImprimirTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirTicketActionPerformed
+        vDetallesVentas.dispose();
+        tickets = new vGestion_ImprimirTickets();
+        vMenuPrincipal.jDesktopPane1.add(tickets);
+        tickets.setVisible(true);
+        tickets.toFront();
+        int nro = jTableVentas.getSelectedRow();
+        if (jTableVentas.getValueAt(nro, 6).toString().equals("Online")) {
+            vGestion_ImprimirTickets.jLabelNumeroOperacion.setText("(*) N° OPERACIÓN");
+        } else {
+            vGestion_ImprimirTickets.jLabelNumeroOperacion.setText("(*) N° DE PEDIDO");
+        }
         IngresarDetalle2();
-        IngresarSubTotal2();
         IngresarTotal();
-        vImprimirFactura.setSize(630, 715);
-        vImprimirFactura.setLocationRelativeTo(this);
-        vImprimirFactura.setModal(true);
-        vImprimirFactura.setVisible(true);
-    }//GEN-LAST:event_jButtonImprimirActionPerformed
 
-    private void jButtonCancelarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarFacturaActionPerformed
-        if (!jTextFieldCliente.getText().equals("") || !jTextFieldDomicilio.getText().isEmpty() || !jTextFieldTelefonoFactura.getText().isEmpty() || !jTextAreaDetalleFactura.getText().isEmpty() || !jTextAreaSubTotal.getText().isEmpty() || !jTextFieldTotalFactura.getText().isEmpty() || !jTextFieldAbonaCliente.getText().isEmpty()) {
-            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                vImprimirFactura.dispose();
-                LimpiarSeleccionVenta();
-                LimpiarSeleccionDetalleVenta();
-            } else {
-                vImprimirFactura.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
-        }
-    }//GEN-LAST:event_jButtonCancelarFacturaActionPerformed
-
-    private void jButtonAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarClienteActionPerformed
-        if (jTableClientes.getRowCount() != 0) {
-            int i = jTableClientes.getSelectedRow();
-            if (i == -1) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
-            } else {
-                vSeleccionarCliente.dispose();
-                jTextFieldCliente.setText(jTableClientes.getValueAt(i, 1).toString() + " " + jTableClientes.getValueAt(i, 2).toString());
-                jTextFieldDomicilio.setText(jTableClientes.getValueAt(i, 3).toString());
-                jTextFieldTelefonoFactura.setText(jTableClientes.getValueAt(i, 4).toString());
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "No se han agregado dichos clientes todavia");
-        }
-    }//GEN-LAST:event_jButtonAgregarClienteActionPerformed
-
-    private void jButtonImprimirFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirFacturaActionPerformed
-        if (!jTextFieldEnvioDinero.getText().isEmpty() && !jTextFieldCliente.getText().equals("") && !jTextFieldDomicilio.getText().isEmpty() && !jTextFieldTelefonoFactura.getText().isEmpty() && !jTextAreaDetalleFactura.getText().isEmpty() && !jTextAreaSubTotal.getText().isEmpty() && !jTextFieldTotalFactura.getText().isEmpty() && !jTextFieldAbonaCliente.getText().isEmpty()) {
-            int i = JOptionPane.showConfirmDialog(null, "Confirmar Factura Venta?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                reporte.CargarFactura(IngresarNroPedido(), jTextFieldEnvioDinero.getText(), jTextFieldCliente.getText(), jTextFieldDomicilio.getText(), jTextFieldTelefonoFactura.getText(), jTextAreaDetalleFactura.getText(), jTextAreaSubTotal.getText(), jTextFieldTotalFactura.getText(), jTextFieldAbonaCliente.getText());
-                vImprimirFactura.dispose();
-            } else {
-                vImprimirFactura.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes completar los campos obligatorios.");
-        }
-    }//GEN-LAST:event_jButtonImprimirFacturaActionPerformed
-
-    private void jButtonCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarClienteActionPerformed
-        int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (i == 0) {
-            vSeleccionarCliente.dispose();
-        } else {
-            vSeleccionarCliente.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        }
-    }//GEN-LAST:event_jButtonCancelarClienteActionPerformed
-
-    private void vSeleccionarClienteWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vSeleccionarClienteWindowClosing
-        int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (i == 0) {
-            vSeleccionarCliente.dispose();
-        } else {
-            vSeleccionarCliente.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        }
-    }//GEN-LAST:event_vSeleccionarClienteWindowClosing
-
-    private void vImprimirFacturaWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_vImprimirFacturaWindowClosing
-        if (!jTextFieldCliente.getText().equals("") || !jTextFieldDomicilio.getText().isEmpty() || !jTextFieldTelefonoFactura.getText().isEmpty() || !jTextAreaDetalleFactura.getText().isEmpty() || !jTextAreaSubTotal.getText().isEmpty() || !jTextFieldTotalFactura.getText().isEmpty() || !jTextFieldAbonaCliente.getText().isEmpty()) {
-            int i = JOptionPane.showConfirmDialog(null, "Esta seguro de salir?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                vImprimirFactura.dispose();
-                LimpiarSeleccionVenta();
-                LimpiarSeleccionDetalleVenta();
-            } else {
-                vImprimirFactura.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-            }
-        }
-    }//GEN-LAST:event_vImprimirFacturaWindowClosing
-
-    private void jButtonSeleccionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeleccionarClienteActionPerformed
-        vSeleccionarCliente.setSize(945, 520);
-        vSeleccionarCliente.setLocationRelativeTo(this);
-        vSeleccionarCliente.setModal(true);
-        vSeleccionarCliente.setVisible(true);
-    }//GEN-LAST:event_jButtonSeleccionarClienteActionPerformed
-
-    private void jTextFieldEnvioDineroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldEnvioDineroKeyTyped
-        char[] p = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '/', KeyEvent.VK_BACK_SPACE};
-        int b = 0;
-        for (int i = 0; i <= 11; i++) {
-            if (p[i] == evt.getKeyChar()) {
-                b = 1;
-            }
-        }
-        if (b == 0) {
-            evt.consume();
-            Toolkit.getDefaultToolkit().beep();
-        }
-    }//GEN-LAST:event_jTextFieldEnvioDineroKeyTyped
-
-    private void jButtonBuscarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarClientesActionPerformed
-        if (!jTextFieldNombre.getText().isEmpty()) {
-            datostabla = ventas.MostrarDatosBusquedaCliente(jTextFieldNombre.getText());
-            if (datostabla.length != 0) {
-                String[] columnas = {"DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO"};
-                tabla = new DefaultTableModel(datostabla, columnas);
-                jTableClientes.setModel(tabla);
-                EliminarFilasVaciasClientes();
-                ocultar_columnasClientes();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos");
-            }
-        } else if (!jTextFieldDNI.getText().isEmpty()) {
-            datostabla = ventas.MostrarDatosBusquedaDNI(jTextFieldDNI.getText());
-            if (datostabla.length != 0) {
-                String[] columnas = {"DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO"};
-                tabla = new DefaultTableModel(datostabla, columnas);
-                jTableClientes.setModel(tabla);
-                EliminarFilasVaciasClientes();
-                ocultar_columnasClientes();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos");
-            }
-        } else if (!jTextFieldTelefono.getText().isEmpty()) {
-            datostabla = ventas.MostrarDatosBusquedaTelefono(jTextFieldTelefono.getText());
-            if (datostabla.length != 0) {
-                String[] columnas = {"DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO"};
-                tabla = new DefaultTableModel(datostabla, columnas);
-                jTableClientes.setModel(tabla);
-                EliminarFilasVaciasClientes();
-                ocultar_columnasClientes();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos");
-            }
-        } else if (!jTextFieldDNI.getText().isEmpty() && !jTextFieldNombre.getText().isEmpty()) {
-            datostabla = ventas.MostrarDatosBusquedaDNICliente(jTextFieldDNI.getText(), jTextFieldNombre.getText());
-            if (datostabla.length != 0) {
-                String[] columnas = {"DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO"};
-                tabla = new DefaultTableModel(datostabla, columnas);
-                jTableClientes.setModel(tabla);
-                EliminarFilasVaciasClientes();
-                ocultar_columnasClientes();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos");
-            }
-        } else if (!jTextFieldNombre.getText().isEmpty() && jTextFieldTelefono.getText().isEmpty()) {
-            datostabla = ventas.MostrarDatosBusquedaClienteTelefono(jTextFieldNombre.getText(), jTextFieldTelefono.getText());
-            if (datostabla.length != 0) {
-                String[] columnas = {"DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO"};
-                tabla = new DefaultTableModel(datostabla, columnas);
-                jTableClientes.setModel(tabla);
-                EliminarFilasVaciasClientes();
-                ocultar_columnasClientes();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos");
-            }
-        } else if (!jTextFieldDNI.getText().isEmpty() && !jTextFieldTelefono.getText().isEmpty()) {
-            datostabla = ventas.MostrarDatosBusquedaDNITelefono(jTextFieldDNI.getText(), jTextFieldTelefono.getText());
-            if (datostabla.length != 0) {
-                String[] columnas = {"DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO"};
-                tabla = new DefaultTableModel(datostabla, columnas);
-                jTableClientes.setModel(tabla);
-                EliminarFilasVaciasClientes();
-                ocultar_columnasClientes();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos");
-            }
-        } else if (!jTextFieldDNI.getText().isEmpty() && !jTextFieldNombre.getText().isEmpty() && !jTextFieldTelefono.getText().isEmpty()) {
-            datostabla = ventas.MostrarDatosBusquedaDNIClienteTelefono(jTextFieldDNI.getText(), jTextFieldNombre.getText(), jTextFieldTelefono.getText());
-            if (datostabla.length != 0) {
-                String[] columnas = {"DNI", "NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO"};
-                tabla = new DefaultTableModel(datostabla, columnas);
-                jTableClientes.setModel(tabla);
-                EliminarFilasVaciasClientes();
-                ocultar_columnasClientes();
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron datos");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes completar los campos");
-        }
-    }//GEN-LAST:event_jButtonBuscarClientesActionPerformed
-
-    private void vSeleccionarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSeleccionarClienteMouseClicked
-        LimpiarSeleccionProd();
-        MostrarCliente();
-        jTextFieldNombre.setText("");
-        jTextFieldDNI.setText("");
-        jTextFieldTelefono.setText("");
-    }//GEN-LAST:event_vSeleccionarClienteMouseClicked
-
-    private void jListClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListClientesMouseClicked
-        int i = jListClientes.getSelectedIndex();
-        ArrayList<String> array;
-        if (i != -1) {
-            jTextFieldCliente.setText(jListClientes.getSelectedValue());
-            array = ventas.ObtenerDatosCliente(jTextFieldCliente.getText());
-            if (array.size() > 0) {
-                for (int j = 0; j < array.size(); j++) {
-                    jTextFieldDomicilio.setText(array.get(j));
-                    j++;
-                    jTextFieldTelefonoFactura.setText(array.get(j));
-                    j++;
-                    jListClientes.setVisible(false);
-                }
-            }
-        }
-    }//GEN-LAST:event_jListClientesMouseClicked
-
-    private void jTextFieldClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldClienteKeyReleased
-        ListaClientes();
-    }//GEN-LAST:event_jTextFieldClienteKeyReleased
+        //IngresarSubTotal2();        
+        //vImprimirFactura.setSize(630, 715);
+        //vImprimirFactura.setLocationRelativeTo(this);
+        //vImprimirFactura.setModal(true);
+        //vImprimirFactura.setVisible(true);
+    }//GEN-LAST:event_jButtonImprimirTicketActionPerformed
 
     private void jTableVentasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVentasMousePressed
         //SeleccionarFilas();
@@ -1626,61 +1086,24 @@ public final class vListas_Ventas extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAgregarCliente;
     private javax.swing.JButton jButtonBuscar;
-    private javax.swing.JButton jButtonBuscarClientes;
-    private javax.swing.JButton jButtonCancelarCliente;
-    private javax.swing.JButton jButtonCancelarFactura;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonEliminarDetalleVenta;
-    private javax.swing.JButton jButtonImprimir;
-    private javax.swing.JButton jButtonImprimirFactura;
+    private javax.swing.JButton jButtonImprimirTicket;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonModificarDetalleVenta;
     private javax.swing.JButton jButtonNuevo;
     private javax.swing.JButton jButtonNuevoDetalleVenta;
-    private javax.swing.JButton jButtonSeleccionarCliente;
     private javax.swing.JButton jButtonVerDetalle;
     public static com.toedter.calendar.JDateChooser jDateFechaDesde;
     public static com.toedter.calendar.JDateChooser jDateFechaHasta;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabelAbonaFactura;
-    private javax.swing.JLabel jLabelDNI;
-    private javax.swing.JLabel jLabelDetalle;
-    private javax.swing.JLabel jLabelDomicilio;
-    private javax.swing.JLabel jLabelEnvioDinero;
-    private javax.swing.JLabel jLabelNombre;
-    private javax.swing.JLabel jLabelSeleccionarCliente;
-    private javax.swing.JLabel jLabelSubTotal;
-    private javax.swing.JLabel jLabelTelefono;
-    private javax.swing.JLabel jLabelTelefonoFactura;
-    private javax.swing.JLabel jLabelTotal;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JList<String> jListClientes;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTableClientes;
     public static javax.swing.JTable jTableDetallesVentas;
     public static javax.swing.JTable jTableVentas;
-    private javax.swing.JTextArea jTextAreaDetalleFactura;
-    private javax.swing.JTextArea jTextAreaSubTotal;
-    private javax.swing.JTextField jTextFieldAbonaCliente;
-    private javax.swing.JTextField jTextFieldCliente;
-    private javax.swing.JTextField jTextFieldDNI;
-    private javax.swing.JTextField jTextFieldDomicilio;
-    private javax.swing.JTextField jTextFieldEnvioDinero;
-    private javax.swing.JTextField jTextFieldNombre;
-    private javax.swing.JTextField jTextFieldTelefono;
-    private javax.swing.JTextField jTextFieldTelefonoFactura;
-    private javax.swing.JTextField jTextFieldTotalFactura;
     private javax.swing.JDialog vDetallesVentas;
-    private javax.swing.JDialog vImprimirFactura;
-    private javax.swing.JDialog vSeleccionarCliente;
     // End of variables declaration//GEN-END:variables
 }

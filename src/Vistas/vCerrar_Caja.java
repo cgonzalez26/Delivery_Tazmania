@@ -303,10 +303,10 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
         jLabeNomlTurno.setText("turno elegido");
 
         jLabelVentasLocal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelVentasLocal.setText("Ventas Local:");
+        jLabelVentasLocal.setText("Ventas Locales (Efectivo - Pedidos YA)");
 
         jLabelVentasOnline.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
-        jLabelVentasOnline.setText("Ventas Online:");
+        jLabelVentasOnline.setText("Ventas Online (Mercado Pago)");
 
         jTextVentasLocal.setEditable(false);
         jTextVentasLocal.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
@@ -340,7 +340,7 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jDateFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 336, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 595, Short.MAX_VALUE)
                                 .addComponent(jLabelUsuario)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabelNomUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -358,13 +358,13 @@ public final class vCerrar_Caja extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabelVentasOnline)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextVentasOnline, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(btnCerrarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(177, 177, 177))))
+                                .addComponent(jTextVentasOnline, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(271, 271, 271)
+                .addComponent(btnCerrarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(177, 177, 177))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

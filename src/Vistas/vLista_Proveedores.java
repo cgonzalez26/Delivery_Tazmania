@@ -112,7 +112,7 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Listado de Proveedores");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LogoDelivery.png"))); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1162, 411));
+        setPreferredSize(new java.awt.Dimension(1162, 438));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -210,7 +210,7 @@ public final class vLista_Proveedores extends javax.swing.JInternalFrame {
                 .addGap(6, 6, 6))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(319, 0, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

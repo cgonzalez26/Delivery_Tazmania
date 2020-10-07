@@ -27,7 +27,7 @@ public class control_Insumos {
     
     public Object[][] OrdenarInsumos(String tipo) {
         String[] columnas = {"idinsumo", "idtipoinsumo", "idproveedor", "i.descripcion", "tipoinsumo", "Nombre_comercial", "unidadmedida", "precio", "stock"};
-        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,i.descripcion,IFNULL(t.descripcion, '-') as tipoinsumo,p.Nombre_comercial,IFNULL(um.descripcion, '-') as unidadmedida,i.precio,i.stock  from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor where i.activo=1 order by t.descripcion='" + tipo + "' desc");
+        Object[][] datos = sql.GetTabla(columnas, "insumos", "select i.idinsumo,t.idtipoinsumo,p.idproveedor,i.descripcion,IFNULL(t.descripcion, '-') as tipoinsumo,p.Nombre_comercial,IFNULL(um.descripcion, '-') as unidadmedida,i.precio,i.stock  from insumos i INNER JOIN tiposinsumos t on t.idtipoinsumo=i.idtipoinsumo INNER JOIN proveedores p on i.idproveedor=p.idproveedor LEFT JOIN unidadesmedidas as um on um.idunidadmedida = i.idunidadmedida where i.activo=1 order by t.descripcion='" + tipo + "' desc");
         return datos;
     }
     

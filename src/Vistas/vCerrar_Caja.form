@@ -58,7 +58,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jDateFecha" min="-2" pref="185" max="-2" attributes="0"/>
-                              <EmptySpace pref="336" max="32767" attributes="0"/>
+                              <EmptySpace pref="595" max="32767" attributes="0"/>
                               <Component id="jLabelUsuario" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabelNomUsuario" min="-2" pref="91" max="-2" attributes="0"/>
@@ -81,14 +81,14 @@
                           </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                      <Component id="btnCerrarCaja" min="-2" pref="99" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnCancelar" min="-2" pref="86" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
-                  </Group>
               </Group>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="271" max="-2" attributes="0"/>
+              <Component id="btnCerrarCaja" min="-2" pref="99" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnCancelar" min="-2" pref="86" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -358,7 +358,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ventas Local:"/>
+        <Property name="text" type="java.lang.String" value="Ventas Locales (Efectivo - Pedidos YA)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelVentasOnline">
@@ -366,7 +366,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="13" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ventas Online:"/>
+        <Property name="text" type="java.lang.String" value="Ventas Online (Mercado Pago)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextVentasLocal">

@@ -57,6 +57,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     private vGestion_Clientes cliente = null;
     private vLista_Clientes listaclie = null;
     private vLista_ConsumosEmpleados consumos = null;
+    private vListas_ClientesMercadoPago mercadopago = null;
 
     public vMenuPrincipal() {
         initComponents();
@@ -478,6 +479,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
         jMenuVentas = new javax.swing.JMenu();
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem19 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem28 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         JMenuInsumos = new javax.swing.JMenu();
@@ -724,6 +726,16 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuVentas.add(jMenuItem19);
+
+        jMenuItem3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenuItem3.setText("Listado de Clientes Mercado Pago");
+        jMenuItem3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenuVentas.add(jMenuItem3);
 
         jMenuItem28.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jMenuItem28.setText("Administrar Productos");
@@ -1313,6 +1325,15 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_jMenuSalirMenuSelected
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        if(mercadopago == null || mercadopago.isClosed()){
+            mercadopago = new vListas_ClientesMercadoPago();
+            jDesktopPane1.add(mercadopago);
+            mercadopago.setVisible(true);
+            mercadopago.toFront();
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1396,6 +1417,7 @@ public final class vMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
     public static javax.swing.JMenuItem jMenuItem29;
+    private javax.swing.JMenuItem jMenuItem3;
     public static javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem33;
     private javax.swing.JMenuItem jMenuItem34;

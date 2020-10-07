@@ -443,6 +443,28 @@ public class Sentencias_sql {
         return array;
     }
 
+    public ArrayList<String> poblar_listclientes_consulta(String sql) {
+        String dni, nom, ape, concat;
+        ArrayList<String> nombresApellidos = new ArrayList<>();
+        try {
+            ps = con.conectado().prepareStatement(sql);
+            res = ps.executeQuery();
+            while (res.next()) {
+                dni = res.getString("dni");
+                nom = res.getString("nombre");
+                ape = res.getString("apellido");
+                concat = dni + ": " + nom + " " + ape;
+                nombresApellidos.add(concat);
+            }
+            res.close();
+            ps.close();
+            return nombresApellidos;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return nombresApellidos;
+    }
+
     public Object[] poblar_combox_con_consulta(String tabla, String idcol, String nombrecol, String sql) {
         int registros = 0;
         try {
@@ -898,14 +920,14 @@ public class Sentencias_sql {
             return null;
         }
     }
-    
-    public ArrayList<String> DatosID(String sql){
+
+    public ArrayList<String> DatosID(String sql) {
         ArrayList<String> iddetalles = new ArrayList<>();
         try {
             String id;
             ps = con.conectado().prepareStatement(sql);
             res = ps.executeQuery();
-            while(res.next()){
+            while (res.next()) {
                 id = res.getString(1);
                 iddetalles.add(id);
             }
@@ -917,8 +939,8 @@ public class Sentencias_sql {
             return null;
         }
     }
-    
-    public int CantidadID(String sql){
+
+    public int CantidadID(String sql) {
         try {
             ps = con.conectado().prepareStatement(sql);
             res = ps.executeQuery();
@@ -933,7 +955,7 @@ public class Sentencias_sql {
         } catch (SQLException e) {
             Logger.getLogger(Sentencias_sql.class.getName()).log(Level.SEVERE, null, e);
             return 0;
-        }      
+        }
     }
 
     public DefaultTableModel ConsultarInsumos() {
@@ -1083,20 +1105,34 @@ public class Sentencias_sql {
         return idcajaturno;
     }
 
-    public ArrayList<String> ObtenerDatosInsProd(String dato1, String dato2, String sql) {
+    public ArrayList<String> ObtenerDatosInsProd(String dato1, String dato2, String dato3, String dato4, String sql) {
         ArrayList<String> array = new ArrayList<>();
+        String nombre, apellido, nombreApellido;
         try {
             ps = con.conectado().prepareStatement(sql);
             res = ps.executeQuery();
-            if (dato1.equals("precioventa")) {
-                while (res.next()) {
-                    array.add(res.getString(dato1));
-                }
-            } else {
-                while (res.next()) {
-                    array.add(res.getString(dato1));
-                    array.add(res.getString(dato2));
-                }
+            switch (dato1) {
+                case "precioventa":
+                    while (res.next()) {
+                        array.add(res.getString(dato1));
+                    }
+                    break;
+                case "nombre":
+                    while (res.next()) {
+                        nombre = res.getString(dato1);
+                        apellido = res.getString(dato2);
+                        nombreApellido = nombre + " " + apellido;
+                        array.add(nombreApellido);
+                        array.add(res.getString(dato3));
+                        array.add(res.getString(dato4));
+                    }
+                    break;
+                default:
+                    while (res.next()) {
+                        array.add(res.getString(dato1));
+                        array.add(res.getString(dato2));
+                    }
+                    break;
             }
             res.close();
         } catch (SQLException e) {

@@ -175,7 +175,7 @@ public class control_Reportes {
         }
     }
 
-    public void CargarFactura(String pedido, String nroenvio, String cliente, String direccion, String telefono, String detalles, String subtotal, String total, String abona) {
+    public void CargarFactura(String nroenvio, String dni, String cliente, String direccion, String telefono, String detalles, String total, String abona) {
         try {
             JasperReport facturaventa;
 
@@ -183,13 +183,14 @@ public class control_Reportes {
 
             HashMap<String, Object> parametros = new HashMap<>();
 
-            parametros.put("pedido", pedido);
+            
             parametros.put("nroenviopago", nroenvio);
+            parametros.put("DNI", dni);
             parametros.put("cliente", cliente);
             parametros.put("direccion", direccion);
             parametros.put("telefono", telefono);
             parametros.put("detalles", detalles);
-            parametros.put("subtotal", subtotal);
+            //parametros.put("subtotal", subtotal);
             parametros.put("total", total);
             parametros.put("abona", abona);
 

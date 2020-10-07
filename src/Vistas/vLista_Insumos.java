@@ -29,7 +29,7 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
         initComponents();
         Mostrar();
         ComboTipoInsumo();
-
+        EliminarItemsVacios();
         jTabla_Insumos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -230,6 +230,11 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
 
         jComboBox_TipoInsumo.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jComboBox_TipoInsumo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno" }));
+        jComboBox_TipoInsumo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox_TipoInsumoItemStateChanged(evt);
+            }
+        });
 
         jLabelInsumoBuscar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 13)); // NOI18N
         jLabelInsumoBuscar.setText("Insumo:");
@@ -407,6 +412,20 @@ public final class vLista_Insumos extends javax.swing.JInternalFrame {
             evt.setKeyChar(c);
         }
     }//GEN-LAST:event_jTextFieldInsumoBuscarKeyTyped
+
+    private void jComboBox_TipoInsumoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox_TipoInsumoItemStateChanged
+        if(!jComboBox_TipoInsumo.getSelectedItem().equals("Ninguno")) {
+            String[] columnas = {"IDINSUMO", "IDTIPOINSUMO", "IDPROVEEDOR", "DESCRIPCION", "TIPO INSUMO", "PROVEEDOR", "UNIDAD MEDIDA", "PRECIO", "STOCK"};
+            datostablati = insumo.OrdenarInsumos(jComboBox_TipoInsumo.getSelectedItem().toString());
+            datos = new DefaultTableModel(datostablati, columnas);
+            jTabla_Insumos.setModel(datos);
+            EliminarFilasVacias();
+            PintarPocoStock();
+            ocultar_columnas();
+        } else {
+            Mostrar();
+        }
+    }//GEN-LAST:event_jComboBox_TipoInsumoItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

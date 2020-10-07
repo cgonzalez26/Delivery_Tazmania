@@ -62,7 +62,7 @@ public class control_Compras {
     }
 
     public ArrayList<String> ObtenerDatosNumInsumos(String texto) {
-        return sql.ObtenerDatosInsProd("precio","stock","select precio,stock from insumos where descripcion='" + texto + "' and activo=1");
+        return sql.ObtenerDatosInsProd("precio","stock","","","select precio,stock from insumos where descripcion='" + texto + "' and activo=1");
     }
 
     public int ObtenerUltimoIDCompra() {

@@ -32,7 +32,10 @@
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_ConsumosEmpleados.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vLista_Egresos.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Asistencias.java</file>
+            <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_TiposArticulos.java</file>
+            <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vListas_ClientesMercadoPago.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vListas_Ventas.java</file>
+            <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_MercadoPago.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_Recetas.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vPagos_Empleados.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_PermisosPantallasPerfiles.java</file>
@@ -46,6 +49,7 @@
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_TiposArticulos.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_Insumos.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vConsumosEmpleados.java</file>
+            <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_ImprimirTickets.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_busquedaCompras.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_CategoriasProductos.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_TiposDocumentos.java</file>
@@ -77,6 +81,7 @@
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vGestion_TiposGastos.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vLogin.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Vistas/vLista_Productos.java</file>
+            <file>file:/F:/Github/Delivery_Tazmania/src/Modelo/MercadoPago.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Compras.java</file>
             <file>file:/F:/Github/Delivery_Tazmania/src/Controlador/control_Cajas.java</file>
         </group>
