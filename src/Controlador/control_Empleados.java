@@ -24,20 +24,20 @@ public class control_Empleados {
     }
 
     public Object[][] MostrarDatos() {
-        String[] columnas = {"idempleado", "idtipoempleado", "idtipodocumento", "t.Descripcion", "d.descripcion", "NroDocumento", "Nombre", "Apellido", "direccion", "Telefono"};
-        Object[][] datos = sql.GetTabla(columnas, "empleados", "select e.idempleado,t.idtipoempleado,d.idtipodocumento,t.Descripcion,d.descripcion,e.NroDocumento,e.Nombre, e.Apellido,e.direccion,e.Telefono from empleados e INNER JOIN tiposempleados t on t.idtipoempleado=e.idtipoempleado INNER JOIN tiposdocumentos d on d.idtipodocumento=e.idtipodocumento where e.activo=1");
+        String[] columnas = {"idempleado", "idtipoempleado", "idtipodocumento", "tipoempleado", "tipodocumento", "NroDocumento", "Nombre", "Apellido", "direccion", "Telefono"};
+        Object[][] datos = sql.GetTabla(columnas, "empleados", "select e.idempleado,t.idtipoempleado,d.idtipodocumento,t.Descripcion as tipoempleado,d.descripcion as tipodocumento,e.NroDocumento,e.Nombre, e.Apellido,e.direccion,e.Telefono from empleados e INNER JOIN tiposempleados t on t.idtipoempleado=e.idtipoempleado INNER JOIN tiposdocumentos d on d.idtipodocumento=e.idtipodocumento where e.activo=1");
         return datos;
     }
 
     public Object[][] MostrarDatosBusqueda(String texto) {
-        String[] columnas = {"idempleado", "idtipoempleado", "idtipodocumento", "t.Descripcion", "d.descripcion", "NroDocumento", "Nombre", "Apellido", "direccion", "Telefono"};
-        Object[][] datos = sql.GetTabla(columnas, "empleados", "select e.idempleado,t.idtipoempleado,d.idtipodocumento,t.Descripcion,d.descripcion,e.NroDocumento,e.Nombre, e.Apellido,e.direccion,e.Telefono from empleados e INNER JOIN tiposempleados t on t.idtipoempleado=e.idtipoempleado INNER JOIN tiposdocumentos d on d.idtipodocumento=e.idtipodocumento where e.activo=1 and e.Nombre like '%" + texto + "%'");
+        String[] columnas = {"idempleado", "idtipoempleado", "idtipodocumento", "tipoempleado", "tipodocumento", "NroDocumento", "Nombre", "Apellido", "direccion", "Telefono"};
+        Object[][] datos = sql.GetTabla(columnas, "empleados", "select e.idempleado,t.idtipoempleado,d.idtipodocumento,t.Descripcion as tipoempleado,d.descripcion as tipodocumento,e.NroDocumento,e.Nombre, e.Apellido,e.direccion,e.Telefono from empleados e INNER JOIN tiposempleados t on t.idtipoempleado=e.idtipoempleado INNER JOIN tiposdocumentos d on d.idtipodocumento=e.idtipodocumento where e.activo=1 and e.Nombre like '%" + texto + "%'");
         return datos;
     }
 
     public Object[][] OrdenarTipoEmpleado(String tipo) {
-        String[] columnas = {"idempleado", "idtipoempleado", "idtipodocumento", "t.Descripcion", "d.descripcion", "NroDocumento", "Nombre", "Apellido", "direccion", "Telefono"};
-        Object[][] datos = sql.GetTabla(columnas, "empleados", "select e.idempleado,t.idtipoempleado,d.idtipodocumento,t.Descripcion,d.descripcion,e.NroDocumento,e.Nombre, e.Apellido,e.direccion,e.Telefono from empleados e INNER JOIN tiposempleados t on t.idtipoempleado=e.idtipoempleado INNER JOIN tiposdocumentos d on d.idtipodocumento=e.idtipodocumento where e.activo=1 order by t.Descripcion='" + tipo + "' desc");
+        String[] columnas = {"idempleado", "idtipoempleado", "idtipodocumento", "tipoempleado", "tipodocumento", "NroDocumento", "Nombre", "Apellido", "direccion", "Telefono"};
+        Object[][] datos = sql.GetTabla(columnas, "empleados", "select e.idempleado,t.idtipoempleado,d.idtipodocumento,t.Descripcion as tipoempleado,d.descripcion as tipodocumento,e.NroDocumento,e.Nombre, e.Apellido,e.direccion,e.Telefono from empleados e INNER JOIN tiposempleados t on t.idtipoempleado=e.idtipoempleado INNER JOIN tiposdocumentos d on d.idtipodocumento=e.idtipodocumento where e.activo=1 order by t.Descripcion='" + tipo + "' desc");
         return datos;
     }
 
