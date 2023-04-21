@@ -1,2 +1,4 @@
 # Delivery_Tazmania
-Sistema de Delivery de Comidas
+Sistema de Escritorio de Delivery de Comidas desarrollada con Java y Mysql.
+
+![Login del Sistema](./Capturas/1-Home.JPG)
